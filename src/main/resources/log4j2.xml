@@ -1,0 +1,56 @@
+
+
+
+
+<Configuration status="WARN">
+
+    <Properties>
+        <property name="pattern_console">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern_console}"/>
+        </Console>
+
+        <RollingFile name="FileRolling" filename="logs/text.log" append="true"
+                     filePattern="logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
+            <PatternLayout pattern="${pattern_console}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name= "Log_Console" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name= "Rolling_File" level="debug" additivity="false">
+            <AppenderRef ref="FileRolling"/>
+        </Logger>
+
+
+        <Root level="all">
+            <AppenderRef ref="FileRolling"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+
+    <!--<dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.13.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.13.0</version>
+    </dependency>-->
+
+</Configuration>
