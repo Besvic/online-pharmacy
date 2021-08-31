@@ -88,4 +88,43 @@ public class Order {
                 ", date=" + date.toString() +
                 '}';
     }
+
+    public static class OrderBuilder{
+
+        private long id;
+        private long userID;
+        private OrderStatus status;
+        private int quantity;
+        private LocalDate date;
+
+        public OrderBuilder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public OrderBuilder setUserID(long userID) {
+            this.userID = userID;
+            return this;
+        }
+
+        public OrderBuilder setStatus(OrderStatus status) {
+            this.status = status;
+            return this;
+        }
+
+        public OrderBuilder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public OrderBuilder setDate(LocalDate date) {
+            this.date = date;
+            return this;
+        }
+
+        public Order createOrder() {
+            return new Order(id, userID, status, quantity, date);
+        }
+    }
+
 }

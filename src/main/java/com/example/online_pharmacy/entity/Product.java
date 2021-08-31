@@ -139,4 +139,66 @@ public class Product {
                 .append('}')
                 .toString();
     }
+
+    public static class ProductBuilder{
+
+        private long id;
+        private String name;
+        private double dosage;
+        private long manufactureId;
+        private int quantity;
+        private double price;
+        private LocalDate dateOfDelivery;
+        private long unitsId;
+        private Blob photo;
+
+        public ProductBuilder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProductBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProductBuilder setDosage(double dosage) {
+            this.dosage = dosage;
+            return this;
+        }
+
+        public ProductBuilder setManufactureId(long manufactureId) {
+            this.manufactureId = manufactureId;
+            return this;
+        }
+
+        public ProductBuilder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public ProductBuilder setPrice(double price) {
+            this.price = price;
+            return this;
+        }
+
+        public ProductBuilder setDateOfDelivery(LocalDate dateOfDelivery) {
+            this.dateOfDelivery = dateOfDelivery;
+            return this;
+        }
+
+        public ProductBuilder setUnitsId(long unitsId) {
+            this.unitsId = unitsId;
+            return this;
+        }
+
+        public ProductBuilder setPhoto(Blob photo) {
+            this.photo = photo;
+            return this;
+        }
+
+        public Product createProduct() {
+            return new Product(id, name, dosage, manufactureId, quantity, price, dateOfDelivery, unitsId, photo);
+        }
+    }
 }

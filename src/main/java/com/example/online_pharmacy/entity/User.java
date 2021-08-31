@@ -117,4 +117,55 @@ public class User {
                 .toString();
 
     }
+
+    public static class UserBuilder{
+
+        private long id;
+        private String name;
+        private double cash;
+        private String login;
+        private String password;
+        private UserStatus userStatus;
+        private Position position;
+
+        public UserBuilder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public UserBuilder setCash(double cash) {
+            this.cash = cash;
+            return this;
+        }
+
+        public UserBuilder setLogin(String login) {
+            this.login = login;
+            return this;
+        }
+
+        public UserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder setUserStatus(UserStatus userStatus) {
+            this.userStatus = userStatus;
+            return this;
+        }
+
+        public UserBuilder setPosition(Position position) {
+            this.position = position;
+            return this;
+        }
+
+        public User createUser() {
+            return new User(id, name, cash, login, password, userStatus, position);
+        }
+    }
+
 }

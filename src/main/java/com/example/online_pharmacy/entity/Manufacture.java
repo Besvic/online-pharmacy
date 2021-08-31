@@ -75,4 +75,36 @@ public class Manufacture {
                 ", countryId=" + countryId +
                 '}';
     }
+
+    public static class ManufactureBuilder{
+
+        private int id;
+        private String name;
+        private String email;
+        private int countryId;
+
+        public ManufactureBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public ManufactureBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ManufactureBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public ManufactureBuilder setCountryId(int countryId) {
+            this.countryId = countryId;
+            return this;
+        }
+
+        public Manufacture createManufacture() {
+            return new Manufacture(id, name, email, countryId);
+        }
+    }
 }
