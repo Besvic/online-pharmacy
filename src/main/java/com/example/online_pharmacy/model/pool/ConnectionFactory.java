@@ -1,4 +1,4 @@
-package com.example.online_pharmacy.model.dbConnection;
+package com.example.online_pharmacy.model.pool;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

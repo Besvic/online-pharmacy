@@ -1,6 +1,8 @@
-package com.example.online_pharmacy.model.dbConnection;
+package com.example.online_pharmacy.model.pool;
 
 import com.example.online_pharmacy.exception.DatabaseException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.Map;
@@ -9,6 +11,7 @@ import java.util.concurrent.Executor;
 
 public class ProxyConnection implements Connection {
 
+    private static final Logger logger = LogManager.getLogger();
     private final Connection connection;
 
     ProxyConnection(Connection connection){this.connection = connection;}
@@ -54,15 +57,11 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void close(){
-        try {
-            ConnectionPool.getInstance().releaseConnection(this);
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
+     public void close(){
+        ConnectionPool.getInstance().releaseConnection(this);
     }
     
-    public void reallyClose() throws SQLException {
+    void reallyClose() throws SQLException {
         connection.close();
     }
 

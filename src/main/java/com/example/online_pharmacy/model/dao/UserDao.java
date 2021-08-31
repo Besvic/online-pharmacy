@@ -9,8 +9,9 @@ public interface UserDao {
 
     int createUser(User user) throws DaoException;
     int deleteUserById(int id) throws DaoException;
-    List<User> findUserByPosition(String positionValue) throws DaoException;
-    boolean checkPassword(String password) throws DaoException;
+    List<User> findUserByPosition(String position) throws DaoException;
+    boolean checkAuthorisation(String login, String password) throws DaoException;
+
 
 
 

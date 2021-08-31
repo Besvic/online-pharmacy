@@ -1,12 +1,10 @@
 package com.example.online_pharmacy.entity;
 
-import java.util.Arrays;
-
 public class User {
 
-    private int id;
+    private long id;
     private Position position;
-    private Status status;
+    private UserStatus userStatus;
     private String name;
     private double cash;
     private String login;
@@ -15,17 +13,17 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, double cash, String login, String password, Status status, Position position) {
+    public User(long id, String name, double cash, String login, String password, UserStatus userStatus, Position position) {
         this.id = id;
         this.name = name;
         this.cash = cash;
         this.login = login;
         this.password = password;
-        this.status = status;
+        this.userStatus = userStatus;
         this.position = position;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,12 +39,12 @@ public class User {
         this.position = position;
     }
 
-    public Status getStatus() {
-        return status;
+    public UserStatus getStatus() {
+        return userStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 
     public String getName() {
@@ -88,24 +86,35 @@ public class User {
         if (o == null || getClass() != o.getClass())
             return false;
         User user = (User) o;
-        return id == user.id && cash == user.cash && status == user.status && position.equals(user.position) 
+        return id == user.id && cash == user.cash && userStatus == user.userStatus && position.equals(user.position)
                 && name.equals(user.name) && login.equals(user.login) && password.equals(user.password);
     }
 
     @Override
-    public int hashCode() { // TODO: 23.08.2021  add position and status 
-        return Arrays.hashCode(new int[]{id, (int) cash}) + login.hashCode() + password.hashCode() + name.hashCode();
+    public int hashCode() {
+        return Long.hashCode(id) + Double.hashCode(cash) + position.hashCode() + userStatus.hashCode()
+                + login.hashCode() + password.hashCode() + name.hashCode();
     }
 
     @Override // FIXME: 23.08.2021  to string builder
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cash=" + cash +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", idStatus=" + idStatus +
-                '}';
+        StringBuffer buffer = new StringBuffer();
+        return buffer.append("User{ id= ")
+                .append(id)
+                .append(", name= ")
+                .append(name)
+                .append(", cash= ")
+                .append(cash)
+                .append(", login= ")
+                .append(login)
+                .append(", password = ")
+                .append(password)
+                .append(", status= ")
+                .append(userStatus)
+                .append(", position= ")
+                .append(position)
+                .append(" }")
+                .toString();
+
     }
 }

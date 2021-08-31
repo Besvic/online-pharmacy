@@ -1,4 +1,4 @@
-package com.example.online_pharmacy.model.dbConnection;
+package com.example.online_pharmacy.model.pool;
 
 import com.example.online_pharmacy.exception.DatabaseException;
 import org.apache.logging.log4j.LogManager;
@@ -68,14 +68,13 @@ public class ConnectionPool {
         }
     }
 
-    public boolean releaseConnection(Connection connection) throws DatabaseException {
+    public boolean releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && busyConnection.remove(connection)) {
             try {
                 freeConnection.put((ProxyConnection) connection);
                 return true;
             } catch (InterruptedException e) {
-                logger.error("Connection not available.");
-                throw new DatabaseException(e);
+                logger.error("Connection not available.", e);
             }
         }
         return false;
@@ -86,6 +85,7 @@ public class ConnectionPool {
             try {
                 freeConnection.take().reallyClose();
             } catch (SQLException | InterruptedException throwables) {
+
                 throw new DatabaseException(throwables);
             }
         }
@@ -93,11 +93,8 @@ public class ConnectionPool {
             try {
                 DriverManager.deregisterDriver(driver);
             } catch (SQLException e) {
-               logger.error("No driver deregister.");
+               logger.error("No driver deregister.", e);
             }
         });
     }
-
-
-
 }
