@@ -18,21 +18,22 @@ public class ConnectionPool {
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final BlockingDeque<ProxyConnection> busyConnection;
     private static final Logger logger = LogManager.getLogger();
-    private static final Lock lock = new ReentrantLock();
+    private static final Lock lock = new ReentrantLock(true);
 
     private final int DEFAULT_SIZE_CONNECTION = 5;
 
     public static ConnectionPool getInstance(){
         lock.lock();
         try {
-            return instance == null ? (instance = new ConnectionPool()) : instance;
+            if (instance == null)
+                instance = new ConnectionPool();
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
         finally {
-            lock.unlock();
+           lock.unlock();
         }
-        return null;
+        return instance;
     }
 
     private ConnectionPool() throws DatabaseException {
@@ -40,18 +41,18 @@ public class ConnectionPool {
         busyConnection = new LinkedBlockingDeque<>(DEFAULT_SIZE_CONNECTION);
         for (int i = 0; i < DEFAULT_SIZE_CONNECTION; i++) {
             try {
-                Connection connection = ConnectionFactory.getConnection();
+                Connection connection = ConnectionFactory.createConnection();
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnection.put(proxyConnection);
-            } catch (SQLException | InterruptedException throwables) {
-                logger.error("No connection to the database.");
+            } catch (InterruptedException throwables) {
+                logger.fatal("No connection to the database.");
                 throw new DatabaseException(throwables);
             }
         }
         logger.info("ConnectionPool was create.");
     }
 
-    public Connection getConnection() throws DatabaseException {
+    public Connection getConnection() {
         ProxyConnection connection = null;
         if (freeConnection.size() > 0){
             try {
@@ -59,13 +60,11 @@ public class ConnectionPool {
                 busyConnection.put(connection);
             } catch (InterruptedException e) {
                 logger.error("Connection not available.");
-                throw new DatabaseException(e);
             }
-            return connection;
         } else {
             logger.info("No free connections.");
-            return null; // TODO: 23.08.2021 нормально ли возвращать null?
         }
+        return connection;
     }
 
     public boolean releaseConnection(Connection connection) {

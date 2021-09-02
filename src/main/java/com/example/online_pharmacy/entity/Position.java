@@ -1,6 +1,6 @@
 package com.example.online_pharmacy.entity;
 
-enum Position {
+public enum Position {
     USER,
     ADMIN,
     DELETE

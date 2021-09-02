@@ -1,6 +1,5 @@
 package com.example.online_pharmacy.model.pool;
 
-import com.example.online_pharmacy.exception.DatabaseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
