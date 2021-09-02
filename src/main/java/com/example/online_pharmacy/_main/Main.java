@@ -21,6 +21,7 @@ public class Main {
                 .setCash(12)
                 .setPosition(Position.ADMIN)
                 .createUser();
+
         try {
             new UserDaoImpl().createUser(user);
         } catch (DaoException e) {

@@ -1,8 +1,11 @@
 package com.example.online_pharmacy.model.dao.impl;
 
+import com.example.online_pharmacy.entity.Position;
 import com.example.online_pharmacy.entity.User;
+import com.example.online_pharmacy.entity.UserStatus;
 import com.example.online_pharmacy.exception.DaoException;
 import com.example.online_pharmacy.exception.DatabaseException;
+import com.example.online_pharmacy.model.dao.ColumnName;
 import com.example.online_pharmacy.model.dao.UserDao;
 import com.example.online_pharmacy.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -10,8 +13,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static com.example.online_pharmacy.model.dao.ColumnName.*;
 
 public class UserDaoImpl implements UserDao {
 
@@ -26,8 +34,18 @@ public class UserDaoImpl implements UserDao {
             set user_position = 'delete'
             where user_id = ?;""";
 
+    private static final String SQL_FIND_USER_BY_STATUS = """
+            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_status = ?;""";
+
+    private static final String SQL_CHECK_AUTHORISATION = """
+            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_status = ?;""";
+
     @Override
-    public int createUser(User user) throws DaoException {
+    public boolean createUser(User user) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_CREATE_USER)){
             statement.setString(1, String.valueOf(user.getPosition()));
@@ -35,35 +53,82 @@ public class UserDaoImpl implements UserDao {
             statement.setDouble(3, user.getCash());
             statement.setString(4, user.getLogin());
             statement.setString(5, user.getPassword());
-            statement.setString(6, user.getStatus().toString());
-            return statement.executeUpdate();
+            statement.setString(6, user.getUserStatus().toString());
+            if (statement.executeUpdate() != 0)
+                return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
             new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
         }
-        return 0;
+        return false;
     }
 
     @Override
-    public int deleteUserById(int id) throws DaoException {
+    public boolean deleteUserById(int id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
             statement.setInt(1, id);
-            return statement.executeUpdate();
+            if (statement.executeUpdate() != 0)
+                return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
             new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
         }
-        return 0;
-    }
-
-    @Override
-    public List<User> findUserByPosition(String position) throws DaoException {
-        return null;
-    }
-
-    @Override
-    public boolean checkAuthorisation(String login, String password) throws DaoException {
         return false;
     }
+
+    @Override
+    public List<User> findUserByStatus(String status) throws DaoException {
+        List<User> userList = new ArrayList<>();
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_STATUS)) {
+            statement.setString(1, status);
+            try(ResultSet result = statement.executeQuery()){
+                while (result.next()){
+                    userList.add(new User.UserBuilder()
+                            .setId(result.getInt(USER_ID))
+                            .setPosition(Position.valueOf(result.getString(USER_POSITION)))
+                            .setName(result.getString(USER_NAME))
+                            .setCash(result.getDouble(USER_CASH))
+                            .setLogin(result.getString(USER_LOGIN))
+                            .setPassword(result.getString(USER_PASSWORD))
+                            .setUserStatus(UserStatus.valueOf(result.getString(USER_STATUS)))
+                            .setPhoto(result.getBlob(USER_PHOTO))
+                            .createUser());
+                }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
+            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+        }
+        return userList;
+    }
+
+    @Override
+    public Optional<User> checkAuthorisation(String login, String password) throws DaoException {
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(SQL_CHECK_AUTHORISATION)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            try (ResultSet result = statement.executeQuery()){
+                if (result.next()){
+                    return Optional.of(new User.UserBuilder()
+                            .setId(result.getInt(USER_ID))
+                            .setPosition(Position.valueOf(result.getString(USER_POSITION)))
+                            .setName(result.getString(USER_NAME))
+                            .setCash(result.getDouble(USER_CASH))
+                            .setLogin(result.getString(USER_LOGIN))
+                            .setPassword(result.getString(USER_PASSWORD))
+                            .setUserStatus(UserStatus.valueOf(result.getString(USER_STATUS)))
+                            .setPhoto(result.getBlob(USER_PHOTO))
+                            .createUser());
+                }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
+            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+        }
+        return Optional.empty();
+    }
+
 }

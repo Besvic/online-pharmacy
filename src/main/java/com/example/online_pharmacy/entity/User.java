@@ -1,5 +1,7 @@
 package com.example.online_pharmacy.entity;
 
+import java.sql.Blob;
+
 public class User {
 
     private long id;
@@ -9,11 +11,13 @@ public class User {
     private double cash;
     private String login;
     private String password;
+    private Blob photo;
 
     public User() {
     }
 
-    public User(long id, String name, double cash, String login, String password, UserStatus userStatus, Position position) {
+    public User(long id, String name, double cash, String login, String password, UserStatus userStatus
+            , Position position, Blob photo) {
         this.id = id;
         this.name = name;
         this.cash = cash;
@@ -21,13 +25,14 @@ public class User {
         this.password = password;
         this.userStatus = userStatus;
         this.position = position;
+        this.photo = photo;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -39,11 +44,11 @@ public class User {
         this.position = position;
     }
 
-    public UserStatus getStatus() {
+    public UserStatus getUserStatus() {
         return userStatus;
     }
 
-    public void setStatus(UserStatus userStatus) {
+    public void setUserStatus(UserStatus userStatus) {
         this.userStatus = userStatus;
     }
 
@@ -79,7 +84,14 @@ public class User {
         this.password = password;
     }
 
-    @Override
+    public Blob getPhoto() {
+        return photo; // TODO: 02.09.2021 как работать с фото
+    }
+
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
+    }
+
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -87,13 +99,13 @@ public class User {
             return false;
         User user = (User) o;
         return id == user.id && cash == user.cash && userStatus == user.userStatus && position.equals(user.position)
-                && name.equals(user.name) && login.equals(user.login) && password.equals(user.password);
+                && name.equals(user.name) && login.equals(user.login) && password.equals(user.password) && photo.equals(user.photo);
     }
 
     @Override
     public int hashCode() {
         return Long.hashCode(id) + Double.hashCode(cash) + position.hashCode() + userStatus.hashCode()
-                + login.hashCode() + password.hashCode() + name.hashCode();
+                + login.hashCode() + password.hashCode() + name.hashCode() + photo.hashCode();
     }
 
     @Override // FIXME: 23.08.2021  to string builder
@@ -127,6 +139,7 @@ public class User {
         private String password;
         private UserStatus userStatus;
         private Position position;
+        private Blob photo;
 
         public UserBuilder setId(long id) {
             this.id = id;
@@ -163,8 +176,13 @@ public class User {
             return this;
         }
 
+        public UserBuilder setPhoto(Blob photo) {
+            this.photo = photo;
+            return this;
+        }
+
         public User createUser() {
-            return new User(id, name, cash, login, password, userStatus, position);
+            return new User(id, name, cash, login, password, userStatus, position, photo);
         }
     }
 
