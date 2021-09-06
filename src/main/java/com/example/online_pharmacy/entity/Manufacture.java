@@ -12,7 +12,7 @@ public class Manufacture {
     public Manufacture() {
     }
 
-    public Manufacture(int id, String name, String email, int countryId) {
+    public Manufacture(long id, String name, String email, long countryId) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -78,12 +78,12 @@ public class Manufacture {
 
     public static class ManufactureBuilder{
 
-        private int id;
+        private long id;
         private String name;
         private String email;
-        private int countryId;
+        private long countryId;
 
-        public ManufactureBuilder setId(int id) {
+        public ManufactureBuilder setId(long id) {
             this.id = id;
             return this;
         }
@@ -98,7 +98,7 @@ public class Manufacture {
             return this;
         }
 
-        public ManufactureBuilder setCountryId(int countryId) {
+        public ManufactureBuilder setCountryId(long countryId) {
             this.countryId = countryId;
             return this;
         }

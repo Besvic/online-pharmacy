@@ -1,16 +1,14 @@
 package com.example.online_pharmacy.entity;
 
-import java.util.Objects;
-
-public class Units {
+public class Measure {
 
     private long id;
     private String name;
 
-    public Units() {
+    public Measure() {
     }
 
-    public Units(long id, String name) {
+    public Measure(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -35,8 +33,8 @@ public class Units {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Units units = (Units) o;
-        return id == units.id && name.equals(units.name);
+        Measure measure = (Measure) o;
+        return id == measure.id && name.equals(measure.name);
     }
 
     @Override

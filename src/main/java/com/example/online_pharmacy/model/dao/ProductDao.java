@@ -12,7 +12,7 @@ public interface ProductDao {
     boolean changeProductNameByProductId(String productName, int productId) throws DaoException;
     boolean addProductQuantityByProductId(int productQuantity, int productId) throws DaoException;
     boolean changeProductPriceByProductId(double productPrice, int productId) throws DaoException;
-    List<Product> findProductByProductDate(LocalDate productDate) throws DaoException;
+    //List<Product> findProductByProductDate(LocalDate productDate) throws DaoException;
     List<Product> findProductUnderProductPrice(double productPrice) throws DaoException;
 
 

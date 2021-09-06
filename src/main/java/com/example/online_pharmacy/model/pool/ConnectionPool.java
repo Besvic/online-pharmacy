@@ -14,10 +14,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
+    private static final Logger logger = LogManager.getLogger();
+
     private static ConnectionPool instance = null;
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final BlockingDeque<ProxyConnection> busyConnection;
-    private static final Logger logger = LogManager.getLogger();
     private static final Lock lock = new ReentrantLock(true);
 
     private final int DEFAULT_SIZE_CONNECTION = 5;

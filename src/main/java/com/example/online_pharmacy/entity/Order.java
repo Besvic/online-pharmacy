@@ -2,12 +2,12 @@ package com.example.online_pharmacy.entity;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Order {
 
     private long id;
-    private long userID;
+    private long productId;
+    private long userId;
     private OrderStatus status;
     private int quantity;
     private LocalDate date;
@@ -15,9 +15,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(long id, long userID, OrderStatus status, int quantity, LocalDate date) {
+    public Order(long id, long productId, long userId, OrderStatus status, int quantity, LocalDate date) {
         this.id = id;
-        this.userID = userID;
+        this.productId = productId;
+        this.userId = userId;
         this.status = status;
         this.quantity = quantity;
         this.date = date;
@@ -31,12 +32,20 @@ public class Order {
         this.id = id;
     }
 
-    public long getUserID() {
-        return userID;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setUserID(long userID) {
-        this.userID = userID;
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public OrderStatus getStatus() {
@@ -70,19 +79,21 @@ public class Order {
         if (o == null || getClass() != o.getClass())
             return false;
         Order order = (Order) o;
-        return id == order.id && userID == order.userID && quantity == order.quantity && status == order.status && date.equals(order.date);
+        return id == order.id && productId == order.productId && userId == order.userId
+                && quantity == order.quantity && status == order.status && date.equals(order.date);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new long[] {id, userID}) + Integer.hashCode(quantity) + status.hashCode() + date.hashCode();
+        return Arrays.hashCode(new long[] {id, productId, userId}) + Integer.hashCode(quantity) + status.hashCode()
+                + date.hashCode();
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", userID=" + userID +
+                ", userID=" + userId +
                 ", status=" + status.toString() +
                 ", quantity=" + quantity +
                 ", date=" + date.toString() +
@@ -92,7 +103,8 @@ public class Order {
     public static class OrderBuilder{
 
         private long id;
-        private long userID;
+        private long productId;
+        private long userId;
         private OrderStatus status;
         private int quantity;
         private LocalDate date;
@@ -102,8 +114,13 @@ public class Order {
             return this;
         }
 
-        public OrderBuilder setUserID(long userID) {
-            this.userID = userID;
+        public OrderBuilder setProductId(long productId) {
+            this.productId = productId;
+            return this;
+        }
+
+        public OrderBuilder setUserId(long userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -123,7 +140,7 @@ public class Order {
         }
 
         public Order createOrder() {
-            return new Order(id, userID, status, quantity, date);
+            return new Order(id, productId, userId, status, quantity, date);
         }
     }
 

@@ -17,8 +17,8 @@ public final class ColumnName {
     //manufacture
     public static final String MANUFACTURE_ID = "manufacture_id";
     public static final String MANUFACTURE_NAME= "manufacture_name";
-    public static final String EMAIL_MANUFACTURE = "manufacture_email";
-    public static final String ID_COUNTRY_MANUFACTURE = "manufacture_country_id";
+    public static final String MANUFACTURE_EMAIL = "manufacture_email";
+    public static final String MANUFACTURE_COUNTRY_ID = "manufacture_country_id";
 
     //order
     public static final String ORDER_ID= "order_id";
@@ -40,9 +40,9 @@ public final class ColumnName {
     public static final String PRODUCT_UNITS_ID = "product_units_id";
     public static final String PRODUCT_PHOTO = "product_photo";
 
-    //units
-    public static final String UNITS_ID = "units_id";
-    public static final String UNITS_NAME = "units_name";
+    //measure
+    public static final String MEASURE_ID = "measure_id";
+    public static final String MEASURE_NAME = "measure_name";
 
     //users
     public static final String USER_ID = "user_id";

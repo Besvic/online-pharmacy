@@ -4,8 +4,6 @@ import com.example.online_pharmacy.entity.Position;
 import com.example.online_pharmacy.entity.User;
 import com.example.online_pharmacy.entity.UserStatus;
 import com.example.online_pharmacy.exception.DaoException;
-import com.example.online_pharmacy.exception.DatabaseException;
-import com.example.online_pharmacy.model.dao.ColumnName;
 import com.example.online_pharmacy.model.dao.UserDao;
 import com.example.online_pharmacy.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
@@ -57,8 +55,8 @@ public class UserDaoImpl implements UserDao {
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
-            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }
@@ -71,8 +69,8 @@ public class UserDaoImpl implements UserDao {
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
-            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }
@@ -98,8 +96,8 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
-            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return userList;
     }
@@ -125,8 +123,8 @@ public class UserDaoImpl implements UserDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or unknown field found." + throwables);
-            new DaoException("PrepareStatement didn't connection or unknown field found.", throwables);
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return Optional.empty();
     }
