@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -20,24 +21,27 @@ public class ConnectionPool {
     private final BlockingDeque<ProxyConnection> freeConnection;
     private final BlockingDeque<ProxyConnection> busyConnection;
     private static final Lock lock = new ReentrantLock(true);
+    private static final AtomicBoolean isCreate = new AtomicBoolean(false);
 
     private final int DEFAULT_SIZE_CONNECTION = 5;
 
     public static ConnectionPool getInstance(){
-        lock.lock();
-        try {
-            if (instance == null)
-                instance = new ConnectionPool();
-        } catch (DatabaseException e) {
-            e.printStackTrace();
-        }
-        finally {
-           lock.unlock();
+        if (!isCreate.get()){
+            lock.lock();
+            try {
+                if (instance == null) {
+                    instance = new ConnectionPool();
+                    isCreate.set(true);
+                }
+            }
+            finally {
+                lock.unlock();
+            }
         }
         return instance;
     }
 
-    private ConnectionPool() throws DatabaseException {
+    private ConnectionPool() {
         freeConnection = new LinkedBlockingDeque<>(DEFAULT_SIZE_CONNECTION);
         busyConnection = new LinkedBlockingDeque<>(DEFAULT_SIZE_CONNECTION);
         for (int i = 0; i < DEFAULT_SIZE_CONNECTION; i++) {
@@ -45,9 +49,8 @@ public class ConnectionPool {
                 Connection connection = ConnectionFactory.createConnection();
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnection.put(proxyConnection);
-            } catch (InterruptedException throwables) {
+            } catch (InterruptedException | DatabaseException e) {
                 logger.fatal("No connection to the database.");
-                throw new DatabaseException(throwables);
             }
         }
         logger.info("ConnectionPool was create.");
@@ -74,26 +77,25 @@ public class ConnectionPool {
                 freeConnection.put((ProxyConnection) connection);
                 return true;
             } catch (InterruptedException e) {
-                logger.error("Connection not available.", e);
+                logger.error("Connection not available." + e);
             }
         }
         return false;
     }
 
-    public void destroyPool() throws DatabaseException {
+    public void destroyPool() {
         for (int i = 0; i < freeConnection.size(); i++) {
             try {
                 freeConnection.take().reallyClose();
             } catch (SQLException | InterruptedException throwables) {
-
-                throw new DatabaseException(throwables);
+                logger.error("Connection not available for destroy." + throwables);
             }
         }
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {
                 DriverManager.deregisterDriver(driver);
             } catch (SQLException e) {
-               logger.error("No driver deregister.", e);
+               logger.error("No driver deregister." + e);
             }
         });
     }

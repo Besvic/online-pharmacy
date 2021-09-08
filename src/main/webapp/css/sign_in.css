@@ -35,13 +35,15 @@ body{
 }
 
 .sign_in{
+    
+    margin: 0 auto;
     font-size: 20px;
     width: 300px;
     background-color:rgba(51, 163, 47, 0.822);
-    margin-left: 20%;
+ /*    margin-left: 20%;
     margin-top: 15%;
     margin-bottom: 16%;
-    margin-right: 50%;
+    margin-right: 50%; */
 
 }
 

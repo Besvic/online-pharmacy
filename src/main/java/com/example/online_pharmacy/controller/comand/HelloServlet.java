@@ -1,4 +1,4 @@
-package com.example.online_pharmacy;
+package com.example.online_pharmacy.controller.comand;
 
 import java.io.*;
 
