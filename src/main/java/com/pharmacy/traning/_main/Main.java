@@ -12,12 +12,11 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        /*Order order = new Order.OrderBuilder().createOrder();*/
         User user = new User.UserBuilder().
                 setUserStatus(UserStatus.IN_REGISTER)
-                .setName("Victor1")
-                .setLogin("victor1")
-                .setPassword("victor1")
+                .setName("Victor2")
+                .setLogin("victor2")
+                .setPassword("victor2")
                 .setCash(12)
                 .setPosition(Position.ADMIN)
                 .createUser();

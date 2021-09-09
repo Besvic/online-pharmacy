@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     private static final Logger logger = LogManager.getLogger();
 
     private static final String SQL_CREATE_USER = """
-            insert into users (user_position, user_name, user_cash, user_login, user_password, user_status) +
+            insert into users (user_position, user_name, user_cash, user_login, user_password, user_status)
             values (?, ?, ?, ?, ?, ?);""";
 
     private static final String SQL_DELETE_USER = """

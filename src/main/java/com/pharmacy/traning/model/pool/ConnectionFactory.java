@@ -24,10 +24,10 @@ class ConnectionFactory {
     static {
         String driverName = null;
         try (InputStream inputStream = ConnectionFactory.class.getClassLoader().getResourceAsStream(RESOURCE)) {
-
             properties.load(inputStream);
-            driverName = (String) properties.get(DB_DRIVER);
+            driverName = properties.getProperty(DB_DRIVER);
             Class.forName(driverName);
+            DATABASE_URL = (String) properties.get(DB_URL);
         } catch (ClassNotFoundException e) {
             logger.fatal("unable to register driver: " + driverName, e);
             throw new RuntimeException("unable to register driver: " + driverName, e);
@@ -35,7 +35,6 @@ class ConnectionFactory {
             logger.fatal("unable to load properties: ", e);
             throw new RuntimeException("unable to load properties: ", e);
         }
-        DATABASE_URL = (String) properties.get(DB_URL);
     }
 
     static Connection createConnection() throws DatabaseException {

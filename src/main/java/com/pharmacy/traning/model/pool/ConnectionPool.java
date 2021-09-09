@@ -63,7 +63,7 @@ public class ConnectionPool {
                 connection = freeConnection.take();
                 busyConnection.put(connection);
             } catch (InterruptedException e) {
-                logger.error("Connection not available.");
+                logger.error("Connection not available.", e);
             }
         } else {
             logger.info("No free connections.");
@@ -77,7 +77,7 @@ public class ConnectionPool {
                 freeConnection.put((ProxyConnection) connection);
                 return true;
             } catch (InterruptedException e) {
-                logger.error("Connection not available." + e);
+                logger.error("Connection not available.", e);
             }
         }
         return false;

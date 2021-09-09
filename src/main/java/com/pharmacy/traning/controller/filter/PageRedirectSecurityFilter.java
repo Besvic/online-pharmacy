@@ -1,13 +1,15 @@
 package com.pharmacy.traning.controller.filter;
 
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-/*@WebFilter(urlPatterns = {"/pages/*"},
-    initParams = {@WebInitParam(name = "INDEX_PATH", value = "/index.jsp")})*/
+@WebFilter(urlPatterns = {"/pages/*"},
+    initParams = {@WebInitParam(name = "INDEX_PATH", value = "/index.jsp")})
 public class PageRedirectSecurityFilter implements Filter {
 
     private String indexPath;
