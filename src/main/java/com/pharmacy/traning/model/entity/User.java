@@ -40,8 +40,8 @@ public class User {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPosition(String position) {
+        this.position = Position.valueOf(position);
     }
 
     public UserStatus getUserStatus() {
@@ -171,8 +171,8 @@ public class User {
             return this;
         }
 
-        public UserBuilder setPosition(Position position) {
-            this.position = position;
+        public UserBuilder setPosition(String position) {
+            this.position = Position.valueOf(position);
             return this;
         }
 

@@ -19,8 +19,9 @@ public class Main {
                 .setLogin("victor21")
                 .setPassword("victor2")
                 .setCash(12)
-                .setPosition(Position.valueOf("admin"))
+                .setPosition("admin")
                 .createUser();
+
         System.out.println(user.toString());
 
 
