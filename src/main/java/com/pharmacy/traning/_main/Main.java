@@ -1,8 +1,8 @@
 package com.pharmacy.traning._main;
 
-import com.pharmacy.traning.entity.Position;
-import com.pharmacy.traning.entity.User;
-import com.pharmacy.traning.entity.UserStatus;
+import com.pharmacy.traning.model.entity.Position;
+import com.pharmacy.traning.model.entity.User;
+import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ public class Main {
         User user = new User.UserBuilder().
                 setUserStatus(UserStatus.IN_REGISTER)
                 .setName("Victor2")
-                .setLogin("victor2")
+                .setLogin("victor21")
                 .setPassword("victor2")
                 .setCash(12)
                 .setPosition(Position.ADMIN)

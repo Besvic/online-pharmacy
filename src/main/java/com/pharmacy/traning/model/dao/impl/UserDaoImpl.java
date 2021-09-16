@@ -1,8 +1,8 @@
 package com.pharmacy.traning.model.dao.impl;
 
-import com.pharmacy.traning.entity.Position;
-import com.pharmacy.traning.entity.User;
-import com.pharmacy.traning.entity.UserStatus;
+import com.pharmacy.traning.model.entity.Position;
+import com.pharmacy.traning.model.entity.User;
+import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.model.dao.UserDao;
 import com.pharmacy.traning.model.pool.ConnectionPool;

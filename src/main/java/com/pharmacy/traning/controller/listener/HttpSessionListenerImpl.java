@@ -1,7 +1,7 @@
 package com.pharmacy.traning.controller.listener;
 
 
-import com.pharmacy.traning.controller.helper.SessionAttribute;
+import com.pharmacy.traning.controller.comand.SessionAttribute;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.*;
 

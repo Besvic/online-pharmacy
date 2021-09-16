@@ -7,7 +7,7 @@
 <body>
 <form action="controller" method="get">
     <%--<input type="text" name="num" value="1">--%>
-    <input type="submit" value="push">
+    <input type="submit" name="command" value="go_sign_in" > to sign in </form>
 </form>
 <%--<hr/>
 result = ${res}

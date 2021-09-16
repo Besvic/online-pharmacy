@@ -9,5 +9,6 @@
 </head>
 <body>
     <strong>Registration page</strong>
+
 </body>
 </html>

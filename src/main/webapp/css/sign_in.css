@@ -1,4 +1,4 @@
-#registr{
+/*#registr{
     size: 12px;
     width: 100px;
     height: 20px;
@@ -10,20 +10,7 @@
 #Pharmacy{
     color: rgb(36, 128, 49);
     font-size: 50px;
-}
-
-/*#confirm_registr{
-    margin-top: 15px;
-    margin-left: 20px;
-    font-size: 15px;
-}
-
-#confirm_sign_in{
-    margin-top: 15px;
-    margin-left: 20px;
-    font-size: 15px;
 }*/
-
 
 body{
     background-image: url(../css/image/sign_in.jpg);
@@ -34,16 +21,17 @@ body{
     
 }
 
+/*
 .sign_in{
     
     margin: 0 auto;
     font-size: 20px;
     width: 300px;
     background-color:rgba(51, 163, 47, 0.822);
- /*    margin-left: 20%;
+ !*    margin-left: 20%;
     margin-top: 15%;
     margin-bottom: 16%;
-    margin-right: 50%; */
+    margin-right: 50%; *!
 
 }
 
@@ -66,3 +54,4 @@ body{
 .label{
     margin-left: 15px;
 }
+*/

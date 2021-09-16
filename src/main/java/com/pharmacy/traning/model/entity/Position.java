@@ -1,4 +1,4 @@
-package com.pharmacy.traning.entity;
+package com.pharmacy.traning.model.entity;
 
 public enum Position {
     USER,

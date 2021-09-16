@@ -1,7 +1,7 @@
 package com.pharmacy.traning.model.dao.impl;
 
-import com.pharmacy.traning.entity.Order;
-import com.pharmacy.traning.entity.OrderStatus;
+import com.pharmacy.traning.model.entity.Order;
+import com.pharmacy.traning.model.entity.OrderStatus;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.model.dao.OrderDao;
 import com.pharmacy.traning.model.pool.ConnectionPool;

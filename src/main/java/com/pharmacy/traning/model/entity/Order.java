@@ -1,4 +1,4 @@
-package com.pharmacy.traning.entity;
+package com.pharmacy.traning.model.entity;
 
 import java.time.LocalDate;
 import java.util.Arrays;

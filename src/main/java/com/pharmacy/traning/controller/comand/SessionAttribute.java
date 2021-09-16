@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.helper;
+package com.pharmacy.traning.controller.comand;
 
 public final class SessionAttribute {
 

@@ -1,6 +1,6 @@
 package com.pharmacy.traning.model.dao;
 
-import com.pharmacy.traning.entity.Basket;
+import com.pharmacy.traning.model.entity.Basket;
 import com.pharmacy.traning.exception.DaoException;
 
 import java.util.List;

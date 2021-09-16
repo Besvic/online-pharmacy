@@ -1,14 +1,13 @@
-package com.pharmacy.traning.entity;
+package com.pharmacy.traning.model.entity;
 
-public class Measure {
-
+public class Country {
     private long id;
     private String name;
 
-    public Measure() {
+    public Country() {
     }
 
-    public Measure(long id, String name) {
+    public Country(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -17,7 +16,7 @@ public class Measure {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -31,10 +30,12 @@ public class Measure {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Measure measure = (Measure) o;
-        return id == measure.id && name.equals(measure.name);
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Country country = (Country) o;
+        return id == country.id && name.equals(country.name);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class Measure {
 
     @Override
     public String toString() {
-        return "Units{" +
+        return "Country{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

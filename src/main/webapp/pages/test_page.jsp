@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+email = ${email}
+password = ${password}
 <a href="enter/sign_in.jsp">
     <button type="button"> to page2</button>
 </a>

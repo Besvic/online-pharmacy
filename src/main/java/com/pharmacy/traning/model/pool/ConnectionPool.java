@@ -49,7 +49,7 @@ public class ConnectionPool {
                 Connection connection = ConnectionFactory.createConnection();
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnection.put(proxyConnection);
-            } catch (InterruptedException | DatabaseException e) {
+            } catch (InterruptedException | SQLException e) {
                 logger.fatal("No connection to the database.");
             }
         }

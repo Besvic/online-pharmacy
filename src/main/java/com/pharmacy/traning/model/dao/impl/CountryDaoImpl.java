@@ -1,6 +1,6 @@
 package com.pharmacy.traning.model.dao.impl;
 
-import com.pharmacy.traning.entity.Country;
+import com.pharmacy.traning.model.entity.Country;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.model.dao.CountryDao;
 import com.pharmacy.traning.model.pool.ConnectionPool;

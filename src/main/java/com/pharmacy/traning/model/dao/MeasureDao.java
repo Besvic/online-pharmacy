@@ -1,6 +1,6 @@
 package com.pharmacy.traning.model.dao;
 
-import com.pharmacy.traning.entity.Measure;
+import com.pharmacy.traning.model.entity.Measure;
 import com.pharmacy.traning.exception.DaoException;
 
 import java.util.Optional;
