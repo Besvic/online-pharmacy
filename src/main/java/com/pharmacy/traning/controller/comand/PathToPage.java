@@ -9,6 +9,8 @@ public class PathToPage {
     public static final String TEST_PAGE = "/pages/test_page.jsp";
     public static final String USER_PROFILE = "/pages/user/user_profile.jsp";
 
+    public static final String ADMIN_PROFILE = "/pages/admin/admin_profile.jsp";
+
     private PathToPage(){
     }
 }

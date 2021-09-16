@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_CHECK_AUTHORISATION = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
-            where user_status = ?;""";
+            where user_login = ? and user_password = ?;""";
 
     @Override
     public boolean createUser(User user) throws DaoException {
@@ -120,11 +120,11 @@ public class UserDaoImpl implements UserDao {
                 if (result.next()){
                     return Optional.of(new User.UserBuilder()
                             .setId(result.getInt(ColumnName.USER_ID))
-                            .setPosition(Position.valueOf(result.getString(ColumnName.USER_POSITION)))
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
                             .setPassword(result.getString(ColumnName.USER_PASSWORD))
+                            .setPosition(Position.valueOf(result.getString(ColumnName.USER_POSITION)))
                             .setUserStatus(UserStatus.valueOf(result.getString(ColumnName.USER_STATUS)))
                             .setPhoto(result.getBlob(ColumnName.USER_PHOTO))
                             .createUser());

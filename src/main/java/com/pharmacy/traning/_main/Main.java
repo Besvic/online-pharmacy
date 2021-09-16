@@ -1,5 +1,6 @@
 package com.pharmacy.traning._main;
 
+import com.pharmacy.traning.model.dao.ColumnName;
 import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.entity.UserStatus;
@@ -18,13 +19,16 @@ public class Main {
                 .setLogin("victor21")
                 .setPassword("victor2")
                 .setCash(12)
-                .setPosition(Position.ADMIN)
+                .setPosition(Position.valueOf("admin"))
                 .createUser();
+        System.out.println(user.toString());
 
-        try {
-            new UserDaoImpl().createUser(user);
+
+
+        /*try {
+            UserDaoImpl.getInstance().createUser(user);
         } catch (DaoException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }

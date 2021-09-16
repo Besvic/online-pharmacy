@@ -6,7 +6,7 @@ import com.pharmacy.traning.model.entity.User;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface ServiceUser {
 
     boolean registration(User user) throws ServiceException, DaoException;
     Optional<User> signIn(String email, String password) throws ServiceException;

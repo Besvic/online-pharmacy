@@ -2,8 +2,16 @@ package com.pharmacy.traning.controller.comand.impl;
 
 import com.pharmacy.traning.controller.comand.*;
 import com.pharmacy.traning.exception.CommandException;
+import com.pharmacy.traning.exception.ServiceException;
+import com.pharmacy.traning.model.entity.Position;
+import com.pharmacy.traning.model.entity.User;
+import com.pharmacy.traning.service.impl.ServiceUserImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.Optional;
+
+import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 public class ConfirmSignInCommand implements Command {
     @Override
@@ -11,9 +19,19 @@ public class ConfirmSignInCommand implements Command {
 
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
-        request.setAttribute(RequestParameter.EMAIL, email + "check");
-        request.setAttribute(RequestParameter.PASSWORD, password + " check");
-        return new Router(PathToPage.USER_PROFILE, Router.RouterType.FORWARD);
+        try {
+            Optional<User> user = ServiceUserImpl.getInstance().signIn(email, password);
+            if (user.isPresent()) {
+                HttpSession session = request.getSession();
+                session.setAttribute(USER, user.get());
+                return user.get().getPosition().equals(Position.USER) ?
+                        new Router(PathToPage.USER_PROFILE, Router.RouterType.FORWARD) :
+                        new Router(PathToPage.ADMIN_PROFILE, Router.RouterType.FORWARD);
+            }
+        } catch (ServiceException e) {
+            // TODO: 16.09.2021 что здесь писать
+        }
+        return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
 
         /*HttpSession session = request.getSession();
         String locale = (String) session.getAttribute(SessionAttribute.LOCALE);

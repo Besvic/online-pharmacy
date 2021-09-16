@@ -1,7 +1,13 @@
 package com.pharmacy.traning.model.entity;
 
 public enum Position {
-    USER,
-    ADMIN,
-    DELETE
+    USER ("user"),
+    ADMIN ("admin"),
+    DELETE ("delete");
+
+    private final String value;
+
+    Position(String value) {
+        this.value = value;
+    }
 }
