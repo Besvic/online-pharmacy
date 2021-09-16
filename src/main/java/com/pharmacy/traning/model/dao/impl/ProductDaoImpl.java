@@ -16,6 +16,15 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final ProductDaoImpl instance = new ProductDaoImpl();
+
+    public static ProductDaoImpl getInstance(){
+        return instance;
+    }
+
+    private ProductDaoImpl(){
+
+    }
 
     private static final String SQL_ADD_PRODUCT = """
             insert into product (product_name, product_dosage, product_manufacture_id, product_quantity,

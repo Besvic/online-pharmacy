@@ -22,6 +22,15 @@ import static com.pharmacy.traning.model.dao.ColumnName.*;
 public class OrderDaoImpl implements OrderDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final OrderDaoImpl instance = new OrderDaoImpl();
+
+    public static OrderDaoImpl getInstance(){
+        return instance;
+    }
+
+    private OrderDaoImpl(){
+
+    }
 
     private static final String SQL_ADD_ORDER = """
             insert into `order` (order_product_id, order_user_id, order_status, order_quantity, order_date)

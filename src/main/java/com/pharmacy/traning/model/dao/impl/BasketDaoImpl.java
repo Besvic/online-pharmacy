@@ -19,6 +19,15 @@ import java.util.Optional;
 public class BasketDaoImpl implements BasketDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final BasketDaoImpl instance = new BasketDaoImpl();
+
+    public static BasketDaoImpl getInstance(){
+        return instance;
+    }
+
+    private BasketDaoImpl(){
+
+    }
 
     private static final String SQL_FIND_BY_BASKET_ID = """
             select basket_id, basket_order_id, basket_user_id

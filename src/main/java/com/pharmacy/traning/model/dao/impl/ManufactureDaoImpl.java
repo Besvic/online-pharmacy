@@ -20,6 +20,15 @@ import static com.pharmacy.traning.model.dao.ColumnName.*;
 public class ManufactureDaoImpl implements ManufactureDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final ManufactureDaoImpl instance = new ManufactureDaoImpl();
+
+    public static ManufactureDaoImpl getInstance(){
+        return instance;
+    }
+
+    private ManufactureDaoImpl(){
+
+    }
 
     private static final String SQL_ADD_MANUFACTURE = """
             insert into manufacture (manufacture_name, manufacture_email, manufacture_country_id)

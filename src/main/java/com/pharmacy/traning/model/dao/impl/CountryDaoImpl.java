@@ -18,6 +18,15 @@ import static com.pharmacy.traning.model.dao.ColumnName.COUNTRY_NAME;
 
 public class CountryDaoImpl implements CountryDao {
     private static final Logger logger = LogManager.getLogger();
+    private static final CountryDaoImpl instance = new CountryDaoImpl();
+
+    public static CountryDaoImpl getInstance(){
+        return instance;
+    }
+
+    private CountryDaoImpl(){
+
+    }
 
     private static final String SQL_ADD_COUNTRY = """
             insert into country (country_name)

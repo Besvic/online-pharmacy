@@ -18,11 +18,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean registration(User user) throws ServiceException {
-        UserDaoImpl userDao = new UserDaoImpl();
         if (!new UserValidatorImpl().isNull(user)) {
             try {
                 user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
-                return userDao.createUser(user);
+                return UserDaoImpl.getInstance().createUser(user);
             } catch (DaoException e) {
                 logger.error("Not available create person, because this email already saved!", e);
                 throw new ServiceException("Not available create person, because this email already saved!", e);

@@ -21,6 +21,15 @@ import java.util.Optional;
 public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final UserDaoImpl instance = new UserDaoImpl();
+
+    public static UserDaoImpl getInstance(){
+        return instance;
+    }
+
+    private UserDaoImpl(){
+
+    }
 
     private static final String SQL_CREATE_USER = """
             insert into users (user_position, user_name, user_cash, user_login, user_password, user_status)

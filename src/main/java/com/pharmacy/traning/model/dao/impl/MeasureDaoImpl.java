@@ -17,6 +17,15 @@ import java.util.Optional;
 public class MeasureDaoImpl implements MeasureDao {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final MeasureDaoImpl instance = new MeasureDaoImpl();
+
+    public static MeasureDaoImpl getInstance(){
+        return instance;
+    }
+
+    private MeasureDaoImpl(){
+
+    }
 
     private static final String SQL_ADD_MEASURE = """
             insert into measure (measure_name)

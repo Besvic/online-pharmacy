@@ -15,7 +15,7 @@ import static com.pharmacy.traning.controller.comand.Router.RouterType.FORWARD;
 import static com.pharmacy.traning.controller.comand.Router.RouterType.REDIRECT;
 
 @WebServlet(name = "helloServlet", urlPatterns = "/controller")
-public class HelloServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
 
     public void init() {
 
