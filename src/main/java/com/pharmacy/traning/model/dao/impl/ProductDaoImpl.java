@@ -57,10 +57,13 @@ public class ProductDaoImpl implements ProductDao {
             statement.setInt(4, product.getQuantity());
             statement.setDouble(5, product.getPrice());
             statement.setDate(6, Date.valueOf(product.getDateOfDelivery()));
-            statement.setLong(7, product.getMeasureId());
-            // TODO: 03.09.2021 добавить запись на фотку
+            statement.setString(7, product.getMeasure());
+            statement.setString(8, product.getPhoto());
+            if (statement.executeUpdate() != 0)
+                return true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }

@@ -57,7 +57,7 @@ public class ManufactureDaoImpl implements ManufactureDao {
                 return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }
@@ -78,7 +78,7 @@ public class ManufactureDaoImpl implements ManufactureDao {
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return Optional.empty();
     }
@@ -100,7 +100,7 @@ public class ManufactureDaoImpl implements ManufactureDao {
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return null;
     }
@@ -115,7 +115,7 @@ public class ManufactureDaoImpl implements ManufactureDao {
                 return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }

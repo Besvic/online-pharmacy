@@ -45,7 +45,7 @@ public class CountryDaoImpl implements CountryDao {
                 return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }
@@ -62,7 +62,7 @@ public class CountryDaoImpl implements CountryDao {
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return Optional.empty();
     }

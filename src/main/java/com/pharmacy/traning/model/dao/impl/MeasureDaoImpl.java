@@ -45,7 +45,7 @@ public class MeasureDaoImpl implements MeasureDao {
                 return true;
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return false;
     }
@@ -64,7 +64,7 @@ public class MeasureDaoImpl implements MeasureDao {
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return Optional.empty();
     }

@@ -13,7 +13,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>Title</title>
+    <title><fmt:message key="title.profile"/> </title>
 
     <link href="${pageContext.request.contextPath}/css/admin/admin_profile.css" rel="stylesheet" type="text/css"/>
 

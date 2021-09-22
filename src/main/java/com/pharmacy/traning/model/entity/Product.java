@@ -1,6 +1,5 @@
 package com.pharmacy.traning.model.entity;
 
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -13,14 +12,14 @@ public class Product {
     private int quantity;
     private double price;
     private LocalDate dateOfDelivery;
-    private long measureId;
-    private Blob photo;
+    private String measure;
+    private String photo;
 
     public Product() {
     }
 
     public Product(long id, String name, double dosage, long manufactureId, int quantity,
-                   double price, LocalDate dateOfDelivery, long measureId, Blob photo) {
+                   double price, LocalDate dateOfDelivery, String measure, String photo) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
@@ -28,7 +27,7 @@ public class Product {
         this.quantity = quantity;
         this.price = price;
         this.dateOfDelivery = dateOfDelivery;
-        this.measureId = measureId;
+        this.measure = measure;
         this.photo = photo;
     }
 
@@ -88,19 +87,19 @@ public class Product {
         this.dateOfDelivery = dateOfDelivery;
     }
 
-    public long getMeasureId() {
-        return measureId;
+    public String getMeasure() {
+        return measure;
     }
 
-    public void setMeasureId(long measureId) {
-        this.measureId = measureId;
+    public void setMeasure(String measure) {
+        this.measure = measure;
     }
 
-    public Blob getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Blob photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -112,20 +111,22 @@ public class Product {
             return false;
         Product product = (Product) o;
         return id == product.id && Double.compare(product.dosage, dosage) == 0 && manufactureId == product.manufactureId &&
-                quantity == product.quantity && Double.compare(product.price, price) == 0 && measureId == product.measureId &&
-                name.equals(product.name) && dateOfDelivery.equals(product.dateOfDelivery) && photo.equals(product.photo);
+                quantity == product.quantity && Double.compare(product.price, price) == 0 &&
+                measure == null ? product.measure == null : measure.equals(product.measure)  &&
+                name == null ? product.name == null : name.equals(product.name) &&
+                dateOfDelivery == null ? product.dateOfDelivery == null : dateOfDelivery.equals(product.dateOfDelivery) && photo.equals(product.photo);
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(quantity) + Arrays.hashCode(new long[] {id, manufactureId, measureId}) +
+        return Integer.hashCode(quantity) + Arrays.hashCode(new long[] {id, manufactureId}) +
                 Arrays.hashCode( new double[] {dosage, price}) + name.hashCode() + dateOfDelivery.hashCode() +
-                photo.hashCode();
+                photo.hashCode() + measure.hashCode();
     }
 
     @Override
     public String toString() {
-        return new StringBuffer().append("Product{")
+        return new String(new StringBuffer().append("Product{")
                 .append("id=").append(id)
                 .append(", name='").append(name)
                 .append(", dosage=").append(dosage)
@@ -133,10 +134,9 @@ public class Product {
                 .append(", quantity=").append(quantity)
                 .append(", price=").append(price)
                 .append(", dateOfDelivery=").append(dateOfDelivery.toString())
-                .append(", measureId=").append(measureId)
-                .append(", photo=").append(photo.toString())
-                .append('}')
-                .toString();
+                .append(", measureId=").append(measure)
+                .append(", photo=").append(photo)
+                .append('}'));
     }
 
     public static class ProductBuilder{
@@ -148,8 +148,8 @@ public class Product {
         private int quantity;
         private double price;
         private LocalDate dateOfDelivery;
-        private long unitsId;
-        private Blob photo;
+        private String measure;
+        private String photo;
 
         public ProductBuilder setId(long id) {
             this.id = id;
@@ -186,18 +186,18 @@ public class Product {
             return this;
         }
 
-        public ProductBuilder setUnitsId(long unitsId) {
-            this.unitsId = unitsId;
+        public ProductBuilder setMeasure(String measure) {
+            this.measure = measure;
             return this;
         }
 
-        public ProductBuilder setPhoto(Blob photo) {
+        public ProductBuilder setPhoto(String photo) {
             this.photo = photo;
             return this;
         }
 
         public Product createProduct() {
-            return new Product(id, name, dosage, manufactureId, quantity, price, dateOfDelivery, unitsId, photo);
+            return new Product(id, name, dosage, manufactureId, quantity, price, dateOfDelivery, measure, photo);
         }
     }
 }
