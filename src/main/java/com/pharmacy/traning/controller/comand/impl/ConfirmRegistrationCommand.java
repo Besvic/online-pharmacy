@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
+import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
 public class ConfirmRegistrationCommand implements Command {
 
@@ -26,26 +26,28 @@ public class ConfirmRegistrationCommand implements Command {
                 .setLogin(request.getParameter(EMAIL))
                 .setName(request.getParameter(NAME))
                 .setPassword(request.getParameter(PASSWORD))
-                .setUserStatus(UserStatus.IN_REGISTER)
+                .setUserStatus(String.valueOf(UserStatus.IN_REGISTER))
                 .createUser();
         if (request.getParameter(IS_ADMIN) == null) {
-            user.setPosition(Position.USER);
+            user.setPosition(USER);
         } else {
-            user.setPosition(Position.ADMIN);
+            user.setPosition(ADMIN);
         }
+        HttpSession session = request.getSession();
         try {
             if (ServiceUserImpl.getInstance().registration(user)) {
                 Optional<User> userOptional = ServiceUserImpl.getInstance().signIn(user.getLogin(), user.getPassword());
                 if (userOptional.isPresent()) {
-                    HttpSession session = request.getSession();
                     session.setAttribute(USER, userOptional.get());
+                    User.currentId = userOptional.get().getId();
                     return userOptional.get().getPosition().equals(Position.USER) ?
-                            new Router(PathToPage.USER_PROFILE, Router.RouterType.FORWARD) :
-                            new Router(PathToPage.ADMIN_PROFILE, Router.RouterType.FORWARD);
+                            new Router(PathToPage.USER_MENU, Router.RouterType.FORWARD) :
+                            new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
                 }
             }
         } catch (ServiceException e) {
-            // TODO: 16.09.2021 что здесь делать с ошибкой? 
+            session.setAttribute(ERROR,"Check your input data.\n " + e );
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }

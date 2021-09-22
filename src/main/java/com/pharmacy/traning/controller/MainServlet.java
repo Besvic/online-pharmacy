@@ -11,11 +11,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-import static com.pharmacy.traning.controller.comand.Router.RouterType.FORWARD;
-import static com.pharmacy.traning.controller.comand.Router.RouterType.REDIRECT;
-
 @WebServlet(name = "helloServlet", urlPatterns = "/controller")
-public class MainServlet extends HttpServlet {
+public class MainServlet extends UploadServlet {
 
     public void init() {
 
@@ -27,11 +24,6 @@ public class MainServlet extends HttpServlet {
         int number = Integer.parseInt(n) * 7;
         request.setAttribute("res", number);
         request.getRequestDispatcher("index.jsp").forward(request, response);*/
-
-
-
-        //request.getRequestDispatcher("/pages/enter/sign_in.jsp").forward(request, response);
-
         processRequest(request, response);
     }
 
@@ -47,8 +39,6 @@ public class MainServlet extends HttpServlet {
         } catch (CommandException e) {
             router = new Router(PathToPage.ERROR_404, Router.RouterType.REDIRECT);
         }
-        //HttpSession session = request.getSession();
-        //session.setAttribute(SessionAttribute.CURRENT_PAGE, router.getPagePath());
         switch (router.getRouterType()) {
             case FORWARD:
                 request.getRequestDispatcher(router.getPagePath()).forward(request, response);

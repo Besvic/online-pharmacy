@@ -11,25 +11,27 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
 
+import static com.pharmacy.traning.controller.comand.SessionAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 public class ConfirmSignInCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-
+        HttpSession session = request.getSession();
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
         try {
             Optional<User> user = ServiceUserImpl.getInstance().signIn(email, password);
             if (user.isPresent()) {
-                HttpSession session = request.getSession();
                 session.setAttribute(USER, user.get());
+                User.currentId = user.get().getId();
                 return user.get().getPosition().equals(Position.USER) ?
-                        new Router(PathToPage.USER_PROFILE, Router.RouterType.FORWARD) :
-                        new Router(PathToPage.ADMIN_PROFILE, Router.RouterType.FORWARD);
+                        new Router(PathToPage.USER_MENU, Router.RouterType.FORWARD) :
+                        new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
             }
         } catch (ServiceException e) {
-            // TODO: 16.09.2021 что здесь писать
+            session.setAttribute(ERROR,"Check your input data.\n " + e );
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
 

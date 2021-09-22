@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Asus
-  Date: 15.09.2021
-  Time: 13:39
+  Date: 20.09.2021
+  Time: 9:56
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,13 +12,12 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>404 Error</title>
+    <title>User menu</title>
 </head>
 <body>
-<p>
-    Error-404
-</p>
-<p > session: ${sessionScope.error} </p>
-<p > request: ${error} </p>
+login = ${sessionScope.user.login}
+name = ${sessionScope.user.name}
+password = ${sessionScope.user.password}
+id = ${sessionScope.user.id}
 </body>
 </html>

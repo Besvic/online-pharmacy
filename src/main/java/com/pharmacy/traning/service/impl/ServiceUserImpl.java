@@ -6,11 +6,12 @@ import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.ServiceUser;
-import com.pharmacy.traning.validator.impl.UserValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
+
+import static java.util.Objects.isNull;
 
 public class ServiceUserImpl implements ServiceUser {
 
@@ -29,7 +30,7 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean registration(User user) throws ServiceException {
-        if (!new UserValidatorImpl().isNull(user)) {
+        if (!isNull(user)) {
             try {
                 user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
                 return UserDaoImpl.getInstance().createUser(user);
@@ -42,6 +43,34 @@ public class ServiceUserImpl implements ServiceUser {
             logger.error("Not available create person, because this data is null!");
             throw new ServiceException("Not available create person, because this data is null!");
         }
+    }
+
+    @Override
+    public boolean updatePhotoById(String path, long id) throws ServiceException {
+        try {
+            return UserDaoImpl.getInstance().updatePhotoById(path, id);
+        } catch (DaoException e) {
+            logger.error("Not available updatePhotoById!", e);
+            throw new ServiceException("Not available updatePhotoById!", e);
+        }
+    }
+
+    @Override
+    public boolean updateUserById(User user, long id) throws ServiceException {
+        if (!isNull(user)){
+            try {
+                return UserDaoImpl.getInstance().updateUserById(user, id);
+            } catch (DaoException e) {
+                logger.error("Not available updateUserById!", e);
+                throw new ServiceException("Not available updateUserById!", e);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateCashById(Double cash, long id) throws ServiceException {
+        return false;
     }
 
     @Override

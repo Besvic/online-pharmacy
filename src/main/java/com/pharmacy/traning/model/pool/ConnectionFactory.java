@@ -1,6 +1,5 @@
 package com.pharmacy.traning.model.pool;
 
-import com.pharmacy.traning.exception.DatabaseException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

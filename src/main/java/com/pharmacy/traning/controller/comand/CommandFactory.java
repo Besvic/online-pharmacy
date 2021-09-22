@@ -20,7 +20,7 @@ public class CommandFactory {
         String commandName = request.getParameter(RequestParameter.COMMAND);
         Command command;
         if (commandName == null)
-            return CommandType.DEFAULT.getCommand();
+             return CommandType.DEFAULT.getCommand();
         else{
             try {
                 CommandType commandType = CommandType.valueOf(commandName.toUpperCase());

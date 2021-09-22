@@ -82,7 +82,7 @@ public class OrderDaoImpl implements OrderDao {
                     .setUserId(result.getLong(ORDER_USER_ID))
                     .setProductId(result.getLong(ORDER_PRODUCT_ID))
                     .setQuantity(result.getInt(ORDER_QUANTITY))
-                    .setStatus(OrderStatus.valueOf(result.getString(ORDER_STATUS)))
+                    .setStatus(result.getString(ORDER_STATUS))
                     .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
                     .createOrder());
                 }
@@ -107,7 +107,7 @@ public class OrderDaoImpl implements OrderDao {
                             .setUserId(result.getLong(ORDER_USER_ID))
                             .setProductId(result.getLong(ORDER_PRODUCT_ID))
                             .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(OrderStatus.valueOf(result.getString(ORDER_STATUS)))
+                            .setStatus(result.getString(ORDER_STATUS))
                             .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
                             .createOrder());
                 }
@@ -132,7 +132,7 @@ public class OrderDaoImpl implements OrderDao {
                             .setUserId(result.getLong(ORDER_USER_ID))
                             .setProductId(result.getLong(ORDER_PRODUCT_ID))
                             .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(OrderStatus.valueOf(result.getString(ORDER_STATUS)))
+                            .setStatus(result.getString(ORDER_STATUS))
                             .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
                             .createOrder());
                 }
@@ -157,7 +157,7 @@ public class OrderDaoImpl implements OrderDao {
                             .setUserId(result.getLong(ORDER_USER_ID))
                             .setProductId(result.getLong(ORDER_PRODUCT_ID))
                             .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(OrderStatus.valueOf(result.getString(ORDER_STATUS)))
+                            .setStatus(result.getString(ORDER_STATUS))
                             .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
                             .createOrder());
                 }

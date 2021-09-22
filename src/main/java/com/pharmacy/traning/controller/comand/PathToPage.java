@@ -7,9 +7,12 @@ public class PathToPage {
     public static final String SIGN_IN = "/pages/enter/sign_in.jsp";
     public static final String INDEX = "index.jsp";
     public static final String TEST_PAGE = "/pages/test_page.jsp";
+    public static final String USER_MENU = "/pages/user/user_menu.jsp";
     public static final String USER_PROFILE = "/pages/user/user_profile.jsp";
 
+    public static final String ADMIN_MENU = "/pages/admin/admin_menu.jsp";
     public static final String ADMIN_PROFILE = "/pages/admin/admin_profile.jsp";
+
 
     private PathToPage(){
     }

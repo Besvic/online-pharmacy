@@ -9,12 +9,14 @@ import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Locale;
+
 public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
         User user = new User.UserBuilder().
-                setUserStatus(UserStatus.IN_REGISTER)
+                setUserStatus(String.valueOf(UserStatus.IN_REGISTER))
                 .setName("Victor2")
                 .setLogin("victor21")
                 .setPassword("victor2")
@@ -25,11 +27,5 @@ public class Main {
         System.out.println(user.toString());
 
 
-
-        /*try {
-            UserDaoImpl.getInstance().createUser(user);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }*/
     }
 }

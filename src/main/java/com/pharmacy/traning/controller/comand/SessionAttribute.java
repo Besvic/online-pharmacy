@@ -7,6 +7,8 @@ public final class SessionAttribute {
     public static final String EN_EN = "en_EN";
     public static final String MESSAGE = "message";
     public static final String USER = "user";
+    public static final String ADMIN = "admin";
+    public static final String ERROR = "error";
 
 
     private SessionAttribute() {

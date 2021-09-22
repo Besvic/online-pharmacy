@@ -52,8 +52,8 @@ public class Order {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
-        this.status = status;
+    public void setStatus(String status) {
+        this.status = OrderStatus.valueOf(status.toUpperCase());
     }
 
     public int getQuantity() {
@@ -124,8 +124,8 @@ public class Order {
             return this;
         }
 
-        public OrderBuilder setStatus(OrderStatus status) {
-            this.status = status;
+        public OrderBuilder setStatus(String status) {
+            this.status = OrderStatus.valueOf(status.toUpperCase());
             return this;
         }
 

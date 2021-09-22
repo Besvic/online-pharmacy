@@ -3,7 +3,7 @@ package com.pharmacy.traning.model.entity;
 import java.sql.Blob;
 
 public class User {
-
+    public static long currentId;
     private long id;
     private Position position;
     private UserStatus userStatus;
@@ -11,13 +11,13 @@ public class User {
     private double cash;
     private String login;
     private String password;
-    private Blob photo;
+    private String photo;
 
     public User() {
     }
 
     public User(long id, String name, double cash, String login, String password, UserStatus userStatus
-            , Position position, Blob photo) {
+            , Position position, String photo) {
         this.id = id;
         this.name = name;
         this.cash = cash;
@@ -48,8 +48,8 @@ public class User {
         return userStatus;
     }
 
-    public void setUserStatus(UserStatus userStatus) {
-        this.userStatus = userStatus;
+    public void setUserStatus(String userStatus) {
+        this.userStatus = UserStatus.valueOf(userStatus.toUpperCase());
     }
 
     public String getName() {
@@ -84,11 +84,11 @@ public class User {
         this.password = password;
     }
 
-    public Blob getPhoto() {
+    public String getPhoto() {
         return photo; // TODO: 02.09.2021 как работать с фото
     }
 
-    public void setPhoto(Blob photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -139,7 +139,7 @@ public class User {
         private String password;
         private UserStatus userStatus;
         private Position position;
-        private Blob photo;
+        private String photo;
 
         public UserBuilder setId(long id) {
             this.id = id;
@@ -166,17 +166,17 @@ public class User {
             return this;
         }
 
-        public UserBuilder setUserStatus(UserStatus userStatus) {
-            this.userStatus = userStatus;
+        public UserBuilder setUserStatus(String userStatus) {
+            this.userStatus = UserStatus.valueOf(userStatus.toUpperCase());
             return this;
         }
 
         public UserBuilder setPosition(String position) {
-            this.position = Position.valueOf(position);
+            this.position = Position.valueOf(position.toUpperCase());
             return this;
         }
 
-        public UserBuilder setPhoto(Blob photo) {
+        public UserBuilder setPhoto(String photo) {
             this.photo = photo;
             return this;
         }

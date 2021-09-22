@@ -59,6 +59,14 @@
             <version>8.0.26</version>
         </dependency>
 
+        <!--validator-->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.4.1</version>
+        </dependency>
+
+
 
 
     </dependencies>

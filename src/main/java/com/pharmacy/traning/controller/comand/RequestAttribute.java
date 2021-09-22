@@ -2,6 +2,7 @@ package com.pharmacy.traning.controller.comand;
 
 public class RequestAttribute {
 
+
     public static String REGISTRATION_USER_DATA = "userMap";
 
     public static String ERROR_USER_NON_ACTIVATED = "errorNonActivatedMessage";

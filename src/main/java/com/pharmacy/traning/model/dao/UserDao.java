@@ -9,9 +9,12 @@ import java.util.Optional;
 public interface UserDao {
 
     boolean createUser(User user) throws DaoException;
-    boolean deleteUserById(int id) throws DaoException;
+    boolean deleteUserById(long id) throws DaoException;
+    boolean updateUserById(User user, long id) throws DaoException;
+    boolean updateCashById(Double cash, long id) throws DaoException;
     List<User> findUserByStatus(String status) throws DaoException;
     Optional<User> checkAuthorisation(String login, String password) throws DaoException;
+    boolean updatePhotoById(String path, long id) throws DaoException;
 
 
 
