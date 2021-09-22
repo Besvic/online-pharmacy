@@ -85,7 +85,7 @@ public class User {
     }
 
     public String getPhoto() {
-        return photo; // TODO: 02.09.2021 как работать с фото
+        return photo;
     }
 
     public void setPhoto(String photo) {
@@ -108,10 +108,9 @@ public class User {
                 + login.hashCode() + password.hashCode() + name.hashCode() + photo.hashCode();
     }
 
-    @Override // FIXME: 23.08.2021  to string builder
+    @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        return buffer.append("User{ id= ")
+        return new String(new StringBuffer().append("User{ id= ")
                 .append(id)
                 .append(", name= ")
                 .append(name)
@@ -125,8 +124,7 @@ public class User {
                 .append(userStatus)
                 .append(", position= ")
                 .append(position)
-                .append(" }")
-                .toString();
+                .append(" }"));
 
     }
 

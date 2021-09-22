@@ -53,7 +53,7 @@ public class ProductDaoImpl implements ProductDao {
              PreparedStatement statement = connection.prepareStatement(SQL_ADD_PRODUCT)){
             statement.setString(1, product.getName());
             statement.setDouble(2, product.getDosage());
-            statement.setLong(3, product.getManufactureId());
+            statement.setLong(3, product.getManufactureCountry());
             statement.setInt(4, product.getQuantity());
             statement.setDouble(5, product.getPrice());
             statement.setDate(6, Date.valueOf(product.getDateOfDelivery()));

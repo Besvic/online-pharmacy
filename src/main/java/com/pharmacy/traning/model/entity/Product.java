@@ -8,7 +8,7 @@ public class Product {
     private long id;
     private String name;
     private double dosage;
-    private long manufactureId;
+    private String manufactureCountry;
     private int quantity;
     private double price;
     private LocalDate dateOfDelivery;
@@ -18,12 +18,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(long id, String name, double dosage, long manufactureId, int quantity,
+    public Product(long id, String name, double dosage, String manufactureCountry, int quantity,
                    double price, LocalDate dateOfDelivery, String measure, String photo) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
-        this.manufactureId = manufactureId;
+        this.manufactureCountry = manufactureCountry;
         this.quantity = quantity;
         this.price = price;
         this.dateOfDelivery = dateOfDelivery;
@@ -55,12 +55,12 @@ public class Product {
         this.dosage = dosage;
     }
 
-    public long getManufactureId() {
-        return manufactureId;
+    public String getManufactureCountry() {
+        return manufactureCountry;
     }
 
-    public void setManufactureId(long manufactureId) {
-        this.manufactureId = manufactureId;
+    public void setManufactureCountry(String manufactureCountry) {
+        this.manufactureCountry = manufactureCountry;
     }
 
     public int getQuantity() {
@@ -110,7 +110,8 @@ public class Product {
         if (o == null || getClass() != o.getClass())
             return false;
         Product product = (Product) o;
-        return id == product.id && Double.compare(product.dosage, dosage) == 0 && manufactureId == product.manufactureId &&
+        return id == product.id && Double.compare(product.dosage, dosage) == 0 &&
+                manufactureCountry == null ? product.manufactureCountry == null : manufactureCountry.equals(product.manufactureCountry) &&
                 quantity == product.quantity && Double.compare(product.price, price) == 0 &&
                 measure == null ? product.measure == null : measure.equals(product.measure)  &&
                 name == null ? product.name == null : name.equals(product.name) &&
@@ -119,9 +120,9 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(quantity) + Arrays.hashCode(new long[] {id, manufactureId}) +
+        return Integer.hashCode(quantity) + Long.hashCode(id) +
                 Arrays.hashCode( new double[] {dosage, price}) + name.hashCode() + dateOfDelivery.hashCode() +
-                photo.hashCode() + measure.hashCode();
+                photo.hashCode() + measure.hashCode() + manufactureCountry.hashCode();
     }
 
     @Override
@@ -130,7 +131,7 @@ public class Product {
                 .append("id=").append(id)
                 .append(", name='").append(name)
                 .append(", dosage=").append(dosage)
-                .append(", manufactureId=").append(manufactureId)
+                .append(", manufactureId=").append(manufactureCountry)
                 .append(", quantity=").append(quantity)
                 .append(", price=").append(price)
                 .append(", dateOfDelivery=").append(dateOfDelivery.toString())
@@ -144,7 +145,7 @@ public class Product {
         private long id;
         private String name;
         private double dosage;
-        private long manufactureId;
+        private String manufactureCountry;
         private int quantity;
         private double price;
         private LocalDate dateOfDelivery;
@@ -166,8 +167,8 @@ public class Product {
             return this;
         }
 
-        public ProductBuilder setManufactureId(long manufactureId) {
-            this.manufactureId = manufactureId;
+        public ProductBuilder setManufactureCountry(String manufactureCountry) {
+            this.manufactureCountry = manufactureCountry;
             return this;
         }
 
@@ -197,7 +198,7 @@ public class Product {
         }
 
         public Product createProduct() {
-            return new Product(id, name, dosage, manufactureId, quantity, price, dateOfDelivery, measure, photo);
+            return new Product(id, name, dosage, manufactureCountry, quantity, price, dateOfDelivery, measure, photo);
         }
     }
 }
