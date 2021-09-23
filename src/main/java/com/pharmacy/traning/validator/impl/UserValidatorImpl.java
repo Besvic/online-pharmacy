@@ -10,7 +10,7 @@ public class UserValidatorImpl implements Validator, ValidatorUser {
 
     public static UserValidatorImpl getInstance(){
         if (instance == null)
-            instance =new UserValidatorImpl();
+            instance = new UserValidatorImpl();
         return instance;
     }
 
@@ -26,10 +26,5 @@ public class UserValidatorImpl implements Validator, ValidatorUser {
     @Override
     public boolean emailIsValid(String email) {
         return EmailValidator.getInstance().isValid(email);
-    }
-
-    @Override
-    public boolean nameIsValid(String name) {
-        return false;
     }
 }

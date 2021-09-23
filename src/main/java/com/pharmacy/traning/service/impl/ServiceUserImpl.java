@@ -6,17 +6,16 @@ import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.ServiceUser;
+import com.pharmacy.traning.validator.impl.UserValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-import static java.util.Objects.isNull;
-
 public class ServiceUserImpl implements ServiceUser {
 
     private static final Logger logger = LogManager.getLogger();
-    private static ServiceUserImpl instance = null;
+    private static ServiceUserImpl instance;
 
     public static ServiceUserImpl getInstance(){
         if (instance == null)
@@ -30,7 +29,7 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean registration(User user) throws ServiceException {
-        if (!isNull(user)) {
+        if (UserValidatorImpl.getInstance().isNullObject(user)) {
             try {
                 user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
                 return UserDaoImpl.getInstance().createUser(user);
@@ -57,7 +56,7 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean updateUserById(User user, long id) throws ServiceException {
-        if (!isNull(user)){
+        if (UserValidatorImpl.getInstance().isNullObject(user)){
             try {
                 return UserDaoImpl.getInstance().updateUserById(user, id);
             } catch (DaoException e) {

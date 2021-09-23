@@ -13,6 +13,7 @@ public interface ProductDao {
     boolean changeProductPriceByProductId(double productPrice, int productId) throws DaoException;
     //List<Product> findProductByProductDate(LocalDate productDate) throws DaoException;
     List<Product> findProductUnderProductPrice(double productPrice) throws DaoException;
+    boolean changeProduct(double productPrice) throws DaoException;
 
 
 }

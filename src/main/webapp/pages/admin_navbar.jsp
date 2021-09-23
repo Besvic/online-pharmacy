@@ -55,11 +55,11 @@
                                                 </li>--%>
 
                     <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_user_list" class="nav-link">Пользователи</button>
+                        <button type="submit" name="command" value="go_to_user_list" class="nav-link" id="navbarDropdownMenuLink3">Пользователи</button>
                     </li>
 
                     <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_admin_profile" class="nav-link">Профиль</button>
+                        <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Профиль</button>
                     </li>
 
 

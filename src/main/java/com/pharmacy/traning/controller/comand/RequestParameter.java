@@ -5,13 +5,21 @@ public final class RequestParameter {
     //command
     public static final String COMMAND = "command";
 
-    //login
+    //profile data
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String NEW_PASSWORD = "new_password";
     public static final String NEW_REPEAT_PASSWORD = "new_repeat_password";
     public static final String NEW_NAME = "new_name";
 
+    //product data
+    public static final String PRODUCT_NAME = "product_name";
+    public static final String MANUFACTURE_COUNTRY = "manufacture_country";
+    public static final String DOSAGE = "dosage";
+    public static final String MEASURE = "measure";
+    public static final String QUANTITY = "quantity";
+    public static final String PRICE = "price";
+    public static final String IMAGE_FILE = "image_file";
 
 
     //locale

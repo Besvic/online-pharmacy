@@ -17,7 +17,7 @@
 
     <link href="${pageContext.request.contextPath}/css/admin/admin_profile.css" rel="stylesheet" type="text/css"/>
 
-    <link href="${pageContext.request.contextPath}/css/admin/admin_menu.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
 </head>
@@ -111,9 +111,22 @@
 
 </form>
 
+
     <form method="post" action="uploadServlet" enctype="multipart/form-data">
-        Choose a file: <input type="file" name="command" value="upload_image" />
-        <input type="submit" name="command" value="upload_image" />
+        <label class="upload_button">
+
+            <div class="example-1">
+                <div class="form-group">
+                    <label class="label">
+                        <i class="material-icons">attach_file</i>
+                        <span class="title">Добавить файл</span>
+                        <input class="input_file" type="file" accept=".jpg, .jpeg, .png" name="command" value="upload_image" />
+                    </label>
+                </div>
+            </div>
+        </label>
+        <%--Choose a file: <input type="file" name="command" value="upload_image" />
+        <input type="submit" name="command" value="upload_image" />--%>
     </form>
 </div>
 </body>

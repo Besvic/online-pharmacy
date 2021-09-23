@@ -13,13 +13,14 @@ public enum CommandType {
     CONFIRM_REGISTRATION(new ConfirmRegistrationCommand()),
     //admin function
     GO_TO_ADD_MANUFACTURE(new GoToAddManufacture()),
-    GO_TO_ADD_PRODUCT(new GoToAddProduct()),
+    GO_TO_ADD_PRODUCT(new GoToAddProductCommand()),
     GO_TO_ADMIN_PROFILE(new GoToAdminProfile()),
     GO_TO_MANUFACTURE_LIST(new GoToManufactureList()),
     GO_TO_PRODUCT_LIST(new GoToProductList()),
     GO_TO_USER_LIST(new GoToUserList()),
     UPLOAD_IMAGE(new UploadImageCommand()),
-    UPDATE_DATA_ADMIN(new UpdateDataAdminCommand())
+    UPDATE_DATA_ADMIN(new UpdateDataAdminCommand()),
+    ADD_PRODUCT(new CreateProductCommand())
 
 
 

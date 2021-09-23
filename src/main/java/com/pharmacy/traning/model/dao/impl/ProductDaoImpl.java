@@ -27,9 +27,9 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     private static final String SQL_ADD_PRODUCT = """
-            insert into product (product_name, product_dosage, product_manufacture_id, product_quantity,
-                                 product_price, product_date_of_delivery, product_measure_id, product_photo)
-            values (?, ?, ?, ?, ?, ?, ?, ?);""";
+            insert into product (product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure)
+            values (?, ?, ?, ?, ?, ?, ?);""";
     private static final String SQL_CHANGE_PRODUCT_NAME_BY_PRODUCT_ID = """
             update product
             set product_name = ?
@@ -43,8 +43,8 @@ public class ProductDaoImpl implements ProductDao {
             set product_price = ?
             where product_id = ?;""";
     private static final String SQL_FIND_PRODUCT_UNDER_PRODUCT_PRICE = """
-            select product_id, product_name, product_dosage, product_manufacture_id, product_quantity,
-                   product_price, product_date_of_delivery, product_measure_id, product_photo
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure, product_photo
             from product
             where product_price <= ?;""";
     @Override
@@ -53,12 +53,11 @@ public class ProductDaoImpl implements ProductDao {
              PreparedStatement statement = connection.prepareStatement(SQL_ADD_PRODUCT)){
             statement.setString(1, product.getName());
             statement.setDouble(2, product.getDosage());
-            statement.setLong(3, product.getManufactureCountry());
+            statement.setString(3, product.getManufactureCountry());
             statement.setInt(4, product.getQuantity());
             statement.setDouble(5, product.getPrice());
             statement.setDate(6, Date.valueOf(product.getDateOfDelivery()));
             statement.setString(7, product.getMeasure());
-            statement.setString(8, product.getPhoto());
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {
@@ -86,5 +85,10 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> findProductUnderProductPrice(double productPrice) throws DaoException {
         return null;
+    }
+
+    @Override
+    public boolean changeProduct(double productPrice) throws DaoException {
+        return false;
     }
 }

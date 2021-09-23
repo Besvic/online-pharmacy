@@ -59,3 +59,37 @@ body{
     font-size: 20px;
     width: 140px;
 }
+
+
+
+
+
+
+
+
+
+.input_file{
+    font-family: 'Architects Daughter', cursive;
+
+    background-color: #af4c9e;
+    margin-left: 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 20px;
+    width: 350px;
+    cursor: pointer;
+
+}
+
+.example-1 .form-group{padding:1em;margin:1em}
+.example-1 input[type=file]{outline:0;opacity:0;pointer-events:none;user-select:none}
+.example-1 .label{width:150px; height: 150px;border:2px dashed grey;border-radius:5px;display:block;padding:1.2em;transition:border 300ms ease;cursor:pointer;text-align:center}
+.example-1 .label i{display:block;font-size:42px;padding-bottom:16px}
+.example-1 .label i,.example-1 .label .title{color:grey;transition:200ms color}
+.example-1 .label:hover{border:2px solid #000}
+.example-1 .label:hover i,.example-1 .label:hover .title{color:#000}
+

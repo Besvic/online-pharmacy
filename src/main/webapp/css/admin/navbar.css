@@ -1,0 +1,98 @@
+body,
+h1,
+h2,
+h3 {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+
+
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+}
+
+.logo{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 100px;
+    width: 100%;
+
+
+}
+#navbarDropdownMenuLink{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #86c232;
+
+}
+#navbarDropdownMenuLink1{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #86c232;
+}
+
+#navbarDropdownMenuLink3{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #86c232;
+
+}
+#navbarDropdownMenuLink4{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #86c232;
+}
+
+.graphic_logo{
+
+    max-height: 100%;
+
+}
+
+.main-list-item a {
+    color: #86c232;
+}
+
+* {box-sizing: border-box;}
+
+
+nav.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+    justify-content: space-between;
+    color: #B61AAE;
+    background-color: black;
+
+
+}
+
+.dropdown-item{
+    color: #c60522;
+
+}
+
+.nav-item{
+    color: #86c232;;
+}
+
+.nav-link{
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 100px;
+
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+
+    color: #86c232;
+    border: none;
+
+}

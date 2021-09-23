@@ -19,7 +19,7 @@ public class Product {
     }
 
     public Product(long id, String name, double dosage, String manufactureCountry, int quantity,
-                   double price, LocalDate dateOfDelivery, String measure, String photo) {
+                   double price, LocalDate dateOfDelivery, String measure) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
@@ -28,7 +28,7 @@ public class Product {
         this.price = price;
         this.dateOfDelivery = dateOfDelivery;
         this.measure = measure;
-        this.photo = photo;
+
     }
 
     public long getId() {
@@ -95,14 +95,6 @@ public class Product {
         this.measure = measure;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -115,14 +107,14 @@ public class Product {
                 quantity == product.quantity && Double.compare(product.price, price) == 0 &&
                 measure == null ? product.measure == null : measure.equals(product.measure)  &&
                 name == null ? product.name == null : name.equals(product.name) &&
-                dateOfDelivery == null ? product.dateOfDelivery == null : dateOfDelivery.equals(product.dateOfDelivery) && photo.equals(product.photo);
+                dateOfDelivery == null ? product.dateOfDelivery == null : dateOfDelivery.equals(product.dateOfDelivery);
     }
 
     @Override
     public int hashCode() {
         return Integer.hashCode(quantity) + Long.hashCode(id) +
                 Arrays.hashCode( new double[] {dosage, price}) + name.hashCode() + dateOfDelivery.hashCode() +
-                photo.hashCode() + measure.hashCode() + manufactureCountry.hashCode();
+                measure.hashCode() + manufactureCountry.hashCode();
     }
 
     @Override
@@ -136,7 +128,6 @@ public class Product {
                 .append(", price=").append(price)
                 .append(", dateOfDelivery=").append(dateOfDelivery.toString())
                 .append(", measureId=").append(measure)
-                .append(", photo=").append(photo)
                 .append('}'));
     }
 
@@ -150,7 +141,6 @@ public class Product {
         private double price;
         private LocalDate dateOfDelivery;
         private String measure;
-        private String photo;
 
         public ProductBuilder setId(long id) {
             this.id = id;
@@ -192,13 +182,8 @@ public class Product {
             return this;
         }
 
-        public ProductBuilder setPhoto(String photo) {
-            this.photo = photo;
-            return this;
-        }
-
         public Product createProduct() {
-            return new Product(id, name, dosage, manufactureCountry, quantity, price, dateOfDelivery, measure, photo);
+            return new Product(id, name, dosage, manufactureCountry, quantity, price, dateOfDelivery, measure);
         }
     }
 }

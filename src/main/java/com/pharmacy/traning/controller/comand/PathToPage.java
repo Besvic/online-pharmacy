@@ -12,6 +12,12 @@ public class PathToPage {
 
     public static final String ADMIN_MENU = "/pages/admin/admin_menu.jsp";
     public static final String ADMIN_PROFILE = "/pages/admin/admin_profile.jsp";
+    public static final String CREATE_PRODUCT = "/pages/admin/add_product.jsp";
+
+
+    // TODO: 23.09.2021  may be delete  
+    public static final String DEFAULT_USER_IMAGE = "/css/image/default_user_image.jpg";
+    public static final String DEFAULT_PRODUCT_IMAGE = "/css/image/default_product_image.jpg";
 
 
     private PathToPage(){
