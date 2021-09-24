@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
 
-import static com.pharmacy.traning.controller.comand.SessionAttribute.ERROR;
+import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 public class ConfirmSignInCommand implements Command {

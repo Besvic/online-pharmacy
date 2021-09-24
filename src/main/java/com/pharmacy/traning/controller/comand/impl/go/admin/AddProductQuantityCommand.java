@@ -11,17 +11,14 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
 import static com.pharmacy.traning.controller.comand.Message.ERROR_LIST_IS_EMPTY;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
+import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 import static com.pharmacy.traning.controller.comand.RequestParameter.QUANTITY;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.PRODUCT_LIST;
-
 
 public class AddProductQuantityCommand implements Command {
 
@@ -40,22 +37,12 @@ public class AddProductQuantityCommand implements Command {
                 }
                 else {
                     request.setAttribute(PRODUCT_LIST, productList);
-                /*List<Product> products = serviceProduct.findAllProduct();
-                if(products != null) {
-                    request.setAttribute();*/
-               /* HttpSession session = request.getSession();
-                List<Product> products = (List<Product>) session.getAttribute(PRODUCT_LIST);
-                for (var i: products) {
-                    if (i.getId() == id){
-                        i.setQuantity(quantity + i.getQuantity());
-                    }
-                }
-                session.setAttribute(PRODUCT_LIST, products);*/
                 return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD);
                 }
             }
         } catch (DaoException | ServiceException e) {
             request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

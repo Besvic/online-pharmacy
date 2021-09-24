@@ -8,13 +8,12 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
 import static com.pharmacy.traning.controller.comand.Message.ERROR_LIST_IS_EMPTY;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.PRODUCT_LIST;
+import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 
 public class GoToProductList implements Command {
 

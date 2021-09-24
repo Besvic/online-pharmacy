@@ -71,4 +71,15 @@ public class ServiceProductImpl implements ServiceProduct {
             throw new ServiceException("Object product is null");
         }
     }
+
+    @Override
+    public Product findProductById(long id) throws ServiceException, DaoException {
+        Optional<Product> optional = productDao.findProductById(id);
+        if (optional.isPresent()){
+            return optional.get();
+        }else {
+            logger.error("Object product is null");
+            throw new ServiceException("Object product is null");
+        }
+    }
 }

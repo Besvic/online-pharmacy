@@ -48,15 +48,15 @@
                     </td>
                     <td>
                         <form action="controller" method="post">
-                            <button type="submit" name="command" value="change_product">change</button>
+                            <button type="submit" name="command" value="go_change_product">change</button>
                             <input type="hidden" name="product_id" value="${product_list.id}">
-                            <input type="hidden" name="product_name" value="${product_list.name}">
+                           <%-- <input type="hidden" name="product_name" value="${product_list.name}">
                             <input type="hidden" name="dosage" value="${product_list.dosage}">
                             <input type="hidden" name="measure" value="${product_list.measure}">
                             <input type="hidden" name="quantity" value="${product_list.quantity}">
                             <input type="hidden" name="price" value="${product_list.price}">
                             <input type="hidden" name="manufacture_country" value="${product_list.manufactureCountry}">
-                            <input type="hidden" name="date" value="${product_list.dateOfDelivery}">
+                            <input type="hidden" name="date" value="${product_list.dateOfDelivery}">--%>
 
 
                         </form>

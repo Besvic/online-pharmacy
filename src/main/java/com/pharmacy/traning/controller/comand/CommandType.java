@@ -5,6 +5,7 @@ import com.pharmacy.traning.controller.comand.impl.ConfirmSignInCommand;
 import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
 import com.pharmacy.traning.controller.comand.impl.go.admin.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
+import com.pharmacy.traning.controller.comand.impl.go.admin.go.GoToChangeProductCommand;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),
@@ -23,7 +24,8 @@ public enum CommandType {
     ADD_PRODUCT(new CreateProductCommand()),
     DELETE_PRODUCT(new DeleteProductCommand()),
     CHANGE_PRODUCT(new ChangeDataProductCommand()),
-    ADD_PRODUCT_QUANTITY(new AddProductQuantityCommand())
+    ADD_PRODUCT_QUANTITY(new AddProductQuantityCommand()),
+    GO_CHANGE_PRODUCT(new GoToChangeProductCommand())
 
     //user function
 

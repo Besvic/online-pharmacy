@@ -4,6 +4,9 @@ public final class RequestAttribute {
 
     public static String ERROR = "error";
     public static String REPORT = "report";
+    public static final String PRODUCT = "product";
+    public static final String PRODUCT_LIST = "product_list";
+
 
     public static String REGISTRATION_USER_DATA = "userMap";
 

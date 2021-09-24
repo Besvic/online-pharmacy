@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.comand.Message;
 import com.pharmacy.traning.controller.comand.PathToPage;
 import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.ServiceException;
-import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.exception.CommandException;
@@ -15,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.Optional;
 
+import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 

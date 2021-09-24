@@ -127,7 +127,7 @@ public class Product {
                 .append(", quantity=").append(quantity)
                 .append(", price=").append(price)
                 .append(", dateOfDelivery=").append(dateOfDelivery.toString())
-                .append(", measureId=").append(measure)
+                .append(", measure=").append(measure)
                 .append('}'));
     }
 

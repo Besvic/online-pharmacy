@@ -37,10 +37,11 @@ public class ChangeDataProductCommand implements Command {
         try {
             if (serviceProduct.changeProduct(product)){
                 request.setAttribute(REPORT, Message.REPORT_DATA_CHANGE);
-                return new Router(PathToPage.CHANGE_PRODUCT, Router.RouterType.FORWARD);
+                return new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
             }
         } catch (DaoException | ServiceException e) {
             request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

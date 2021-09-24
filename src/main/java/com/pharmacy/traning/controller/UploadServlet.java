@@ -13,7 +13,8 @@ import org.apache.logging.log4j.util.Constants;
 import java.io.File;
 import java.io.IOException;
 
-import static com.pharmacy.traning.controller.comand.SessionAttribute.ERROR;
+
+import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 @WebServlet(name = "UploadServlet", urlPatterns = "/uploadServlet")

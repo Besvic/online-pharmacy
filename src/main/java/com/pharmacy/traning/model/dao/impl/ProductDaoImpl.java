@@ -11,6 +11,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 
@@ -49,9 +50,10 @@ public class ProductDaoImpl implements ProductDao {
             update product
             set product_quantity = product_quantity + ?
             where product_id = ?;""";
-    private static final String SQL_CHANGE_PRODUCT_PRICE_BY_PRODUCT_ID = """
-            update product
-            set product_price = ?
+    private static final String SQL_FIND_PRODUCT_BY_ID = """
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure
+            from product
             where product_id = ?;""";
     private static final String SQL_FIND_PRODUCT_UNDER_PRODUCT_PRICE = """
             select product_id, product_name, product_dosage, product_manufacture, product_quantity,
@@ -159,8 +161,29 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean changeProductPriceByProductId(double productPrice, int productId) throws DaoException {
-        return false;
+    public Optional<Product> findProductById(long productId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_PRODUCT_BY_ID)){
+            statement.setLong(1, productId);
+            try(ResultSet result = statement.executeQuery()){
+                if (result.next()){
+                    return Optional.of(new Product.ProductBuilder()
+                            .setId(result.getLong(PRODUCT_ID))
+                            .setName(result.getString(PRODUCT_NAME))
+                            .setQuantity(result.getInt(PRODUCT_QUANTITY))
+                            .setDosage(result.getDouble(PRODUCT_DOSAGE))
+                            .setMeasure(result.getString(PRODUCT_MEASURE))
+                            .setPrice(result.getDouble(PRODUCT_PRICE))
+                            .setDateOfDelivery(result.getDate(PRODUCT_DATE_OF_DELIVERY).toLocalDate())
+                            .setManufactureCountry(result.getString(PRODUCT_MANUFACTURE))
+                            .createProduct());
+                }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -168,8 +191,5 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
-    @Override
-    public boolean changeProduct(double productPrice) throws DaoException {
-        return false;
-    }
+
 }

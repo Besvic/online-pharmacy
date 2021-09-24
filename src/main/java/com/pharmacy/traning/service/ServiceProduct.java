@@ -13,6 +13,7 @@ public interface ServiceProduct {
     List<Product> findAllProduct() throws ServiceException;
     boolean addProductQuantityByProductId(int productQuantity, long id) throws ServiceException, DaoException;
     boolean changeProduct(Optional<Product> product) throws ServiceException, DaoException;
+    Product findProductById(long id) throws ServiceException, DaoException;
 
 
 

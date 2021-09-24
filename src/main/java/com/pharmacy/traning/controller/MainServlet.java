@@ -33,7 +33,7 @@ public class MainServlet extends UploadServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = CommandFactory.getInstance().createCommand(request);
-        Router router = null;
+        Router router;
         try {
             router = command.execute(request);
         } catch (CommandException e) {
