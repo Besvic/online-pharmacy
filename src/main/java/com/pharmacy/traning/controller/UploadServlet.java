@@ -34,8 +34,9 @@ public class UploadServlet extends HttpServlet {
         File uploadDir = new File(path);
         HttpSession session = request.getSession();
         boolean flag = true;
-        if (!uploadDir.exists())
+        if (!uploadDir.exists()) {
             uploadDir.mkdir();
+        }
         String fileName = null;
         for (Part part : request.getParts()) {
             fileName = part.getSubmittedFileName();
@@ -44,20 +45,23 @@ public class UploadServlet extends HttpServlet {
                 User user = (User) session.getAttribute(USER);
                 String pathToPhotoAdmin = "/css/image/admin";
                 String pathToPhotoUser = "/css/image/user";
-                if (user.getPosition().equals(Position.ADMIN))
+                if (user.getPosition().equals(Position.ADMIN)) {
                     user.setPhoto(pathToPhotoAdmin + File.separator + fileName);
-                else
+                }
+                else {
                     user.setPhoto(pathToPhotoUser + File.separator + fileName);
+                }
                 session.setAttribute(USER, user);
                 try {
                     ServiceUserImpl.getInstance().updatePhotoById(user.getPhoto(), user.getId());
                 } catch (ServiceException e) {
-                    session.setAttribute(ERROR, e);
-                    request.getRequestDispatcher(PathToPage.ADMIN_PROFILE).forward(request, response);
+                    request.setAttribute(ERROR, e);
+                    request.getRequestDispatcher(PathToPage.ERROR_404).forward(request, response);
                 }
                 flag = false;
             }
         }
+
         request.getRequestDispatcher(PathToPage.ADMIN_PROFILE).forward(request, response);
     }
 }

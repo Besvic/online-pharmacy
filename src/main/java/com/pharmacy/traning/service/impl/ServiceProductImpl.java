@@ -6,10 +6,15 @@ import com.pharmacy.traning.model.dao.impl.ProductDaoImpl;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.ServiceProduct;
 import com.pharmacy.traning.validator.impl.ValidatorProductImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ServiceProductImpl implements ServiceProduct {
 
-
+    private static final Logger logger = LogManager.getLogger();
     private static ServiceProductImpl instance;
     private final ProductDaoImpl productDao = ProductDaoImpl.getInstance();
     private final ValidatorProductImpl validatorProduct = ValidatorProductImpl.getInstance();
@@ -21,26 +26,49 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
-    public boolean createProduct(Product product) throws ServiceException {
-        if (validatorProduct.isOnlyLetter(product.getName()) &&
-                validatorProduct.isOnlyLetter(product.getManufactureCountry()) &&
-                validatorProduct.isOnlyLetter(product.getMeasure())){
-            try {
-                return productDao.addProduct(product);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
+    public boolean createProduct(Optional<Product> product) throws ServiceException, DaoException {
+        if (product.isPresent() && validatorProduct.isOnlyLetter(product.get().getName()) &&
+                validatorProduct.isOnlyLetter(product.get().getManufactureCountry()) &&
+                validatorProduct.isOnlyLetter(product.get().getMeasure())){
+            return productDao.addProduct(product.get());
         }
-        return false;
+        else{
+            logger.error("Object product is null");
+            throw new ServiceException("Object product is null");
+        }
     }
 
     @Override
-    public boolean addProductQuantityByProductId(Product product, long id) throws ServiceException {
-        return false;
+    public boolean deleteProductById(long id) throws ServiceException {
+        try {
+            return productDao.deleteProductById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override
-    public boolean changeProduct(Product product) throws ServiceException {
-        return false;
+    public List<Product> findAllProduct() throws ServiceException {
+        try {
+            return productDao.findAllProduct();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public boolean addProductQuantityByProductId(int productQuantity, long id) throws ServiceException, DaoException {
+        return productDao.addProductQuantityByProductId(productQuantity, id);
+    }
+
+    @Override
+    public boolean changeProduct(Optional<Product> product) throws ServiceException, DaoException {
+        if (product.isPresent()){
+            return productDao.changeProductByProductId(product.get());
+        }
+        else{
+            logger.error("Object product is null");
+            throw new ServiceException("Object product is null");
+        }
     }
 }

@@ -32,13 +32,13 @@ public final class ColumnName {
     public static final String PRODUCT_ID = "product_id";
     public static final String PRODUCT_NAME = "product_name";
     public static final String PRODUCT_DOSAGE = "product_dosage";
-    public static final String PRODUCT_MANUFACTURE_ID = "product_manufacture_id";
+    public static final String PRODUCT_MANUFACTURE = "product_manufacture";
     public static final String PRODUCT_QUANTITY = "product_quantity";
     public static final String PRODUCT_PRICE = "product_price";
-    public static final String PRODUCT_WAREHOUSE_ID = "product_warehouse_id";
+    //public static final String PRODUCT_WAREHOUSE_ID = "product_warehouse_id";
     public static final String PRODUCT_DATE_OF_DELIVERY = "product_date_of_delivery";
-    public static final String PRODUCT_UNITS_ID = "product_units_id";
-    public static final String PRODUCT_PHOTO = "product_photo";
+    public static final String PRODUCT_MEASURE = "product_measure";
+    //public static final String PRODUCT_PHOTO = "product_photo";
 
     //measure
     public static final String MEASURE_ID = "measure_id";

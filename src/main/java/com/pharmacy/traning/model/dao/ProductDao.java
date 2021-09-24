@@ -8,8 +8,11 @@ import java.util.List;
 public interface ProductDao {
 
     boolean addProduct(Product product) throws DaoException;
-    boolean changeProductNameByProductId(String productName, int productId) throws DaoException;
-    boolean addProductQuantityByProductId(int productQuantity, int productId) throws DaoException;
+    List<Product> findAllProduct() throws DaoException;
+    boolean deleteProductById(long id) throws DaoException;
+    boolean changeProductByProductId(Product product) throws DaoException;
+    boolean addProductQuantityByProductId(int productQuantity, long productId) throws DaoException;
+
     boolean changeProductPriceByProductId(double productPrice, int productId) throws DaoException;
     //List<Product> findProductByProductDate(LocalDate productDate) throws DaoException;
     List<Product> findProductUnderProductPrice(double productPrice) throws DaoException;

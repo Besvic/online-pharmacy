@@ -1,10 +1,10 @@
 package com.pharmacy.traning.validator.impl;
 
-import com.pharmacy.traning.validator.Validator;
+
 import com.pharmacy.traning.validator.ValidatorUser;
 import org.apache.commons.validator.routines.EmailValidator;
 
-public class UserValidatorImpl implements Validator, ValidatorUser {
+public class UserValidatorImpl implements ValidatorUser {
 
     private static UserValidatorImpl instance;
 

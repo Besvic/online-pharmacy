@@ -129,5 +129,7 @@
         <input type="submit" name="command" value="upload_image" />--%>
     </form>
 </div>
+
+<label class="report_label">${report} </label>
 </body>
 </html>

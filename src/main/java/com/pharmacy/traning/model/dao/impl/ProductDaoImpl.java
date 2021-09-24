@@ -7,11 +7,12 @@ import com.pharmacy.traning.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.pharmacy.traning.model.dao.ColumnName.*;
 
 public class ProductDaoImpl implements ProductDao {
 
@@ -30,9 +31,19 @@ public class ProductDaoImpl implements ProductDao {
             insert into product (product_name, product_dosage, product_manufacture, product_quantity,
             product_price, product_date_of_delivery, product_measure)
             values (?, ?, ?, ?, ?, ?, ?);""";
-    private static final String SQL_CHANGE_PRODUCT_NAME_BY_PRODUCT_ID = """
+    private static final String SQL_FIND_ALL_PRODUCT = """
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure
+            from product
+            where product_status = 'actual';""";
+    private static final String SQL_DELETE_PRODUCT_BY_PRODUCT_ID = """
             update product
-            set product_name = ?
+            set product_status = 'delete'
+            where product_id = ?""";
+    private static final String SQL_CHANGE_PRODUCT_BY_PRODUCT_ID = """
+            update product
+            set product_name = ?, product_dosage = ?, product_manufacture = ?,
+            product_price = ?, product_date_of_delivery = ?, product_measure = ?
             where product_id = ?;""";
     private static final String SQL_ADD_PRODUCT_QUANTITY_BY_PRODUCT_ID = """
             update product
@@ -47,6 +58,8 @@ public class ProductDaoImpl implements ProductDao {
             product_price, product_date_of_delivery, product_measure, product_photo
             from product
             where product_price <= ?;""";
+
+
     @Override
     public boolean addProduct(Product product) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -58,8 +71,9 @@ public class ProductDaoImpl implements ProductDao {
             statement.setDouble(5, product.getPrice());
             statement.setDate(6, Date.valueOf(product.getDateOfDelivery()));
             statement.setString(7, product.getMeasure());
-            if (statement.executeUpdate() != 0)
+            if (statement.executeUpdate() != 0) {
                 return true;
+            }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
             throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
@@ -68,12 +82,79 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean changeProductNameByProductId(String productName, int productId) throws DaoException {
+    public List<Product> findAllProduct() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCT);
+             ResultSet result = statement.executeQuery()){
+            List<Product> productList = new ArrayList<>();
+            while (result.next()){
+                productList.add(new Product.ProductBuilder()
+                .setId(result.getLong(PRODUCT_ID))
+                .setName(result.getString(PRODUCT_NAME))
+                .setQuantity(result.getInt(PRODUCT_QUANTITY))
+                .setDosage(result.getDouble(PRODUCT_DOSAGE))
+                .setMeasure(result.getString(PRODUCT_MEASURE))
+                .setPrice(result.getDouble(PRODUCT_PRICE))
+                .setDateOfDelivery(result.getDate(PRODUCT_DATE_OF_DELIVERY).toLocalDate())
+                .setManufactureCountry(result.getString(PRODUCT_MANUFACTURE))
+                .createProduct());
+            }
+            return productList;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+    }
+
+    @Override
+    public boolean deleteProductById(long id) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_PRODUCT_BY_PRODUCT_ID)){
+            statement.setLong(1, id);
+            if (statement.executeUpdate() != 0){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
         return false;
     }
 
     @Override
-    public boolean addProductQuantityByProductId(int productQuantity, int productId) throws DaoException {
+    public boolean changeProductByProductId(Product product) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_CHANGE_PRODUCT_BY_PRODUCT_ID)){
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getDosage());
+            statement.setString(3, product.getManufactureCountry());
+            statement.setDouble(4, product.getPrice());
+            statement.setDate(5, Date.valueOf(product.getDateOfDelivery()));
+            statement.setString(6, product.getMeasure());
+            statement.setLong(7, product.getId());
+            if (statement.executeUpdate() != 0) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addProductQuantityByProductId(int productQuantity, long productId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_ADD_PRODUCT_QUANTITY_BY_PRODUCT_ID)){
+            statement.setInt(1, productQuantity);
+            statement.setLong(2, productId);
+            if (statement.executeUpdate() != 0){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
         return false;
     }
 

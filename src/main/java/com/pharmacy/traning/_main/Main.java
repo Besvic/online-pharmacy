@@ -11,6 +11,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Locale;
 
+import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
+
 public class Main {
     private static final Logger logger = LogManager.getLogger();
 
@@ -21,7 +23,7 @@ public class Main {
                 .setLogin("victor21")
                 .setPassword("victor2")
                 .setCash(12)
-                .setPosition("admin")
+                .setPosition(ADMIN)
                 .createUser();
 
         System.out.println(user.toString());

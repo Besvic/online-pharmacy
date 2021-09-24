@@ -5,6 +5,7 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+
 <form action="controller" method="get">
     <%--<input type="text" name="num" value="1">--%>
     <input type="submit" name="command" value="go_sign_in" > to sign in </form>

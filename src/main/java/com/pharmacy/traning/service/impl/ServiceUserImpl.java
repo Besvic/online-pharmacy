@@ -12,10 +12,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
+
 public class ServiceUserImpl implements ServiceUser {
 
     private static final Logger logger = LogManager.getLogger();
     private static ServiceUserImpl instance;
+    private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
 
     public static ServiceUserImpl getInstance(){
         if (instance == null)
@@ -31,8 +34,12 @@ public class ServiceUserImpl implements ServiceUser {
     public boolean registration(User user) throws ServiceException {
         if (UserValidatorImpl.getInstance().isNullObject(user)) {
             try {
+                if (user.getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
+                    logger.warn("First administrator completed registration!");
+                    return false;
+                }
                 user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
-                return UserDaoImpl.getInstance().createUser(user);
+                return userDao.createUser(user);
             } catch (DaoException e) {
                 logger.warn("Not available create person, because this email already saved!", e);
                 throw new ServiceException("Not available create person, because this email already saved!", e);
@@ -47,7 +54,7 @@ public class ServiceUserImpl implements ServiceUser {
     @Override
     public boolean updatePhotoById(String path, long id) throws ServiceException {
         try {
-            return UserDaoImpl.getInstance().updatePhotoById(path, id);
+            return userDao.updatePhotoById(path, id);
         } catch (DaoException e) {
             logger.error("Not available updatePhotoById!", e);
             throw new ServiceException("Not available updatePhotoById!", e);
@@ -58,7 +65,7 @@ public class ServiceUserImpl implements ServiceUser {
     public boolean updateUserById(User user, long id) throws ServiceException {
         if (UserValidatorImpl.getInstance().isNullObject(user)){
             try {
-                return UserDaoImpl.getInstance().updateUserById(user, id);
+                return userDao.updateUserById(user, id);
             } catch (DaoException e) {
                 logger.error("Not available updateUserById!", e);
                 throw new ServiceException("Not available updateUserById!", e);
@@ -77,7 +84,7 @@ public class ServiceUserImpl implements ServiceUser {
         if (!email.isEmpty() && !password.isEmpty()){
             try {
                 String hashPassword = CryptorPassword.getInstance().encryptor(password);
-                return UserDaoImpl.getInstance().checkAuthorisation(email, hashPassword);
+                return userDao.checkAuthorisation(email, hashPassword);
             } catch (DaoException e) {
                 logger.warn("Enter is not successful, email or password entered incorrect.", e);
                 throw new ServiceException("Enter is not successful, email or password entered incorrect.", e);

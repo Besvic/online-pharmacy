@@ -39,7 +39,7 @@
 
             <tr class="second_row">
                 <td><label class="label_text">dosage</label></td>
-                <td><input class="input" type="number" name="dosage" placeholder="dosage" required></td>
+                <td><input class="input" type="number" step="0.01" name="dosage" placeholder="dosage" required></td>
                 <td><label class="label_text">measure</label></td>
                 <td><input class="input" type="text" name="measure" placeholder="mg" required></td>
 
@@ -48,7 +48,7 @@
                 <td><label class="label_text">quantity</label></td>
                 <td><input class="input" type="number" name="quantity" placeholder="quantity" required></td>
                 <td><label class="label_text">price (BYR)</label></td>
-                <td><input class="input" type="number" name="price" placeholder="price" required></td>
+                <td><input class="input" type="number" step="0.01" name="price" placeholder="price" required></td>
 
             </tr>
             <tr>
@@ -64,5 +64,7 @@
             </tr>
         </form>
     </table>
+
+    <label class="report_label">${report} </label>
 </div>
 </body>

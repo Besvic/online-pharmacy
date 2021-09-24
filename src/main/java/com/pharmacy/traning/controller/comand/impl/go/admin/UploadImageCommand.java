@@ -14,7 +14,8 @@ import java.io.File;
 import java.io.IOException;
 
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
-
+// TODO: 24.09.2021 delete
+/*
 public class UploadImageCommand implements Command
 {
     private static final String UPLOAD_DIRECTORY = "/avatar/";
@@ -37,3 +38,4 @@ public class UploadImageCommand implements Command
         return new Router(PathToPage.ADMIN_PROFILE, Router.RouterType.FORWARD);
     }
 }
+*/

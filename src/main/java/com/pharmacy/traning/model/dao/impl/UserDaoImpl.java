@@ -64,6 +64,13 @@ public class UserDaoImpl implements UserDao {
                 where user_id = ?;""";
 
 
+    private static final String SQL_CHECK_IS_ADMIN = """
+            select user_position
+            from users
+            where user_position = 'admin';""";
+
+
+
 
 
 
@@ -197,6 +204,20 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
             throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkIsAdmin() throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_CHECK_IS_ADMIN);
+             ResultSet result = statement.executeQuery()) {
+            if (result.next())
+                return true;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection." + throwables);
+            throw new DaoException("PrepareStatement didn't connection.", throwables);
         }
         return false;
     }

@@ -1,6 +1,7 @@
 package com.pharmacy.traning.controller.comand.impl;
 
 import com.pharmacy.traning.controller.comand.Command;
+import com.pharmacy.traning.controller.comand.Message;
 import com.pharmacy.traning.controller.comand.PathToPage;
 import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.ServiceException;
@@ -36,18 +37,13 @@ public class ConfirmRegistrationCommand implements Command {
         HttpSession session = request.getSession();
         try {
             if (ServiceUserImpl.getInstance().registration(user)) {
-                Optional<User> userOptional = ServiceUserImpl.getInstance().signIn(user.getLogin(), user.getPassword());
-                if (userOptional.isPresent()) {
-                    session.setAttribute(USER, userOptional.get());
-                    User.currentId = userOptional.get().getId();
-                    return userOptional.get().getPosition().equals(Position.USER) ?
-                            new Router(PathToPage.USER_MENU, Router.RouterType.FORWARD) :
-                            new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
-                }
+               return new Router(PathToPage.SIGN_IN, Router.RouterType.FORWARD);
+            }
+            else {
+                request.setAttribute(ERROR, Message.ERROR_ADMINISTRATOR_REGISTRATION);
             }
         } catch (ServiceException e) {
-            session.setAttribute(ERROR,"Check your input data.\n " + e );
-            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+            request.setAttribute(ERROR,Message.ERROR_INPUT_DATA + e );
         }
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }

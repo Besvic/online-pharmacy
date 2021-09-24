@@ -41,7 +41,7 @@ public class User {
     }
 
     public void setPosition(String position) {
-        this.position = Position.valueOf(position);
+        this.position = Position.valueOf(position.toUpperCase());
     }
 
     public UserStatus getUserStatus() {

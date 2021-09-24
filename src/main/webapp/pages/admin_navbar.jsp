@@ -5,20 +5,6 @@
   Time: 16:37
   To change this template use File | Settings | File Templates.
 --%>
-
-
-
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>--%>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="logo">
 
@@ -38,14 +24,15 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button type="submit" name="command" value="go_to_product_list" class="dropdown-item">Список препаратов</button>
                             <button type="submit" name="command" value="go_to_add_product" class="dropdown-item">Добавить препарат</button>
+                            <button type="submit" name="command" value="go_to_delete_product_list" class="dropdown-item">История удалений</button>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Производители</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <button type="submit" name="command" value="go_to_manufacture_list" class="dropdown-item">Список производителей</button>
-                            <button type="submit" name="command" value="go_to_add_manufacture" class="dropdown-item">Добавить производителя</button>
+                            <button type="submit" name="command" value="go_to_manufacture_list" class="dropdown-item">Список пользователей</button>
+                            <button type="submit" name="command" value="go_to_add_manufacture" class="dropdown-item">...</button>
                         </div>
                     </li>
 
