@@ -1,19 +1,5 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin;
+package com.pharmacy.traning.controller.comand.impl.admin;
 
-import com.pharmacy.traning.controller.comand.Command;
-import com.pharmacy.traning.controller.comand.PathToPage;
-import com.pharmacy.traning.controller.comand.Router;
-import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.model.entity.User;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-
-import java.io.File;
-import java.io.IOException;
-
-import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 // TODO: 24.09.2021 delete
 /*
 public class UploadImageCommand implements Command

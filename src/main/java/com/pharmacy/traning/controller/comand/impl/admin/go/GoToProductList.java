@@ -1,35 +1,35 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin;
+package com.pharmacy.traning.controller.comand.impl.admin.go;
 
 import com.pharmacy.traning.controller.comand.Command;
-import com.pharmacy.traning.controller.comand.Message;
 import com.pharmacy.traning.controller.comand.PathToPage;
 import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.ServiceException;
+import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.IOException;
+import java.util.List;
 
+import static com.pharmacy.traning.controller.comand.Message.ERROR_LIST_IS_EMPTY;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
-import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
+import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 
-public class DeleteProductCommand implements Command {
+public class GoToProductList implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-       long id = Long.parseLong(request.getParameter(PRODUCT_ID));
+
         try {
-            if (serviceProduct.deleteProductById(id)){
-                request.setAttribute(REPORT, Message.REPORT_PRODUCT_DELETE);
-                return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD);
+            List<Product> productList = serviceProduct.findAllProduct();
+            if (productList == null){
+                request.setAttribute(ERROR, ERROR_LIST_IS_EMPTY);
             }
             else {
-                request.setAttribute(ERROR, Message.ERROR_DELETE);
+                request.setAttribute(PRODUCT_LIST, productList);
+                return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             request.setAttribute(ERROR, e);

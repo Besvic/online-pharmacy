@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin;
+package com.pharmacy.traning.controller.comand.impl.admin;
 
 import com.pharmacy.traning.controller.comand.Command;
 import com.pharmacy.traning.controller.comand.Message;
@@ -18,28 +18,29 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 
-public class CreateProductCommand implements Command {
+public class ChangeDataProductCommand implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        Product product = new Product.ProductBuilder()
+        Optional<Product> product = Optional.of(new Product.ProductBuilder()
+                .setId(Long.parseLong(request.getParameter(PRODUCT_ID)))
                 .setName(request.getParameter(PRODUCT_NAME))
                 .setDosage(Double.parseDouble(request.getParameter(DOSAGE)))
-                .setDateOfDelivery(LocalDate.now())
-                .setManufactureCountry(request.getParameter(MANUFACTURE_COUNTRY))
-                .setPrice(Double.parseDouble(request.getParameter(PRICE)))
                 .setMeasure(request.getParameter(MEASURE))
                 .setQuantity(Integer.parseInt(request.getParameter(QUANTITY)))
-                .createProduct();
+                .setPrice(Double.parseDouble(request.getParameter(PRICE)))
+                .setManufactureCountry(request.getParameter(MANUFACTURE_COUNTRY))
+                .setDateOfDelivery(LocalDate.parse(request.getParameter(DATE)))
+                .createProduct());
         try {
-            if (serviceProduct.createProduct(Optional.of(product))) {
-                request.setAttribute(REPORT, Message.REPORT_PRODUCT_ADD);
-                return new Router(PathToPage.CREATE_PRODUCT, Router.RouterType.FORWARD);
+            if (serviceProduct.changeProduct(product)){
+                request.setAttribute(REPORT, Message.REPORT_DATA_CHANGE);
+                return new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
             }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
+        } catch (DaoException | ServiceException e) {
+            request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);

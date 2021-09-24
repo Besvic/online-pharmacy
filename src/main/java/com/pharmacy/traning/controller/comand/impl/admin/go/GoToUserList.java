@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin;
+package com.pharmacy.traning.controller.comand.impl.admin.go;
 
 import com.pharmacy.traning.controller.comand.Command;
 import com.pharmacy.traning.controller.comand.Router;

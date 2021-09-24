@@ -3,9 +3,9 @@ package com.pharmacy.traning.controller.comand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmRegistrationCommand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmSignInCommand;
 import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
-import com.pharmacy.traning.controller.comand.impl.go.admin.*;
+import com.pharmacy.traning.controller.comand.impl.admin.*;
+import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
-import com.pharmacy.traning.controller.comand.impl.go.admin.go.GoToChangeProductCommand;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),

@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin.go;
+package com.pharmacy.traning.controller.comand.impl.admin.go;
 
 import com.pharmacy.traning.controller.comand.Command;
 import com.pharmacy.traning.controller.comand.Message;
@@ -10,7 +10,6 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

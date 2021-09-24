@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.comand.impl.go.admin;
+package com.pharmacy.traning.controller.comand.impl.admin;
 
 import com.pharmacy.traning.controller.comand.*;
 import com.pharmacy.traning.exception.CommandException;
@@ -6,11 +6,8 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.impl.ServiceUserImpl;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
