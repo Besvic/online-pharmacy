@@ -19,13 +19,14 @@
         <table>
             <thead class="first_row">
             <tr>
-                <%--<th><fmt:message key="label.product.id"/> </th>--%>
                 <th><fmt:message key="label.product.name"/> </th>
                 <th><fmt:message key="label.product.dosage"/> <span id="measure_id"> (<fmt:message key="label.product.measure"/>) </span> </th>
                 <th><fmt:message key="label.product.quantity"/> </th>
                 <th><fmt:message key="label.product.price"/> </th>
                 <th><fmt:message key="label.product.manufacture_country"/> </th>
                 <th><fmt:message key="label.product.date_of_delivery"/> </th>
+                <th colspan="3"><fmt:message key="label.product.change_function"/> </th>
+
                 <th></th>
             </tr>
             </thead>

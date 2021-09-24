@@ -26,41 +26,37 @@
 <jsp:include page="../admin_navbar.jsp"/>
 <div class="box">
     <table class="table_data">
-        <form action="controller" >
+        <form action="controller" method="post">
             <!-- <form action="uploadImage"> -->
             <tr class="first_row">
-                <td class="img_column" rowspan="3"> <%--<img class="image" src="/css/image/default_product_image.jpg" alt="image product">--%></td>
-                <td><label class="label_text">full name</label></td>
-                <td><input class="input" type="text" name="product_name" placeholder="full name" required></td>
-                <td><label class="label_text">manufacture country</label></td>
-                <td><input class="input" type="text" name="manufacture_country" placeholder="country" required></td>
+                <td class="img_column" rowspan="3"> </td>
+                <td><label class="label_text"><fmt:message key="label.product.name"/>: </label></td>
+                <td><input class="input" type="text" name="product_name" placeholder="<fmt:message key="label.product.name"/>" required></td>
+                <td><label class="label_text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
+                <td><input class="input" type="text" name="manufacture_country" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
             </tr>
             <!-- </form> -->
 
             <tr class="second_row">
-                <td><label class="label_text">dosage</label></td>
-                <td><input class="input" type="number" step="0.01" name="dosage" placeholder="dosage" required></td>
-                <td><label class="label_text">measure</label></td>
-                <td><input class="input" type="text" name="measure" placeholder="mg" required></td>
+                <td><label class="label_text"><fmt:message key="label.product.dosage"/> </label></td>
+                <td><input class="input" type="number" step="0.001" min="0.001"  name="dosage" placeholder="0.020" required></td>
+                <td><label class="label_text"> <fmt:message key="label.product.measure"/> </label></td>
+                <td><input class="input" type="text" maxlength="10" name="measure" placeholder="g" required></td>
 
             </tr>
             <tr class="treeth_row">
-                <td><label class="label_text">quantity</label></td>
-                <td><input class="input" type="number" name="quantity" placeholder="quantity" required></td>
-                <td><label class="label_text">price (BYR)</label></td>
-                <td><input class="input" type="number" step="0.01" name="price" placeholder="price" required></td>
+                <td><label class="label_text"> <fmt:message key="label.product.quantity"/> </label></td>
+                <td><input class="input" type="number" min="0" name="quantity" placeholder="<fmt:message key="label.product.quantity"/>" required></td>
+                <td><label class="label_text"><fmt:message key="label.product.price"/> (BYR) </label></td>
+                <td><input class="input" type="number" step="0.01" min="0" name="price" placeholder="1.11" required></td>
 
             </tr>
             <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
                 <td></td>
                 <td></td>
-                <td><button class="submit_button" type="submit" name = "command" value="add_product">save product </button></td>
+                <td></td>
+                <td></td>
+                <td><button class="submit_button" type="submit" name = "command" value="add_product"><fmt:message key="button.name.save"/> </button></td>
             </tr>
         </form>
     </table>
