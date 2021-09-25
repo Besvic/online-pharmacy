@@ -4,6 +4,7 @@ import com.pharmacy.traning.controller.comand.Command;
 import com.pharmacy.traning.controller.comand.Message;
 import com.pharmacy.traning.controller.comand.PathToPage;
 import com.pharmacy.traning.controller.comand.Router;
+import com.pharmacy.traning.controller.comand.impl.admin.go.GoToProductList;
 import com.pharmacy.traning.exception.CommandException;
 
 import com.pharmacy.traning.exception.DaoException;
@@ -31,14 +32,14 @@ public class AddProductQuantityCommand implements Command {
         long id = Long.parseLong(request.getParameter(PRODUCT_ID));
         try {
             if (serviceProduct.addProductQuantityByProductId(quantity, id)){
-                List<Product> productList = serviceProduct.findAllProduct();
+               /* List<Product> productList = serviceProduct.findAllProduct();
                 if (productList == null){
                     request.setAttribute(ERROR, ERROR_LIST_IS_EMPTY);
                 }
                 else {
-                    request.setAttribute(PRODUCT_LIST, productList);
-                return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD);
-                }
+                    request.setAttribute(PRODUCT_LIST, productList);*/
+                return new GoToProductList().execute(request)/*new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD)*/;
+
             }
         } catch (DaoException | ServiceException e) {
             request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);

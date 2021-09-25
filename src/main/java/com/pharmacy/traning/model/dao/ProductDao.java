@@ -10,7 +10,10 @@ public interface ProductDao {
 
     boolean addProduct(Product product) throws DaoException;
     List<Product> findAllProduct() throws DaoException;
+    List<Product> findAllDeleteProduct() throws DaoException;
     boolean deleteProductById(long id) throws DaoException;
+    boolean reallyDeleteProductById(long id) throws DaoException;
+    boolean restoreProductById(long id) throws DaoException;
     boolean changeProductByProductId(Product product) throws DaoException;
     boolean addProductQuantityByProductId(int productQuantity, long productId) throws DaoException;
     Optional<Product> findProductById(long productId) throws DaoException;

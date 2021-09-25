@@ -12,7 +12,9 @@ public interface UserDao {
     boolean deleteUserById(long id) throws DaoException;
     boolean updateUserById(User user, long id) throws DaoException;
     boolean updateCashById(Double cash, long id) throws DaoException;
-    List<User> findUserByStatus(String status) throws DaoException;
+    List<User> findAllInRegisterUser() throws DaoException;
+    List<User> findAllDeleteUser() throws DaoException;
+    List<User> findAllNonDeleteUser() throws DaoException;
     Optional<User> checkAuthorisation(String login, String password) throws DaoException;
     boolean updatePhotoById(String path, long id) throws DaoException;
     boolean checkIsAdmin() throws DaoException;

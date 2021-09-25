@@ -18,14 +18,18 @@ public enum CommandType {
     GO_TO_ADMIN_PROFILE(new GoToAdminProfile()),
     GO_TO_MANUFACTURE_LIST(new GoToManufactureList()),
     GO_TO_PRODUCT_LIST(new GoToProductList()),
-    GO_TO_USER_LIST(new GoToUserList()),
+    GO_TO_USER_LIST(new GoToNonDeleteUserListCommand()),
+    GO_TO_DELETE_PRODUCT_LIST(new GoToDeleteProductListCommand()),
+    GO_CHANGE_PRODUCT(new GoToChangeProductCommand()),
     //UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_DATA_ADMIN(new UpdateDataAdminCommand()),
     ADD_PRODUCT(new CreateProductCommand()),
     DELETE_PRODUCT(new DeleteProductCommand()),
     CHANGE_PRODUCT(new ChangeDataProductCommand()),
     ADD_PRODUCT_QUANTITY(new AddProductQuantityCommand()),
-    GO_CHANGE_PRODUCT(new GoToChangeProductCommand())
+    RESTORE_PRODUCT(new RestoreProductCommand()),
+    REALLY_DELETE_PRODUCT(new ReallyDeleteProductCommand()),
+
 
     //user function
 

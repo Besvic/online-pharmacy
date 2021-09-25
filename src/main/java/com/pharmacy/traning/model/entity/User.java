@@ -1,7 +1,5 @@
 package com.pharmacy.traning.model.entity;
 
-import java.sql.Blob;
-
 public class User {
     public static long currentId;
     private long id;

@@ -48,6 +48,16 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
+    public boolean restoreProductById(long id) throws ServiceException, DaoException {
+        return productDao.restoreProductById(id);
+    }
+
+    @Override
+    public boolean reallyDeleteProductById(long id) throws ServiceException, DaoException {
+        return productDao.reallyDeleteProductById(id);
+    }
+
+    @Override
     public List<Product> findAllProduct() throws ServiceException {
         try {
             return productDao.findAllProduct();
@@ -57,18 +67,25 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
+    public List<Product> findAllDeleteProduct() throws ServiceException, DaoException {
+        return productDao.findAllDeleteProduct();
+    }
+
+    @Override
     public boolean addProductQuantityByProductId(int productQuantity, long id) throws ServiceException, DaoException {
         return productDao.addProductQuantityByProductId(productQuantity, id);
     }
 
     @Override
     public boolean changeProduct(Optional<Product> product) throws ServiceException, DaoException {
-        if (product.isPresent()){
+        if (product.isPresent() && validatorProduct.isOnlyLetter(product.get().getMeasure()) &&
+                validatorProduct.isOnlyLetter(product.get().getName()) &&
+                validatorProduct.isOnlyLetter(product.get().getManufactureCountry())){
             return productDao.changeProductByProductId(product.get());
         }
         else{
-            logger.error("Object product is null");
-            throw new ServiceException("Object product is null");
+            logger.error("Product data isn't correct!");
+            throw new ServiceException("Product data isn't correct!");
         }
     }
 

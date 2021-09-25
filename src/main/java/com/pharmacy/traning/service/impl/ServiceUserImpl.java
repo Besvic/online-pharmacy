@@ -10,6 +10,7 @@ import com.pharmacy.traning.validator.impl.UserValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
@@ -35,7 +36,7 @@ public class ServiceUserImpl implements ServiceUser {
         if (UserValidatorImpl.getInstance().isNullObject(user)) {
             try {
                 if (user.getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
-                    logger.warn("First administrator completed registration!");
+                    logger.error("First administrator completed registration!");
                     return false;
                 }
                 user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
@@ -72,6 +73,36 @@ public class ServiceUserImpl implements ServiceUser {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<User> findAllDeleteUser() throws DaoException, ServiceException {
+        List<User> userList = userDao.findAllDeleteUser();
+        if (userList.isEmpty()){
+            logger.error("List is empty.");
+            throw new ServiceException("List is empty.");
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> findAllNonDeleteUser() throws ServiceException, DaoException {
+        List<User> userList = userDao.findAllNonDeleteUser();
+        if (userList.isEmpty()){
+            logger.error("List is empty.");
+            throw new ServiceException("List is empty.");
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> findAllInRegisterUser() throws ServiceException, DaoException {
+        List<User> userList = userDao.findAllInRegisterUser();
+        if (userList.isEmpty()){
+            logger.error("List is empty.");
+            throw new ServiceException("List is empty.");
+        }
+        return userList;
     }
 
     @Override

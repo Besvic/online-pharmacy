@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.pharmacy.traning.model.dao.ColumnName.*;
+
 public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LogManager.getLogger();
@@ -38,10 +40,35 @@ public class UserDaoImpl implements UserDao {
             set user_position = 'delete'
             where user_id = ?;""";
 
+    private static final String SQL_ACTIVE_USER = """
+            update users
+            set user_position = 'active'
+            where user_id = ?;""";
+
+    private static final String SQL_IN_REGISTER_USER = """
+            update users
+            set user_position = 'in_register'
+            where user_id = ?;""";
+
     private static final String SQL_FIND_USER_BY_STATUS = """
+            select user_id, user_position, user_name, user_cash, user_login, user_status, user_photo
+            from users
+            where user_status = ? and user_position = 'user';""";
+
+    private static final String SQL_FIND_ALL_DELETE_USER = """
+            select user_id, user_position, user_name, user_cash, user_login, user_status, user_photo
+            from users
+            where user_status = 'delete' and user_position = 'user';""";
+
+    private static final String SQL_FIND_ALL_NON_DELETE_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
-            where user_status = ?;""";
+            where user_status != 'delete' and user_position = 'user';""";
+
+    private static final String SQL_FIND_ALL_IN_REGISTER_USER = """
+            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_status != 'delete' and user_position = 'user';""";
 
     private static final String SQL_CHECK_AUTHORISATION = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
@@ -67,7 +94,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_CHECK_IS_ADMIN = """
             select user_position
             from users
-            where user_position = 'admin';""";
+            where user_position = 'admin' and user_status != 'delete';""";
 
 
 
@@ -140,6 +167,45 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> findAllInRegisterUser() throws DaoException {
+        return findAllUserByScript(SQL_FIND_ALL_IN_REGISTER_USER);    }
+
+    @Override
+    public List<User> findAllDeleteUser() throws DaoException {
+        return findAllUserByScript(SQL_FIND_ALL_DELETE_USER);
+    }
+
+    @Override
+    public List<User> findAllNonDeleteUser() throws DaoException {
+        return findAllUserByScript(SQL_FIND_ALL_NON_DELETE_USER);
+    }
+
+    private List<User> findAllUserByScript(String scrypt) throws DaoException {
+        List<User> userList = new ArrayList<>();
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(scrypt);
+            ResultSet result = statement.executeQuery()){
+                while (result.next()) {
+                    userList.add(new User.UserBuilder()
+                            .setId(result.getLong(USER_ID))
+                            .setPosition((result.getString(USER_POSITION)))
+                            .setName(result.getString(USER_NAME))
+                            .setCash(result.getDouble(USER_CASH))
+                            .setLogin(result.getString(USER_LOGIN))
+                            .setUserStatus(result.getString(USER_STATUS))
+                            .setPhoto(result.getString(USER_PHOTO))
+                            .createUser());
+
+                }
+            }catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return userList;
+    }
+
+
+    /*@Override
     public List<User> findUserByStatus(String status) throws DaoException {
         List<User> userList = new ArrayList<>();
         try(Connection connection = ConnectionPool.getInstance().getConnection();
@@ -148,14 +214,14 @@ public class UserDaoImpl implements UserDao {
             try(ResultSet result = statement.executeQuery()){
                 while (result.next()){
                     userList.add(new User.UserBuilder()
-                            .setId(result.getInt(ColumnName.USER_ID))
+                            .setId(result.getInt(USER_ID))
                             .setPosition((result.getString(ColumnName.USER_POSITION)))
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
                             .setPassword(result.getString(ColumnName.USER_PASSWORD))
-                            .setUserStatus(result.getString(ColumnName.USER_STATUS))
-                            .setPhoto(result.getString(ColumnName.USER_PHOTO))
+                            .setUserStatus(result.getString(USER_STATUS))
+                            .setPhoto(result.getString(USER_PHOTO))
                             .createUser());
                 }
             }
@@ -164,7 +230,7 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
         }
         return userList;
-    }
+    }*/
 
     @Override
     public Optional<User> checkAuthorisation(String login, String password) throws DaoException {
@@ -175,14 +241,14 @@ public class UserDaoImpl implements UserDao {
             try (ResultSet result = statement.executeQuery()){
                 if (result.next()){
                     return Optional.of(new User.UserBuilder()
-                            .setId(result.getInt(ColumnName.USER_ID))
+                            .setId(result.getInt(USER_ID))
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
                             .setPassword(result.getString(ColumnName.USER_PASSWORD))
                             .setPosition((result.getString(ColumnName.USER_POSITION)))
-                            .setUserStatus(result.getString(ColumnName.USER_STATUS))
-                            .setPhoto(result.getString(ColumnName.USER_PHOTO))
+                            .setUserStatus(result.getString(USER_STATUS))
+                            .setPhoto(result.getString(USER_PHOTO))
                             .createUser());
                 }
             }

@@ -6,6 +6,7 @@ public final class RequestAttribute {
     public static String REPORT = "report";
     public static final String PRODUCT = "product";
     public static final String PRODUCT_LIST = "product_list";
+    public static final String USER_LIST = "user_list";
 
 
     public static String REGISTRATION_USER_DATA = "userMap";

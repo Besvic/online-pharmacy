@@ -14,7 +14,11 @@ public final class PathToPage {
     public static final String ADMIN_PROFILE = "/pages/admin/admin_profile.jsp";
     public static final String CREATE_PRODUCT = "/pages/admin/add_product.jsp";
     public static final String ADMIN_PRODUCT_LIST = "/pages/admin/product_list.jsp";
+    public static final String ADMIN_PRODUCT_DELETE_LIST = "/pages/admin/delete_product_list.jsp";
     public static final String CHANGE_PRODUCT = "/pages/admin/change_product_data.jsp";
+    public static final String ADMIN_NON_DELETE_USER_LIST = "/pages/admin/non_delete_user_list.jsp";
+    public static final String ADMIN_DELETE_USER_LIST = "/pages/admin/delete_user_list.jsp";
+    public static final String ADMIN_IN_REGISTER_USER_LIST = "/pages/admin/in_register_user_list.jsp";
 
 
     // TODO: 23.09.2021  may be delete  

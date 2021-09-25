@@ -3,67 +3,6 @@
 
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="local.content"/>
-
-<%--
-<html >
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> <fmt:message key="title.sign_in"/> </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sign_in.css" rel="stylesheet">
-
-</head>
-<body>
-<header>
-    <h1 id="Pharmacy" align="center"> <fmt:message key="text.pharmacy"/> </h1>
-    <hr>
-</header>
-<section>
-    <form>
-        <div class="sign_in">
-            <form name="confirm_sign_in" action="${pageContext.request.contextPath}/controller">
-                <p align="center">
-                    <strong><fmt:message key="text.enter_data"/>:</strong>
-                </p>
-                <label class="label" for="input_login">
-                    <strong><fmt:message key="label.placeholder.E-mail"/>:</strong>
-                </label>
-                <br>
-                <input class="input_text" id= "input_login" type="login" name="email" placeholder="<fmt:message key="label.placeholder.E-mail"/> " required>
-                <br>
-                <label class="label" for="input_pass">
-                    <strong><fmt:message key="label.placeholder.password"/>:</strong>
-                </label>
-                <br>
-                <input class="input_text" id="input_pass" type="password" name="password" placeholder="<fmt:message key="label.placeholder.password"/>" required>
-                <br>
-                &lt;%&ndash;<a href="${pageContext.request.contextPath}/registration.jsp">&ndash;%&gt;
-                <input class="confirm-button" id="confirm_sign_in" type="submit" value="<fmt:message key="button.name.sign_in"/>">
-                <input type="hidden" name="command" value="confirm_sign_in"> &lt;%&ndash;мне надо писать кнопку под кнопкой что бы команда отправлялась ?&ndash;%&gt;
-
-            &lt;%&ndash;</a>&ndash;%&gt;
-            </form>
-
-
-            <form action="${pageContext.request.contextPath}\registration.jsp">
-                <input class="confirm-button" id="confirm_registr" type="button" name="registr" value="<fmt:message key="button.name.registration"/> ">
-            </form>
-
-        </div>
-    </form>
-</section>
-
-<button type="button" onclick="location.href='registration.jsp'"> to page1</button>
-
-
-</body>
-</html>
---%>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

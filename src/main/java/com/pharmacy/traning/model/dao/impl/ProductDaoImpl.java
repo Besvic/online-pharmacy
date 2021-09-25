@@ -37,6 +37,11 @@ public class ProductDaoImpl implements ProductDao {
             product_price, product_date_of_delivery, product_measure
             from product
             where product_status = 'actual';""";
+    private static final String SQL_FIND_ALL_DELETE_PRODUCT = """
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure
+            from product
+            where product_status = 'delete';""";
     private static final String SQL_DELETE_PRODUCT_BY_PRODUCT_ID = """
             update product
             set product_status = 'delete'
@@ -60,6 +65,18 @@ public class ProductDaoImpl implements ProductDao {
             product_price, product_date_of_delivery, product_measure, product_photo
             from product
             where product_price <= ?;""";
+
+    private static final String SQL_REALLY_DELETE_PRODUCT_BY_ID = """
+            delete from product
+            where product_id = ?;""";
+
+    private static final String SQL_RESTORE_PRODUCT_BY_ID = """
+            update product
+            set product_status = 'actual'
+            where product_id = ?;""";
+
+
+
 
 
     @Override
@@ -85,21 +102,30 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> findAllProduct() throws DaoException {
+        return findAllProductByScript(SQL_FIND_ALL_PRODUCT);
+    }
+
+    @Override
+    public List<Product> findAllDeleteProduct() throws DaoException {
+        return findAllProductByScript(SQL_FIND_ALL_DELETE_PRODUCT);
+    }
+
+    private List<Product> findAllProductByScript(String script) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_PRODUCT);
+             PreparedStatement statement = connection.prepareStatement(script);
              ResultSet result = statement.executeQuery()){
             List<Product> productList = new ArrayList<>();
             while (result.next()){
                 productList.add(new Product.ProductBuilder()
-                .setId(result.getLong(PRODUCT_ID))
-                .setName(result.getString(PRODUCT_NAME))
-                .setQuantity(result.getInt(PRODUCT_QUANTITY))
-                .setDosage(result.getDouble(PRODUCT_DOSAGE))
-                .setMeasure(result.getString(PRODUCT_MEASURE))
-                .setPrice(result.getDouble(PRODUCT_PRICE))
-                .setDateOfDelivery(result.getDate(PRODUCT_DATE_OF_DELIVERY).toLocalDate())
-                .setManufactureCountry(result.getString(PRODUCT_MANUFACTURE))
-                .createProduct());
+                        .setId(result.getLong(PRODUCT_ID))
+                        .setName(result.getString(PRODUCT_NAME))
+                        .setQuantity(result.getInt(PRODUCT_QUANTITY))
+                        .setDosage(result.getDouble(PRODUCT_DOSAGE))
+                        .setMeasure(result.getString(PRODUCT_MEASURE))
+                        .setPrice(result.getDouble(PRODUCT_PRICE))
+                        .setDateOfDelivery(result.getDate(PRODUCT_DATE_OF_DELIVERY).toLocalDate())
+                        .setManufactureCountry(result.getString(PRODUCT_MANUFACTURE))
+                        .createProduct());
             }
             return productList;
         } catch (SQLException throwables) {
@@ -110,8 +136,22 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean deleteProductById(long id) throws DaoException {
+        return executeScriptById(SQL_DELETE_PRODUCT_BY_PRODUCT_ID, id);
+    }
+
+    @Override
+    public boolean restoreProductById(long id) throws DaoException {
+        return executeScriptById(SQL_RESTORE_PRODUCT_BY_ID, id);
+    }
+
+    @Override
+    public boolean reallyDeleteProductById(long id) throws DaoException {
+        return executeScriptById(SQL_REALLY_DELETE_PRODUCT_BY_ID, id);
+    }
+
+    private boolean executeScriptById(String script, long id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_PRODUCT_BY_PRODUCT_ID)){
+             PreparedStatement statement = connection.prepareStatement(script)){
             statement.setLong(1, id);
             if (statement.executeUpdate() != 0){
                 return true;
@@ -122,6 +162,7 @@ public class ProductDaoImpl implements ProductDao {
         }
         return false;
     }
+
 
     @Override
     public boolean changeProductByProductId(Product product) throws DaoException {

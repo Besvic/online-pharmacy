@@ -31,8 +31,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <button type="submit" name="command" value="go_to_manufacture_list" class="dropdown-item">Список пользователей</button>
-                            <button type="submit" name="command" value="go_to_add_manufacture" class="dropdown-item">...</button>
+                            <button type="submit" name="command" value="go_to_user_list" class="dropdown-item">user list</button>
+                            <button type="submit" name="command" value="go_to_order_list" class="dropdown-item">check order</button>
                         </div>
                     </li>
 
@@ -41,15 +41,15 @@
                                                     <a class="nav-link" href="#">Препараты</a>
                                                 </li>--%>
 
-                    <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_user_list" class="nav-link" id="navbarDropdownMenuLink3">Пользователи</button>
-                    </li>
+
 
                     <li class="nav-item" >
                         <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Профиль</button>
                     </li>
 
-
+                    <li class="nav-item" >
+                        <button type="submit" name="command" value="go_to_admin_menu" class="nav-link" id="navbarDropdownMenuLink3">Menu</button>
+                    </li>
 
                     <%--<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Добавить произваодеителя</a>
