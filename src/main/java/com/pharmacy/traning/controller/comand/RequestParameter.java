@@ -23,6 +23,7 @@ public final class RequestParameter {
     public static final String DATE = "date";
 
 
+    public static final String ORDER_ID = "order_id";
 
     //locale
     public static final String LOCALE = "locale";

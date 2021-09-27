@@ -1,0 +1,89 @@
+package com.pharmacy.traning.model.dao.impl;
+
+import com.pharmacy.traning.exception.DaoException;
+import com.pharmacy.traning.model.dao.OrderDao;
+import com.pharmacy.traning.model.dao.PharmacyDao;
+import com.pharmacy.traning.model.entity.Order;
+import com.pharmacy.traning.model.entity.Pharmacy;
+import com.pharmacy.traning.model.entity.Product;
+import com.pharmacy.traning.model.pool.ConnectionPool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.pharmacy.traning.model.dao.ColumnName.*;
+import static com.pharmacy.traning.model.dao.ColumnName.ORDER_QUANTITY;
+
+public class PharmacyDaoImpl implements PharmacyDao {
+
+    private static final Logger logger = LogManager.getLogger();
+    private static PharmacyDao instance;
+
+    private static final String SQL_CREATE_PHARMACY = """
+            insert into pharmacy(pharmacy_city, pharmacy_street, pharmacy_number)
+            values (?, ?, ?);""";
+    private static final String SQL_DELETE_PHARMACY_BY_ID = """
+            update pharmacy
+            set pharmacy_status = 'delete'
+            where pharmacy_id = ?""";
+    private static final String SQL_FIND_ALL_ACTUAL_PHARMACY = """
+            select pharmacy_id, pharmacy_city, pharmacy_street, pharmacy_number
+            from pharmacy
+            where pharmacy_status = 'actual';""";
+    /*private static final String SQL_ = """
+            """;
+    private static final String SQL_ = """
+            """;
+    private static final String SQL_ = """
+            """;*/
+
+
+    public static PharmacyDao getInstance(){
+        if (instance == null){
+            instance = new PharmacyDaoImpl();
+        }
+        return instance;
+    }
+
+    private PharmacyDaoImpl(){
+
+    }
+
+    @Override
+    public boolean createPharmacy(Pharmacy pharmacy) throws DaoException {
+
+        return false;
+    }
+
+    @Override
+    public boolean deletePharmacy(long id) throws DaoException {
+        return false;
+    }
+
+    @Override
+    public List<Pharmacy> findAllActualPharmacy() throws DaoException {
+        List<Pharmacy> pharmacyList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_ACTUAL_PHARMACY);
+             ResultSet result = statement.executeQuery()) {
+                while (result.next()){
+                    pharmacyList.add(new Pharmacy.PharmacyBuilder()
+                        .setId(result.getLong(PHARMACY_ID))
+                        .setCity(result.getString(PHARMACY_CITY))
+                        .setStreet(result.getString(PHARMACY_STREET))
+                        .setNumber(result.getInt(PHARMACY_NUMBER))
+                        .createPharmacy());
+                }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return pharmacyList;
+    }
+}

@@ -3,7 +3,7 @@ package com.pharmacy.traning.model.entity;
 public enum OrderStatus {
 
     COMPLETED ("completed"),
-    NOT_COMPLETED("not_completed");
+    NOT_COMPLETED("not completed");
 
     private final String value;
 

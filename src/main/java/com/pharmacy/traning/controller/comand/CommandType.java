@@ -6,6 +6,10 @@ import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
 import com.pharmacy.traning.controller.comand.impl.admin.*;
 import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
+import com.pharmacy.traning.controller.comand.impl.user.AddProductInOrderCommand;
+import com.pharmacy.traning.controller.comand.impl.user.PayOrderCommand;
+import com.pharmacy.traning.controller.comand.impl.user.go.GoToOrderListByUserCommand;
+import com.pharmacy.traning.controller.comand.impl.user.go.GoToProductListForPurchaseCommand;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),
@@ -32,6 +36,13 @@ public enum CommandType {
 
 
     //user function
+    GO_TO_PRODUCT_LIST_BY_USER(new GoToProductListForPurchaseCommand()),
+    GO_TO_ORDER_LIST_BY_USER(new GoToOrderListByUserCommand()),
+//    GO_TO_USER_PROFILE(),
+//    GO_TO_USER_MENU()
+    ADD_PRODUCT_IN_ORDER(new AddProductInOrderCommand()),
+    PAY_ORDER(new PayOrderCommand()),
+
 
     ;
 

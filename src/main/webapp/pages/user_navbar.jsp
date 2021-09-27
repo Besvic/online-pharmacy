@@ -23,9 +23,8 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button type="submit" name="command" value="go_to_product_list_by_user" class="dropdown-item">Product list</button>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <button type="submit" name="command" value="go_to_purchase_history_list_by_user" class="dropdown-item">Purchase history</button>
+                            <button type="submit" name="command" value="go_to_order_list_by_user" class="dropdown-item">Purchase history</button>
+
                         </div>
                     </li>
 
@@ -36,10 +35,6 @@
                             <button type="submit" name="command" value="go_to_order_list" class="dropdown-item">check order</button>
                         </div>
                     </li>--%>
-
-                    <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_user_profile" class="nav-link" id="navbarDropdownMenuLink5">add cash</button>
-                    </li>
 
                     <li class="nav-item" >
                         <button type="submit" name="command" value="go_to_user_profile" class="nav-link" id="navbarDropdownMenuLink4">Profile</button>

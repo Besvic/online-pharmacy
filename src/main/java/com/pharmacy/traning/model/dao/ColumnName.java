@@ -15,10 +15,10 @@ public final class ColumnName {
     public static final String COUNTRY_NAME = "country_name";
 
     //manufacture
-    public static final String MANUFACTURE_ID = "manufacture_id";
-    public static final String MANUFACTURE_NAME= "manufacture_name";
-    public static final String MANUFACTURE_EMAIL = "manufacture_email";
-    public static final String MANUFACTURE_COUNTRY_ID = "manufacture_country_id";
+    public static final String PHARMACY_ID = "pharmacy_id";
+    public static final String PHARMACY_CITY= "pharmacy_city";
+    public static final String PHARMACY_STREET = "pharmacy_street";
+    public static final String PHARMACY_NUMBER = "pharmacy_number";
 
     //order
     public static final String ORDER_ID= "order_id";
@@ -26,6 +26,7 @@ public final class ColumnName {
     public static final String ORDER_USER_ID = "order_user_id";
     public static final String ORDER_STATUS = "order_status";
     public static final String ORDER_QUANTITY = "order_quantity";
+    public static final String ORDER_PHARMACY_ID = "order_pharmacy_id";
     public static final String ORDER_DATE = "order_date";
 
     //product

@@ -1,27 +1,30 @@
 package com.pharmacy.traning.model.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Order {
 
     private long id;
-    private long productId;
-    private long userId;
+    private Product product;
+    private User user;
+    private Pharmacy pharmacy;
     private OrderStatus status;
-    private int quantity;
     private LocalDate date;
+    private int quantity;
 
     public Order() {
     }
 
-    public Order(long id, long productId, long userId, OrderStatus status, int quantity, LocalDate date) {
+    public Order(long id, Product product, User user, Pharmacy pharmacy, OrderStatus status, LocalDate date, int quantity) {
         this.id = id;
-        this.productId = productId;
-        this.userId = userId;
+        this.product = product;
+        this.user = user;
+        this.pharmacy = pharmacy;
         this.status = status;
-        this.quantity = quantity;
         this.date = date;
+        this.quantity = quantity;
     }
 
     public long getId() {
@@ -32,36 +35,36 @@ public class Order {
         this.id = id;
     }
 
-    public long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Pharmacy getPharmacy() {
+        return pharmacy;
+    }
+
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 
     public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = OrderStatus.valueOf(status.toUpperCase());
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public LocalDate getDate() {
@@ -72,65 +75,47 @@ public class Order {
         this.date = date;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Order order = (Order) o;
-        return id == order.id && productId == order.productId && userId == order.userId
-                && quantity == order.quantity && status == order.status && date.equals(order.date);
+    public int getQuantity() {
+        return quantity;
     }
 
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(new long[] {id, productId, userId}) + Integer.hashCode(quantity) + status.hashCode()
-                + date.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", userID=" + userId +
-                ", status=" + status.toString() +
-                ", quantity=" + quantity +
-                ", date=" + date.toString() +
-                '}';
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public static class OrderBuilder{
 
+
         private long id;
-        private long productId;
-        private long userId;
+        private Product product;
+        private User user;
+        private Pharmacy pharmacy;
         private OrderStatus status;
-        private int quantity;
         private LocalDate date;
+        private int quantity;
 
         public OrderBuilder setId(long id) {
             this.id = id;
             return this;
         }
 
-        public OrderBuilder setProductId(long productId) {
-            this.productId = productId;
+        public OrderBuilder setProduct(Product product) {
+            this.product = product;
             return this;
         }
 
-        public OrderBuilder setUserId(long userId) {
-            this.userId = userId;
+        public OrderBuilder setUser(User user) {
+            this.user = user;
             return this;
         }
 
-        public OrderBuilder setStatus(String status) {
-            this.status = OrderStatus.valueOf(status.toUpperCase());
+        public OrderBuilder setPharmacy(Pharmacy pharmacy) {
+            this.pharmacy = pharmacy;
             return this;
         }
 
-        public OrderBuilder setQuantity(int quantity) {
-            this.quantity = quantity;
+        public OrderBuilder setStatus(OrderStatus status) {
+            this.status = status;
             return this;
         }
 
@@ -139,8 +124,13 @@ public class Order {
             return this;
         }
 
+        public OrderBuilder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
         public Order createOrder() {
-            return new Order(id, productId, userId, status, quantity, date);
+            return new Order(id, product, user, pharmacy, status, date, quantity);
         }
     }
 

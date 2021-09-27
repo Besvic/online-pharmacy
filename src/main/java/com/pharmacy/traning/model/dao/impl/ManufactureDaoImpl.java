@@ -1,3 +1,4 @@
+/*
 package com.pharmacy.traning.model.dao.impl;
 
 import com.pharmacy.traning.model.entity.Manufacture;
@@ -120,3 +121,4 @@ public class ManufactureDaoImpl implements ManufactureDao {
         return false;
     }
 }
+*/

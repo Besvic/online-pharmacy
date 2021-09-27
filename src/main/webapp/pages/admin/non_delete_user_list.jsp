@@ -16,43 +16,52 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
+
+    <link href="${pageContext.request.contextPath}/css/admin/table.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
 <jsp:include page="../admin_navbar.jsp"/>
-<div class="table">
-    <table>
-        <thead class="first_row">
-        <tr>
+<div class="table_custom">
+    <table align="center">
+        <thead>
+        <tr class="first_row">
             <th><fmt:message key="label.user.photo"/> </th>
             <th><fmt:message key="label.user.name"/> </th>
             <th><fmt:message key="label.user.login"/> </th>
             <th><fmt:message key="label.user.cash"/> </th>
             <th><fmt:message key="label.user.status"/> </th>
-            <th colspan="2"><fmt:message key="label.user.change_function"/> </th>
         </tr>
         </thead>
 
 
         <c:forEach var="user_list" items="${user_list}">
-            <tr>
-                <td><img height="100px" width="150" src="${pageContext.request.contextPath}${user_list.photo}" alt="don't upload"/></td>
-                <td>${user_list.name}</td>
-                <td>${user_list.login}</td>
-                <td>${user_list.cash}</td>
-                <td>${user_list.userStatus}</td>
-                <td>
-                    <form action="controller" method="post">
-                        <button type="submit" name="command" value="delete_user">delete</button>
-                        <input type="hidden" name="user_id" value="${user_list.id}">
-                    </form>
-                </td>
-                <td>
-                    <form action="controller" method="post">
-                        <button type="submit" name="command" value="go_check_order">check order</button>
-                        <input type="hidden" name="user_id" value="${user_list.id}">
-                    </form>
-                </td>
-            </tr>
+            <tbody>
+                <tr class="row_custom">
+                    <td rowspan="2"><img height="120px" width="160" src="${pageContext.request.contextPath}${user_list.photo}" alt="don't upload"/></td>
+                    <td>${user_list.name}</td>
+                    <td>${user_list.login}</td>
+                    <td>${user_list.cash}</td>
+                    <td>${user_list.userStatus}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <form action="controller" method="post">
+                            <button type="submit" class="button delete" name="command" value="delete_user">delete</button>
+                            <input type="hidden" name="user_id" value="${user_list.id}">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="controller" method="post">
+                            <button type="submit" class="button" name="command" value="go_check_order">check order</button>
+                            <input type="hidden" name="user_id" value="${user_list.id}">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
         </c:forEach>
 
 
