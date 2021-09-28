@@ -26,6 +26,8 @@ public class AddProductQuantityCommand implements Command {
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
 
     // TODO: 24.09.2021 что делать если один админ удалил данные продукт, а второй хочет добавить количество. может стоит сделать лок как то
+    // TODO: 27.09.2021  create transaction
+
     @Override
     public Router execute(HttpServletRequest request) throws CommandException{
         int quantity = Integer.parseInt(request.getParameter(QUANTITY));

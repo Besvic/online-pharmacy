@@ -75,6 +75,11 @@ public class UserDaoImpl implements UserDao {
             from users
             where user_login = ? and user_password = ?;""";
 
+    private static final String SQL_FIND_USER_BY_ID = """
+            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_id = ?;""";
+
     private static final String SQL_UPDATE_PHOTO_BY_ID = """
             update users
             set user_photo = ?
@@ -82,8 +87,13 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_UPDATE_CASH_BY_ID = """
             update users
-                set user_cash = ?
+                set user_cash = user_cash + ? 
                 where user_id = ?;""";
+
+    private static final String SQL_REDUCE_CASH_BY_ID = """
+            update users
+            set user_cash = user_cash - ? 
+            where user_id = ?;""";
 
     private static final String SQL_UPDATE_PASSWORD_NAME_BY_ID = """
              update users
@@ -155,6 +165,20 @@ public class UserDaoImpl implements UserDao {
     public boolean updateCashById(Double cash, long id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_CASH_BY_ID)) {
+            statement.setDouble(1, cash);
+            statement.setLong(2, id);
+            if (statement.executeUpdate() != 0)
+                return true;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean reduceCashById(Double cash, long id, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_REDUCE_CASH_BY_ID)) {
             statement.setDouble(1, cash);
             statement.setLong(2, id);
             if (statement.executeUpdate() != 0)
@@ -240,12 +264,37 @@ public class UserDaoImpl implements UserDao {
             statement.setString(2, password);
             try (ResultSet result = statement.executeQuery()){
                 if (result.next()){
-                    return Optional.of(new User.UserBuilder()
+                    return Optional.ofNullable(new User.UserBuilder()
                             .setId(result.getInt(USER_ID))
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
-                            .setPassword(result.getString(ColumnName.USER_PASSWORD))
+                            /*.setPassword(result.getString(ColumnName.USER_PASSWORD))*/
+                            .setPosition((result.getString(ColumnName.USER_POSITION)))
+                            .setUserStatus(result.getString(USER_STATUS))
+                            .setPhoto(result.getString(USER_PHOTO))
+                            .createUser());
+                }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserById(long userId, Connection connection) throws DaoException {
+        try(PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_ID)) {
+            statement.setLong(1, userId);
+            try (ResultSet result = statement.executeQuery()){
+                if (result.next()){
+                    return Optional.ofNullable(new User.UserBuilder()
+                            .setId(result.getInt(USER_ID))
+                            .setName(result.getString(ColumnName.USER_NAME))
+                            .setCash(result.getDouble(ColumnName.USER_CASH))
+                           /* .setLogin(result.getString(ColumnName.USER_LOGIN))*/
+                           /* .setPassword(result.getString(ColumnName.USER_PASSWORD))*/
                             .setPosition((result.getString(ColumnName.USER_POSITION)))
                             .setUserStatus(result.getString(USER_STATUS))
                             .setPhoto(result.getString(USER_PHOTO))

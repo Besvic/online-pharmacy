@@ -13,29 +13,24 @@ import com.pharmacy.traning.service.impl.ServiceOrderImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.RequestAttribute.PHARMACY_LIST;
-import static com.pharmacy.traning.controller.comand.RequestParameter.*;
+import static com.pharmacy.traning.controller.comand.RequestParameter.ORDER_ID;
 
-
-public class PayOrderCommand implements Command {
+public class DeleteOrderByUserCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        long orderId = Long.parseLong(request.getParameter(ORDER_ID));
-        long pharmacyId = Long.parseLong(request.getParameter(PHARMACY_ID));
-        int productQuantity = Integer.parseInt(request.getParameter(QUANTITY));
-        double orderPrice = Double.parseDouble(request.getParameter(PRICE));
         try {
-            if (serviceOrder.payOrder(orderId, pharmacyId, productQuantity, orderPrice)) {
-             return new GoToOrderListByUserCommand().execute(request);
+            long orderId = Long.parseLong(request.getParameter(ORDER_ID));
+            if (serviceOrder.deleteOrderById(orderId)){
+                return new GoToOrderListByUserCommand().execute(request);
             } else {
-                request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
+                request.setAttribute(ERROR, Message.ERROR_DELETE);
             }
-        } catch (ServiceException | DaoException e) {
+        } catch (NullPointerException | ServiceException | DaoException e) {
             request.setAttribute(ERROR, e);
         }
-        return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+       return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }
 }

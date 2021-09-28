@@ -45,24 +45,33 @@ public class OrderDaoImpl implements OrderDao {
             where order_id = ?;""";
 
     private static final String SQL_IS_ORDER = """
-            select order_id
+            select order_id, product_quantity
             from `order`
+            join product on order_product_id = product_id
             where order_user_id = ? and order_product_id = ? and order_status = 'not completed';""";
+
+    private static final String SQL_COMPLETED_ORDER = """
+         
+            update `order`
+            set order_status = 'completed', order_pharmacy_id = ?
+            where order_id = ?;""";
 
 
 
     private static final String SQL_FIND_ORDER_BY_ID = """
-           select order_id, user_id, user_cash,  order_quantity, product_price * order_quantity as product_price, product_id, pharmacy_id, pharmacy_city, pharmacy_street, pharmacy_number
+           select order_id, user_id, user_cash,  order_quantity, product_price * order_quantity as product_price, product_id, product_quantity, pharmacy_id, pharmacy_city, pharmacy_street, pharmacy_number
            from `order`
            join pharmacy on pharmacy_id = `order`.order_pharmacy_id
            join product on product_id = `order`.order_product_id
            join users on user_id = `order`.order_user_id
            where order_id = ?;""";
 
+
+
     private static final String SQL_FIND_ALL_ORDER_BY_USER_ID = """
-           select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name, pharmacy_city, pharmacy_street, pharmacy_number
+           select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name/*, pharmacy_city, pharmacy_street, pharmacy_number*/
            from `order`
-           join pharmacy p on p.pharmacy_id = `order`.order_pharmacy_id
+          /* join pharmacy p on p.pharmacy_id = `order`.order_pharmacy_id*/
            join product pr on pr.product_id = `order`.order_product_id
            where order_user_id = ? and order_status = 'not completed';""";
     
@@ -74,6 +83,12 @@ public class OrderDaoImpl implements OrderDao {
             select order_id, order_product_id, order_user_id, order_status, order_quantity, order_date
             from `order`
             where order_status = ?;""";
+
+    private static final String SQL_DELETE_ORDER_BY_ID = """
+            delete from `order`
+            where order_id = ?;""";
+
+
 
     @Override
     public boolean addOrder(Order order) throws DaoException {
@@ -108,6 +123,33 @@ public class OrderDaoImpl implements OrderDao {
         return false;
     }
 
+    @Override
+    public boolean deleteOrderById(long orderId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER_BY_ID)){
+            statement.setLong(1, orderId);
+            if (statement.executeUpdate() != 0)
+                return true;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean completedOrder(long orderId, long pharmacyId, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_COMPLETED_ORDER)){
+            statement.setLong(1, pharmacyId);
+            statement.setLong(2, orderId);
+            if (statement.executeUpdate() != 0)
+                return true;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }return false;
+    }
+
 
     @Override
     public Optional<Order> checkIsOrder(long userId, long productId) throws DaoException {
@@ -119,6 +161,9 @@ public class OrderDaoImpl implements OrderDao {
                 if (result.next()){
                     return Optional.ofNullable(new Order.OrderBuilder()
                             .setId(result.getLong(ORDER_ID))
+                            .setProduct(new Product.ProductBuilder()
+                                    .setQuantity(result.getInt(PRODUCT_QUANTITY))
+                                    .createProduct())
                             .createOrder());
                 }
             }
@@ -144,11 +189,11 @@ public class OrderDaoImpl implements OrderDao {
                             .setName(result.getString(PRODUCT_NAME))
                             .setId(result.getLong(PRODUCT_ID))
                             .createProduct())
-                        .setPharmacy(new Pharmacy.PharmacyBuilder()
+                        /*.setPharmacy(new Pharmacy.PharmacyBuilder()
                             .setCity(result.getString(PHARMACY_CITY))
                             .setStreet(result.getString(PHARMACY_STREET))
                             .setNumber(result.getInt(PHARMACY_NUMBER))
-                            .createPharmacy())
+                            .createPharmacy())*/
                         .setQuantity(result.getInt(ORDER_QUANTITY))
                         .createOrder());
                 }
@@ -161,13 +206,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Optional<Order> findOrderById(int orderId) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_ID)){
+    public Optional<Order> findOrderById(long orderId, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_ID)){
             statement.setLong(1, orderId);
             try (ResultSet result = statement.executeQuery()){
                 if (result.next()){
-                    return Optional.of(new Order.OrderBuilder()
+                    return Optional.ofNullable(new Order.OrderBuilder()
                     .setId(result.getLong(ORDER_ID))
                     .setUser(new User.UserBuilder()
                             .setId(result.getLong(USER_ID))
@@ -177,6 +221,7 @@ public class OrderDaoImpl implements OrderDao {
                     .setProduct( new Product.ProductBuilder()
                             .setPrice(result.getDouble(PRODUCT_PRICE))
                             .setId(result.getInt(PRODUCT_ID))
+                            .setQuantity(result.getInt(PRODUCT_QUANTITY))
                             .createProduct())
                     .setPharmacy(new Pharmacy.PharmacyBuilder()
                             .setId(result.getLong(PHARMACY_ID))

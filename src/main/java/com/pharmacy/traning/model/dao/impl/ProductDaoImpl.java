@@ -55,6 +55,11 @@ public class ProductDaoImpl implements ProductDao {
             update product
             set product_quantity = product_quantity + ?
             where product_id = ?;""";
+
+    private static final String SQL_REDUCE_PRODUCT_QUANTITY_BY_PRODUCT_ID = """
+            update product
+            set product_quantity = product_quantity - ?
+            where product_id = ?;""";
     private static final String SQL_FIND_PRODUCT_BY_ID = """
             select product_id, product_name, product_dosage, product_manufacture, product_quantity,
             product_price, product_date_of_delivery, product_measure
@@ -200,6 +205,20 @@ public class ProductDaoImpl implements ProductDao {
         }
         return false;
     }
+
+    @Override
+    public boolean reduceProductQuantityByProductId(int productQuantity, long productId, Connection connection) throws DaoException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_REDUCE_PRODUCT_QUANTITY_BY_PRODUCT_ID)){
+            statement.setInt(1, productQuantity);
+            statement.setLong(2, productId);
+            if (statement.executeUpdate() != 0){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;    }
 
     @Override
     public Optional<Product> findProductById(long productId) throws DaoException {

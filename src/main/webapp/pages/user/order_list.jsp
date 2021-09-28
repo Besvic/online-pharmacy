@@ -39,12 +39,13 @@
             <form action="controller" method="post">
                 <tr class="row_custom">
                     <td>${order_list.product.name}</td>
-                    <td><input class="input" type="number" name="quantity" min="1" placeholder="${order_list.quantity}" required></td>
+                    <td><input class="input" type="number" name="quantity" min="1" value="${order_list.quantity}" required></td>
                     <td>${order_list.product.price}</td>
                     <td>
-                        <select>
-                            <c:forEach var="pharmacy_list" items="${pharmacy_list}">
-                                <option >${pharmacy_list.city}, ${pharmacy_list.street}, ${pharmacy_list.number}</option>
+                        <select name="pharmacy_id">
+                            <c:forEach var="pharmacy" items="${pharmacy_list}">
+                                <option name="pharmacy_id" value="${pharmacy.id}" > ${pharmacy.city}, ${pharmacy.street}, ${pharmacy.number}</option>
+<%--                                <input type="hidden" name="pharmacy_id" value="${pharmacy.id}">--%>
                             </c:forEach>
                         </select>
 
@@ -54,13 +55,13 @@
 
                 <tr>
                     <td></td>
-                    <td></td>
-                    <td></td>
                     <td>
-                        <button class="button" type="submit" name="command" value="by_order">buy</button>
                         <input type="hidden" name="product_id" value="${order_list.product.id}">
                         <input type="hidden" name="order_id" value="${order_list.id}">
+                        <input type="hidden" name="price" value="${order_list.product.price}">
                     </td>
+                    <td><button class="button" type="submit" name="command" value="pay_order">buy</button></td>
+                    <td><button class="button delete" type="submit" name="command" value="delete_order_by_user">buy</button></td>
                 </tr>
             </form>
             </tbody>

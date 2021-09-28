@@ -24,6 +24,8 @@ public final class RequestParameter {
 
 
     public static final String ORDER_ID = "order_id";
+    public static final String PHARMACY_ID = "pharmacy_id";
+
 
     //locale
     public static final String LOCALE = "locale";

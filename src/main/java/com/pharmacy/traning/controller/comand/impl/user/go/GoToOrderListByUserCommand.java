@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
-import static com.pharmacy.traning.controller.comand.RequestParameter.USER_ID;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
 public class GoToOrderListByUserCommand implements Command {
@@ -31,20 +30,20 @@ public class GoToOrderListByUserCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
-        long userId = ((User) session.getAttribute(USER)).getId();
         try{
+            long userId = ((User) session.getAttribute(USER)).getId();
             List<Order> orderList = serviceOrder.findAllNotCompletedOrderByUser(userId);
             List<Pharmacy> pharmacyList = servicePharmacy.findAllActualPharmacy();
-            if (!orderList.isEmpty() && !pharmacyList.isEmpty()){
+            if (!pharmacyList.isEmpty()){
                 request.setAttribute(ORDER_LIST_NOT_COMPLETED, orderList);
                 request.setAttribute(PHARMACY_LIST, pharmacyList);
                 return new Router(PathToPage.USER_ORDER_LIST, Router.RouterType.FORWARD);
             } else {
-                request.setAttribute(ERROR, Message.ERROR_LIST_IS_EMPTY);
+                request.setAttribute(ERROR, Message.ERROR_PHARMACY_LIST_IS_EMPTY);
                 return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
-        } catch (DaoException | ServiceException e) {
-            request.setAttribute(ERROR, e);
+        } catch (DaoException | ServiceException | NullPointerException e) {
+            request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
     }
