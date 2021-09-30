@@ -19,6 +19,7 @@ public final class ColumnName {
     public static final String PHARMACY_CITY= "pharmacy_city";
     public static final String PHARMACY_STREET = "pharmacy_street";
     public static final String PHARMACY_NUMBER = "pharmacy_number";
+    public static final String PHARMACY_STATUS = "pharmacy_status";
 
     //order
     public static final String ORDER_ID= "order_id";

@@ -29,7 +29,15 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pharmacy</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <button type="submit" name="command" value="go_to_pharmacy_list" class="dropdown-item">pharmacy list</button>
+                            <button type="submit" name="command" value="go_to_add_pharmacy" class="dropdown-item">add pharmacy</button>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button type="submit" name="command" value="go_to_user_list" class="dropdown-item">user list</button>
                             <button type="submit" name="command" value="go_to_order_list" class="dropdown-item">check order</button>
@@ -44,7 +52,7 @@
 
 
                     <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Профиль</button>
+                        <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Profile</button>
                     </li>
 
                     <li class="nav-item" >

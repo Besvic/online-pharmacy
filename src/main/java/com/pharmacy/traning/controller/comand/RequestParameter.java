@@ -25,6 +25,9 @@ public final class RequestParameter {
 
     public static final String ORDER_ID = "order_id";
     public static final String PHARMACY_ID = "pharmacy_id";
+    public static final String PHARMACY_NUMBER = "pharmacy_number";
+    public static final String PHARMACY_CITY = "pharmacy_city";
+    public static final String PHARMACY_STREET = "pharmacy_street";
 
 
 

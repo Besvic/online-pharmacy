@@ -5,9 +5,11 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Pharmacy;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServicePharmacy {
-    boolean createPharmacy(Pharmacy pharmacy) throws ServiceException;
-    boolean deletePharmacy(long id) throws ServiceException;
+    boolean createPharmacy(Optional<Pharmacy> pharmacy) throws ServiceException, DaoException;
+    boolean deletePharmacy(long id) throws ServiceException, DaoException;
     List<Pharmacy> findAllActualPharmacy() throws ServiceException, DaoException;
+    List<Pharmacy> findAllPharmacy() throws ServiceException, DaoException;
 }

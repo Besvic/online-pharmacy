@@ -1,5 +1,6 @@
 package com.pharmacy.traning.validator;
 
+import com.pharmacy.traning.validator.impl.ValidatorPharmacyImpl;
 import com.pharmacy.traning.validator.impl.ValidatorProductImpl;
 import org.junit.jupiter.api.Test;
 

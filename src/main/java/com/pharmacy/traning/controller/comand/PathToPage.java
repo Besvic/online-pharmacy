@@ -20,6 +20,8 @@ public final class PathToPage {
     public static final String ADMIN_ORDER_LIST = "/pages/admin/order_list.jsp";
     public static final String ADMIN_DELETE_USER_LIST = "/pages/admin/delete_user_list.jsp";
     public static final String ADMIN_IN_REGISTER_USER_LIST = "/pages/admin/in_register_user_list.jsp";
+    public static final String ADMIN_PHARMACY_LIST = "/pages/admin/pharmacy_list.jsp";
+    public static final String ADMIN_ADD_PHARMACY = "/pages/admin/add_pharmacy.jsp";
 
     public static final String USER_MENU = "/pages/user/user_menu.jsp";
     public static final String USER_PROFILE = "/pages/user/user_profile.jsp";

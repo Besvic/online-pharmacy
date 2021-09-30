@@ -9,7 +9,9 @@ public interface PharmacyDao {
 
     boolean createPharmacy(Pharmacy pharmacy) throws DaoException;
     boolean deletePharmacy(long id) throws DaoException;
+    boolean restorePharmacy(long pharmacyId) throws DaoException;
     List<Pharmacy> findAllActualPharmacy() throws  DaoException;
+    List<Pharmacy> findAllPharmacy() throws  DaoException;
 
 
 }
