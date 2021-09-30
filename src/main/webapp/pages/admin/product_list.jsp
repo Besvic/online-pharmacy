@@ -52,21 +52,21 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <form action="controller" method="post">
-                            <button class="button delete" type="submit" name="command" value="delete_product">delete</button>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <button class="button delete" type="submit" name="command" value="delete_product"><fmt:message key="button.delete"/> </button>
                             <input type="hidden" name="product_id" value="${product_list.id}">
                         </form>
                     </td>
                     <td>
-                        <form action="controller" method="post">
-                            <button type="submit" class="button" name="command" value="go_change_product">change</button>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <button type="submit" class="button" name="command" value="go_change_product"><fmt:message key="button.change"/> </button>
                             <input type="hidden" name="product_id" value="${product_list.id}">
                         </form>
                     </td>
                     <td colspan="2">
-                        <form action="controller" method="post">
-                            <input type="number" class="input" name="quantity" min="1" placeholder="add quantity" required>
-                            <button type="submit" class="button" name="command" value="add_product_quantity">add quantity</button>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <input type="number" class="input" name="quantity" min="1" placeholder="<fmt:message key="placeholder.number"/> " required>
+                            <button type="submit" class="button" name="command" value="add_product_quantity"><fmt:message key="button.add_quantity"/> </button>
                             <input type="hidden" name="product_id" value="${product_list.id}">
                         </form>
                     </td>

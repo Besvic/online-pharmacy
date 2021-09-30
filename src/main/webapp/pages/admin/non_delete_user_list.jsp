@@ -12,7 +12,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>user_list</title>
+    <title><fmt:message key="title.user_list"/> </title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
@@ -49,13 +49,13 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <form action="controller" method="post">
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
                             <button type="submit" class="button delete" name="command" value="delete_user">delete</button>
                             <input type="hidden" name="user_id" value="${user_list.id}">
                         </form>
                     </td>
                     <td>
-                        <form action="controller" method="post">
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
                             <button type="submit" class="button" name="command" value="active_user">active</button>
                             <input type="hidden" name="user_status" value="${user_list.userStatus}">
                             <input type="hidden" name="user_id" value="${user_list.id}">

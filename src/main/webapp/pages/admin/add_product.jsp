@@ -26,8 +26,7 @@
 <jsp:include page="../admin_navbar.jsp"/>
 <div class="box">
     <table class="table_data">
-        <form action="controller" method="post">
-            <!-- <form action="uploadImage"> -->
+        <form action="${pageContext.request.contextPath}/controller" method="post">
             <tr class="first_row">
                 <td class="img_column" rowspan="3"> </td>
                 <td><label class="label_text"><fmt:message key="label.product.name"/>: </label></td>
@@ -35,7 +34,6 @@
                 <td><label class="label_text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
                 <td><input class="input" type="text" name="manufacture_country" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
             </tr>
-            <!-- </form> -->
 
             <tr class="second_row">
                 <td><label class="label_text"><fmt:message key="label.product.dosage"/> </label></td>

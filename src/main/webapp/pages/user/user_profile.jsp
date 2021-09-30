@@ -5,7 +5,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>Profile user</title>
+    <title><fmt:message key="title.menu"/> </title>
 </head>
 <body>
 <link href="${pageContext.request.contextPath}/css/admin/admin_profile.css" rel="stylesheet" type="text/css"/>

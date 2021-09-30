@@ -22,7 +22,7 @@
   <jsp:include page="../admin_navbar.jsp"/>
   <div class="box">
     <table class="table_data">
-      <form action="controller" method="post">
+      <form action="${pageContext.request.contextPath}/controller" method="post">
 
         <tr class="first_row">
           <td class="img_column" rowspan="3"> </td>

@@ -35,7 +35,7 @@
                 <%--Section sign in--%>
                 <div class="tab-content tabs">
                     <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                        <form class="form-horizontal" action="controller">
+                        <form class="form-horizontal" action="${pageContext.request.contextPath}/controller">
                             <div class="form-group">
                                 <label for="exampleInputEmail1"> <fmt:message key="label.text.Enter_email"/> </label>
                                 <input type="email" name="email" placeholder="<fmt:message key="placeholder.E-mail"/>" required class="form-control" id="exampleInputUserName" >

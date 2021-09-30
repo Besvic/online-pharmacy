@@ -12,7 +12,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>order list</title>
+    <title><fmt:message key="title.order_list"/> </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
 
@@ -28,15 +28,13 @@
             <th><fmt:message key="label.product.name"/> </th>
             <th><fmt:message key="label.order.quantity"/> </th>
             <th><fmt:message key="label.order.price"/> </th>
-            <th>pick_up</th>
-
-
+            <th><fmt:message key="label.pick_up"/> </th>
         </tr>
         </thead>
 
         <c:forEach var="order_list" items="${order_list_n_c}">
             <tbody>
-            <form action="controller" method="post">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
                 <tr class="row_custom">
                     <td>${order_list.product.name}</td>
                     <td><input class="input" type="number" name="quantity" min="1" value="${order_list.quantity}" required></td>
@@ -45,12 +43,9 @@
                         <select name="pharmacy_id">
                             <c:forEach var="pharmacy" items="${pharmacy_list}">
                                 <option name="pharmacy_id" value="${pharmacy.id}" > ${pharmacy.city}, ${pharmacy.street}, ${pharmacy.number}</option>
-<%--                                <input type="hidden" name="pharmacy_id" value="${pharmacy.id}">--%>
                             </c:forEach>
                         </select>
-
                     </td>
-                    <%--<td>${order_list.pharmacy.city}, ${order_list.pharmacy.street}, ${order_list.pharmacy.number}</td>--%>
                 </tr>
 
                 <tr>
@@ -60,8 +55,8 @@
                         <input type="hidden" name="order_id" value="${order_list.id}">
                         <input type="hidden" name="price" value="${order_list.product.price}">
                     </td>
-                    <td><button class="button" type="submit" name="command" value="pay_order">buy</button></td>
-                    <td><button class="button delete" type="submit" name="command" value="delete_order_by_user">buy</button></td>
+                    <td><button class="button" type="submit" name="command" value="pay_order"><fmt:message key="button.pay"/> </button></td>
+                    <td><button class="button delete" type="submit" name="command" value="delete_order_by_user"><fmt:message key="button.delete"/> </button></td>
                 </tr>
             </form>
             </tbody>

@@ -24,32 +24,16 @@
 <body>
 <jsp:include page="../admin_navbar.jsp"/>
 <div class="box">
-    <form action="controller">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
 
 
         <table class="table_data">
             <tr>
-                <td class="img_column" rowspan="3">
-                    <img class="img" src=" ${pageContext.request.contextPath}${sessionScope.user.photo}" alt="photo didn't upload" >
-                </td>
-                    <td>
-                        <Label class="label-text">
-                            <fmt:message key="label.text.full_name"/>:
-                        </Label>
-                    </td>
-                    <td>
-                        <input type="text" name="new_name" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required>
-                    </td>
-                    <td>
-                        <Label class="label-text">
-                            <fmt:message key="label.text.cash"/>:
-                        </Label>
-                    </td>
-                    <td>
-                        <Label class="label-text">
-                            ${sessionScope.user.cash}
-                        </Label>
-                    </td>
+                <td class="img_column" rowspan="3"><img class="img" src=" ${pageContext.request.contextPath}${sessionScope.user.photo}" alt="photo didn't upload" ></td>
+                    <td><Label class="label-text"><fmt:message key="label.text.full_name"/>:</Label></td>
+                    <td><input type="text" name="new_name" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required></td>
+                    <td><Label class="label-text"><fmt:message key="label.text.cash"/>:</Label></td>
+                    <td><Label class="label-text">${sessionScope.user.cash}</Label></td>
             </tr>
                     <tr>
                         <td>
@@ -80,19 +64,13 @@
                         <td>
                             <input type="password" name="new_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required>
                         </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
+                        <td></td>
+                        <td></td>
 
                     </tr>
 
                 <tr>
-                    <td>
-
-                    </td>
+                    <td></td>
                     <td >
                         <Label class="label-text" class="column_first">
                             <fmt:message key="label.text.repeat_password"/> :
@@ -107,26 +85,22 @@
                     </td>
                 </tr>
         </table>
-
-
 </form>
 
 
-    <form method="post" action="uploadServlet" enctype="multipart/form-data">
+    <form method="post" action="${pageContext.request.contextPath}/uploadServlet" enctype="multipart/form-data">
         <label class="upload_button">
 
             <div class="example-1">
                 <div class="form-group">
                     <label class="label">
                         <i class="material-icons">attach_file</i>
-                        <span class="title">Добавить файл</span>
+                        <span class="title"><fmt:message key="label.add_image"/> </span>
                         <input class="input_file" type="file" accept=".jpg, .jpeg, .png" name="command" value="upload_image" />
                     </label>
                 </div>
             </div>
         </label>
-        <%--Choose a file: <input type="file" name="command" value="upload_image" />
-        <input type="submit" name="command" value="upload_image" />--%>
     </form>
 </div>
 

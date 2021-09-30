@@ -12,7 +12,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>pharmacy list</title>
+    <title><fmt:message key="title.pharmacy_list"/> </title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
@@ -30,8 +30,8 @@
             <th><fmt:message key="label.pharmacy.number"/> </th>
             <th><fmt:message key="label.pharmacy.status"/> </th>
 
-            <form action="controller" method="post">
-                <th><button type="submit" class="button" name="command" value="go_to_add_pharmacy">add</button></th>
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <th><button type="submit" class="button" name="command" value="go_to_add_pharmacy"><fmt:message key="button.add"/> </button></th>
             </form>
         </tr>
         </thead>
@@ -52,15 +52,15 @@
                 <td></td>
                 <td>
                     <c:if test="${list.status.value == 'actual'}">
-                        <form action="controller" method="post">
-                            <button type="submit" class="button delete" name="command" value="delete_pharmacy">delete</button>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <button type="submit" class="button delete" name="command" value="delete_pharmacy"><fmt:message key="button.delete"/> </button>
                             <input type="hidden" name="pharmacy_id" value="${list.id}">
                         </form>
                     </c:if>
 
                     <c:if test="${list.status.value == 'delete'}">
-                        <form action="controller" method="post">
-                            <button type="submit" class="button" name="command" value="restore_pharmacy">restore</button>
+                        <form action="${pageContext.request.contextPath}/controller" method="post">
+                            <button type="submit" class="button" name="command" value="restore_pharmacy"><fmt:message key="button.restore"/> </button>
                             <input type="hidden" name="user_id" value="${list.id}">
                         </form>
                     </c:if>

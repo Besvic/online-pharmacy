@@ -12,7 +12,7 @@
 <fmt:setBundle basename="local.content"/>
 <html>
 <head>
-    <title>order list</title>
+    <title><fmt:message key="title.order_list"/> </title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
@@ -31,15 +31,15 @@
             <th><fmt:message key="label.product.name"/> </th>
             <th><fmt:message key="label.order.price"/> </th>
             <th><fmt:message key="label.order.quantity"/> </th>
-            <td>date</td>
-            <th>pick_up</th>
+            <td><fmt:message key="label.order.date"/> </td>
+            <th><fmt:message key="label.pick_up"/> </th>
 
         </tr>
         </thead>
 
         <c:forEach var="order_list" items="${order_list_c}">
             <tbody>
-            <form action="controller" method="post">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
                 <tr class="row_custom">
                     <td>${order_list.user.name}</td>
                     <td>${order_list.user.cash}</td>

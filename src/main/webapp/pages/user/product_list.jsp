@@ -55,9 +55,9 @@
                <td></td>
                <td></td>
                <td>
-                   <form action="controller" method="post">
+                   <form action="${pageContext.request.contextPath}/controller" method="post">
                        <input class="input" type="number" name="quantity" min="1" placeholder="quantity" required>
-                       <button class="button" type="submit" name="command" value="add_product_in_order">add in order</button>
+                       <button class="button" type="submit" name="command" value="add_product_in_order"><fmt:message key="button.add_in_order"/> </button>
                        <input type="hidden" name="product_id" value="${product_list.id}">
                    </form>
                </td>

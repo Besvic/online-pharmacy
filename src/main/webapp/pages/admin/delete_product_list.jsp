@@ -55,13 +55,13 @@
                 <td></td>
                 <td>
                     <form action="controller" method="post">
-                        <button type="submit" class="button" name="command" value="restore_product">restore</button>
+                        <button type="submit" class="button" name="command" value="restore_product"><fmt:message key="button.restore"/> </button>
                         <input type="hidden" name="product_id" value="${product_list.id}">
                     </form>
                 </td>
                 <td>
                     <form action="controller" method="post">
-                        <button type="submit" class="button delete" name="command" value="really_delete_product">delete</button>
+                        <button type="submit" class="button delete" name="command" value="really_delete_product"><fmt:message key="button.delete"/> </button>
                         <input type="hidden" name="product_id" value="${product_list.id}">
                     </form>
                 </td>
