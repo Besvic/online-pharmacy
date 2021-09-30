@@ -19,16 +19,16 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
-@WebFilter(urlPatterns = {"/pages/user/*"/*"/pages/*"*/},
-    initParams = {@WebInitParam(name = "INDEX_PATH", value = "/index.jsp")})
+@WebFilter(urlPatterns = {"/pages/user/*", "/pages/admin/*"},
+    initParams = {@WebInitParam(name = "SIGN_IN_PATH", value = "/pages/enter/sign_in.jsp")})
 public class PageRedirectSecurityFilter implements Filter {
 
-    private String indexPath;
+    private String signInPath;
     private final String USER_PATH = "/pages/user/";
     private final String ADMIN_PATH = "/pages/admin/";
 
     public void init(FilterConfig config) throws ServletException {
-        indexPath = config.getInitParameter("INDEX_PATH");
+        signInPath = config.getInitParameter("SIGN_IN_PATH");
     }
 
     public void destroy() {
@@ -42,18 +42,35 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
         String currentPage = httpServletRequest.getRequestURI();
+       /* System.out.println(currentPage);
         try {
             Optional<User> userOptional = Optional.ofNullable((User) session.getAttribute(USER));
             Position userPosition = userOptional.isPresent() ? userOptional.get().getPosition() : null;
             if (userOptional.isPresent() && (userPosition.getValue().equalsIgnoreCase(ADMIN) && currentPage.contains(ADMIN_PATH) ||
                     userPosition.getValue().equalsIgnoreCase(USER) && currentPage.contains(USER_PATH))){
+               // System.out.println("Context path: " + httpServletRequest.getContextPath());
+
             }else{
-                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + indexPath);
+                System.out.println("Context path: " + httpServletRequest.getContextPath());
+                httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
+                //httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
             }
         } catch (IOException | NullPointerException e) {
             httpServletRequest.setAttribute(ERROR, e);
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + PathToPage.ERROR_404);
+        }*/
+   //     httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
+      /*  if (currentPage.contains("/controller")) {
+            int indexStart = currentPage.indexOf("/controller");
+
+            String command = currentPage.substring(indexStart);
+
+            System.out.println(httpServletRequest.getContextPath() + command);
+            httpServletRequest.getRequestDispatcher(httpServletRequest.getContextPath() + command).forward(request, response);
         }
+        else */
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
+        //httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
         chain.doFilter(request, response);
     }
 

@@ -8,16 +8,8 @@ public final class RequestAttribute {
     public static final String PRODUCT_LIST = "product_list";
     public static final String USER_LIST = "user_list";
     public static final String ORDER_LIST_NOT_COMPLETED = "order_list_n_c";
+    public static final String ORDER_LIST_COMPLETED = "order_list_c";
     public static final String PHARMACY_LIST = "pharmacy_list";
-
-
-    public static String REGISTRATION_USER_DATA = "userMap";
-
-    public static String ERROR_USER_NON_ACTIVATED = "errorNonActivatedMessage";
-    public static String ERROR_USER_BLOCKED = "errorBlockedMessage";
-    public static String WRONG_PASSWORD_OR_EMAIL = "errorLogInMessage";
-    public static final String WRONG_REGISTRATION_DATA = "errorWrongDataMessage";
-    public static final String ERROR_EMAIL_EXISTS = "errorEmailExistsMessage";
 
 
     private RequestAttribute(){

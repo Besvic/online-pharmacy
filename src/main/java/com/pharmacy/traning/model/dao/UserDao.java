@@ -14,6 +14,8 @@ public interface UserDao {
     boolean updateUserById(User user, long id) throws DaoException;
     boolean updateCashById(Double cash, long id) throws DaoException;
     boolean reduceCashById(Double cash, long id, Connection connection) throws DaoException;
+    boolean changeUserStatusOnInRegister(long userId) throws DaoException;
+    boolean changeUserStatusOnActive(long userId) throws DaoException;
     List<User> findAllInRegisterUser() throws DaoException;
     List<User> findAllDeleteUser() throws DaoException;
     List<User> findAllNonDeleteUser() throws DaoException;
@@ -21,6 +23,7 @@ public interface UserDao {
     Optional<User> findUserById(long userId, Connection connection) throws DaoException;
     boolean updatePhotoById(String path, long id) throws DaoException;
     boolean checkIsAdmin() throws DaoException;
+
 
 
 

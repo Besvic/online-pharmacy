@@ -37,11 +37,15 @@
                     </li>--%>
 
                     <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_user_profile" class="nav-link" id="navbarDropdownMenuLink4">Profile</button>
+                        <button type="submit" name="command" value="go_to_user_profile" class="nav-link" id="navbarDropdownMenuLink2">Profile</button>
                     </li>
 
                     <li class="nav-item" >
                         <button type="submit" name="command" value="go_to_user_menu" class="nav-link" id="navbarDropdownMenuLink3">Menu</button>
+                    </li>
+
+                    <li class="nav-item" >
+                        <button type="submit" name="command" value="go_sign_in" class="nav-link" id="navbarDropdownMenuLink4">Exit</button>
                     </li>
                 </ul>
             </form>

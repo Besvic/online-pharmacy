@@ -10,6 +10,6 @@ public class GoToMenuByUserCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        return new Router(PathToPage.USER_MENU, Router.RouterType.REDIRECT);
+        return new Router(PathToPage.USER_MENU, Router.RouterType.FORWARD);
     }
 }

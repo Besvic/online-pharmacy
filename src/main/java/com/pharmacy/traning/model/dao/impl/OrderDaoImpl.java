@@ -74,11 +74,26 @@ public class OrderDaoImpl implements OrderDao {
           /* join pharmacy p on p.pharmacy_id = `order`.order_pharmacy_id*/
            join product pr on pr.product_id = `order`.order_product_id
            where order_user_id = ? and order_status = 'not completed';""";
-    
-    private static final String SQL_FIND_ORDER_BY_PRODUCT_ID = """
-            select order_id, order_product_id, order_user_id, order_status, order_quantity, order_date
+
+    private static final String SQL_FIND_ALL_COMPLETED_ORDER_BY_USER_ID = """
+            select order_id, order_date, user_cash, user_name, user_login, order_quantity, product_name, product_price * order_quantity as product_price, pharmacy_city, pharmacy_street, pharmacy_number
             from `order`
-            where order_product_id = ?;""";
+            join pharmacy on pharmacy_id = `order`.order_pharmacy_id
+            join product on product_id = `order`.order_product_id
+            join users on user_id = `order`.order_user_id
+            where user_id = ? and order_date = ? and order_status = 'completed'
+            order by order_date desc, product_price desc;""";
+    
+    private static final String SQL_FIND_ALL_COMPLETED_ORDER = """
+            select order_date, user_cash, user_name, sum(order_quantity) as order_quantity, sum(product_price * order_quantity) as product_price, user_id/*, order_id, user_login, product_name,  pharmacy_city, pharmacy_street, pharmacy_number*/
+            from `order`
+            join pharmacy on pharmacy_id = `order`.order_pharmacy_id
+            join product on product_id = `order`.order_product_id
+            join users on user_id = `order`.order_user_id
+            where order_status = 'completed'
+            group by order_date, user_id
+            order by order_date desc, product_price desc;""";
+
     private static final String SQL_FIND_ORDER_BY_STATUS = """
             select order_id, order_product_id, order_user_id, order_status, order_quantity, order_date
             from `order`
@@ -197,6 +212,71 @@ public class OrderDaoImpl implements OrderDao {
                         .setQuantity(result.getInt(ORDER_QUANTITY))
                         .createOrder());
                 }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return orderList;
+    }
+
+    @Override
+    public List<Order> findAllCompletedOrder() throws DaoException {
+        List<Order> orderList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_COMPLETED_ORDER);
+             ResultSet result = statement.executeQuery() ){
+                while (result.next()){
+                    orderList.add(new Order.OrderBuilder()
+                            .setDate(result.getDate(ORDER_DATE).toLocalDate())
+                            .setUser(new User.UserBuilder()
+                                    .setCash(result.getDouble(USER_CASH))
+                                    .setName(result.getString(USER_NAME))
+                                    .setId(result.getLong(USER_ID))
+                                    .createUser())
+                            .setProduct(new Product.ProductBuilder()
+                                    .setPrice(result.getDouble(PRODUCT_PRICE))
+                                    .createProduct())
+                            .setQuantity(result.getInt(ORDER_QUANTITY))
+                            .createOrder());
+
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return orderList;
+    }
+
+    @Override
+    public List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws DaoException {
+        List<Order> orderList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_COMPLETED_ORDER_BY_USER_ID)){
+            statement.setLong(1, userId);
+            statement.setDate(2, Date.valueOf(date));
+             try(ResultSet result = statement.executeQuery() ){
+            while (result.next()) {
+                orderList.add(new Order.OrderBuilder()
+                        .setId(result.getLong(ORDER_ID))
+                        .setDate(result.getDate(ORDER_DATE).toLocalDate())
+                        .setUser(new User.UserBuilder()
+                                .setCash(result.getDouble(USER_CASH))
+                                .setName(result.getString(USER_NAME))
+                                .setLogin(result.getString(USER_LOGIN))
+                                .createUser())
+                        .setProduct(new Product.ProductBuilder()
+                                .setPrice(result.getDouble(PRODUCT_PRICE))
+                                .setName(result.getString(PRODUCT_NAME))
+                                .createProduct())
+                        .setPharmacy(new Pharmacy.PharmacyBuilder()
+                                .setCity(result.getString(PHARMACY_CITY))
+                                .setStreet(result.getString(PHARMACY_STREET))
+                                .setNumber(result.getInt(PHARMACY_NUMBER))
+                                .createPharmacy())
+                        .setQuantity(result.getInt(ORDER_QUANTITY))
+                        .createOrder());
+            }
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);

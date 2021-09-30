@@ -2,7 +2,8 @@ package com.pharmacy.traning.model.entity;
 
 public enum UserStatus {
     IN_REGISTER ("in_register"),
-    ACTION ("action");
+    ACTIVE ("active"),
+    DELETE("delete");
 
     private final String value;
 

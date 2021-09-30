@@ -40,14 +40,14 @@ public class UserDaoImpl implements UserDao {
             set user_position = 'delete'
             where user_id = ?;""";
 
-    private static final String SQL_ACTIVE_USER = """
+    private static final String SQL_SET_ACTIVE_USER_BY_USER_ID = """
             update users
-            set user_position = 'active'
+            set user_status = 'active'
             where user_id = ?;""";
 
-    private static final String SQL_IN_REGISTER_USER = """
+    private static final String SQL_SET_IN_REGISTER_USER_BY_USER_ID = """
             update users
-            set user_position = 'in_register'
+            set user_status = 'in_register'
             where user_id = ?;""";
 
     private static final String SQL_FIND_USER_BY_STATUS = """
@@ -63,7 +63,11 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_FIND_ALL_NON_DELETE_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
-            where user_status != 'delete' and user_position = 'user';""";
+            where user_status != 'delete' and user_position = 'user'
+            order by(case user_status
+            when 'in_register' then 1
+            when 'active' then 2
+            end), user_name;""";
 
     private static final String SQL_FIND_ALL_IN_REGISTER_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
@@ -183,6 +187,30 @@ public class UserDaoImpl implements UserDao {
             statement.setLong(2, id);
             if (statement.executeUpdate() != 0)
                 return true;
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean changeUserStatusOnInRegister(long userId) throws DaoException {
+        return setUserStatus(SQL_SET_IN_REGISTER_USER_BY_USER_ID, userId);
+    }
+
+    @Override
+    public boolean changeUserStatusOnActive(long userId) throws DaoException {
+        return setUserStatus(SQL_SET_ACTIVE_USER_BY_USER_ID, userId);
+    }
+
+    private boolean setUserStatus(String scrypt, long userId) throws DaoException{
+       try(Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(scrypt)) {
+            statement.setLong(1, userId);
+            if (statement.executeUpdate() != 0) {
+                return true;
+            }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
             throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);

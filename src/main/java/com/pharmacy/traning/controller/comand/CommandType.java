@@ -27,6 +27,8 @@ public enum CommandType {
     GO_TO_USER_LIST(new GoToNonDeleteUserListCommand()),
     GO_TO_DELETE_PRODUCT_LIST(new GoToDeleteProductListCommand()),
     GO_CHANGE_PRODUCT(new GoToChangeProductCommand()),
+    GO_TO_ORDER_LIST(new GoToOrderListByAdmin()),
+    GO_TO_ORDER_LIST_BY_USER_ID(new GoToOrderListByUserIdCommand()),
     //UPLOAD_IMAGE(new UploadImageCommand()),
     UPDATE_DATA_ADMIN(new UpdateDataAdminCommand()),
     ADD_PRODUCT(new CreateProductCommand()),
@@ -35,6 +37,7 @@ public enum CommandType {
     ADD_PRODUCT_QUANTITY(new AddProductQuantityCommand()),
     RESTORE_PRODUCT(new RestoreProductCommand()),
     REALLY_DELETE_PRODUCT(new ReallyDeleteProductCommand()),
+    ACTIVE_USER(new ActivatorUserCommand()),
 
 
     //user function

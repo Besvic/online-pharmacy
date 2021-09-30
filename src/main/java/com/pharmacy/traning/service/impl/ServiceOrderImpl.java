@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +55,6 @@ public class ServiceOrderImpl implements ServiceOrder {
 
                 long userId = orderOptional.get().getUser().getId();
                 int productQuantity = orderOptional.get().getProduct().getQuantity();
-// TODO: 28.09.2021 сделать проверку на количество оставщегося продукта, проверка на наличие обектов,
                 if (orderOptional.get().getQuantity() != orderQuantity || orderOptional.get().getProduct().getPrice() != orderPrice) {
                     if (!orderDao.addProductQuantityInOrder(orderId, orderQuantity)) {
                         transaction.rollback();
@@ -101,6 +101,16 @@ public class ServiceOrderImpl implements ServiceOrder {
     @Override
     public List<Order> findAllNotCompletedOrderByUser(long userId) throws ServiceException, DaoException {
         return orderDao.findAllNotCompletedOrderById(userId);
+    }
+
+    @Override
+    public List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws ServiceException, DaoException {
+        return orderDao.findAllCompletedOrderByUserId(userId, date);
+    }
+
+    @Override
+    public List<Order> findAllCompletedOrder() throws ServiceException, DaoException {
+        return orderDao.findAllCompletedOrder();
     }
 
 

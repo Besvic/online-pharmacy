@@ -4,6 +4,7 @@ import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import com.pharmacy.traning.model.entity.User;
+import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.ServiceUser;
 import com.pharmacy.traning.validator.impl.UserValidatorImpl;
@@ -73,6 +74,11 @@ public class ServiceUserImpl implements ServiceUser {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean changeUserStatusByUserId(long userId, UserStatus currentStatus) throws ServiceException, DaoException {
+        return currentStatus.equals(UserStatus.ACTIVE) ? userDao.changeUserStatusOnInRegister(userId) : userDao.changeUserStatusOnActive(userId);
     }
 
     @Override

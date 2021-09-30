@@ -4,6 +4,7 @@ import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Order;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ServiceOrder {
@@ -12,6 +13,8 @@ public interface ServiceOrder {
     boolean deleteOrderById(long orderId) throws ServiceException, DaoException;
 
     List<Order> findAllNotCompletedOrderByUser(long userId) throws ServiceException, DaoException;
+    List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws ServiceException, DaoException;
+    List<Order> findAllCompletedOrder() throws ServiceException, DaoException;
 
     /*boolean addProductInOrder(long productId, long userId, int quantity) throws ServiceException, DaoException;
     boolean addProductQuantityInOrder(long orderId, int quantity) throws ServiceException, DaoException;*/
