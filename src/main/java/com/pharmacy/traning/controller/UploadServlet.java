@@ -18,11 +18,10 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 @WebServlet(name = "UploadServlet", urlPatterns = "/uploadServlet")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+/*@MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)
+        maxRequestSize = 1024 * 1024 * 5 * 5)*/
 public class UploadServlet extends HttpServlet {
-    private static final String UPLOAD_DIRECTORY = "/avatar/";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

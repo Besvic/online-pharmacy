@@ -47,6 +47,10 @@
                     <li class="nav-item" >
                         <button type="submit" name="command" value="go_sign_in" class="nav-link" id="navbarDropdownMenuLink4">Exit</button>
                     </li>
+
+                    <li>
+                        <button type="submit" name="command" value="change_locale" class="nav-link" id="navbarDropdownMenuLink6">RU/EN</button>
+                    </li>
                 </ul>
             </form>
         </div>

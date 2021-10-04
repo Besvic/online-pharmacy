@@ -61,7 +61,7 @@
                     <c:if test="${list.status.value == 'delete'}">
                         <form action="${pageContext.request.contextPath}/controller" method="post">
                             <button type="submit" class="button" name="command" value="restore_pharmacy"><fmt:message key="button.restore"/> </button>
-                            <input type="hidden" name="user_id" value="${list.id}">
+                            <input type="hidden" name="pharmacy_id" value="${list.id}">
                         </form>
                     </c:if>
                 </td>

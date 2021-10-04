@@ -8,116 +8,64 @@
     <title><fmt:message key="title.menu"/> </title>
 </head>
 <body>
-<link href="${pageContext.request.contextPath}/css/admin/admin_profile.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/css/admin/profile.css" rel="stylesheet" type="text/css"/>
 
-<%--<link href="${pageContext.request.contextPath}/css/admin/admin_menu.css" rel="stylesheet" type="text/css"/>--%>
+<link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
 </head>
 <body>
-<%--<jsp:include page="../admin_navbar.jsp"/>--%>
+<jsp:include page="../user_navbar.jsp"/>
 <div class="box">
-    <form action="controller">
-
-
-        <table class="table_data">
+    <table class="table_data">
+        <form action="${pageContext.request.contextPath}/controller" method="post">
             <tr>
-                <td class="img_column" rowspan="4">
-                    <img class="img" src="${sessionScope.user.photo}" alt="photo didn't upload" >
-                </td>
-
-                <td>
-                    <Label class="label-text">
-                        <fmt:message key="label.text.full_name"/>:
-                    </Label>
-                </td>
-                <td>
-                    <input type="text" name="name" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        <fmt:message key="label.text.cash"/>:
-                    </Label>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        ${sessionScope.user.cash}
-                    </Label>
-                </td>
+                <td class="img_column" rowspan="3"><img class="img" src=" ${pageContext.request.contextPath}${sessionScope.user.photo}" alt="photo didn't upload" ></td>
+                <td><Label class="label-text"><fmt:message key="label.text.full_name"/>:</Label></td>
+                <td><input type="text" name="new_name" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required></td>
+                <td><Label class="label-text"><fmt:message key="label.text.cash"/>:</Label></td>
+                <td><Label class="label-text">${sessionScope.user.cash}</Label></td>
             </tr>
             <tr>
-                <td>
-                    <Label class="label-text">
-                        <fmt:message key="label.text.email"/> :
-                    </Label>
-                </td>
-                <td>
-                    <label class="label-text"> ${sessionScope.user.login}</label>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        <fmt:message key="label.text.position"/> :
-                    </Label>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        ${sessionScope.user.position}
-                    </Label>
-                </td>
+                <td><Label class="label-text"><fmt:message key="label.text.email"/> :</Label></td>
+                <td><label class="label-text"> ${sessionScope.user.login}</label></td>
+                <td><%--<Label class="label-text"><fmt:message key="label.text.position"/> :</Label>--%></td>
+                <td><%--<Label class="label-text">${sessionScope.user.position}</Label>--%></td>
             </tr>
             <tr>
-
-
+                <td><Label class="label-text" ><fmt:message key="label.text.password"/> :</Label></td>
+                <td><input type="password" name="new_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required></td>
+                <td></td>
+                <td></td>
             </tr>
+
             <tr>
-                <td>
-                    <Label class="label-text" >
-                        <fmt:message key="label.text.password"/> :
-                    </Label>
+                <td></td>
+                <td><Label class="label-text" class="column_first"><fmt:message key="label.text.repeat_password"/> :</Label></td>
+                <td class="column_second"><input type="password" name="new_repeat_password" class="input" placeholder="<fmt:message key="placeholder.repeat_password"/> " required></td>
+                <td colspan="2">
+                    <button class="save_button" type="submit" name="command" value="update_data_admin"><fmt:message key="button.name.save"/> </button>
                 </td>
-                <td>
-                    <input type="password" name="newPassword" class="input" placeholder="<fmt:message key="placeholder.password"/> " required>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        <fmt:message key="label.text.status"/>
-                    </Label>
-                </td>
-                <td>
-                    <Label class="label-text">
-                        ${sessionScope.user.userStatus}
-                    </Label>
-                </td>
-
             </tr>
-
-            <td >
-                <Label class="label-text" class="column_first">
-                    <fmt:message key="label.text.repeat_password"/> :
-                </Label>
+        </form>
+        <tr>
+            <td>
+                <form method="post" action="uploadServlet" enctype="multipart/form-data">
+                    <label class="upload_button">
+                        <div class="example-1">
+                            <div class="form-group">
+                                <label class="label">
+                                    <i class="material-icons">attach_file</i>
+                                    <span class="title"><fmt:message key="label.add_image"/> </span>
+                                    <input class="input_file" type="file" accept=".jpg, .jpeg, .png" name="command" value="upload_image" />
+                                </label>
+                            </div>
+                        </div>
+                    </label>
+                </form>
             </td>
-            <td class="column_second">
-                <input type="password" name="newPassword" class="input" placeholder="<fmt:message key="placeholder.repeat_password"/> " required>
-            </td>
-            <td colspan="2">
-                <button class="save_button" type="submit" name="command" value="save_profile_data"><fmt:message key="button.name.save"/> </button>
-
-            </td>
-            </tr>
-        </table>
-
-
-
-
-
-
-
-
-    </form>
+        </tr>
+    </table>
 </div>
-
-
-
-</body>
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.pharmacy.traning.controller.listener;
 
-
-import com.pharmacy.traning.controller.comand.SessionAttribute;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.*;
+
+import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
 @WebListener
 public class HttpSessionListenerImpl implements HttpSessionListener {
@@ -11,8 +11,7 @@ public class HttpSessionListenerImpl implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         HttpSession session = se.getSession();
-        se.getSession().setAttribute(SessionAttribute.LOCALE, SessionAttribute.RU_RU);
+        String currentLocale = String.valueOf(session.getAttribute(LOCALE));
+        session.setAttribute(LOCALE, currentLocale.isEmpty() ? currentLocale : RU_RU);
     }
-
-
 }

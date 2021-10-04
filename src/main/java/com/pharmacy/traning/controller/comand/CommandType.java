@@ -3,6 +3,7 @@ package com.pharmacy.traning.controller.comand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmRegistrationCommand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmSignInCommand;
 import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
+import com.pharmacy.traning.controller.comand.impl.EnglishLocaleCommand;
 import com.pharmacy.traning.controller.comand.impl.admin.*;
 import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
@@ -12,12 +13,14 @@ import com.pharmacy.traning.controller.comand.impl.user.PayOrderCommand;
 import com.pharmacy.traning.controller.comand.impl.user.go.GoToMenuByUserCommand;
 import com.pharmacy.traning.controller.comand.impl.user.go.GoToOrderListByUserCommand;
 import com.pharmacy.traning.controller.comand.impl.user.go.GoToProductListForPurchaseCommand;
+import com.pharmacy.traning.controller.comand.impl.user.go.GoToProfileCommand;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),
     GO_SIGN_IN(new GoToSignInCommandPage()),
     CONFIRM_SIGN_IN(new ConfirmSignInCommand()),
     CONFIRM_REGISTRATION(new ConfirmRegistrationCommand()),
+    CHANGE_LOCALE(new EnglishLocaleCommand()),
     //admin function
     GO_TO_ADD_MANUFACTURE(new GoToAddManufacture()),
     GO_TO_ADD_PRODUCT(new GoToAddProductCommand()),
@@ -42,11 +45,13 @@ public enum CommandType {
     REALLY_DELETE_PRODUCT(new ReallyDeleteProductCommand()),
     ACTIVE_USER(new ActivatorUserCommand()),
     CREATE_PHARMACY(new CreatePharmacyCommand()),
+    DELETE_PHARMACY(new DeletePharmacyCommand()),
+    RESTORE_PHARMACY(new RestorePharmacyCommand()),
 
     //user function
     GO_TO_PRODUCT_LIST_BY_USER(new GoToProductListForPurchaseCommand()),
     GO_TO_ORDER_LIST_BY_USER(new GoToOrderListByUserCommand()),
-//    GO_TO_USER_PROFILE(),
+    GO_TO_USER_PROFILE(new GoToProfileCommand()),
     GO_TO_USER_MENU(new GoToMenuByUserCommand()),
     ADD_PRODUCT_IN_ORDER(new AddProductInOrderCommand()),
     PAY_ORDER(new PayOrderCommand()),

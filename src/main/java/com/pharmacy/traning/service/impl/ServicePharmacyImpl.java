@@ -47,6 +47,11 @@ public class ServicePharmacyImpl implements ServicePharmacy {
     }
 
     @Override
+    public boolean restorePharmacy(long id) throws ServiceException, DaoException {
+        return pharmacyDao.restorePharmacy(id);
+    }
+
+    @Override
     public List<Pharmacy> findAllActualPharmacy() throws ServiceException, DaoException {
         List<Pharmacy> pharmacyList = pharmacyDao.findAllActualPharmacy();
         if (pharmacyList.isEmpty()){

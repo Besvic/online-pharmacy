@@ -55,19 +55,17 @@
                         <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Profile</button>
                     </li>
 
-                    <li class="nav-item" >
-                        <button type="submit" name="command" value="go_to_admin_menu" class="nav-link" id="navbarDropdownMenuLink3">Menu</button>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Come back</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <button type="submit" name="command" value="go_to_admin_menu" class="dropdown-item">Menu</button>
+                            <button type="submit" name="command" value="go_sign_in" class="dropdown-item">sign in</button>
+                        </div>
                     </li>
 
-                    <%--<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Добавить произваодеителя</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <button type="submit" name="command" value="go_to_product_list" class="dropdown-item" href="#">Список препаратов</button>
-                            <a class="dropdown-item" href="#">Добавить препарат</a>
-                            <a class="dropdown-item" href="#">Добавить производителя</a>
-                        </div>
-                    </li>--%>
-
+                    <li>
+                        <button type="submit" name="command" value="change_locale" class="nav-link" id="navbarDropdownMenuLink6">RU/EN</button>
+                    </li>
                 </ul>
 
             </form>

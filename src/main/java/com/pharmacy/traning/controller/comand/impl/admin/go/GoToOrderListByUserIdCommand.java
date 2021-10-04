@@ -27,7 +27,7 @@ public class GoToOrderListByUserIdCommand implements Command {
             long userId = Long.parseLong(request.getParameter(USER_ID));
             LocalDate date = LocalDate.parse(request.getParameter(DATE));
             request.setAttribute(ORDER_LIST_COMPLETED, serviceOrder.findAllCompletedOrderByUserId(userId, date));
-            return new Router(PathToPage.ADMIN_ORDER_LIST, Router.RouterType.FORWARD);
+            return new Router(PathToPage.ADMIN_ORDER_LIST_BY_USER_ID, Router.RouterType.FORWARD);
         } catch (NullPointerException | DaoException | ServiceException e) {
             request.setAttribute(ERROR, e);
         }

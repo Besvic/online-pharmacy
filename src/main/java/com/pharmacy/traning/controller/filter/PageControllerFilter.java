@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/controller")
+/*@WebFilter(urlPatterns = "/controller")*/
 public class PageControllerFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

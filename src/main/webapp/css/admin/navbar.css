@@ -9,8 +9,6 @@ h3 {
 
 a{
     text-decoration: none;
-
-
 }
 
 body{
@@ -59,6 +57,12 @@ body{
     color: #86c232;
 }
 
+#navbarDropdownMenuLink6{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #32c2a5;
+}
+
 .graphic_logo{
 
     max-height: 100%;
@@ -76,13 +80,13 @@ nav.navbar .dropdown:hover > .dropdown-menu {
     display: block;
     justify-content: space-between;
     color: #B61AAE;
-    background-color: black;
+    background-color: #2F4454;
 
 
 }
 
 .dropdown-item{
-    color: #c60522;
+    color: #32c2a5;
 
 }
 
