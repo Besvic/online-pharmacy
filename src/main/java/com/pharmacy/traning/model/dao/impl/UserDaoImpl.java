@@ -91,8 +91,8 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_UPDATE_CASH_BY_ID = """
             update users
-                set user_cash = user_cash + ? 
-                where user_id = ?;""";
+            set user_cash = user_cash + ? 
+            where user_id = ?;""";
 
     private static final String SQL_REDUCE_CASH_BY_ID = """
             update users

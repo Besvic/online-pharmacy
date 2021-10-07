@@ -3,24 +3,22 @@ package com.pharmacy.traning.controller.comand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmRegistrationCommand;
 import com.pharmacy.traning.controller.comand.impl.ConfirmSignInCommand;
 import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
-import com.pharmacy.traning.controller.comand.impl.EnglishLocaleCommand;
+import com.pharmacy.traning.controller.comand.impl.ChangeLocaleCommand;
 import com.pharmacy.traning.controller.comand.impl.admin.*;
 import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
+import com.pharmacy.traning.controller.comand.impl.user.AddCashCommand;
 import com.pharmacy.traning.controller.comand.impl.user.AddProductInOrderCommand;
 import com.pharmacy.traning.controller.comand.impl.user.DeleteOrderByUserCommand;
 import com.pharmacy.traning.controller.comand.impl.user.PayOrderCommand;
-import com.pharmacy.traning.controller.comand.impl.user.go.GoToMenuByUserCommand;
-import com.pharmacy.traning.controller.comand.impl.user.go.GoToOrderListByUserCommand;
-import com.pharmacy.traning.controller.comand.impl.user.go.GoToProductListForPurchaseCommand;
-import com.pharmacy.traning.controller.comand.impl.user.go.GoToProfileCommand;
+import com.pharmacy.traning.controller.comand.impl.user.go.*;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),
     GO_SIGN_IN(new GoToSignInCommandPage()),
     CONFIRM_SIGN_IN(new ConfirmSignInCommand()),
     CONFIRM_REGISTRATION(new ConfirmRegistrationCommand()),
-    CHANGE_LOCALE(new EnglishLocaleCommand()),
+    CHANGE_LOCALE(new ChangeLocaleCommand()),
     //admin function
     GO_TO_ADD_MANUFACTURE(new GoToAddManufacture()),
     GO_TO_ADD_PRODUCT(new GoToAddProductCommand()),
@@ -53,6 +51,8 @@ public enum CommandType {
     GO_TO_ORDER_LIST_BY_USER(new GoToOrderListByUserCommand()),
     GO_TO_USER_PROFILE(new GoToProfileCommand()),
     GO_TO_USER_MENU(new GoToMenuByUserCommand()),
+    GO_TO_ADD_CASH(new GoToAddCashCommand()),
+    ADD_MONEY_TO_CASH(new AddCashCommand()),
     ADD_PRODUCT_IN_ORDER(new AddProductInOrderCommand()),
     PAY_ORDER(new PayOrderCommand()),
     DELETE_ORDER_BY_USER(new DeleteOrderByUserCommand()),

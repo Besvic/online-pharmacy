@@ -8,13 +8,19 @@ public interface Validator {
     default boolean isNullObject(Object object){
         return object != null;
     }
-    default boolean isOnlyLetter(String string){
 
-        return string.matches(REGEX_LETTER);
-    }
-    default boolean isOnlyNumber(Integer number){
-        String num = String.valueOf(number);
-        return num.matches(REGEX_NUMBER);
-    }
+    boolean isPassword(String string);
+    boolean isEmail(String string);
+    boolean isOnlyLetter(String string);
+    boolean isOnlyNumber(String number);
+    boolean isOnlyUpperCaseLetter(String string);
+    boolean isCvv(String string);
+    boolean isCreditCode(String string);
+    boolean isDouble(String string);
+    boolean isInt(String string);
+    boolean isMoney(String string);
+    boolean isYear(String string);
+    boolean isMonth(String string);
+
 
 }

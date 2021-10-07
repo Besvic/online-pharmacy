@@ -30,6 +30,14 @@ public final class RequestParameter {
     public static final String PHARMACY_STREET = "pharmacy_street";
 
 
+    //credit card
+    public static final String CARD_NUMBER = "card_number";
+    public static final String CARD_NAME = "card_name";
+    public static final String CARD_MONTH = "card_month";
+    public static final String CARD_YEAR = "card_year";
+    public static final String CARD_CVV = "card_cvv";
+    public static final String MONEY = "money";
+
 
     //locale
     public static final String LOCALE = "locale";

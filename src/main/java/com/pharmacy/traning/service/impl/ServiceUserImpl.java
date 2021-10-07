@@ -3,11 +3,14 @@ package com.pharmacy.traning.service.impl;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
+import com.pharmacy.traning.model.entity.CreditCard;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.ServiceUser;
-import com.pharmacy.traning.validator.impl.UserValidatorImpl;
+import com.pharmacy.traning.validator.Validator;
+import com.pharmacy.traning.validator.ValidatorUser;
+import com.pharmacy.traning.validator.impl.ValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +24,7 @@ public class ServiceUserImpl implements ServiceUser {
     private static final Logger logger = LogManager.getLogger();
     private static ServiceUserImpl instance;
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
+    private static final Validator validator = ValidatorImpl.getInstance();
 
     public static ServiceUserImpl getInstance(){
         if (instance == null)
@@ -34,7 +38,7 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean registration(User user) throws ServiceException {
-        if (UserValidatorImpl.getInstance().isNullObject(user)) {
+        if (ValidatorImpl.getInstance().isNullObject(user)) {
             try {
                 if (user.getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
                     logger.error("First administrator completed registration!");
@@ -65,7 +69,7 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean updateUserById(User user, long id) throws ServiceException {
-        if (UserValidatorImpl.getInstance().isNullObject(user)){
+        if (ValidatorImpl.getInstance().isNullObject(user)){
             try {
                 return userDao.updateUserById(user, id);
             } catch (DaoException e) {
@@ -112,8 +116,13 @@ public class ServiceUserImpl implements ServiceUser {
     }
 
     @Override
-    public boolean updateCashById(Double cash, long id) throws ServiceException {
-        return false;
+    public boolean updateCashById(CreditCard creditCard, long id) throws ServiceException, DaoException {
+        if (validator.isCreditCode(creditCard.getNumber()) &&
+                validator.isOnlyUpperCaseLetter(creditCard.getName())){
+            return userDao.updateCashById(creditCard.getCash(), id);
+        }
+        logger.error("Check you input data.");
+        throw new ServiceException("Check you input data.");
     }
 
     @Override

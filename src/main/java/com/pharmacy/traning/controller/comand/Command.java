@@ -8,5 +8,5 @@ import java.io.IOException;
 
 public interface Command {
 
-    Router execute(HttpServletRequest request) throws CommandException;
+    Router execute(HttpServletRequest request) throws CommandException, IOException, ServletException;
 }

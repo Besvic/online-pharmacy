@@ -25,7 +25,6 @@ public class CurrentPageFilter implements Filter {
         if (currentPage.contains("pages/")) {
             int index = currentPage.indexOf("pages/");
             currentPage = currentPage.substring(index);
-
             session.setAttribute(SessionAttribute.CURRENT_PAGE, currentPage);
 
         } else if (currentPage.contains("controller") && !httpRequest.getParameterMap().isEmpty()

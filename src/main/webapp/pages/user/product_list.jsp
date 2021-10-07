@@ -29,7 +29,6 @@
             <th><fmt:message key="label.product.name"/> </th>
             <th><fmt:message key="label.product.quantity"/> </th>
             <th><fmt:message key="label.product.dosage"/> <span id="measure_id"> (<fmt:message key="label.product.measure"/>) </span> </th>
-            <th><fmt:message key="label.product.quantity"/> </th>
             <th><fmt:message key="label.product.price"/> </th>
             <th><fmt:message key="label.product.manufacture_country"/> </th>
             <th><fmt:message key="label.product.date_of_delivery"/> </th>
@@ -41,8 +40,8 @@
             <tbody>
             <tr class="row_custom">
                 <td>${product_list.name}</td>
-                <td>${product_list.dosage}(${product_list.measure})</td>
                 <td>${product_list.quantity}</td>
+                <td>${product_list.dosage}(${product_list.measure})</td>
                 <td>${product_list.price}</td>
                 <td>${product_list.manufactureCountry}</td>
                 <td>${product_list.dateOfDelivery}</td>
@@ -56,7 +55,7 @@
                <td></td>
                <td>
                    <form action="${pageContext.request.contextPath}/controller" method="post">
-                       <input class="input" type="number" name="quantity" min="1" placeholder="quantity" required>
+                       <input class="input" width="80px" type="number" name="quantity" min="1" placeholder="<fmt:message key="label.product.quantity"/>" required>
                        <button class="button" type="submit" name="command" value="add_product_in_order"><fmt:message key="button.add_in_order"/> </button>
                        <input type="hidden" name="product_id" value="${product_list.id}">
                    </form>

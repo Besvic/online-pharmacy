@@ -17,16 +17,19 @@ public class Main {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-        User user = new User.UserBuilder().
+       /* User user = new User.UserBuilder().
                 setUserStatus(String.valueOf(UserStatus.IN_REGISTER))
                 .setName("Victor2")
                 .setLogin("victor21")
                 .setPassword("victor2")
                 .setCash(12)
                 .setPosition(ADMIN)
-                .createUser();
+                .createUser();*/
 
-        System.out.println(user.toString());
+
+        /*System.out.println(user.toString());*/
+
+        int d = Integer.parseInt("sdfvsd");
 
 
     }

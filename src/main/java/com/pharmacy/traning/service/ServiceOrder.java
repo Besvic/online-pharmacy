@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ServiceOrder {
-    boolean addOrder(long productId, long userId, int quantity) throws ServiceException, DaoException;
+    boolean addOrder(long productId, long userId, String quantity) throws ServiceException, DaoException;
     boolean payOrder(long orderId, long pharmacyId, int orderQuantity, double orderPrice) throws ServiceException, DaoException;
     boolean deleteOrderById(long orderId) throws ServiceException, DaoException;
 

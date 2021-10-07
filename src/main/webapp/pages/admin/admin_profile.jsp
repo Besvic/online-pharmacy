@@ -60,23 +60,25 @@
                     </td>
                 </tr>
             </form>
-            <tr>
-                <td>
-                    <form method="post" action="${pageContext.request.contextPath}/uploadServlet" enctype="multipart/form-data">
+            <form method="post" action="${pageContext.request.contextPath}/uploadServlet" enctype="multipart/form-data">
+                <tr>
+                    <td>
                         <label class="upload_button">
                             <div class="example-1">
                                 <div class="form-group">
                                     <label class="label">
                                         <i class="material-icons">attach_file</i>
                                         <span class="title"><fmt:message key="label.add_image"/> </span>
-                                        <input class="input_file" type="file" <%--accept=".jpg, .jpeg, .png"--%> <%--name="command" value="upload_image"--%> />
+                                        <input class="input_file" type="file" name="multiPartServlet" accept=".jpg, .jpeg, .png"/>
                                     </label>
                                 </div>
                             </div>
                         </label>
-                    </form>
-                </td>
-            </tr>
+                    </td>
+                    <td><input class="save_button" type="submit" value="<fmt:message key="button.add"/>" /></td>
+
+                </tr>
+            </form>
         </table>
 </div>
 </body>

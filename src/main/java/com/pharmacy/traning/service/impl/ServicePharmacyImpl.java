@@ -9,8 +9,9 @@ import com.pharmacy.traning.model.dao.impl.PharmacyDaoImpl;
 import com.pharmacy.traning.model.entity.Pharmacy;
 import com.pharmacy.traning.service.ServiceOrder;
 import com.pharmacy.traning.service.ServicePharmacy;
+import com.pharmacy.traning.validator.Validator;
 import com.pharmacy.traning.validator.ValidatorPharmacy;
-import com.pharmacy.traning.validator.impl.ValidatorPharmacyImpl;
+import com.pharmacy.traning.validator.impl.ValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class ServicePharmacyImpl implements ServicePharmacy {
     private static final Logger logger = LogManager.getLogger();
     private static ServicePharmacy instance;
     private static final PharmacyDao pharmacyDao = PharmacyDaoImpl.getInstance();
-    private static final ValidatorPharmacy validatorPharmacy = ValidatorPharmacyImpl.getInstance();
+    private static final Validator validatorPharmacy = ValidatorImpl.getInstance();
 
     public static ServicePharmacy getInstance() {
         if (instance == null){

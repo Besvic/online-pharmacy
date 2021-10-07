@@ -53,18 +53,19 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
                 <td>
                     <form action="controller" method="post">
                         <button type="submit" class="button" name="command" value="restore_product"><fmt:message key="button.restore"/> </button>
                         <input type="hidden" name="product_id" value="${product_list.id}">
                     </form>
                 </td>
-                <td>
-                    <form action="controller" method="post">
-                        <button type="submit" class="button delete" name="command" value="really_delete_product"><fmt:message key="button.delete"/> </button>
-                        <input type="hidden" name="product_id" value="${product_list.id}">
-                    </form>
-                </td>
+<%--                <td>--%>
+<%--                    <form action="controller" method="post">--%>
+<%--                        <button type="submit" class="button delete" name="command" value="really_delete_product"><fmt:message key="button.delete"/> </button>--%>
+<%--                        <input type="hidden" name="product_id" value="${product_list.id}">--%>
+<%--                    </form>--%>
+<%--                </td>--%>
             </tr>
             </tbody>
         </c:forEach>

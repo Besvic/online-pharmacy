@@ -16,6 +16,10 @@ body{
     justify-content: space-between;
 }
 
+td{
+    padding: 15px 20px;
+}
+
 .table_data{
     width:fit-content;
 
@@ -43,14 +47,7 @@ body{
 }
 
 
-.label-text{
-    font-size: 20px;
-    font-weight: bolder;
-    color: white;
-    margin-right: 10px;
-}
-
-.label-text1{
+.label_text{
     font-size: 20px;
     font-weight: bolder;
     color: white;
@@ -77,7 +74,12 @@ body{
 
 
 input[type = number]{
-    width: 45px;
+    width: 100px;
+}
+
+input{
+    border-radius: 3px;
+    border-color: black;
 }
 
 
@@ -101,12 +103,3 @@ input[type = number]{
     cursor: pointer;
 
 }
-
-.example-1 .form-group{padding:1em;margin:1em}
-.example-1 input[type=file]{outline:0;opacity:0;pointer-events:none;user-select:none}
-.example-1 .label{width:150px; height: 150px;border:2px dashed grey;border-radius:5px;display:block;padding:1.2em;transition:border 300ms ease;cursor:pointer;text-align:center}
-.example-1 .label i{display:block;font-size:42px;padding-bottom:16px}
-.example-1 .label i,.example-1 .label .title{color:grey;transition:200ms color}
-.example-1 .label:hover{border:2px solid #000}
-.example-1 .label:hover i,.example-1 .label:hover .title{color:#000}
-

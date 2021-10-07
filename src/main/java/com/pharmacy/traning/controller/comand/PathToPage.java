@@ -27,6 +27,7 @@ public final class PathToPage {
     public static final String USER_PROFILE = "/pages/user/user_profile.jsp";
     public static final String USER_PRODUCT_LIST = "/pages/user/product_list.jsp";
     public static final String USER_ORDER_LIST = "/pages/user/order_list.jsp";
+    public static final String USER_CASH_PAGE = "/pages/user/cash_page.jsp";
 
 
     // TODO: 23.09.2021  may be delete  

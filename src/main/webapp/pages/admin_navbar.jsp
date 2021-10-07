@@ -16,7 +16,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown" >
-            <form>
+            <form method="post" action="${pageContext.request.contextPath}/controller">
                 <ul class="navbar-nav">
 
                     <li class="nav-item dropdown">
@@ -38,7 +38,7 @@
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div  id="dropdown-item" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button type="submit" name="command" value="go_to_user_list" class="dropdown-item">user list</button>
                             <button type="submit" name="command" value="go_to_order_list" class="dropdown-item">check order</button>
                         </div>
@@ -64,7 +64,7 @@
                     </li>
 
                     <li>
-                        <button type="submit" name="command" value="change_locale" class="nav-link" id="navbarDropdownMenuLink6">RU/EN</button>
+                        <button type="submit" name="command" value="change_locale" class="nav-link" id="navbarDropdownMenuLink7">RU/EN</button>
                     </li>
                 </ul>
 

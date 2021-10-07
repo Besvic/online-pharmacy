@@ -28,7 +28,7 @@ public class AddProductInOrderCommand implements Command {
         HttpSession session = request.getSession();
         long productId = Long.parseLong(request.getParameter(PRODUCT_ID));
         long userId = ((User) session.getAttribute(USER)).getId();
-        int quantity = Integer.parseInt(request.getParameter(QUANTITY));
+        String quantity = request.getParameter(QUANTITY);
         try {
             if (serviceOrder.addOrder(productId, userId, quantity)){
                return new GoToProductListForPurchaseCommand().execute(request);

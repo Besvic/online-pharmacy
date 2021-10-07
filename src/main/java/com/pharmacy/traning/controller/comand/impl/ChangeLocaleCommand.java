@@ -15,7 +15,7 @@ import java.util.Optional;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 import static com.pharmacy.traning.model.entity.Position.DELETE;
 
-public class EnglishLocaleCommand implements Command {
+public class ChangeLocaleCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {

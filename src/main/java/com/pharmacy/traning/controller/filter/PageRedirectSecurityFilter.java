@@ -42,23 +42,23 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
         String currentPage = httpServletRequest.getRequestURI();
-       /* System.out.println(currentPage);
         try {
             Optional<User> userOptional = Optional.ofNullable((User) session.getAttribute(USER));
             Position userPosition = userOptional.isPresent() ? userOptional.get().getPosition() : null;
+            System.out.println(userPosition.getValue().equalsIgnoreCase(USER) && currentPage.contains(USER_PATH));// TODO: 05.10.2021 del
+            System.out.println( currentPage.contains(USER_PATH));// TODO: 05.10.2021 del
             if (userOptional.isPresent() && (userPosition.getValue().equalsIgnoreCase(ADMIN) && currentPage.contains(ADMIN_PATH) ||
-                    userPosition.getValue().equalsIgnoreCase(USER) && currentPage.contains(USER_PATH))){
-               // System.out.println("Context path: " + httpServletRequest.getContextPath());
-
+                    userOptional.isPresent() && userPosition.getValue().equalsIgnoreCase(USER) && currentPage.contains(USER_PATH))){
+                
             }else{
-                System.out.println("Context path: " + httpServletRequest.getContextPath());
-                httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
-                //httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
+                System.out.println("Context path: " + httpServletRequest.getContextPath()); // TODO: 05.10.2021  del 
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
+
             }
         } catch (IOException | NullPointerException e) {
             httpServletRequest.setAttribute(ERROR, e);
             httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + PathToPage.ERROR_404);
-        }*/
+        }
    //     httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
       /*  if (currentPage.contains("/controller")) {
             int indexStart = currentPage.indexOf("/controller");
@@ -69,7 +69,7 @@ public class PageRedirectSecurityFilter implements Filter {
             httpServletRequest.getRequestDispatcher(httpServletRequest.getContextPath() + command).forward(request, response);
         }
         else */
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
+
         //httpServletRequest.getRequestDispatcher(signInPath).forward(httpServletRequest, httpServletResponse);
         chain.doFilter(request, response);
     }

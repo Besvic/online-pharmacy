@@ -69,11 +69,10 @@ public class OrderDaoImpl implements OrderDao {
 
 
     private static final String SQL_FIND_ALL_ORDER_BY_USER_ID = """
-           select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name/*, pharmacy_city, pharmacy_street, pharmacy_number*/
+           select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name
            from `order`
-          /* join pharmacy p on p.pharmacy_id = `order`.order_pharmacy_id*/
            join product pr on pr.product_id = `order`.order_product_id
-           where order_user_id = ? and order_status = 'not completed';""";
+           where order_user_id = ? and order_status = 'not completed' and product_status = 'actual';""";
 
     private static final String SQL_FIND_ALL_COMPLETED_ORDER_BY_USER_ID = """
             select order_id, order_date, user_cash, user_name, user_login, order_quantity, product_name, product_price * order_quantity as product_price, pharmacy_city, pharmacy_street, pharmacy_number
@@ -204,11 +203,6 @@ public class OrderDaoImpl implements OrderDao {
                             .setName(result.getString(PRODUCT_NAME))
                             .setId(result.getLong(PRODUCT_ID))
                             .createProduct())
-                        /*.setPharmacy(new Pharmacy.PharmacyBuilder()
-                            .setCity(result.getString(PHARMACY_CITY))
-                            .setStreet(result.getString(PHARMACY_STREET))
-                            .setNumber(result.getInt(PHARMACY_NUMBER))
-                            .createPharmacy())*/
                         .setQuantity(result.getInt(ORDER_QUANTITY))
                         .createOrder());
                 }

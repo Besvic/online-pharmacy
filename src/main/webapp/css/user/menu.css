@@ -1,0 +1,57 @@
+body,
+h1,
+h2,
+h3 {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+    background-image: url(../image/back_image.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.main_box{
+    width:fit-content;
+
+    margin: 150px auto;
+    padding: 50px 120px;
+
+    border: 7px inset #FF8E00;
+    background-color:#17013bb0;
+}
+
+.contact_box{
+    width:fit-content;
+
+    margin: 150px auto;
+    padding: 50px 120px;
+
+    border: 7px inset #FF8E00;
+    background-color:#17013bb0;
+}
+
+.label_text{
+    height: 100px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    padding: inherit;
+}
+
+.label_text:hover{
+    height: 100px;
+    font-size: 20px;
+    text-align: center;
+    color: #4cfd00;
+    padding: inherit;
+}

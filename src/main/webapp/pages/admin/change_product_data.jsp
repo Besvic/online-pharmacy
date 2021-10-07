@@ -14,6 +14,8 @@
   <head>
     <title><fmt:message key="title.change_product"/> </title>
 
+    <link href="${pageContext.request.contextPath}/css/admin/change_product.css" rel="stylesheet" type="text/css"/>
+
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
@@ -25,7 +27,6 @@
       <form action="${pageContext.request.contextPath}/controller" method="post">
 
         <tr class="first_row">
-          <td class="img_column" rowspan="3"> </td>
           <td><label class="label_text"><fmt:message key="label.product.name"/>: </label></td>
           <td><input class="input" type="text" name="product_name" value="${product.name}" placeholder="<fmt:message key="label.product.name"/>" required></td>
           <td><label class="label_text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
@@ -49,7 +50,6 @@
         <tr>
           <td></td>
           <td></td>
-          <td></td>
           <td><label class="label_text"> <fmt:message key="label.product.date_of_delivery"/> </label></td>
           <td><input class="input" type="date" name="date" value="${product.dateOfDelivery}" required></td>
 
@@ -59,7 +59,7 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><button class="submit_button" type="submit" name = "command" value="change_product"><fmt:message key="button.name.save"/> </button></td>
+          <td><button class="save_button" type="submit" name = "command" value="change_product"><fmt:message key="button.name.save"/> </button></td>
         </tr>
         <input type="hidden" name="product_id" value="${product.id}">
       </form>

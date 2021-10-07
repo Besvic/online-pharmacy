@@ -1,7 +1,8 @@
 package com.pharmacy.traning.validator.impl;
 
 import com.pharmacy.traning.validator.Validator;
-
+// TODO: 07.10.2021 del
+/*
 public class ValidatorProductImpl implements Validator {
 
 
@@ -17,3 +18,4 @@ public class ValidatorProductImpl implements Validator {
 
     }
 }
+*/

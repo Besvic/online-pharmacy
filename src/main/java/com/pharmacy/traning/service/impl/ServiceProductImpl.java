@@ -5,7 +5,8 @@ import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.dao.impl.ProductDaoImpl;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.ServiceProduct;
-import com.pharmacy.traning.validator.impl.ValidatorProductImpl;
+import com.pharmacy.traning.validator.Validator;
+import com.pharmacy.traning.validator.impl.ValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +18,7 @@ public class ServiceProductImpl implements ServiceProduct {
     private static final Logger logger = LogManager.getLogger();
     private static ServiceProductImpl instance;
     private final ProductDaoImpl productDao = ProductDaoImpl.getInstance();
-    private final ValidatorProductImpl validatorProduct = ValidatorProductImpl.getInstance();
+    private final Validator validatorProduct = ValidatorImpl.getInstance();
 
     public static ServiceProductImpl getInstance(){
         if (instance == null)

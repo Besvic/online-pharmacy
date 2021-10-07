@@ -33,13 +33,14 @@ body{
     color: #86c232;
 
 }
-#navbarDropdownMenuLink1{
+#navbarDropdownMenuLink1, #navbarDropdownMenuLink2, #navbarDropdownMenuLink3
+, #navbarDropdownMenuLink4, #navbarDropdownMenuLink5{
     font-family: 'Architects Daughter', cursive;
     background-color:#2F4454;
     color: #86c232;
 }
 
-#navbarDropdownMenuLink2{
+/*#navbarDropdownMenuLink2{
     font-family: 'Architects Daughter', cursive;
     background-color:#2F4454;
     color: #86c232;
@@ -55,14 +56,23 @@ body{
     font-family: 'Architects Daughter', cursive;
     background-color:#2F4454;
     color: #86c232;
-}
+}*/
 
-#navbarDropdownMenuLink6{
+#navbarDropdownMenuLink7{
     font-family: 'Architects Daughter', cursive;
     background-color:#2F4454;
     color: #32c2a5;
 }
 
+#navbarDropdownMenuLink6{
+    font-family: 'Architects Daughter', cursive;
+    background-color:#2F4454;
+    color: #ffd500;
+    font-size: 25px;
+}
+
+.label_navbar{
+}
 .graphic_logo{
 
     max-height: 100%;

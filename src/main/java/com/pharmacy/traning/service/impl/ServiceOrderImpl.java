@@ -13,6 +13,8 @@ import com.pharmacy.traning.model.entity.Order;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.service.ServiceOrder;
+import com.pharmacy.traning.validator.Validator;
+import com.pharmacy.traning.validator.impl.ValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +31,7 @@ public class ServiceOrderImpl implements ServiceOrder {
     private static final UserDao userDao = UserDaoImpl.getInstance();
     private static final ProductDao productDao = ProductDaoImpl.getInstance();
     private static final Transaction transaction = Transaction.getInstance();
+    private static final Validator validator = ValidatorImpl.getInstance();
 
     public static ServiceOrder getInstance() {
         if (instance == null){
@@ -39,11 +42,23 @@ public class ServiceOrderImpl implements ServiceOrder {
 
 
     @Override
-    public boolean addOrder(long productId, long userId, int quantity) throws ServiceException, DaoException {
-        Optional<Order> orderOptional = orderDao.checkIsOrder(userId, productId);
-        return orderOptional.isPresent() && quantity <= orderOptional.get().getQuantity()
-                ? addProductQuantityInOrder(orderOptional.get().getId(), quantity)
-                : createOrder(productId, userId, quantity);
+    public boolean addOrder(long productId, long userId, String strQuantity) throws ServiceException, DaoException {
+        if (validator.isOnlyNumber(strQuantity)) {
+            int quantity = Integer.parseInt(strQuantity);
+            Optional<Product> optionalProduct = productDao.findProductById(productId);
+            if (optionalProduct.isPresent() && optionalProduct.get().getQuantity() >= quantity) {
+                Optional<Order> orderOptional = orderDao.checkIsOrder(userId, productId);
+                return orderOptional.isPresent() && quantity <= orderOptional.get().getQuantity()
+                        ? addProductQuantityInOrder(orderOptional.get().getId(), quantity)
+                        : createOrder(productId, userId, quantity);
+            } else {
+                logger.error("Not enough product in stock.");
+                throw new ServiceException("Not enough product in stock.");
+            }
+        } else {
+            logger.error("Incorrect quantity.");
+            throw new ServiceException("Incorrect quantity.");
+        }
     }
 
     @Override
@@ -61,7 +76,6 @@ public class ServiceOrderImpl implements ServiceOrder {
                         return false;
                     }
                 }
-                    //Optional<User> userOptional = userDao.findUserById(userId, connection);
                     double cash = orderOptional.get().getUser().getCash();
                     if (cash >= orderPrice && orderQuantity <= productQuantity) {
                         long productId = orderOptional.get().getProduct().getId();

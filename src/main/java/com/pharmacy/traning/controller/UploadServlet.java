@@ -18,13 +18,13 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 @WebServlet(name = "UploadServlet", urlPatterns = "/uploadServlet")
-/*@MultipartConfig(fileSizeThreshold = 1024 * 1024,
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 5 * 5)*/
+        maxRequestSize = 1024 * 1024 * 5 * 5)
 public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("doGet");
     }
 
     @Override
@@ -37,20 +37,18 @@ public class UploadServlet extends HttpServlet {
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        String fileName = null;
+        User user = (User) session.getAttribute(USER);
+        Position currentPosition = user.getPosition();
+        String fileName;
         for (Part part : request.getParts()) {
             fileName = part.getSubmittedFileName();
-            part.write(path + File.separator + fileName);
+
             if (flag){
-                User user = (User) session.getAttribute(USER);
-                String pathToPhotoAdmin = "/css/image/admin";
-                String pathToPhotoUser = "/css/image/user";
-                if (user.getPosition().equals(Position.ADMIN)) {
-                    user.setPhoto(pathToPhotoAdmin + File.separator + fileName);
-                }
-                else {
-                    user.setPhoto(pathToPhotoUser + File.separator + fileName);
-                }
+
+                String pathToPhotoAdmin = "/css/image/admin/";
+                String pathToPhotoUser = "/css/image/user/";
+                user.setPhoto(currentPosition.equals(Position.ADMIN) ? pathToPhotoAdmin + fileName : pathToPhotoUser + fileName);
+                part.write(path + user.getPhoto());
                 session.setAttribute(USER, user);
                 try {
                     ServiceUserImpl.getInstance().updatePhotoById(user.getPhoto(), user.getId());
@@ -61,7 +59,8 @@ public class UploadServlet extends HttpServlet {
                 flag = false;
             }
         }
-
-        request.getRequestDispatcher(PathToPage.ADMIN_PROFILE).forward(request, response);
+        response.sendRedirect(request.getContextPath() + (currentPosition.equals(Position.ADMIN) ? PathToPage.ADMIN_MENU : PathToPage.USER_MENU));
+        //request.getRequestDispatcher(PathToPage.ADMIN_MENU).forward(request, response);
+        // TODO: 05.10.2021 del
     }
 }
