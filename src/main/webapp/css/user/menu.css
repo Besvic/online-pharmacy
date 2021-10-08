@@ -55,3 +55,48 @@ body{
     color: #4cfd00;
     padding: inherit;
 }
+.footer_wrapper{
+   /* background-color: #373d77;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   /* border-radius: 9px;
+    border-color: gold;
+    border-style: inset;
+    border-width: 7px;*/
+    margin: 50px 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.main_wrapper{
+    height: 600px;
+    width: 1300px;
+    background-color:#17013bb0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 50px;
+    padding: 25px;
+    border-radius: 9px;
+    border-color: gold;
+    border-style: inset;
+    border-width: 7px;
+
+}
+
+.main_wrapper_text{
+    font-family: 'Raleway', sans-serif;
+    padding: 25px;
+    font-size: 20px;
+    color: #d4b622;
+}
+.footer_wrapper_text{
+    font-family: 'Raleway', sans-serif;
+    padding: 20px;
+    color: white;
+}

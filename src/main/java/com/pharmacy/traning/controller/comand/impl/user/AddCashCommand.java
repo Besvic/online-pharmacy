@@ -38,8 +38,8 @@ public class AddCashCommand implements Command {
                 .setNumber(request.getParameter(CARD_NUMBER))
                 .setName(request.getParameter(CARD_NAME))
                 .createCreditCard();
-        if (validator.isMonth(cardMonth) && validator.isYear(cardYear) && validator.isCvv(cardCVV)
-                && validator.isMoney(money)){
+        if (validator.isMonth(cardMonth) && validator.isYear(cardYear) &&
+                validator.isCvv(cardCVV) && validator.isMoney(money)){
             creditCard.setMonth(Integer.parseInt(cardMonth));
             creditCard.setYear(Integer.parseInt(cardYear));
             creditCard.setCvv(Integer.parseInt(cardCVV));

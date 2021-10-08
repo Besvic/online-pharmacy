@@ -21,6 +21,26 @@
 </head>
 <body>
 <jsp:include page="../user_navbar.jsp"/>
+<div class="container">
+    <main class="main_wrapper">
+        <p class="main_wrapper_text">
+            <fmt:message key="label.menu.main"/>
+        </p>
 
+        <p class="main_wrapper_text">
+            <fmt:message key="label.menu.main"/>
+        </p>
+    </main>
+</div>
+<div class="container">
+    <footer class="footer_wrapper">
+        <p class="footer_wrapper_text">
+            <fmt:message key="label.menu.contact"/> <br>
+            <fmt:message key="label.menu.street"/> <br>
+            <fmt:message key="label.menu.phoneNumber"/> <br>
+            <fmt:message key="label.menu.hours.work"/>
+        </p>
+    </footer>
+</div>
 </body>
 </html>

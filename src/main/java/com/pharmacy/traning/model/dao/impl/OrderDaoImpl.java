@@ -59,9 +59,9 @@ public class OrderDaoImpl implements OrderDao {
 
 
     private static final String SQL_FIND_ORDER_BY_ID = """
-           select order_id, user_id, user_cash,  order_quantity, product_price * order_quantity as product_price, product_id, product_quantity, pharmacy_id, pharmacy_city, pharmacy_street, pharmacy_number
+           select order_id, user_id, user_cash,  order_quantity, product_price * order_quantity as product_price, product_id, product_quantity
            from `order`
-           join pharmacy on pharmacy_id = `order`.order_pharmacy_id
+           
            join product on product_id = `order`.order_product_id
            join users on user_id = `order`.order_user_id
            where order_id = ?;""";
@@ -297,12 +297,12 @@ public class OrderDaoImpl implements OrderDao {
                             .setId(result.getInt(PRODUCT_ID))
                             .setQuantity(result.getInt(PRODUCT_QUANTITY))
                             .createProduct())
-                    .setPharmacy(new Pharmacy.PharmacyBuilder()
-                            .setId(result.getLong(PHARMACY_ID))
-                            .setNumber(result.getInt(PHARMACY_NUMBER))
-                            .setStreet(result.getString(PHARMACY_STREET))
-                            .setCity(result.getString(PHARMACY_CITY))
-                            .createPharmacy())
+//                    .setPharmacy(new Pharmacy.PharmacyBuilder()
+//                            .setId(result.getLong(PHARMACY_ID))
+//                            .setNumber(result.getInt(PHARMACY_NUMBER))
+//                            .setStreet(result.getString(PHARMACY_STREET))
+//                            .setCity(result.getString(PHARMACY_CITY))
+//                            .createPharmacy())
                     .createOrder());
                 }
             }

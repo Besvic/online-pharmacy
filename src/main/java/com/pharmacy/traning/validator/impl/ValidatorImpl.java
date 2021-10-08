@@ -38,62 +38,63 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public boolean isPassword(String string) {
-        return string.length() > 8 && !string.matches(REGEX_ONLY_LETTER) && !string.matches(REGEX_ONLY_NUMBER);
+        return string != null && string.length() > 8 && !string.matches(REGEX_ONLY_LETTER) &&
+                !string.matches(REGEX_ONLY_NUMBER);
     }
 
     @Override
     public boolean isEmail(String email) {
-        return email.matches(REGEX_CORRECT_EMAIL);
+        return email != null && email.matches(REGEX_CORRECT_EMAIL);
     }
 
     @Override
     public boolean isOnlyLetter(String string) {
-        return string.matches(REGEX_ONLY_LETTER);
+        return string != null && string.matches(REGEX_ONLY_LETTER);
     }
 
     @Override
     public boolean isOnlyNumber(String number) {
-        return number.matches(REGEX_ONLY_NUMBER);
+        return number != null && number.matches(REGEX_ONLY_NUMBER);
     }
 
     @Override
     public boolean isOnlyUpperCaseLetter(String string) {
-        return string.matches(REGEX_UPPERCASE_LETTER);
+        return string != null && string.matches(REGEX_UPPERCASE_LETTER);
     }
 
     @Override
     public boolean isCvv(String string) {
-        return string.matches(REGEX_CORRECT_CVV);
+        return string != null && string.matches(REGEX_CORRECT_CVV);
     }
 
     @Override
     public boolean isCreditCode(String string) {
-        return string.matches(REGEX_CORRECT_CREDIT_CARD_NUMBER);
+        return string != null && string.matches(REGEX_CORRECT_CREDIT_CARD_NUMBER);
     }
 
     @Override
     public boolean isDouble(String string) {
-        return string.matches(REGEX_CORRECT_DOUBLE);
+        return string != null && string.matches(REGEX_CORRECT_DOUBLE);
     }
 
     @Override
     public boolean isInt(String string) {
-        return string.matches(REGEX_CORRECT_INT);
+        return string != null && string.matches(REGEX_CORRECT_INT);
     }
 
     @Override
     public boolean isMoney(String string) {
-        return string.matches(REGEX_CORRECT_MONEY);
+        return string != null && string.matches(REGEX_CORRECT_MONEY);
     }
 
     @Override
     public boolean isYear(String string) {
         int currentYear = Calendar.getInstance().get(YEAR);
-        return string.matches(REGEX_CORRECT_YEAR) && Integer.parseInt(string) >= currentYear;
+        return string != null && string.matches(REGEX_CORRECT_YEAR) && Integer.parseInt(string) >= currentYear;
     }
 
     @Override
     public boolean isMonth(String string) {
-        return string.matches(REGEX_CORRECT_MONTH) && Integer.parseInt(string) <= 12 && Integer.parseInt(string) > 0;
+        return string != null && string.matches(REGEX_CORRECT_MONTH) && Integer.parseInt(string) <= 12 && Integer.parseInt(string) > 0;
     }
 }

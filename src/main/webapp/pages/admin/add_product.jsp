@@ -14,11 +14,13 @@
 <head>
     <title><fmt:message key="title.add_product"/> </title>
 
-    <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
-    <link href="${pageContext.request.contextPath}/css/admin/add_product.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/css/user/cash.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
+
+
 
 </head>
 <body>
@@ -29,23 +31,23 @@
         <form action="${pageContext.request.contextPath}/controller" method="post">
             <tr class="first_row">
                 <td class="img_column" rowspan="3"> </td>
-                <td><label class="label_text"><fmt:message key="label.product.name"/>: </label></td>
+                <td><label class="label-text"><fmt:message key="label.product.name"/>: </label></td>
                 <td><input class="input" type="text" name="product_name" placeholder="<fmt:message key="label.product.name"/>" required></td>
-                <td><label class="label_text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
+                <td><label class="label-text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
                 <td><input class="input" type="text" name="manufacture_country" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
             </tr>
 
             <tr class="second_row">
-                <td><label class="label_text"><fmt:message key="label.product.dosage"/> </label></td>
+                <td><label class="label-text"><fmt:message key="label.product.dosage"/> </label></td>
                 <td><input class="input" type="number" step="0.001" min="0.001"  name="dosage" placeholder="0.020" required></td>
-                <td><label class="label_text"> <fmt:message key="label.product.measure"/> </label></td>
+                <td><label class="label-text"> <fmt:message key="label.product.measure"/> </label></td>
                 <td><input class="input" type="text" maxlength="10" name="measure" placeholder="g" required></td>
 
             </tr>
             <tr class="treeth_row">
-                <td><label class="label_text"> <fmt:message key="label.product.quantity"/> </label></td>
+                <td><label class="label-text"> <fmt:message key="label.product.quantity"/> </label></td>
                 <td><input class="input" type="number" min="0" name="quantity" placeholder="<fmt:message key="label.product.quantity"/>" required></td>
-                <td><label class="label_text"><fmt:message key="label.product.price"/> (BYR) </label></td>
+                <td><label class="label-text"><fmt:message key="label.product.price"/> (BYR) </label></td>
                 <td><input class="input" type="number" step="0.01" min="0" name="price" placeholder="1.11" required></td>
 
             </tr>
@@ -54,7 +56,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><button class="submit_button" type="submit" name = "command" value="add_product"><fmt:message key="button.name.save"/> </button></td>
+                <td><button class="save_button" type="submit" name = "command" value="add_product"><fmt:message key="button.name.save"/> </button></td>
             </tr>
         </form>
     </table>
