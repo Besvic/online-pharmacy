@@ -29,10 +29,6 @@
             <th><fmt:message key="label.pharmacy.street"/> </th>
             <th><fmt:message key="label.pharmacy.number"/> </th>
             <th><fmt:message key="label.pharmacy.status"/> </th>
-
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-                <th><button type="submit" class="button" name="command" value="go_to_add_pharmacy"><fmt:message key="button.add"/> </button></th>
-            </form>
         </tr>
         </thead>
 
@@ -60,7 +56,7 @@
 
                     <c:if test="${list.status.value == 'delete'}">
                         <form action="${pageContext.request.contextPath}/controller" method="post">
-                            <button type="submit" class="button" name="command" value="restore_pharmacy"><fmt:message key="button.restore"/> </button>
+                            <button type="submit" class="button long_button" name="command" value="restore_pharmacy"><fmt:message key="button.restore"/> </button>
                             <input type="hidden" name="pharmacy_id" value="${list.id}">
                         </form>
                     </c:if>

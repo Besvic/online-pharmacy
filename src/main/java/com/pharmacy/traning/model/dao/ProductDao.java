@@ -11,7 +11,9 @@ public interface ProductDao {
 
     boolean addProduct(Product product) throws DaoException;
     List<Product> findAllProduct() throws DaoException;
+    List<Product> searchProductByName(String name) throws DaoException;
     List<Product> findAllDeleteProduct() throws DaoException;
+    List<Product> searchDeleteProductByName(String name) throws DaoException;
     boolean deleteProductById(long id) throws DaoException;
     boolean reallyDeleteProductById(long id) throws DaoException;
     boolean restoreProductById(long id) throws DaoException;

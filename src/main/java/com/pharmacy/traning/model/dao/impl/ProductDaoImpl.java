@@ -36,12 +36,30 @@ public class ProductDaoImpl implements ProductDao {
             select product_id, product_name, product_dosage, product_manufacture, product_quantity,
             product_price, product_date_of_delivery, product_measure
             from product
-            where product_status = 'actual';""";
+            where product_status = 'actual'
+            order by product_name;""";
+
+    private static final String SQL_SEARCH_ALL_PRODUCT_BY_NAME = """
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure
+            from product
+            where product_status = 'actual' and product_name like ?
+            order by product_name;""";
+
     private static final String SQL_FIND_ALL_DELETE_PRODUCT = """
             select product_id, product_name, product_dosage, product_manufacture, product_quantity,
             product_price, product_date_of_delivery, product_measure
             from product
-            where product_status = 'delete';""";
+            where product_status = 'delete'
+            order by product_name;""";
+
+    private static final String SQL_SEARCH_DELETE_PRODUCT_BY_NAME = """
+            select product_id, product_name, product_dosage, product_manufacture, product_quantity,
+            product_price, product_date_of_delivery, product_measure
+            from product
+            where product_status = 'delete' and product_name like ?
+            order by product_name;""";
+
     private static final String SQL_DELETE_PRODUCT_BY_PRODUCT_ID = """
             update product
             set product_status = 'delete'
@@ -111,10 +129,45 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public List<Product> searchProductByName(String name) throws DaoException {
+        return searchProductByNameAndScript(name, SQL_SEARCH_ALL_PRODUCT_BY_NAME);
+    }
+
+    @Override
     public List<Product> findAllDeleteProduct() throws DaoException {
         return findAllProductByScript(SQL_FIND_ALL_DELETE_PRODUCT);
     }
 
+    @Override
+    public List<Product> searchDeleteProductByName(String name) throws DaoException {
+        return searchProductByNameAndScript(name, SQL_SEARCH_DELETE_PRODUCT_BY_NAME);
+    }
+
+    private List<Product> searchProductByNameAndScript(String name, String script) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(script)){
+            statement.setString(1, "%" + name + "%");
+            try (ResultSet result = statement.executeQuery()) {
+                List<Product> productList = new ArrayList<>();
+                while (result.next()) {
+                    productList.add(new Product.ProductBuilder()
+                            .setId(result.getLong(PRODUCT_ID))
+                            .setName(result.getString(PRODUCT_NAME))
+                            .setQuantity(result.getInt(PRODUCT_QUANTITY))
+                            .setDosage(result.getDouble(PRODUCT_DOSAGE))
+                            .setMeasure(result.getString(PRODUCT_MEASURE))
+                            .setPrice(result.getDouble(PRODUCT_PRICE))
+                            .setDateOfDelivery(result.getDate(PRODUCT_DATE_OF_DELIVERY).toLocalDate())
+                            .setManufactureCountry(result.getString(PRODUCT_MANUFACTURE))
+                            .createProduct());
+                }
+                return productList;
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+    }
     private List<Product> findAllProductByScript(String script) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(script);
@@ -184,8 +237,8 @@ public class ProductDaoImpl implements ProductDao {
                 return true;
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or changeProductByProductId function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or changeProductByProductId function is not available.", throwables);
         }
         return false;
     }
@@ -200,8 +253,8 @@ public class ProductDaoImpl implements ProductDao {
                 return true;
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or addProductQuantityByProductId function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or addProductQuantityByProductId function is not available.", throwables);
         }
         return false;
     }
@@ -215,10 +268,11 @@ public class ProductDaoImpl implements ProductDao {
                 return true;
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or reduceProductQuantityByProductId function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or reduceProductQuantityByProductId function is not available.", throwables);
         }
-        return false;    }
+        return false;
+    }
 
     @Override
     public Optional<Product> findProductById(long productId) throws DaoException {
@@ -240,8 +294,8 @@ public class ProductDaoImpl implements ProductDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findProductById function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findProductById function is not available.", throwables);
         }
         return Optional.empty();
     }

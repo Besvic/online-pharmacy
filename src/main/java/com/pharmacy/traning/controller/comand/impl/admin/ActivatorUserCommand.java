@@ -22,8 +22,8 @@ public class ActivatorUserCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        UserStatus currentStatus = UserStatus.valueOf(request.getParameter(USER_STATUS));
-        long userId = Long.parseLong(request.getParameter(USER_ID));
+        String currentStatus = request.getParameter(USER_STATUS);
+        String userId = request.getParameter(USER_ID);
         try {
             serviceUser.changeUserStatusByUserId(userId, currentStatus);
             return new GoToNonDeleteUserListCommand().execute(request);

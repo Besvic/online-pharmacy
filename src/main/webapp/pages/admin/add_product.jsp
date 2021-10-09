@@ -41,7 +41,7 @@
                 <td><label class="label-text"><fmt:message key="label.product.dosage"/> </label></td>
                 <td><input class="input" type="number" step="0.001" min="0.001"  name="dosage" placeholder="0.020" required></td>
                 <td><label class="label-text"> <fmt:message key="label.product.measure"/> </label></td>
-                <td><input class="input" type="text" maxlength="10" name="measure" placeholder="g" required></td>
+                <td><input class="input" type="text" maxlength="10" name="measure" placeholder="<fmt:message key="label.product.measure"/> " required></td>
 
             </tr>
             <tr class="treeth_row">
@@ -60,7 +60,5 @@
             </tr>
         </form>
     </table>
-
-    <label class="report_label">${report} </label>
 </div>
 </body>

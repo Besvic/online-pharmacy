@@ -19,12 +19,20 @@
 
     <link href="${pageContext.request.contextPath}/css/admin/table.css" rel="stylesheet" type="text/css"/>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="${pageContext.request.contextPath}/css/search.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <jsp:include page="../admin_navbar.jsp"/>
 
 <div class="table_custom">
     <table align="center">
+        <div class="search_div">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <input  class="search_input" name="search_name" type="search" placeholder="<fmt:message key="placeholder.search"/> ">
+                <button type="submit" name="command" value="search_delete_product_by_name" align="left" class="fa fa-search"></button>
+            </form>
+        </div>
         <thead>
         <tr class="first_row">
             <th><fmt:message key="label.product.name"/> </th>
@@ -35,6 +43,7 @@
             <th><fmt:message key="label.product.date_of_delivery"/> </th>
         </tr>
         </thead>
+
 
 
         <c:forEach var="product_list" items="${product_list}">
@@ -56,7 +65,7 @@
                 <td></td>
                 <td>
                     <form action="controller" method="post">
-                        <button type="submit" class="button" name="command" value="restore_product"><fmt:message key="button.restore"/> </button>
+                        <button type="submit" class="button long_button" name="command" value="restore_product"><fmt:message key="button.restore"/> </button>
                         <input type="hidden" name="product_id" value="${product_list.id}">
                     </form>
                 </td>

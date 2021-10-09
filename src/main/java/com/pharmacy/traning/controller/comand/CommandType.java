@@ -1,9 +1,6 @@
 package com.pharmacy.traning.controller.comand;
 
-import com.pharmacy.traning.controller.comand.impl.ConfirmRegistrationCommand;
-import com.pharmacy.traning.controller.comand.impl.ConfirmSignInCommand;
-import com.pharmacy.traning.controller.comand.impl.DefaultCommand;
-import com.pharmacy.traning.controller.comand.impl.ChangeLocaleCommand;
+import com.pharmacy.traning.controller.comand.impl.*;
 import com.pharmacy.traning.controller.comand.impl.admin.*;
 import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
@@ -19,13 +16,13 @@ public enum CommandType {
     CONFIRM_SIGN_IN(new ConfirmSignInCommand()),
     CONFIRM_REGISTRATION(new ConfirmRegistrationCommand()),
     CHANGE_LOCALE(new ChangeLocaleCommand()),
+
     //admin function
-    GO_TO_ADD_MANUFACTURE(new GoToAddManufacture()),
     GO_TO_ADD_PRODUCT(new GoToAddProductCommand()),
     GO_TO_ADMIN_PROFILE(new GoToAdminProfile()),
-    GO_TO_MANUFACTURE_LIST(new GoToManufactureList()),
     GO_TO_PRODUCT_LIST(new GoToProductList()),
     GO_TO_USER_LIST(new GoToNonDeleteUserListCommand()),
+    GO_TO_DELETE_USER_LIST(new GoToDeleteUserListCommand()),
     GO_TO_DELETE_PRODUCT_LIST(new GoToDeleteProductListCommand()),
     GO_CHANGE_PRODUCT(new GoToChangeProductCommand()),
     GO_TO_ORDER_LIST(new GoToOrderListByAdmin()),
@@ -42,9 +39,14 @@ public enum CommandType {
     RESTORE_PRODUCT(new RestoreProductCommand()),
     REALLY_DELETE_PRODUCT(new ReallyDeleteProductCommand()),
     ACTIVE_USER(new ActivatorUserCommand()),
+    DELETE_USER(new DeleteUserCommand()),
     CREATE_PHARMACY(new CreatePharmacyCommand()),
     DELETE_PHARMACY(new DeletePharmacyCommand()),
     RESTORE_PHARMACY(new RestorePharmacyCommand()),
+    SEARCH_PRODUCT_BY_NAME(new SearchProductByNameCommand()),
+    SEARCH_DELETE_PRODUCT_BY_NAME(new SearchDeleteProductByNameCommand()),
+    SEARCH_NON_DELETE_USER_BY_NAME(new SearchNonDeleteUserByNameCommand()),
+    SEARCH_DELETE_USER_BY_NAME(new SearchDeleteUserByNameCommand()),
 
     //user function
     GO_TO_PRODUCT_LIST_BY_USER(new GoToProductListForPurchaseCommand()),

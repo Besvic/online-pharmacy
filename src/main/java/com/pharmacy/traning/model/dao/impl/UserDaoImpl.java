@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_DELETE_USER = """
             update users
-            set user_position = 'delete'
+            set user_status = 'delete'
             where user_id = ?;""";
 
     private static final String SQL_SET_ACTIVE_USER_BY_USER_ID = """
@@ -58,7 +58,8 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_FIND_ALL_DELETE_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_status, user_photo
             from users
-            where user_status = 'delete' and user_position = 'user';""";
+            where user_status = 'delete' and user_position = 'user'
+            order by user_name;""";
 
     private static final String SQL_FIND_ALL_NON_DELETE_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
@@ -69,10 +70,23 @@ public class UserDaoImpl implements UserDao {
             when 'active' then 2
             end), user_name;""";
 
+    private static final String SQL_SEARCH_DELETE_USER_BY_NAME = """
+           select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_status = 'delete' and user_position = 'user' and user_name like ?
+            order by user_name;""";
+
+    private static final String SQL_SEARCH_NON_DELETE_USER_BY_NAME = """
+           select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
+            from users
+            where user_status != 'delete' and user_position = 'user' and user_name like ?
+            order by user_name;""";
+
     private static final String SQL_FIND_ALL_IN_REGISTER_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
-            where user_status != 'delete' and user_position = 'user';""";
+            where user_status != 'delete' and user_position = 'user'
+            order by user_name;""";
 
     private static final String SQL_CHECK_AUTHORISATION = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
@@ -143,19 +157,19 @@ public class UserDaoImpl implements UserDao {
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or deleteUserById function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or deleteUserById function is not available.", throwables);
         }
         return false;
     }
 
     @Override
-    public boolean updateUserById(User user, long id) throws DaoException {
+    public boolean updateUserById(User user) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_PASSWORD_NAME_BY_ID)) {
             statement.setString(1, user.getPassword());
             statement.setString(2, user.getName());
-            statement.setLong(3, id);
+            statement.setLong(3, user.getId());
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {
@@ -256,6 +270,41 @@ public class UserDaoImpl implements UserDao {
         return userList;
     }
 
+    @Override
+    public List<User> searchDeleteUserByName(String name) throws DaoException {
+        return searchUserByScript(SQL_SEARCH_DELETE_USER_BY_NAME, name);
+    }
+
+    @Override
+    public List<User> searchNonDeleteUserByName(String name) throws DaoException {
+        return searchUserByScript(SQL_SEARCH_NON_DELETE_USER_BY_NAME, name);
+    }
+
+    private List<User> searchUserByScript(String scrypt, String name) throws DaoException {
+        List<User> userList = new ArrayList<>();
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(scrypt)){
+            statement.setString(1, "%" + name + "%");
+            try(ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    userList.add(new User.UserBuilder()
+                            .setId(result.getLong(USER_ID))
+                            .setPosition((result.getString(USER_POSITION)))
+                            .setName(result.getString(USER_NAME))
+                            .setCash(result.getDouble(USER_CASH))
+                            .setLogin(result.getString(USER_LOGIN))
+                            .setUserStatus(result.getString(USER_STATUS))
+                            .setPhoto(result.getString(USER_PHOTO))
+                            .createUser());
+
+                }
+            }
+        }catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return userList;
+    }
 
     /*@Override
     public List<User> findUserByStatus(String status) throws DaoException {
@@ -297,7 +346,7 @@ public class UserDaoImpl implements UserDao {
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
-                            /*.setPassword(result.getString(ColumnName.USER_PASSWORD))*/
+                            .setPassword(result.getString(ColumnName.USER_PASSWORD))
                             .setPosition((result.getString(ColumnName.USER_POSITION)))
                             .setUserStatus(result.getString(USER_STATUS))
                             .setPhoto(result.getString(USER_PHOTO))
@@ -321,9 +370,9 @@ public class UserDaoImpl implements UserDao {
                             .setId(result.getInt(USER_ID))
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
-                           /* .setLogin(result.getString(ColumnName.USER_LOGIN))*/
-                           /* .setPassword(result.getString(ColumnName.USER_PASSWORD))*/
-                            .setPosition((result.getString(ColumnName.USER_POSITION)))
+                            .setLogin(result.getString(ColumnName.USER_LOGIN))
+                            /*.setPassword(result.getString(ColumnName.USER_PASSWORD))
+                            .setPosition((result.getString(ColumnName.USER_POSITION)))*/
                             .setUserStatus(result.getString(USER_STATUS))
                             .setPhoto(result.getString(USER_PHOTO))
                             .createUser());

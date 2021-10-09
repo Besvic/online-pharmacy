@@ -26,7 +26,7 @@ public class ValidatorImplTest {
 
     @Test
     void isOnlyLetter() {
-        boolean actual = valid.isOnlyLetter("dsdfvs");
+        boolean actual = valid.isOnlyLetter("фывсыв");
         assertTrue(actual);
     }
 
@@ -81,6 +81,12 @@ public class ValidatorImplTest {
     @Test
     void isMonth() {
         boolean actual = valid.isMonth("2");
+        assertTrue(actual);
+    }
+
+    @Test
+    void isName() {
+        boolean actual = valid.isName("вапр роро");
         assertTrue(actual);
     }
 

@@ -2,6 +2,7 @@ package com.pharmacy.traning.service.impl;
 
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
+import com.pharmacy.traning.model.dao.ProductDao;
 import com.pharmacy.traning.model.dao.impl.ProductDaoImpl;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.service.ServiceProduct;
@@ -17,8 +18,8 @@ public class ServiceProductImpl implements ServiceProduct {
 
     private static final Logger logger = LogManager.getLogger();
     private static ServiceProductImpl instance;
-    private final ProductDaoImpl productDao = ProductDaoImpl.getInstance();
-    private final Validator validatorProduct = ValidatorImpl.getInstance();
+    private final ProductDao productDao = ProductDaoImpl.getInstance();
+    private final Validator validator = ValidatorImpl.getInstance();
 
     public static ServiceProductImpl getInstance(){
         if (instance == null)
@@ -27,25 +28,23 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
-    public boolean createProduct(Optional<Product> product) throws ServiceException, DaoException {
-        if (product.isPresent() && validatorProduct.isOnlyLetter(product.get().getName()) &&
-                validatorProduct.isOnlyLetter(product.get().getManufactureCountry()) &&
-                validatorProduct.isOnlyLetter(product.get().getMeasure())){
+    public boolean createProduct(Optional<Product> product, String dosage, String price, String quantity) throws ServiceException, DaoException {
+        if (product.isPresent() && validator.isOnlyLetter(product.get().getName()) &&
+                validator.isOnlyLetter(product.get().getManufactureCountry()) &&
+                validator.isOnlyLetter(product.get().getMeasure()) && validator.isDouble(dosage) && validator.isMoney(price) &&
+                validator.isOnlyNumber(quantity)){
+            product.get().setQuantity(Integer.parseInt(quantity));
+            product.get().setDosage(Double.parseDouble(dosage));
+            product.get().setPrice(Double.parseDouble(price));
             return productDao.addProduct(product.get());
         }
-        else{
-            logger.error("Object product is null");
-            throw new ServiceException("Object product is null");
-        }
+        logger.error("Object product is null");
+        throw new ServiceException("Object product is null");
     }
 
     @Override
-    public boolean deleteProductById(long id) throws ServiceException {
-        try {
-            return productDao.deleteProductById(id);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
+    public boolean deleteProductById(long id) throws ServiceException, DaoException {
+        return productDao.deleteProductById(id);
     }
 
     @Override
@@ -59,12 +58,17 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
-    public List<Product> findAllProduct() throws ServiceException {
-        try {
-            return productDao.findAllProduct();
-        } catch (DaoException e) {
-            throw new ServiceException(e);
+    public List<Product> findAllProduct() throws ServiceException, DaoException {
+        return productDao.findAllProduct();
+    }
+
+    @Override
+    public List<Product> searchProductByName(String name) throws ServiceException, DaoException {
+        if (name != null && !name.isEmpty()){
+            return productDao.searchProductByName(name);
         }
+        logger.error("Product name isn't empty!");
+        throw new ServiceException("Product name isn't empty!");
     }
 
     @Override
@@ -73,32 +77,51 @@ public class ServiceProductImpl implements ServiceProduct {
     }
 
     @Override
-    public boolean addProductQuantityByProductId(int productQuantity, long id) throws ServiceException, DaoException {
-        return productDao.addProductQuantityByProductId(productQuantity, id);
+    public List<Product> searchDeleteProductByName(String name) throws ServiceException, DaoException {
+        if (name != null && !name.isEmpty()){
+            return productDao.searchDeleteProductByName(name);
+        }
+        logger.error("Product name isn't empty!");
+        throw new ServiceException("Product name isn't empty!");
     }
 
     @Override
-    public boolean changeProduct(Optional<Product> product) throws ServiceException, DaoException {
-        if (product.isPresent() && validatorProduct.isOnlyLetter(product.get().getMeasure()) &&
-                validatorProduct.isOnlyLetter(product.get().getName()) &&
-                validatorProduct.isOnlyLetter(product.get().getManufactureCountry())){
-            return productDao.changeProductByProductId(product.get());
+    public boolean addProductQuantityByProductId(String productQuantity, String productId) throws ServiceException, DaoException {
+        if (validator.isOnlyNumber(productQuantity) && validator.isInt(productId)){
+            int quantity = Integer.parseInt(productQuantity);
+            long id = Long.parseLong(productId);
+            return productDao.addProductQuantityByProductId(quantity, id);
         }
-        else{
-            logger.error("Product data isn't correct!");
-            throw new ServiceException("Product data isn't correct!");
-        }
+        logger.error("Product quantity isn't correct!");
+        throw new ServiceException("Product quantity isn't correct!");
     }
 
     @Override
-    public Product findProductById(long id) throws ServiceException, DaoException {
-        Optional<Product> optional = productDao.findProductById(id);
-        if (optional.isPresent()){
-            return optional.get();
-        }else {
-            logger.error("Object product is null");
-            throw new ServiceException("Object product is null");
+    public boolean changeProduct(Optional<Product> productOptional, String strDosage, String strQuantity, String strPrice) throws ServiceException, DaoException {
+        if (productOptional.isPresent() && validator.isOnlyLetter(productOptional.get().getMeasure()) &&
+                validator.isName(productOptional.get().getName()) && validator.isOnlyNumber(strQuantity) &&
+                validator.isName(productOptional.get().getManufactureCountry()) && validator.isDouble(strDosage) &&
+                validator.isMoney(strPrice)){
+            productOptional.get().setDosage(Double.parseDouble(strDosage));
+            productOptional.get().setQuantity(Integer.parseInt(strQuantity));
+            productOptional.get().setPrice(Double.parseDouble(strPrice));
+            return productDao.changeProductByProductId(productOptional.get());
         }
+        logger.error("Product data isn't correct!");
+        throw new ServiceException("Product data isn't correct!");
+    }
+
+    @Override
+    public Product findProductById(String strId) throws ServiceException, DaoException {
+        if (validator.isInt(strId)){
+            long id = Long.parseLong(strId);
+            Optional<Product> optional = productDao.findProductById(id);
+            if (optional.isPresent()) {
+                return optional.get();
+            }
+        }
+        logger.error("Update page, please.");
+        throw new ServiceException("Update page, please.");
     }
 
 

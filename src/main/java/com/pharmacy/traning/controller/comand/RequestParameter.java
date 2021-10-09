@@ -9,7 +9,7 @@ public final class RequestParameter {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String NEW_PASSWORD = "new_password";
-    public static final String NEW_REPEAT_PASSWORD = "new_repeat_password";
+    public static final String CURRENT_PASSWORD = "current_password";
     public static final String NEW_NAME = "new_name";
 
     //product data
@@ -48,6 +48,9 @@ public final class RequestParameter {
 
     //verification
     public static final String USER_ID = "user_id";
+    public static final String SEARCH_NAME = "search_name";
+
+
 
     private RequestParameter() {
     }

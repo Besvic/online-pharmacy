@@ -9,15 +9,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServiceProduct {
-    boolean createProduct(Optional<Product> product) throws ServiceException, DaoException;
-    boolean deleteProductById(long id) throws ServiceException;
+    boolean createProduct(Optional<Product> product, String dosage, String price, String number) throws ServiceException, DaoException;
+    boolean deleteProductById(long id) throws ServiceException, DaoException;
     boolean restoreProductById(long id) throws ServiceException, DaoException;
     boolean reallyDeleteProductById(long id) throws ServiceException, DaoException;
-    List<Product> findAllProduct() throws ServiceException;
+    List<Product> findAllProduct() throws ServiceException, DaoException;
+    List<Product> searchProductByName(String name) throws ServiceException, DaoException;
     List<Product> findAllDeleteProduct() throws ServiceException, DaoException;
-    boolean addProductQuantityByProductId(int productQuantity, long id) throws ServiceException, DaoException;
-    boolean changeProduct(Optional<Product> product) throws ServiceException, DaoException;
-    Product findProductById(long id) throws ServiceException, DaoException;
+    List<Product> searchDeleteProductByName(String name) throws ServiceException, DaoException;
+    boolean addProductQuantityByProductId(String productQuantity, String id) throws ServiceException, DaoException;
+    boolean changeProduct(Optional<Product> product, String strDosage, String strQuantity, String strPrice) throws ServiceException, DaoException;
+    Product findProductById(String id) throws ServiceException, DaoException;
 
 
 

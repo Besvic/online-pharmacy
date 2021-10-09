@@ -8,6 +8,7 @@ import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
+import com.pharmacy.traning.service.ServiceProduct;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -20,13 +21,13 @@ import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID
 public class GoToChangeProductCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
+    private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        long id = Long.parseLong(request.getParameter(PRODUCT_ID));
+        String strId = request.getParameter(PRODUCT_ID);
         try {
-            Product product = serviceProduct.findProductById(id);
+            Product product = serviceProduct.findProductById(strId);
             request.setAttribute(PRODUCT, product);
             return new Router(PathToPage.CHANGE_PRODUCT, Router.RouterType.FORWARD);
         } catch (ServiceException e) {

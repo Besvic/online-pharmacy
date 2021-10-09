@@ -17,12 +17,14 @@
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
 
     <link href="${pageContext.request.contextPath}/css/admin/table.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
 <jsp:include page="../user_navbar.jsp"/>
 
 <div class="table_custom">
     <table align="center">
+
         <thead>
         <tr class="first_row">
             <th><fmt:message key="label.product.name"/> </th>

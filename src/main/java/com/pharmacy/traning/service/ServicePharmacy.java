@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServicePharmacy {
-    boolean createPharmacy(Optional<Pharmacy> pharmacy) throws ServiceException, DaoException;
+    boolean createPharmacy(Optional<Pharmacy> pharmacy, String number) throws ServiceException, DaoException;
     boolean deletePharmacy(long id) throws ServiceException, DaoException;
     boolean restorePharmacy(long id) throws ServiceException, DaoException;
     List<Pharmacy> findAllActualPharmacy() throws ServiceException, DaoException;

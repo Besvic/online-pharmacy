@@ -26,11 +26,11 @@
         <form action="${pageContext.request.contextPath}/controller" method="post">
             <tr class="row_custom">
             <td><label class="label-info"><fmt:message key="label.pharmacy.city"/>:</label> </td>
-            <td><input class="input" type="text" maxlength="20" name="pharmacy_city" placeholder="<fmt:message key="placeholder.city"/> " required/></td>
+            <td><input class="input" type="text" maxlength="20" pattern="[a-zA-Zа-я-А-Я]{1,20}" name="pharmacy_city" placeholder="<fmt:message key="placeholder.city"/> " required/></td>
             </tr>
             <tr class="row_custom">
                 <td><label><fmt:message key="label.pharmacy.street"/>:</label> </td>
-                <td><input class="input" type="text" maxlength="20" name="pharmacy_street" placeholder="<fmt:message key="placeholder.street"/> " required/></td>
+                <td><input class="input" type="text" maxlength="20" pattern="[a-zA-Zа-я-А-Я]{1,20}" name="pharmacy_street" placeholder="<fmt:message key="placeholder.street"/> " required/></td>
             </tr>
             <tr class="row_custom">
                 <td><label><fmt:message key="label.pharmacy.number"/>:</label> </td>

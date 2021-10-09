@@ -32,7 +32,7 @@
             <tr>
                 <td class="img_column" rowspan="3"><img class="img" src=" ${pageContext.request.contextPath}${sessionScope.user.photo}" alt="photo didn't upload" ></td>
                     <td><Label class="label-text"><fmt:message key="label.text.full_name"/>:</Label></td>
-                    <td><input type="text" name="new_name" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required></td>
+                    <td><input type="text" name="new_name" pattern="[a-zA-Zа-я-А-Я\s]{1,40}" value="${sessionScope.user.name}" class="input" placeholder="<fmt:message key="placeholder.name"/> " required></td>
                     <td><Label class="label-text"><fmt:message key="label.text.position"/> :</Label></td>
                     <td><Label class="label-text">${sessionScope.user.position}</Label></td>
                    <%-- <td><Label class="label-text"><fmt:message key="label.text.cash"/>:</Label></td>
@@ -45,16 +45,16 @@
                         <td><Label class="label-text">${sessionScope.user.position}</Label></td>--%>
                     </tr>
                     <tr>
-                        <td><Label class="label-text" ><fmt:message key="label.text.password"/> :</Label></td>
-                        <td><input type="password" name="new_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required></td>
+                        <td><Label class="label-text" ><fmt:message key="label.text.repeat_password"/> :</Label></td>
+                        <td><input type="password" name="new_password" class="input" placeholder="<fmt:message key="label.text.repeat_password"/> "></td>
                         <td></td>
                         <td></td>
                     </tr>
 
                 <tr>
                     <td></td>
-                    <td><Label class="label-text" class="column_first"><fmt:message key="label.text.repeat_password"/> :</Label></td>
-                    <td class="column_second"><input type="password" name="new_repeat_password" class="input" placeholder="<fmt:message key="placeholder.repeat_password"/> " required></td>
+                    <td><Label class="label-text" class="column_first"><fmt:message key="label.text.password"/> :</Label></td>
+                    <td class="column_second"><input type="password" name="current_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required></td>
                     <td colspan="2">
                         <button class="save_button" type="submit" name="command" value="update_data_admin"><fmt:message key="button.name.save"/> </button>
                     </td>
@@ -67,7 +67,7 @@
                             <div class="example-1">
                                 <div class="form-group">
                                     <label class="label">
-                                        <i class="material-icons">attach_file</i>
+                                        <i class="material-icons"></i>
                                         <span class="title"><fmt:message key="label.add_image"/> </span>
                                         <input class="input_file" type="file" name="multiPartServlet" accept=".jpg, .jpeg, .png"/>
                                     </label>

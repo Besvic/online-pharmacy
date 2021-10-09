@@ -68,44 +68,64 @@ public class ServiceUserImpl implements ServiceUser {
     }
 
     @Override
-    public boolean updateUserById(User user, long id) throws ServiceException {
-        if (ValidatorImpl.getInstance().isNullObject(user)){
-            try {
-                return userDao.updateUserById(user, id);
-            } catch (DaoException e) {
-                logger.error("Not available updateUserById!", e);
-                throw new ServiceException("Not available updateUserById!", e);
-            }
+    public boolean updateUserById(User user, String pass, String name) throws ServiceException, DaoException {
+        if (validator.isName(name)){
+            user.setName(name);
         }
-        return false;
+        user.setPassword(pass);
+        return userDao.updateUserById(user);
     }
 
     @Override
-    public boolean changeUserStatusByUserId(long userId, UserStatus currentStatus) throws ServiceException, DaoException {
-        return currentStatus.equals(UserStatus.ACTIVE) ? userDao.changeUserStatusOnInRegister(userId) : userDao.changeUserStatusOnActive(userId);
+    public boolean changeUserStatusByUserId(String strId, String status) throws ServiceException, DaoException {
+        if (validator.isInt(strId) && !status.isEmpty()) {
+            long userId = Long.parseLong(strId);
+            UserStatus currentStatus = UserStatus.valueOf(status);
+            return currentStatus.equals(UserStatus.ACTIVE) ? userDao.changeUserStatusOnInRegister(userId) : userDao.changeUserStatusOnActive(userId);
+        }
+        logger.error("Update page, please!");
+        throw new ServiceException("Update page, please!");
+    }
+
+    @Override
+    public boolean deleteUserByUserId(String strId) throws ServiceException, DaoException {
+        if (validator.isInt(strId)) {
+            long userId = Long.parseLong(strId);
+            return userDao.deleteUserById(userId);
+        }
+        logger.error("Update page, please!");
+        throw new ServiceException("Update page, please!");
     }
 
     @Override
     public List<User> findAllDeleteUser() throws DaoException, ServiceException {
-        List<User> userList = userDao.findAllDeleteUser();
-        if (userList.isEmpty()){
-            logger.error("List is empty.");
-            throw new ServiceException("List is empty.");
-        }
-        return userList;
+        return userDao.findAllDeleteUser();
     }
 
     @Override
     public List<User> findAllNonDeleteUser() throws ServiceException, DaoException {
-        List<User> userList = userDao.findAllNonDeleteUser();
-        if (userList.isEmpty()){
-            logger.error("List is empty.");
-            throw new ServiceException("List is empty.");
-        }
-        return userList;
+        return userDao.findAllNonDeleteUser();
     }
 
     @Override
+    public List<User> searchDeleteUserByName(String name) throws ServiceException, DaoException {
+        if (validator.isName(name)) {
+            return userDao.searchDeleteUserByName(name);
+        }
+        logger.error("Incorrect input string!");
+        throw new ServiceException("Incorrect input string!");
+    }
+
+    @Override
+    public List<User> searchNonDeleteUserByName(String name) throws ServiceException, DaoException {
+        if (validator.isName(name)) {
+            return userDao.searchNonDeleteUserByName(name);
+        }
+        logger.error("Incorrect input string!");
+        throw new ServiceException("Incorrect input string!");
+    }
+
+    /*@Override
     public List<User> findAllInRegisterUser() throws ServiceException, DaoException {
         List<User> userList = userDao.findAllInRegisterUser();
         if (userList.isEmpty()){
@@ -113,7 +133,7 @@ public class ServiceUserImpl implements ServiceUser {
             throw new ServiceException("List is empty.");
         }
         return userList;
-    }
+    }*/
 
     @Override
     public boolean updateCashById(CreditCard creditCard, long id) throws ServiceException, DaoException {

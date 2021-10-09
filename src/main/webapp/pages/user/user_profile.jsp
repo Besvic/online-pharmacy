@@ -42,7 +42,7 @@
                     <tr>
                         <td></td>
                         <td><Label class="label-text" class="column_first"><fmt:message key="label.text.repeat_password"/> :</Label></td>
-                        <td class="column_second"><input type="password" name="new_repeat_password" class="input" placeholder="<fmt:message key="placeholder.repeat_password"/> " required></td>
+                        <td class="column_second"><input type="password" name="new_repeat_password" class="input" placeholder="<fmt:message key="placeholder.current_password"/> " required></td>
                         <td colspan="2">
                             <button class="save_button" type="submit" name="command" value="update_data_admin"><fmt:message key="button.name.save"/> </button>
                         </td>

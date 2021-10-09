@@ -33,9 +33,10 @@ public class ServicePharmacyImpl implements ServicePharmacy {
     }
 
     @Override
-    public boolean createPharmacy(Optional<Pharmacy> pharmacy) throws ServiceException, DaoException {
+    public boolean createPharmacy(Optional<Pharmacy> pharmacy, String number) throws ServiceException, DaoException {
         if (pharmacy.isPresent() && validatorPharmacy.isOnlyLetter(pharmacy.get().getCity())
-                && validatorPharmacy.isOnlyLetter(pharmacy.get().getStreet())){
+                && validatorPharmacy.isOnlyLetter(pharmacy.get().getStreet()) && validatorPharmacy.isOnlyNumber(number)){
+            pharmacy.get().setNumber(Integer.parseInt(number));
             return pharmacyDao.createPharmacy(pharmacy.get());
         }
         logger.error("Incorrect input data!");

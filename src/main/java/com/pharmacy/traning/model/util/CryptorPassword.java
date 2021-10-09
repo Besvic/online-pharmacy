@@ -18,7 +18,7 @@ public class CryptorPassword {
         return instance;
     }
     public String encryptor(String password){
-        MessageDigest md5 = null;
+        MessageDigest md5;
         try {
             md5 = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {

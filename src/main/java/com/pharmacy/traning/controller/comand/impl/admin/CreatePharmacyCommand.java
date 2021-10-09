@@ -26,16 +26,15 @@ public class CreatePharmacyCommand implements Command {
         try{
             String city = request.getParameter(PHARMACY_CITY);
             String street = request.getParameter(PHARMACY_STREET);
-            int number = Integer.parseInt(request.getParameter(PHARMACY_NUMBER));
+            String number = request.getParameter(PHARMACY_NUMBER);
             Optional<Pharmacy> pharmacy = Optional.ofNullable(new Pharmacy.PharmacyBuilder()
                     .setCity(city)
                     .setStreet(street)
-                    .setNumber(number)
                     .createPharmacy());
-            if (servicePharmacy.createPharmacy(pharmacy)){
+            if (servicePharmacy.createPharmacy(pharmacy, number)){
                 return new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
             }
-        } catch (NullPointerException | DaoException | ServiceException e) {
+        } catch (DaoException | ServiceException e) {
            request.setAttribute(ERROR, e);
         }
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

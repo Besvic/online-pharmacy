@@ -28,9 +28,9 @@
 
         <tr class="first_row">
           <td><label class="label_text"><fmt:message key="label.product.name"/>: </label></td>
-          <td><input class="input" type="text" name="product_name" value="${product.name}" placeholder="<fmt:message key="label.product.name"/>" required></td>
+          <td><input class="input" type="text" name="product_name" pattern="[а-яa-zА-ЯA-Zs]{1,40}" value="${product.name}" placeholder="<fmt:message key="label.product.name"/>" required></td>
           <td><label class="label_text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
-          <td><input class="input" type="text" name="manufacture_country" value="${product.manufactureCountry}" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
+          <td><input class="input" type="text" name="manufacture_country" pattern="[а-яa-zА-ЯA-Zs]{1,40}" value="${product.manufactureCountry}" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
         </tr>
 
         <tr class="second_row">

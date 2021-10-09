@@ -8,6 +8,7 @@ import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
+import com.pharmacy.traning.service.ServiceProduct;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,7 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 public class GoToDeleteProductListCommand implements Command {
 
-    private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
+    private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {

@@ -40,16 +40,10 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Пользователи</a>
                         <div  id="dropdown-item" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <button type="submit" name="command" value="go_to_user_list" class="dropdown-item">user list</button>
+                            <button type="submit" name="command" value="go_to_delete_user_list" class="dropdown-item">del user list</button>
                             <button type="submit" name="command" value="go_to_order_list" class="dropdown-item">check order</button>
                         </div>
                     </li>
-
-                    <%--
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#">Препараты</a>
-                                                </li>--%>
-
-
 
                     <li class="nav-item" >
                         <button type="submit" name="command" value="go_to_admin_profile" class="nav-link" id="navbarDropdownMenuLink4">Profile</button>

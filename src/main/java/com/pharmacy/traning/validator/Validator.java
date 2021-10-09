@@ -21,6 +21,8 @@ public interface Validator {
     boolean isMoney(String string);
     boolean isYear(String string);
     boolean isMonth(String string);
+    boolean isName(String string);
+
 
 
 }

@@ -8,6 +8,7 @@ import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
+import com.pharmacy.traning.service.ServiceProduct;
 import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,23 +21,23 @@ import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 
 public class CreateProductCommand implements Command {
 
-    private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();
+    private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         Product product = new Product.ProductBuilder()
                 .setName(request.getParameter(PRODUCT_NAME))
-                .setDosage(Double.parseDouble(request.getParameter(DOSAGE)))
                 .setDateOfDelivery(LocalDate.now())
                 .setManufactureCountry(request.getParameter(MANUFACTURE_COUNTRY))
-                .setPrice(Double.parseDouble(request.getParameter(PRICE)))
                 .setMeasure(request.getParameter(MEASURE))
-                .setQuantity(Integer.parseInt(request.getParameter(QUANTITY)))
                 .createProduct();
+        String dosage = request.getParameter(DOSAGE);
+        String price = request.getParameter(PRICE);
+        String quantity = request.getParameter(QUANTITY);
         try {
-            if (serviceProduct.createProduct(Optional.of(product))) {
+            if (serviceProduct.createProduct(Optional.ofNullable(product), dosage, price, quantity)) {
                 request.setAttribute(REPORT, Message.REPORT_PRODUCT_ADD);
-                return new Router(PathToPage.CREATE_PRODUCT, Router.RouterType.FORWARD);
+                return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
             }
         } catch (ServiceException | DaoException e) {
             request.setAttribute(ERROR, e);
