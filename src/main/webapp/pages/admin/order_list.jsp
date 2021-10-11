@@ -18,11 +18,20 @@
     <link href="${pageContext.request.contextPath}/css/admin/navbar.css" rel="stylesheet" type="text/css"/>
 
     <link href="${pageContext.request.contextPath}/css/admin/table.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="${pageContext.request.contextPath}/css/search.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <jsp:include page="../admin_navbar.jsp"/>
 
 <div class="table_custom">
+    <div class="search_div">
+        <form action="${pageContext.request.contextPath}/controller" method="post">
+            <input  class="search_input" name="search_name" autocomplete="off" type="search" placeholder="<fmt:message key="placeholder.search"/> ">
+            <button type="submit" name="command" value="search_order_by_name" align="left" class="fa fa-search"></button>
+        </form>
+    </div>
     <table align="center">
         <thead>
         <tr class="first_row">

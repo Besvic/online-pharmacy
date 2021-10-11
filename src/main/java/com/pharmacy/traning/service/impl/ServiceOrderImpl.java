@@ -62,12 +62,13 @@ public class ServiceOrderImpl implements ServiceOrder {
     }
 
     @Override
-    public boolean payOrder(long orderId, long pharmacyId, int orderQuantity, double orderPrice) throws ServiceException {
+    public boolean payOrder(long orderId, long pharmacyId, String strQuantity, String strPrice) throws ServiceException {
         try{
             Connection connection = transaction.initConnection();
             Optional<Order> orderOptional = orderDao.findOrderById(orderId, connection);
-            if (orderOptional.isPresent()){
-
+            if (orderOptional.isPresent() && validator.isOnlyNumber(strQuantity) && validator.isMoney(strPrice)){
+                int orderQuantity = Integer.parseInt(strQuantity);
+                double orderPrice = Double.parseDouble(strPrice) / orderOptional.get().getQuantity() * orderQuantity;
                 long userId = orderOptional.get().getUser().getId();
                 int productQuantity = orderOptional.get().getProduct().getQuantity();
                 if (orderOptional.get().getQuantity() != orderQuantity || orderOptional.get().getProduct().getPrice() != orderPrice) {
@@ -76,15 +77,15 @@ public class ServiceOrderImpl implements ServiceOrder {
                         return false;
                     }
                 }
-                    double cash = orderOptional.get().getUser().getCash();
-                    if (cash >= orderPrice && orderQuantity <= productQuantity) {
-                        long productId = orderOptional.get().getProduct().getId();
-                        if (productDao.reduceProductQuantityByProductId(orderQuantity, productId, connection) &&
-                                userDao.reduceCashById(orderPrice, userId, connection) && orderDao.completedOrder(orderId, pharmacyId, connection)) {
-                            transaction.commit();
-                            return true;
-                        }
+                double cash = orderOptional.get().getUser().getCash();
+                if (cash >= orderPrice && orderQuantity <= productQuantity) {
+                    long productId = orderOptional.get().getProduct().getId();
+                    if (productDao.reduceProductQuantityByProductId(orderQuantity, productId, connection) &&
+                            userDao.reduceCashById(orderPrice, userId, connection) && orderDao.completedOrder(orderId, pharmacyId, connection)) {
+                        transaction.commit();
+                        return true;
                     }
+                }
             }
             transaction.rollback();
             return false;
@@ -125,6 +126,15 @@ public class ServiceOrderImpl implements ServiceOrder {
     @Override
     public List<Order> findAllCompletedOrder() throws ServiceException, DaoException {
         return orderDao.findAllCompletedOrder();
+    }
+
+    @Override
+    public List<Order> searchOrderByName(String name) throws ServiceException, DaoException {
+        if (name != null && !name.isEmpty()){
+            return orderDao.searchOrderByName(name);
+        }
+        logger.error("Product name isn't empty!");
+        throw new ServiceException("Product name isn't empty!");
     }
 
 

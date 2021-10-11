@@ -23,28 +23,24 @@ public class ConfirmRegistrationCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
-        User user = new User.UserBuilder()
+        Optional<User> user = Optional.ofNullable(new User.UserBuilder()
                 .setLogin(request.getParameter(EMAIL))
                 .setName(request.getParameter(NAME))
                 .setPassword(request.getParameter(PASSWORD))
-                .setUserStatus(String.valueOf(UserStatus.IN_REGISTER))
-                .createUser();
-        if (request.getParameter(IS_ADMIN) == null) {
-            user.setPosition(USER);
-        } else {
-            user.setPosition(ADMIN);
-        }
-        HttpSession session = request.getSession();
+                .setUserStatus(String.valueOf(UserStatus.ACTIVE))
+                .createUser());
+        user.get().setPosition(request.getParameter(IS_ADMIN) == null ? USER :ADMIN);
         try {
             if (ServiceUserImpl.getInstance().registration(user)) {
                return new Router(PathToPage.SIGN_IN, Router.RouterType.FORWARD);
             }
             else {
                 request.setAttribute(ERROR, Message.ERROR_ADMINISTRATOR_REGISTRATION);
+                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
         } catch (ServiceException e) {
-            request.setAttribute(ERROR,Message.ERROR_INPUT_DATA + e );
+            request.setAttribute(ERROR, e);
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
-        return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }
 }

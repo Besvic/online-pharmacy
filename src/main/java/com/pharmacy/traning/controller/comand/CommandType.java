@@ -4,18 +4,17 @@ import com.pharmacy.traning.controller.comand.impl.*;
 import com.pharmacy.traning.controller.comand.impl.admin.*;
 import com.pharmacy.traning.controller.comand.impl.admin.go.*;
 import com.pharmacy.traning.controller.comand.impl.go.GoToSignInCommandPage;
-import com.pharmacy.traning.controller.comand.impl.user.AddCashCommand;
-import com.pharmacy.traning.controller.comand.impl.user.AddProductInOrderCommand;
-import com.pharmacy.traning.controller.comand.impl.user.DeleteOrderByUserCommand;
-import com.pharmacy.traning.controller.comand.impl.user.PayOrderCommand;
+import com.pharmacy.traning.controller.comand.impl.user.*;
 import com.pharmacy.traning.controller.comand.impl.user.go.*;
 
 public enum CommandType {
     DEFAULT(new DefaultCommand()),
     GO_SIGN_IN(new GoToSignInCommandPage()),
+    GO_MAIN_PAGE(new GoMainPageCommand()),
     CONFIRM_SIGN_IN(new ConfirmSignInCommand()),
     CONFIRM_REGISTRATION(new ConfirmRegistrationCommand()),
     CHANGE_LOCALE(new ChangeLocaleCommand()),
+    SEARCH_MAIN_PAGE(new SearchOnMainPageCommand()),
 
     //admin function
     GO_TO_ADD_PRODUCT(new GoToAddProductCommand()),
@@ -47,6 +46,8 @@ public enum CommandType {
     SEARCH_DELETE_PRODUCT_BY_NAME(new SearchDeleteProductByNameCommand()),
     SEARCH_NON_DELETE_USER_BY_NAME(new SearchNonDeleteUserByNameCommand()),
     SEARCH_DELETE_USER_BY_NAME(new SearchDeleteUserByNameCommand()),
+    SEARCH_ORDER_BY_NAME(new SearchOrderByNameCommand()),
+
 
     //user function
     GO_TO_PRODUCT_LIST_BY_USER(new GoToProductListForPurchaseCommand()),
@@ -58,6 +59,8 @@ public enum CommandType {
     ADD_PRODUCT_IN_ORDER(new AddProductInOrderCommand()),
     PAY_ORDER(new PayOrderCommand()),
     DELETE_ORDER_BY_USER(new DeleteOrderByUserCommand()),
+    SEARCH_PRODUCT_FOR_USER_BY_NAME(new SearchProductForUserByNameCommand()),
+    UPDATE_DATA_USER(new UpdateDataUserCommand()),
 
 
     ;

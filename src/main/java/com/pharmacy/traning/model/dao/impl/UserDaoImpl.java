@@ -40,6 +40,11 @@ public class UserDaoImpl implements UserDao {
             set user_status = 'delete'
             where user_id = ?;""";
 
+    private static final String SQL_USER_CASH_BY_USER_ID = """
+            select user_cash
+            from users
+            where user_id = ?;""";
+
     private static final String SQL_SET_ACTIVE_USER_BY_USER_ID = """
             update users
             set user_status = 'active'
@@ -412,6 +417,23 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException("PrepareStatement didn't connection.", throwables);
         }
         return false;
+    }
+
+    @Override
+    public double findUserCashById(long userId) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_USER_CASH_BY_USER_ID)) {
+            statement.setLong(1, userId);
+            try (ResultSet result = statement.executeQuery()){
+               if (result.next()){
+                   return result.getDouble(USER_CASH);
+               }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or findUserCashById function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findUserCashById function is not available.", throwables);
+        }
+        return 0;
     }
 
 }

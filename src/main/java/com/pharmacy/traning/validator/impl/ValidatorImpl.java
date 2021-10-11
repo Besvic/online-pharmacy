@@ -15,7 +15,7 @@ public class ValidatorImpl implements Validator {
     private static final String REGEX_CORRECT_EMAIL = "^[A-Za-z0-9+_.-]+@(.+)$";
     private static final String REGEX_UPPERCASE_LETTER = "[А-ЯA-Z\s]{1,40}";
     private static final String REGEX_CORRECT_CVV = "[0-9]{3}";
-    private static final String REGEX_CORRECT_CREDIT_CARD_NUMBER = "[0-9]{16,19}";
+    private static final String REGEX_CORRECT_CREDIT_CARD_NUMBER = "[0-9]{16}";
     private static final String REGEX_CORRECT_DOUBLE = "[0-9]+\\.{0,1}[0-9]{0,6}";
     private static final String REGEX_CORRECT_MONEY = "[0-9]+\\.{0,1}[0-9]{0,2}";
     private static final String REGEX_ONLY_LETTER = "[а-яА-Яa-zA-Z]{1,40}";

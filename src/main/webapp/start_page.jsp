@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Asus
-  Date: 25.09.2021
-  Time: 18:25
+  Date: 10.10.2021
+  Time: 0:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -24,13 +24,12 @@
 
 </head>
 <body>
-<jsp:include page="../user_navbar.jsp"/>
-
+<jsp:include page="pages/main_navbar.jsp"/>
 <div class="table_custom">
     <div class="search_div">
         <form action="${pageContext.request.contextPath}/controller" method="post">
             <input  class="search_input" name="search_name" autocomplete="off" type="search" placeholder="<fmt:message key="placeholder.search"/> ">
-            <button type="submit" name="command" value="search_product_for_user_by_name" align="left" class="fa fa-search"></button>
+            <button type="submit" name="command" value="search_main_page" align="left" class="fa fa-search"></button>
         </form>
     </div>
     <table align="center">
@@ -46,7 +45,6 @@
         </thead>
 
         <c:forEach var="product_list" items="${product_list}">
-
             <tbody>
             <tr class="row_custom">
                 <td>${product_list.name}</td>
@@ -57,21 +55,21 @@
                 <td>${product_list.dateOfDelivery}</td>
             </tr>
 
-           <tr>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td>
-                   <form action="${pageContext.request.contextPath}/controller" method="post">
-                       <input class="input" width="80px" type="number" name="quantity" min="1" placeholder="<fmt:message key="label.product.quantity"/>" required>
-                       <button class="button" type="submit" name="command" value="add_product_in_order"><fmt:message key="button.add_in_order"/> </button>
-                       <input type="hidden" name="product_id" value="${product_list.id}">
-                   </form>
-               </td>
-           </tr>
-           </tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                        <input class="input" width="80px" type="number" name="quantity" min="1" placeholder="<fmt:message key="label.product.quantity"/>" required>
+                        <button class="button" type="submit" name="command" value="go_sign_in"><fmt:message key="button.add_in_order"/> </button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
         </c:forEach>
     </table>
 </div>

@@ -32,7 +32,7 @@
 
             <tr>
                 <td><Label class="label-text"><fmt:message key="label.card.name"/>: </Label></td>
-                <td COLSPAN="2"> <input type="text" name="card_name" pattern="[A-ZА-Я]+" placeholder="<fmt:message key="placeholder.code.name"/>"></td>
+                <td COLSPAN="2"> <input type="text" name="card_name" pattern="[A-ZА-Я\s]+" placeholder="<fmt:message key="placeholder.code.name"/>"></td>
             </tr>
             <tr>
                 <td></td>

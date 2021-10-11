@@ -30,8 +30,8 @@ public class GoToOrderListByUserCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
+        long userId = ((User) session.getAttribute(USER)).getId();
         try{
-            long userId = ((User) session.getAttribute(USER)).getId();
             List<Order> orderList = serviceOrder.findAllNotCompletedOrderByUser(userId);
             List<Pharmacy> pharmacyList = servicePharmacy.findAllActualPharmacy();
             if (!pharmacyList.isEmpty()){
@@ -42,7 +42,7 @@ public class GoToOrderListByUserCommand implements Command {
                 request.setAttribute(ERROR, Message.ERROR_PHARMACY_LIST_IS_EMPTY);
                 return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
-        } catch (DaoException | ServiceException | NullPointerException e) {
+        } catch (DaoException | ServiceException e) {
             request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }

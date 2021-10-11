@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td><Label class="label-text" ><fmt:message key="label.text.password"/> :</Label></td>
-                        <td><input type="password" name="new_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required></td>
+                        <td><input type="password" name="current_password" class="input" placeholder="<fmt:message key="placeholder.password"/> " required></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -42,9 +42,9 @@
                     <tr>
                         <td></td>
                         <td><Label class="label-text" class="column_first"><fmt:message key="label.text.repeat_password"/> :</Label></td>
-                        <td class="column_second"><input type="password" name="new_repeat_password" class="input" placeholder="<fmt:message key="placeholder.current_password"/> " required></td>
+                        <td class="column_second"><input type="password" name="new_password" class="input" placeholder="<fmt:message key="placeholder.current_password"/> "></td>
                         <td colspan="2">
-                            <button class="save_button" type="submit" name="command" value="update_data_admin"><fmt:message key="button.name.save"/> </button>
+                            <button class="save_button" type="submit" name="command" value="update_data_user"><fmt:message key="button.name.save"/> </button>
                         </td>
                     </tr>
                 </form>
@@ -55,7 +55,7 @@
                                 <div class="example-1">
                                     <div class="form-group">
                                         <label class="label">
-                                            <i class="material-icons">attach_file</i>
+                                            <i class="material-icons"></i>
                                             <span class="title"><fmt:message key="label.add_image"/> </span>
                                             <input class="input_file" type="file" name="multiPartServlet" accept=".jpg, .jpeg, .png"/>
                                         </label>

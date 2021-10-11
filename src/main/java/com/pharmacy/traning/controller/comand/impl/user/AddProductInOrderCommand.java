@@ -8,13 +8,19 @@ import com.pharmacy.traning.controller.comand.impl.user.go.GoToProductListForPur
 import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
+import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.service.ServiceOrder;
+import com.pharmacy.traning.service.ServiceProduct;
 import com.pharmacy.traning.service.impl.ServiceOrderImpl;
+import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
+import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 import static com.pharmacy.traning.controller.comand.RequestParameter.QUANTITY;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
@@ -22,6 +28,7 @@ import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 public class AddProductInOrderCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();
+    private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
@@ -31,7 +38,9 @@ public class AddProductInOrderCommand implements Command {
         String quantity = request.getParameter(QUANTITY);
         try {
             if (serviceOrder.addOrder(productId, userId, quantity)){
-               return new GoToProductListForPurchaseCommand().execute(request);
+                List<Product> productList = serviceProduct.findAllProduct();
+                request.setAttribute(PRODUCT_LIST, productList);
+                return new Router(PathToPage.USER_PRODUCT_LIST, Router.RouterType.FORWARD);
             }
         } catch (ServiceException | DaoException e) {
             request.setAttribute(ERROR, e);

@@ -19,6 +19,10 @@ import java.util.List;
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 import static com.pharmacy.traning.model.dao.ColumnName.ORDER_QUANTITY;
 
+/***
+ * class PharmacyDaoImpl
+ * @author Victor Besarab
+ */
 public class PharmacyDaoImpl implements PharmacyDao {
 
     private static final Logger logger = LogManager.getLogger();
@@ -27,14 +31,18 @@ public class PharmacyDaoImpl implements PharmacyDao {
     private static final String SQL_CREATE_PHARMACY = """
             insert into pharmacy(pharmacy_city, pharmacy_street, pharmacy_number)
             values (?, ?, ?);""";
+
     private static final String SQL_DELETE_PHARMACY_BY_ID = """
             update pharmacy
             set pharmacy_status = 'delete'
             where pharmacy_id = ?""";
+
     private static final String SQL_RESTORE_PHARMACY_BY_ID = """
             update pharmacy
             set pharmacy_status = 'actual'
             where pharmacy_id = ?""";
+
+
     private static final String SQL_FIND_ALL_ACTUAL_PHARMACY = """
             select pharmacy_id, pharmacy_city, pharmacy_street, pharmacy_number
             from pharmacy
@@ -47,25 +55,27 @@ public class PharmacyDaoImpl implements PharmacyDao {
             when 'actual' then 1
             when 'delete' then 2
             end) asc;""";
-    /*private static final String SQL_ = """
-            """;
-    private static final String SQL_ = """
-            """;
-    private static final String SQL_ = """
-            """;*/
 
-
+    /***
+     *
+     * @return
+     */
     public static PharmacyDao getInstance(){
         if (instance == null){
             instance = new PharmacyDaoImpl();
         }
         return instance;
     }
-
     private PharmacyDaoImpl(){
 
     }
 
+    /***
+     *
+     * @param pharmacy
+     * @return
+     * @throws DaoException
+     */
     @Override
     public boolean createPharmacy(Pharmacy pharmacy) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -82,6 +92,12 @@ public class PharmacyDaoImpl implements PharmacyDao {
         return false;
     }
 
+    /***
+     *
+     * @param pharmacyId
+     * @return
+     * @throws DaoException
+     */
     @Override
     public boolean deletePharmacy(long pharmacyId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -96,6 +112,12 @@ public class PharmacyDaoImpl implements PharmacyDao {
         return false;
     }
 
+    /***
+     *
+     * @param pharmacyId
+     * @return
+     * @throws DaoException
+     */
     @Override
     public boolean restorePharmacy(long pharmacyId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -110,6 +132,11 @@ public class PharmacyDaoImpl implements PharmacyDao {
         return false;
     }
 
+    /***
+     *
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Pharmacy> findAllActualPharmacy() throws DaoException {
         List<Pharmacy> pharmacyList = new ArrayList<>();
@@ -131,6 +158,11 @@ public class PharmacyDaoImpl implements PharmacyDao {
         return pharmacyList;
     }
 
+    /***
+     *
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Pharmacy> findAllPharmacy() throws DaoException {
         List<Pharmacy> pharmacyList = new ArrayList<>();

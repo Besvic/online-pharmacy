@@ -72,7 +72,8 @@ public class OrderDaoImpl implements OrderDao {
            select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name
            from `order`
            join product pr on pr.product_id = `order`.order_product_id
-           where order_user_id = ? and order_status = 'not completed' and product_status = 'actual';""";
+           where order_user_id = ? and order_status = 'not completed' and product_status = 'actual'
+           order by product_name;""";
 
     private static final String SQL_FIND_ALL_COMPLETED_ORDER_BY_USER_ID = """
             select order_id, order_date, user_cash, user_name, user_login, order_quantity, product_name, product_price * order_quantity as product_price, pharmacy_city, pharmacy_street, pharmacy_number
@@ -96,13 +97,22 @@ public class OrderDaoImpl implements OrderDao {
     private static final String SQL_FIND_ORDER_BY_STATUS = """
             select order_id, order_product_id, order_user_id, order_status, order_quantity, order_date
             from `order`
-            where order_status = ?;""";
+            where order_status = ?
+            order by user_name;""";
+
+    private static final String SQL_SEARCH_ORDER_BY_NAME = """
+             select order_date, user_cash, user_name, sum(order_quantity) as order_quantity, sum(product_price * order_quantity) as product_price, user_id
+            from `order`
+            join pharmacy on pharmacy_id = `order`.order_pharmacy_id
+            join product on product_id = `order`.order_product_id
+            join users on user_id = `order`.order_user_id
+            where order_status = 'completed' and user_name like ?
+            group by order_date, user_id
+            order by order_date desc, product_price desc;""";
 
     private static final String SQL_DELETE_ORDER_BY_ID = """
             delete from `order`
             where order_id = ?;""";
-
-
 
     @Override
     public boolean addOrder(Order order) throws DaoException {
@@ -271,6 +281,36 @@ public class OrderDaoImpl implements OrderDao {
                         .setQuantity(result.getInt(ORDER_QUANTITY))
                         .createOrder());
             }
+            }
+        } catch (SQLException throwables) {
+            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
+            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+        }
+        return orderList;
+    }
+
+    // TODO: 10.10.2021  start change class in admin from user package, add fuv=nction for user order list
+    @Override
+    public List<Order> searchOrderByName(String name) throws DaoException {
+        List<Order> orderList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_SEARCH_ORDER_BY_NAME)){
+            statement.setString(1, "%" + name + "%");
+            try(ResultSet result = statement.executeQuery() ){
+                while (result.next()) {
+                    orderList.add(new Order.OrderBuilder()
+                            .setDate(result.getDate(ORDER_DATE).toLocalDate())
+                            .setUser(new User.UserBuilder()
+                                    .setCash(result.getDouble(USER_CASH))
+                                    .setName(result.getString(USER_NAME))
+                                    .setId(result.getLong(USER_ID))
+                                    .createUser())
+                            .setProduct(new Product.ProductBuilder()
+                                    .setPrice(result.getDouble(PRODUCT_PRICE))
+                                    .createProduct())
+                            .setQuantity(result.getInt(ORDER_QUANTITY))
+                            .createOrder());
+                }
             }
         } catch (SQLException throwables) {
             logger.error("PrepareStatement didn't connection or this function is not available." + throwables);

@@ -18,6 +18,7 @@ public interface OrderDao {
     List<Order> findAllNotCompletedOrderById(long userId) throws DaoException;
     List<Order> findAllCompletedOrder() throws DaoException;
     List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws DaoException;
+    List<Order> searchOrderByName(String name) throws DaoException;
     Optional<Order> findOrderById(long orderId, Connection connection) throws DaoException;
 
 //    List<Order> findOrderByUserId(int userId) throws DaoException;

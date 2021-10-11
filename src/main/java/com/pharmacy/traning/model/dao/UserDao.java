@@ -26,6 +26,7 @@ public interface UserDao {
     Optional<User> findUserById(long userId, Connection connection) throws DaoException;
     boolean updatePhotoById(String path, long id) throws DaoException;
     boolean checkIsAdmin() throws DaoException;
+    double findUserCashById(long userId) throws DaoException;
 
 
 

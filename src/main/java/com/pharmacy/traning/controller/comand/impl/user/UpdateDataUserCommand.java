@@ -1,6 +1,9 @@
-package com.pharmacy.traning.controller.comand.impl.admin;
+package com.pharmacy.traning.controller.comand.impl.user;
 
-import com.pharmacy.traning.controller.comand.*;
+import com.pharmacy.traning.controller.comand.Command;
+import com.pharmacy.traning.controller.comand.Message;
+import com.pharmacy.traning.controller.comand.PathToPage;
+import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
@@ -14,11 +17,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
+import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
-public class UpdateDataAdminCommand implements Command {
+public class UpdateDataUserCommand implements Command {
 
     private static final CryptorPassword crypt = CryptorPassword.getInstance();
     private static final Validator valid = ValidatorImpl.getInstance();
@@ -31,21 +33,21 @@ public class UpdateDataAdminCommand implements Command {
         String newPass = request.getParameter(NEW_PASSWORD);
         String name = request.getParameter(NEW_NAME);
         User currentUser = (User)session.getAttribute(USER);
-            try {
-                if (valid.isPassword(currentPass) && valid.isName(name) &&
-                        crypt.encryptor(currentPass).equals(currentUser.getPassword())){
-                    currentPass = valid.isPassword(newPass) ? crypt.encryptor(newPass) : currentUser.getPassword();
-                    if (serviceUser.updateUserById(currentUser, currentPass, name)){
-                        currentUser.setPassword(currentPass);
-                        currentUser.setName(name);
-                        session.setAttribute(USER, currentUser);
-                        return new Router(PathToPage.ADMIN_MENU, Router.RouterType.FORWARD);
-                    }
+        try {
+            if (valid.isPassword(currentPass) && valid.isName(name) &&
+                    crypt.encryptor(currentPass).equals(currentUser.getPassword())){
+                currentPass = valid.isPassword(newPass) ? crypt.encryptor(newPass) : currentUser.getPassword();
+                if (serviceUser.updateUserById(currentUser, currentPass, name)){
+                    currentUser.setPassword(currentPass);
+                    currentUser.setName(name);
+                    session.setAttribute(USER, currentUser);
+                    return new Router(PathToPage.USER_MENU, Router.RouterType.FORWARD);
                 }
-            } catch (ServiceException | DaoException e) {
-                request.setAttribute(ERROR, e.toString());
-                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD) ;
             }
+        } catch (ServiceException | DaoException e) {
+            request.setAttribute(ERROR, e.toString());
+            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD) ;
+        }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD) ;
     }

@@ -6,7 +6,7 @@ public final class PathToPage {
     public static final String REGISTRATION = "/pages/enter/registration.jsp";
     public static final String SIGN_IN = "/pages/enter/sign_in.jsp";
     public static final String INDEX = "index.jsp";
-    public static final String TEST_PAGE = "/pages/test_page.jsp";
+    public static final String MAIN = "start_page.jsp";
 
 
     public static final String ADMIN_MENU = "/pages/admin/admin_menu.jsp";

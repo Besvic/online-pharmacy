@@ -30,7 +30,6 @@ public class CryptorPassword {
         for (var b: bytes) {
             builder.append(b);
         }
-        System.out.println(builder);
         return builder.toString();
     }
 

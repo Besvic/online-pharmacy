@@ -5,17 +5,6 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-
-<form action="controller" method="get">
-    <%--<input type="text" name="num" value="1">--%>
-    <input type="submit" name="command" value="go_sign_in" > to sign in </form>
-</form>
-<%--<hr/>
-result = ${res}
-<br/>--%>
-<%--<jsp:forward page="pages/enter/sign_in.jsp"></jsp:forward>--%>
-<a href="pages/test_page.jsp">
-    <button type="button" value="to_sign" > to page</button>
-</a>
+<jsp:forward page="/controller?command=go_main_page"></jsp:forward>
 </body>
 </html>

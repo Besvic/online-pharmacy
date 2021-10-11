@@ -25,6 +25,7 @@ public class ServiceUserImpl implements ServiceUser {
     private static ServiceUserImpl instance;
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
     private static final Validator validator = ValidatorImpl.getInstance();
+    private static final CryptorPassword crypt = CryptorPassword.getInstance();
 
     public static ServiceUserImpl getInstance(){
         if (instance == null)
@@ -37,15 +38,16 @@ public class ServiceUserImpl implements ServiceUser {
     }
 
     @Override
-    public boolean registration(User user) throws ServiceException {
-        if (ValidatorImpl.getInstance().isNullObject(user)) {
+    public boolean registration(Optional<User> user) throws ServiceException {
+        if (user.isPresent() && validator.isName(user.get().getName()) &&
+                validator.isEmail(user.get().getLogin()) && validator.isPassword(user.get().getPassword())) {
             try {
-                if (user.getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
+                if (user.get().getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
                     logger.error("First administrator completed registration!");
-                    return false;
+                   throw new ServiceException("First administrator completed registration!");
                 }
-                user.setPassword(CryptorPassword.getInstance().encryptor(user.getPassword()));
-                return userDao.createUser(user);
+                user.get().setPassword(crypt.encryptor(user.get().getPassword()));
+                return userDao.createUser(user.get());
             } catch (DaoException e) {
                 logger.warn("Not available create person, because this email already saved!", e);
                 throw new ServiceException("Not available create person, because this email already saved!", e);
@@ -125,6 +127,11 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Incorrect input string!");
     }
 
+    @Override
+    public double findUserCashById(long userId) throws ServiceException, DaoException {
+        return userDao.findUserCashById(userId);
+    }
+
     /*@Override
     public List<User> findAllInRegisterUser() throws ServiceException, DaoException {
         List<User> userList = userDao.findAllInRegisterUser();
@@ -146,16 +153,12 @@ public class ServiceUserImpl implements ServiceUser {
     }
 
     @Override
-    public Optional<User> signIn(String email, String password) throws ServiceException {
-        if (!email.isEmpty() && !password.isEmpty()){
-            try {
-                String hashPassword = CryptorPassword.getInstance().encryptor(password);
-                return userDao.checkAuthorisation(email, hashPassword);
-            } catch (DaoException e) {
-                logger.warn("Enter is not successful, email or password entered incorrect.", e);
-                throw new ServiceException("Enter is not successful, email or password entered incorrect.", e);
-            }
+    public Optional<User> signIn(String email, String password) throws ServiceException, DaoException {
+        if (validator.isEmail(email) && validator.isPassword(password)){
+            String hashPassword = CryptorPassword.getInstance().encryptor(password);
+            return userDao.checkAuthorisation(email, hashPassword);
         }
-        return Optional.empty();
+        logger.warn("Enter is not successful, email or password entered incorrect.");
+        throw new ServiceException("Enter is not successful, email or password entered incorrect.");
     }
 }
