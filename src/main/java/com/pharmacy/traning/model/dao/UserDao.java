@@ -86,6 +86,25 @@ public interface UserDao {
      */
     List<User> findAllDeleteUser() throws DaoException;
 
+    // TODO: 12.10.2021 del
+    /**
+     * Find all in register user list.
+     *
+     * @return the list
+     * @throws DaoException the dao exception
+     *//*
+    List<User> findAllInRegisterUser() throws DaoException;
+
+    *//**
+     * Find user by id optional.
+     *
+     * @param userId     the user id
+     * @param connection the connection
+     * @return the optional
+     * @throws DaoException the dao exception
+     *//*
+    public Optional<User> findUserById(long userId, Connection connection) throws DaoException;*/
+
     /**
      * Find all non delete user list.
      *

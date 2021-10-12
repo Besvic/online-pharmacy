@@ -1,3 +1,4 @@
+/*
 package com.pharmacy.traning.controller;
 
 import jakarta.servlet.*;
@@ -33,3 +34,5 @@ public class DownloadImageServlet extends HttpServlet {
 
     }
 }
+*/
+// TODO: 12.10.2021 del

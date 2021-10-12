@@ -5,6 +5,8 @@ package com.pharmacy.traning.controller.comand;
  */
 public final class PathToPage {
 
+    private PathToPage(){
+    }
     /**
      * The constant ERROR_404.
      */
@@ -16,9 +18,8 @@ public final class PathToPage {
     /**
      * The constant MAIN.
      */
+
     public static final String MAIN = "start_page.jsp";
-
-
     /**
      * The constant ADMIN_MENU.
      */
@@ -89,6 +90,16 @@ public final class PathToPage {
      */
     public static final String USER_CASH_PAGE = "/pages/user/cash_page.jsp";
 
-    private PathToPage(){
-    }
+    /**
+     * The constant PATH_TO_PHOTO_ADMIN.
+     */
+    public static final String PATH_TO_PHOTO_ADMIN = "/css/image/admin/";
+    /**
+     * The constant PATH_TO_PHOTO_USER.
+     */
+    public static final String PATH_TO_PHOTO_USER = "/css/image/user/";
+    /**
+     * The constant ABSOLUTELY_PATH.
+     */
+    public static final String ABSOLUTELY_PATH = "D:\\БГУИР\\Личное\\Java\\Epam\\online-pharmacy\\src\\main\\webapp";
 }

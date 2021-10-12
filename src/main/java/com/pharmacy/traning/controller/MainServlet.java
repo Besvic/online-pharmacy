@@ -11,6 +11,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+/**
+ * The type Main servlet.
+ */
 @WebServlet(name = "helloServlet", urlPatterns = "/controller")
 public class MainServlet extends UploadServlet {
 

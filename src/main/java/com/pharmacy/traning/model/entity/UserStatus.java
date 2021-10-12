@@ -1,8 +1,20 @@
 package com.pharmacy.traning.model.entity;
 
+/**
+ * The enum User status.
+ */
 public enum UserStatus {
+    /**
+     * In register user status.
+     */
     IN_REGISTER ("in_register"),
+    /**
+     * Active user status.
+     */
     ACTIVE ("active"),
+    /**
+     * Delete user status.
+     */
     DELETE("delete");
 
     private final String value;
@@ -11,6 +23,11 @@ public enum UserStatus {
         this.value = value;
     }
 
+    /**
+     * Gets value.
+     *
+     * @return the value
+     */
     public String getValue() {
         return value;
     }

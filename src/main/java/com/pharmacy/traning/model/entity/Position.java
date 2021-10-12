@@ -1,8 +1,20 @@
 package com.pharmacy.traning.model.entity;
 
+/**
+ * The enum Position.
+ */
 public enum Position {
+    /**
+     * User position.
+     */
     USER ("user"),
+    /**
+     * Admin position.
+     */
     ADMIN ("admin"),
+    /**
+     * Delete position.
+     */
     DELETE ("delete");
 
     private final String value;
@@ -11,6 +23,11 @@ public enum Position {
         this.value = value;
     }
 
+    /**
+     * Gets value.
+     *
+     * @return the value
+     */
     public String getValue() {
         return value;
     }
