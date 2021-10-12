@@ -19,12 +19,7 @@ public class MainServlet extends UploadServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        /*response.setContentType("text/html");
-        String n = request.getParameter("num");
-        int number = Integer.parseInt(n) * 7;
-        request.setAttribute("res", number);
-        request.getRequestDispatcher("index.jsp").forward(request, response);*/
-        processRequest(request, response);
+       processRequest(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

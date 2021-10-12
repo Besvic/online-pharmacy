@@ -18,12 +18,23 @@ import java.util.Optional;
 
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 
+/**
+ * The type User dao.
+ */
 public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final UserDaoImpl instance = new UserDaoImpl();
+    private static UserDaoImpl instance;
 
+    /**
+     * Get instance user dao.
+     *
+     * @return the user dao
+     */
     public static UserDaoImpl getInstance(){
+        if (instance == null){
+            instance = new UserDaoImpl();
+        }
         return instance;
     }
 
@@ -54,11 +65,6 @@ public class UserDaoImpl implements UserDao {
             update users
             set user_status = 'in_register'
             where user_id = ?;""";
-
-    private static final String SQL_FIND_USER_BY_STATUS = """
-            select user_id, user_position, user_name, user_cash, user_login, user_status, user_photo
-            from users
-            where user_status = ? and user_position = 'user';""";
 
     private static final String SQL_FIND_ALL_DELETE_USER = """
             select user_id, user_position, user_name, user_cash, user_login, user_status, user_photo
@@ -120,18 +126,14 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_UPDATE_PASSWORD_NAME_BY_ID = """
              update users
-                set user_password = ? , user_name = ?
-                where user_id = ?;""";
+             set user_password = ? , user_name = ?
+             where user_id = ?;""";
 
 
     private static final String SQL_CHECK_IS_ADMIN = """
             select user_position
             from users
             where user_position = 'admin' and user_status != 'delete';""";
-
-
-
-
 
 
 
@@ -311,33 +313,6 @@ public class UserDaoImpl implements UserDao {
         return userList;
     }
 
-    /*@Override
-    public List<User> findUserByStatus(String status) throws DaoException {
-        List<User> userList = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_STATUS)) {
-            statement.setString(1, status);
-            try(ResultSet result = statement.executeQuery()){
-                while (result.next()){
-                    userList.add(new User.UserBuilder()
-                            .setId(result.getInt(USER_ID))
-                            .setPosition((result.getString(ColumnName.USER_POSITION)))
-                            .setName(result.getString(ColumnName.USER_NAME))
-                            .setCash(result.getDouble(ColumnName.USER_CASH))
-                            .setLogin(result.getString(ColumnName.USER_LOGIN))
-                            .setPassword(result.getString(ColumnName.USER_PASSWORD))
-                            .setUserStatus(result.getString(USER_STATUS))
-                            .setPhoto(result.getString(USER_PHOTO))
-                            .createUser());
-                }
-            }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }
-        return userList;
-    }*/
-
     @Override
     public Optional<User> checkAuthorisation(String login, String password) throws DaoException {
         try(Connection connection = ConnectionPool.getInstance().getConnection();
@@ -376,8 +351,6 @@ public class UserDaoImpl implements UserDao {
                             .setName(result.getString(ColumnName.USER_NAME))
                             .setCash(result.getDouble(ColumnName.USER_CASH))
                             .setLogin(result.getString(ColumnName.USER_LOGIN))
-                            /*.setPassword(result.getString(ColumnName.USER_PASSWORD))
-                            .setPosition((result.getString(ColumnName.USER_POSITION)))*/
                             .setUserStatus(result.getString(USER_STATUS))
                             .setPhoto(result.getString(USER_PHOTO))
                             .createUser());

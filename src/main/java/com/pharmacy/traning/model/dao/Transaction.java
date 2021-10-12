@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * The type Transaction.
+ */
 public class Transaction {
 
     private static final Logger logger = LogManager.getLogger();
@@ -16,6 +19,11 @@ public class Transaction {
 
     private Transaction(){}
 
+    /**
+     * Get instance transaction.
+     *
+     * @return the transaction
+     */
     public synchronized static Transaction getInstance(){
         if (instance == null){
             instance = new Transaction();
@@ -23,6 +31,12 @@ public class Transaction {
         return instance;
     }
 
+    /**
+     * Init connection connection.
+     *
+     * @return the connection
+     * @throws DaoException the dao exception
+     */
     public Connection initConnection() throws DaoException {
         try {
             if (connection == null) {
@@ -36,6 +50,11 @@ public class Transaction {
         return connection;
     }
 
+    /**
+     * Include auto commit.
+     *
+     * @throws DaoException the dao exception
+     */
     public void includeAutoCommit() throws DaoException {
         try {
             connection.setAutoCommit(true);
@@ -45,6 +64,11 @@ public class Transaction {
         }
     }
 
+    /**
+     * Commit.
+     *
+     * @throws DaoException the dao exception
+     */
     public void commit() throws DaoException {
         try {
             connection.commit();
@@ -54,6 +78,11 @@ public class Transaction {
         }
     }
 
+    /**
+     * Rollback.
+     *
+     * @throws DaoException the dao exception
+     */
     public void rollback() throws DaoException {
         try {
             connection.rollback();

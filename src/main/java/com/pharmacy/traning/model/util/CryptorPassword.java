@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class CryptorPassword {
+public final class CryptorPassword {
 
     private static final Logger logger = LogManager.getLogger();
     private static CryptorPassword instance = null;

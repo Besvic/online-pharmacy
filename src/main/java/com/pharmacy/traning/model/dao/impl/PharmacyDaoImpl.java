@@ -1,23 +1,18 @@
 package com.pharmacy.traning.model.dao.impl;
 
 import com.pharmacy.traning.exception.DaoException;
-import com.pharmacy.traning.model.dao.OrderDao;
 import com.pharmacy.traning.model.dao.PharmacyDao;
-import com.pharmacy.traning.model.entity.Order;
 import com.pharmacy.traning.model.entity.Pharmacy;
 import com.pharmacy.traning.model.entity.PharmacyStatus;
-import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.pharmacy.traning.model.dao.ColumnName.*;
-import static com.pharmacy.traning.model.dao.ColumnName.ORDER_QUANTITY;
 
 /***
  * class PharmacyDaoImpl

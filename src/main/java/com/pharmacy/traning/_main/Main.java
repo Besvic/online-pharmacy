@@ -14,23 +14,17 @@ import java.util.Locale;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
 
 public class Main {
+    static int a = 1;
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
-       /* User user = new User.UserBuilder().
-                setUserStatus(String.valueOf(UserStatus.IN_REGISTER))
-                .setName("Victor2")
-                .setLogin("victor21")
-                .setPassword("victor2")
-                .setCash(12)
-                .setPosition(ADMIN)
-                .createUser();*/
-
-
-        /*System.out.println(user.toString());*/
-
-        int d = Integer.parseInt("sdfvsd");
-
+        System.out.println(Test.i);
+        Test.i = 3;
+        System.out.println(Test.i);
 
     }
+}
+
+class Test{
+    static int i = 1;
 }

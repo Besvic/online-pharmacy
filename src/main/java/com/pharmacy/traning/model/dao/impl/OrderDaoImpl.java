@@ -18,11 +18,19 @@ import java.util.Optional;
 
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 
+/**
+ * The type Order dao.
+ */
 public class OrderDaoImpl implements OrderDao {
 
     private static final Logger logger = LogManager.getLogger();
     private static OrderDao instance;
 
+    /**
+     * Get instance order dao.
+     *
+     * @return the order dao
+     */
     public static OrderDao getInstance(){
         if (instance == null){
             instance = new OrderDaoImpl();
@@ -51,22 +59,17 @@ public class OrderDaoImpl implements OrderDao {
             where order_user_id = ? and order_product_id = ? and order_status = 'not completed';""";
 
     private static final String SQL_COMPLETED_ORDER = """
-         
             update `order`
             set order_status = 'completed', order_pharmacy_id = ?
             where order_id = ?;""";
 
 
-
     private static final String SQL_FIND_ORDER_BY_ID = """
            select order_id, user_id, user_cash,  order_quantity, product_price * order_quantity as product_price, product_id, product_quantity
            from `order`
-           
            join product on product_id = `order`.order_product_id
            join users on user_id = `order`.order_user_id
            where order_id = ?;""";
-
-
 
     private static final String SQL_FIND_ALL_ORDER_BY_USER_ID = """
            select order_id, order_quantity, order_quantity * pr.product_price as product_price, product_id, product_name
@@ -76,7 +79,8 @@ public class OrderDaoImpl implements OrderDao {
            order by product_name;""";
 
     private static final String SQL_FIND_ALL_COMPLETED_ORDER_BY_USER_ID = """
-            select order_id, order_date, user_cash, user_name, user_login, order_quantity, product_name, product_price * order_quantity as product_price, pharmacy_city, pharmacy_street, pharmacy_number
+            select order_id, order_date, user_cash, user_name, user_login, order_quantity, product_name,
+            product_price * order_quantity as product_price, pharmacy_city, pharmacy_street, pharmacy_number
             from `order`
             join pharmacy on pharmacy_id = `order`.order_pharmacy_id
             join product on product_id = `order`.order_product_id
@@ -85,7 +89,7 @@ public class OrderDaoImpl implements OrderDao {
             order by order_date desc, product_price desc;""";
     
     private static final String SQL_FIND_ALL_COMPLETED_ORDER = """
-            select order_date, user_cash, user_name, sum(order_quantity) as order_quantity, sum(product_price * order_quantity) as product_price, user_id/*, order_id, user_login, product_name,  pharmacy_city, pharmacy_street, pharmacy_number*/
+            select order_date, user_cash, user_name, sum(order_quantity) as order_quantity, sum(product_price * order_quantity) as product_price, user_id
             from `order`
             join pharmacy on pharmacy_id = `order`.order_pharmacy_id
             join product on product_id = `order`.order_product_id
@@ -93,12 +97,6 @@ public class OrderDaoImpl implements OrderDao {
             where order_status = 'completed'
             group by order_date, user_id
             order by order_date desc, product_price desc;""";
-
-    private static final String SQL_FIND_ORDER_BY_STATUS = """
-            select order_id, order_product_id, order_user_id, order_status, order_quantity, order_date
-            from `order`
-            where order_status = ?
-            order by user_name;""";
 
     private static final String SQL_SEARCH_ORDER_BY_NAME = """
              select order_date, user_cash, user_name, sum(order_quantity) as order_quantity, sum(product_price * order_quantity) as product_price, user_id
@@ -130,7 +128,6 @@ public class OrderDaoImpl implements OrderDao {
         }
         return false;
     }
-
 
     @Override
     public boolean addProductQuantityInOrder(long orderId, int quantity) throws DaoException {
@@ -289,7 +286,6 @@ public class OrderDaoImpl implements OrderDao {
         return orderList;
     }
 
-    // TODO: 10.10.2021  start change class in admin from user package, add fuv=nction for user order list
     @Override
     public List<Order> searchOrderByName(String name) throws DaoException {
         List<Order> orderList = new ArrayList<>();
@@ -337,12 +333,6 @@ public class OrderDaoImpl implements OrderDao {
                             .setId(result.getInt(PRODUCT_ID))
                             .setQuantity(result.getInt(PRODUCT_QUANTITY))
                             .createProduct())
-//                    .setPharmacy(new Pharmacy.PharmacyBuilder()
-//                            .setId(result.getLong(PHARMACY_ID))
-//                            .setNumber(result.getInt(PHARMACY_NUMBER))
-//                            .setStreet(result.getString(PHARMACY_STREET))
-//                            .setCity(result.getString(PHARMACY_CITY))
-//                            .createPharmacy())
                     .createOrder());
                 }
             }
@@ -352,80 +342,4 @@ public class OrderDaoImpl implements OrderDao {
         }
         return Optional.empty();
     }
-
-    /*
-    @Override
-    public List<Order> findOrderByUserId(int userId) throws DaoException {
-        List<Order> orderList = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_USER_ID)){
-            statement.setLong(1, userId);
-            try (ResultSet result = statement.executeQuery()){
-                while (result.next()){
-                    orderList.add(new Order.OrderBuilder()
-                            .setId(result.getLong(ORDER_ID))
-                            .setUserId(result.getLong(ORDER_USER_ID))
-                            .setProductId(result.getLong(ORDER_PRODUCT_ID))
-                            .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(result.getString(ORDER_STATUS))
-                            .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
-                            .createOrder());
-                }
-            }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }
-        return orderList;
-    }
-
-    @Override
-    public List<Order> findOrderByProductId(int productId) throws DaoException {
-        List<Order> orderList = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_PRODUCT_ID)){
-            statement.setLong(1, productId);
-            try (ResultSet result = statement.executeQuery()){
-                while (result.next()){
-                    orderList.add(new Order.OrderBuilder()
-                            .setId(result.getLong(ORDER_ID))
-                            .setUserId(result.getLong(ORDER_USER_ID))
-                            .setProductId(result.getLong(ORDER_PRODUCT_ID))
-                            .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(result.getString(ORDER_STATUS))
-                            .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
-                            .createOrder());
-                }
-            }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }
-        return orderList;
-    }
-
-    @Override
-    public List<Order> findOrderByStatus(String orderStatus) throws DaoException {
-        List<Order> orderList = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_STATUS)){
-            statement.setString(1, orderStatus);
-            try (ResultSet result = statement.executeQuery()){
-                while (result.next()){
-                    orderList.add(new Order.OrderBuilder()
-                            .setId(result.getLong(ORDER_ID))
-                            .setUserId(result.getLong(ORDER_USER_ID))
-                            .setProductId(result.getLong(ORDER_PRODUCT_ID))
-                            .setQuantity(result.getInt(ORDER_QUANTITY))
-                            .setStatus(result.getString(ORDER_STATUS))
-                            .setDate(LocalDate.parse(result.getString(ORDER_DATE)))
-                            .createOrder());
-                }
-            }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }
-        return orderList;
-    }*/
 }

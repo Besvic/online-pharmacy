@@ -29,8 +29,6 @@ public class CommandFactory {
                 command = CommandType.DEFAULT.getCommand();
             }
         }
-        CommandType commandType = CommandType.valueOf(commandName.toUpperCase());
-        command = commandType.getCommand();
         return command;
     }
 }
