@@ -32,16 +32,16 @@
             <tr class="first_row">
                 <td class="img_column" rowspan="3"> </td>
                 <td><label class="label-text"><fmt:message key="label.product.name"/>: </label></td>
-                <td><input class="input" type="text" name="product_name" placeholder="<fmt:message key="label.product.name"/>" required></td>
+                <td><input class="input" type="text" pattern="[а-яa-zА-ЯA-Z/s]{1,40}" name="product_name" placeholder="<fmt:message key="label.product.name"/>" required></td>
                 <td><label class="label-text"><fmt:message key="label.product.manufacture_country"/>: </label></td>
-                <td><input class="input" type="text" name="manufacture_country" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
+                <td><input class="input" type="text" pattern="[а-яa-zА-ЯA-Z/s]{1,40}" name="manufacture_country" placeholder="<fmt:message key="label.product.manufacture_country"/>" required></td>
             </tr>
 
             <tr class="second_row">
                 <td><label class="label-text"><fmt:message key="label.product.dosage"/> </label></td>
                 <td><input class="input" type="number" step="0.001" min="0.001"  name="dosage" placeholder="0.020" required></td>
                 <td><label class="label-text"> <fmt:message key="label.product.measure"/> </label></td>
-                <td><input class="input" type="text" maxlength="10" name="measure" placeholder="<fmt:message key="label.product.measure"/> " required></td>
+                <td><input class="input" type="text" maxlength="10" pattern="[а-яa-zА-ЯA-Z/s]{1,40}" name="measure" placeholder="<fmt:message key="label.product.measure"/> " required></td>
 
             </tr>
             <tr class="treeth_row">

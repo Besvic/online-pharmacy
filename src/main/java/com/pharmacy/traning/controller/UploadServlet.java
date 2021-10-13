@@ -1,11 +1,11 @@
 package com.pharmacy.traning.controller;
 
-import com.pharmacy.traning.controller.comand.PathToPage;
+import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
-import com.pharmacy.traning.service.ServiceUser;
-import com.pharmacy.traning.service.impl.ServiceUserImpl;
+import com.pharmacy.traning.model.service.ServiceUser;
+import com.pharmacy.traning.model.service.impl.ServiceUserImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -14,11 +14,11 @@ import java.io.File;
 import java.io.IOException;
 
 
-import static com.pharmacy.traning.controller.comand.PathToPage.PATH_TO_PHOTO_ADMIN;
-import static com.pharmacy.traning.controller.comand.PathToPage.PATH_TO_PHOTO_USER;
-import static com.pharmacy.traning.controller.comand.PathToPage.ABSOLUTELY_PATH;
-import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
+import static com.pharmacy.traning.controller.command.PathToPage.PATH_TO_PHOTO_ADMIN;
+import static com.pharmacy.traning.controller.command.PathToPage.PATH_TO_PHOTO_USER;
+import static com.pharmacy.traning.controller.command.PathToPage.ABSOLUTELY_PATH;
+import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
+import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
 /**
  * The type Upload servlet.

@@ -1,18 +1,11 @@
 package com.pharmacy.traning._main;
 
-import com.pharmacy.traning.model.dao.ColumnName;
-import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
-import com.pharmacy.traning.model.entity.UserStatus;
-import com.pharmacy.traning.exception.DaoException;
-import com.pharmacy.traning.model.dao.impl.UserDaoImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Locale;
-
-import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
+import static com.pharmacy.traning.controller.command.SessionAttribute.ADMIN;
+import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
 /**
  * The type Main.

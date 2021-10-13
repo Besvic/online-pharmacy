@@ -27,7 +27,7 @@
         <form action="${pageContext.request.contextPath}/controller" method="post">
             <tr>
                 <td><Label class="label-text"><fmt:message key="label.cart_code"/> :</Label></td>
-                <td colspan="2"><input type="text" pattern="[1-9]{16,19}" name="card_number" minlength="16" maxlength="19" autocomplete="off" placeholder="#### #### #### ####" required></td>
+                <td colspan="2"><input type="text" pattern="[0-9]{16}" name="card_number" minlength="16" maxlength="19" autocomplete="off" placeholder="#### #### #### ####" required></td>
             </tr>
 
             <tr>

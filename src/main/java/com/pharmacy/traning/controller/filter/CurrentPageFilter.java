@@ -1,6 +1,6 @@
 package com.pharmacy.traning.controller.filter;
 
-import com.pharmacy.traning.controller.comand.SessionAttribute;
+import com.pharmacy.traning.controller.command.SessionAttribute;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;

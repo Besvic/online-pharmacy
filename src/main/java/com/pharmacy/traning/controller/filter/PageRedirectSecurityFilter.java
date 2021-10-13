@@ -1,6 +1,6 @@
 package com.pharmacy.traning.controller.filter;
 
-import com.pharmacy.traning.controller.comand.PathToPage;
+import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
 import jakarta.servlet.*;
@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
-import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
+import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
+import static com.pharmacy.traning.controller.command.SessionAttribute.ADMIN;
+import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
 /**
  * The type Page redirect security filter.

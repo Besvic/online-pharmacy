@@ -3,7 +3,7 @@ package com.pharmacy.traning.controller.listener;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.*;
 
-import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
+import static com.pharmacy.traning.controller.command.SessionAttribute.*;
 
 /**
  * The type Http session listener.

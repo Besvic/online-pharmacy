@@ -2,10 +2,10 @@ package com.pharmacy.traning.controller;
 
 import java.io.*;
 
-import com.pharmacy.traning.controller.comand.Command;
-import com.pharmacy.traning.controller.comand.CommandFactory;
-import com.pharmacy.traning.controller.comand.PathToPage;
-import com.pharmacy.traning.controller.comand.Router;
+import com.pharmacy.traning.controller.command.Command;
+import com.pharmacy.traning.controller.command.CommandFactory;
+import com.pharmacy.traning.controller.command.PathToPage;
+import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
