@@ -17,6 +17,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ORDER_LIST
 import static com.pharmacy.traning.controller.comand.RequestParameter.DATE;
 import static com.pharmacy.traning.controller.comand.RequestParameter.USER_ID;
 
+/**
+ * The type Go to order list by user id command.
+ */
 public class GoToOrderListByUserIdCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

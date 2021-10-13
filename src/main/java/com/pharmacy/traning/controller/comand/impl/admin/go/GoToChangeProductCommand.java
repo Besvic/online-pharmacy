@@ -18,6 +18,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 
+/**
+ * The type Go to change product command.
+ */
 public class GoToChangeProductCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();

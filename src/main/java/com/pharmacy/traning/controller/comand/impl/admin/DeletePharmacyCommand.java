@@ -14,6 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PHARMACY_ID;
 
+/**
+ * The type Delete pharmacy command.
+ */
 public class DeletePharmacyCommand implements Command {
 
     private static final ServicePharmacy servicePharmacy = ServicePharmacyImpl.getInstance();

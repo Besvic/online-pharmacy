@@ -19,6 +19,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 
+/**
+ * The type Create product command.
+ */
 public class CreateProductCommand implements Command {
 
     private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
@@ -35,7 +38,7 @@ public class CreateProductCommand implements Command {
         String price = request.getParameter(PRICE);
         String quantity = request.getParameter(QUANTITY);
         try {
-            if (serviceProduct.createProduct(Optional.ofNullable(product), dosage, price, quantity)) {
+            if (serviceProduct.createProduct(product, dosage, price, quantity)) {
                 request.setAttribute(REPORT, Message.REPORT_PRODUCT_ADD);
                 return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
             }

@@ -5,18 +5,39 @@ import org.apache.logging.log4j.Logger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * The type Cryptor password.
+ */
 public final class CryptorPassword {
 
+    /**
+     * The Logger.
+     */
     private static final Logger logger = LogManager.getLogger();
+    /**
+     * The Instance.
+     */
     private static CryptorPassword instance = null;
 
     private CryptorPassword(){};
 
+    /**
+     * Get instance cryptor password.
+     *
+     * @return the cryptor password
+     */
     public static CryptorPassword getInstance(){
         if (instance == null)
             instance = new CryptorPassword();
         return instance;
     }
+
+    /**
+     * Encryptor string.
+     *
+     * @param password the password
+     * @return the string
+     */
     public String encryptor(String password){
         MessageDigest md5;
         try {

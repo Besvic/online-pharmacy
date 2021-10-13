@@ -2,31 +2,72 @@ package com.pharmacy.traning.validator.impl;
 
 
 import com.pharmacy.traning.validator.Validator;
-import com.pharmacy.traning.validator.ValidatorUser;
-import org.apache.commons.validator.routines.EmailValidator;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 
 import static java.util.Calendar.YEAR;
 
+/**
+ * The type Validator.
+ */
 public class ValidatorImpl implements Validator {
 
+    /**
+     * The constant REGEX_CORRECT_EMAIL.
+     */
     private static final String REGEX_CORRECT_EMAIL = "^[A-Za-z0-9+_.-]+@(.+)$";
+    /**
+     * The constant REGEX_UPPERCASE_LETTER.
+     */
     private static final String REGEX_UPPERCASE_LETTER = "[А-ЯA-Z\s]{1,40}";
+    /**
+     * The constant REGEX_CORRECT_CVV.
+     */
     private static final String REGEX_CORRECT_CVV = "[0-9]{3}";
+    /**
+     * The constant REGEX_CORRECT_CREDIT_CARD_NUMBER.
+     */
     private static final String REGEX_CORRECT_CREDIT_CARD_NUMBER = "[0-9]{16}";
+    /**
+     * The constant REGEX_CORRECT_DOUBLE.
+     */
     private static final String REGEX_CORRECT_DOUBLE = "[0-9]+\\.{0,1}[0-9]{0,6}";
+    /**
+     * The constant REGEX_CORRECT_MONEY.
+     */
     private static final String REGEX_CORRECT_MONEY = "[0-9]+\\.{0,1}[0-9]{0,2}";
+    /**
+     * The constant REGEX_ONLY_LETTER.
+     */
     private static final String REGEX_ONLY_LETTER = "[а-яА-Яa-zA-Z]{1,40}";
+    /**
+     * The constant REGEX_CORRECT_NAME.
+     */
     private static final String REGEX_CORRECT_NAME = "[а-яa-zА-ЯA-Z\s]{1,40}";
+    /**
+     * The constant REGEX_CORRECT_INT.
+     */
     private static final String REGEX_CORRECT_INT = "[0-9]{1,6}";
+    /**
+     * The constant REGEX_ONLY_NUMBER.
+     */
     private static final String REGEX_ONLY_NUMBER = "[0-9]{1,8}";
+    /**
+     * The constant REGEX_CORRECT_MONTH.
+     */
     private static final String REGEX_CORRECT_MONTH = "[0-9]{1,2}";
+    /**
+     * The constant REGEX_CORRECT_YEAR.
+     */
     private static final String REGEX_CORRECT_YEAR = "[0-9]{4}";
 
     private static ValidatorImpl instance;
 
+    /**
+     * Get instance validator.
+     *
+     * @return the validator
+     */
     public static ValidatorImpl getInstance(){
         if (instance == null)
             instance = new ValidatorImpl();

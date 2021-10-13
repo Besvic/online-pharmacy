@@ -16,6 +16,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 
+/**
+ * The type Go to product list.
+ */
 public class GoToProductList implements Command {
 
     private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();

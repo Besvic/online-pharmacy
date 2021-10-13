@@ -38,6 +38,11 @@ public class User {
         this.photo = photo;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public long getId() {
         return id;
     }

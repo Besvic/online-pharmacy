@@ -21,6 +21,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 import static com.pharmacy.traning.controller.comand.RequestParameter.SEARCH_NAME;
 
+/**
+ * The type Search order by name command.
+ */
 public class SearchOrderByNameCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

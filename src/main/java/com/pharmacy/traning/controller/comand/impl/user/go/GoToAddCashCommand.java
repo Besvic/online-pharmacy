@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
 
+/**
+ * The type Go to add cash command.
+ */
 public class GoToAddCashCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException, IOException, ServletException {

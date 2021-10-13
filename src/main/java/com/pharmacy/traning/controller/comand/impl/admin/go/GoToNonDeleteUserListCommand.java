@@ -16,6 +16,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.USER_LIST;
 
+/**
+ * The type Go to non delete user list command.
+ */
 public class GoToNonDeleteUserListCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

@@ -25,6 +25,9 @@ import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID
 import static com.pharmacy.traning.controller.comand.RequestParameter.QUANTITY;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
+/**
+ * The type Add product in order command.
+ */
 public class AddProductInOrderCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

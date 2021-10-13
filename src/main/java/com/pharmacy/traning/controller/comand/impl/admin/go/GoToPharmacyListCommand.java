@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PHARMACY_LIST;
 
+/**
+ * The type Go to pharmacy list command.
+ */
 public class GoToPharmacyListCommand implements Command {
 
     private static final ServicePharmacy servicePharmacy = ServicePharmacyImpl.getInstance();

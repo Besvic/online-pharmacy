@@ -7,6 +7,7 @@ public final class PathToPage {
 
     private PathToPage(){
     }
+
     /**
      * The constant ERROR_404.
      */

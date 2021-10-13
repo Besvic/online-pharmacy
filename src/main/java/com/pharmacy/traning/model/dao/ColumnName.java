@@ -32,7 +32,7 @@ public final class ColumnName {
     /**
      * The constant ORDER_ID.
      */
-    //order
+//order
     public static final String ORDER_ID= "order_id";
     /**
      * The constant ORDER_QUANTITY.
@@ -46,7 +46,7 @@ public final class ColumnName {
     /**
      * The constant PRODUCT_ID.
      */
-    //product
+//product
     public static final String PRODUCT_ID = "product_id";
     /**
      * The constant PRODUCT_NAME.
@@ -80,7 +80,7 @@ public final class ColumnName {
     /**
      * The constant USER_ID.
      */
-    //users
+//users
     public static final String USER_ID = "user_id";
     /**
      * The constant USER_POSITION.

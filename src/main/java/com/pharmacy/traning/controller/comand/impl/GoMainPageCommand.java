@@ -15,6 +15,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 
+/**
+ * The type Go main page command.
+ */
 public class GoMainPageCommand implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();

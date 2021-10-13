@@ -5,6 +5,9 @@ import jakarta.servlet.http.*;
 
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
+/**
+ * The type Http session listener.
+ */
 @WebListener
 public class HttpSessionListenerImpl implements HttpSessionListener {
 

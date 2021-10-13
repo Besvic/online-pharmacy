@@ -24,6 +24,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 import static com.pharmacy.traning.controller.comand.RequestParameter.ORDER_ID;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
+/**
+ * The type Delete order by user command.
+ */
 public class DeleteOrderByUserCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

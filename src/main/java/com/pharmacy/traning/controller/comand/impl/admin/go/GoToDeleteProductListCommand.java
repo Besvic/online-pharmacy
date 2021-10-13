@@ -16,6 +16,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
+
+/**
+ * The type Go to delete product list command.
+ */
 public class GoToDeleteProductListCommand implements Command {
 
     private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();

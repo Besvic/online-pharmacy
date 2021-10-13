@@ -27,6 +27,9 @@ import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
 
+/**
+ * The type Pay order command.
+ */
 public class PayOrderCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

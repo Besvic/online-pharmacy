@@ -7,7 +7,6 @@ import com.pharmacy.traning.controller.comand.impl.admin.go.GoToNonDeleteUserLis
 import com.pharmacy.traning.exception.CommandException;
 import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
-import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.service.ServiceUser;
 import com.pharmacy.traning.service.impl.ServiceUserImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +15,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.model.dao.ColumnName.USER_ID;
 import static com.pharmacy.traning.model.dao.ColumnName.USER_STATUS;
 
+/**
+ * The type Activator user command.
+ */
 public class ActivatorUserCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

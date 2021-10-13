@@ -15,6 +15,9 @@ import java.util.Optional;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 import static com.pharmacy.traning.model.entity.Position.DELETE;
 
+/**
+ * The type Change locale command.
+ */
 public class ChangeLocaleCommand implements Command {
 
     @Override

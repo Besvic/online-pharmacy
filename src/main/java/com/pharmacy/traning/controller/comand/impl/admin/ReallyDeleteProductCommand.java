@@ -14,6 +14,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 
+/**
+ * The type Really delete product command.
+ */
 public class ReallyDeleteProductCommand implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();

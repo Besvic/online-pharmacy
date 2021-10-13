@@ -17,6 +17,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 
 
+/**
+ * The type Create pharmacy command.
+ */
 public class CreatePharmacyCommand implements Command {
 
     private static final ServicePharmacy servicePharmacy = ServicePharmacyImpl.getInstance();

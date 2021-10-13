@@ -12,19 +12,37 @@ import org.apache.logging.log4j.Logger;
 import java.util.Locale;
 
 import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
+import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The A.
+     */
     static int a = 1;
     private static final Logger logger = LogManager.getLogger();
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
-        System.out.println(Test.i);
-        Test.i = 3;
-        System.out.println(Test.i);
+        User user = new User.UserBuilder().setPosition(USER).createUser();
+        System.out.println(user.getPosition().getValue().equals(ADMIN));
+
 
     }
 }
 
+/**
+ * The type Test.
+ */
 class Test{
+    /**
+     * The .
+     */
     static int i = 1;
 }

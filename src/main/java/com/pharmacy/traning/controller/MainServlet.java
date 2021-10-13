@@ -38,12 +38,8 @@ public class MainServlet extends UploadServlet {
             router = new Router(PathToPage.ERROR_404, Router.RouterType.REDIRECT);
         }
         switch (router.getRouterType()) {
-            case FORWARD:
-                request.getRequestDispatcher(router.getPagePath()).forward(request, response);
-                break;
-            case REDIRECT:
-                response.sendRedirect(request.getContextPath() + router.getPagePath());
-                break;
+            case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
+            case REDIRECT -> response.sendRedirect(request.getContextPath() + router.getPagePath());
         }
     }
 

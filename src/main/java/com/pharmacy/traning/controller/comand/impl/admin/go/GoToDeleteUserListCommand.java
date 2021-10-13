@@ -18,6 +18,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.USER_LIST;
 
+/**
+ * The type Go to delete user list command.
+ */
 public class GoToDeleteUserListCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

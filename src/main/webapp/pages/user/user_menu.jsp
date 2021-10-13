@@ -28,7 +28,7 @@
         </p>
 
         <p class="main_wrapper_text">
-            <fmt:message key="label.menu.main"/>
+            <fmt:message key="label.menu.description"/>
         </p>
     </main>
 </div>

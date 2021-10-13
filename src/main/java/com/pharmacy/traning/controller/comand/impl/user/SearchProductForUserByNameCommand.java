@@ -19,6 +19,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 import static com.pharmacy.traning.controller.comand.RequestParameter.SEARCH_NAME;
 
+/**
+ * The type Search product for user by name command.
+ */
 public class SearchProductForUserByNameCommand implements Command {
 
     private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();

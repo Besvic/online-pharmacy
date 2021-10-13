@@ -60,7 +60,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final String SQL_COMPLETED_ORDER = """
             update `order`
-            set order_status = 'completed', order_pharmacy_id = ?
+            set order_status = 'completed', order_pharmacy_id = ?, order_date = ?
             where order_id = ?;""";
 
 
@@ -117,6 +117,7 @@ public class OrderDaoImpl implements OrderDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)){
             statement.setLong(1, order.getUser().getId());
+            System.out.println(Date.valueOf(LocalDate.now()));
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, order.getProduct().getId());
             statement.setInt(4, order.getQuantity());
@@ -162,7 +163,8 @@ public class OrderDaoImpl implements OrderDao {
     public boolean completedOrder(long orderId, long pharmacyId, Connection connection) throws DaoException {
         try (PreparedStatement statement = connection.prepareStatement(SQL_COMPLETED_ORDER)){
             statement.setLong(1, pharmacyId);
-            statement.setLong(2, orderId);
+            statement.setDate(2, Date.valueOf(LocalDate.now()));
+            statement.setLong(3, orderId);
             if (statement.executeUpdate() != 0)
                 return true;
         } catch (SQLException throwables) {

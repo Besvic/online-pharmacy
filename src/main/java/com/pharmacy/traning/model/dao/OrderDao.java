@@ -21,6 +21,15 @@ public interface OrderDao {
      * @throws DaoException the dao exception
      */
     boolean addOrder(Order order) throws DaoException;
+
+    /**
+     * Add product quantity in order boolean.
+     *
+     * @param orderId  the order id
+     * @param quantity the quantity
+     * @return the boolean
+     * @throws DaoException the dao exception
+     */
     boolean addProductQuantityInOrder(long orderId, int quantity) throws DaoException;
 
     /**

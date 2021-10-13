@@ -21,6 +21,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 import static com.pharmacy.traning.controller.comand.RequestParameter.SEARCH_NAME;
 
+/**
+ * The type Search non delete user by name command.
+ */
 public class SearchNonDeleteUserByNameCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

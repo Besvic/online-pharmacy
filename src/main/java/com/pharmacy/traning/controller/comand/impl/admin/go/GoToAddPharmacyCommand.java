@@ -6,6 +6,9 @@ import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * The type Go to add pharmacy command.
+ */
 public class GoToAddPharmacyCommand implements Command {
 
     @Override

@@ -53,7 +53,7 @@ public class PharmacyDaoImpl implements PharmacyDao {
 
     /***
      *
-     * @return
+     * @return pharmacy dao
      */
     public static PharmacyDao getInstance(){
         if (instance == null){

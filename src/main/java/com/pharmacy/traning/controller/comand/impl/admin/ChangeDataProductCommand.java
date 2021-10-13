@@ -13,12 +13,14 @@ import com.pharmacy.traning.service.impl.ServiceProductImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 
+/**
+ * The type Change data product command.
+ */
 public class ChangeDataProductCommand implements Command {
 
     private static final ServiceProduct serviceProduct = ServiceProductImpl.getInstance();
@@ -28,13 +30,13 @@ public class ChangeDataProductCommand implements Command {
         String strDosage = request.getParameter(DOSAGE);
         String strQuantity = request.getParameter(QUANTITY);
         String strPrice = request.getParameter(PRICE);
-        Optional<Product> product = Optional.of(new Product.ProductBuilder()
+        Product product = new Product.ProductBuilder()
                 .setId(Long.parseLong(request.getParameter(PRODUCT_ID)))
                 .setName(request.getParameter(PRODUCT_NAME))
                 .setMeasure(request.getParameter(MEASURE))
                 .setManufactureCountry(request.getParameter(MANUFACTURE_COUNTRY))
                 .setDateOfDelivery(LocalDate.parse(request.getParameter(DATE)))
-                .createProduct());
+                .createProduct();
         try {
             if (serviceProduct.changeProduct(product, strDosage, strQuantity, strPrice)){
                 request.setAttribute(REPORT, Message.REPORT_DATA_CHANGE);

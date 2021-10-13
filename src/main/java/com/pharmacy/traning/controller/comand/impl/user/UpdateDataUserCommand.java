@@ -20,6 +20,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
+/**
+ * The type Update data user command.
+ */
 public class UpdateDataUserCommand implements Command {
 
     private static final CryptorPassword crypt = CryptorPassword.getInstance();

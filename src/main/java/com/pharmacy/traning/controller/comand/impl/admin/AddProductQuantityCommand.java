@@ -4,7 +4,6 @@ import com.pharmacy.traning.controller.comand.Command;
 import com.pharmacy.traning.controller.comand.Message;
 import com.pharmacy.traning.controller.comand.PathToPage;
 import com.pharmacy.traning.controller.comand.Router;
-import com.pharmacy.traning.controller.comand.impl.admin.go.GoToProductList;
 import com.pharmacy.traning.exception.CommandException;
 
 import com.pharmacy.traning.exception.DaoException;
@@ -15,12 +14,14 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-import static com.pharmacy.traning.controller.comand.Message.ERROR_LIST_IS_EMPTY;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 import static com.pharmacy.traning.controller.comand.RequestParameter.QUANTITY;
 
+/**
+ * The type Add product quantity command.
+ */
 public class AddProductQuantityCommand implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();

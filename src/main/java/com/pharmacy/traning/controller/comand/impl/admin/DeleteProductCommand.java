@@ -17,6 +17,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PRODUCT_ID;
 
+/**
+ * The type Delete product command.
+ */
 public class DeleteProductCommand implements Command {
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();

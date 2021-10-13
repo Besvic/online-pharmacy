@@ -18,6 +18,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
+/**
+ * The type Update data admin command.
+ */
 public class UpdateDataAdminCommand implements Command {
 
     private static final CryptorPassword crypt = CryptorPassword.getInstance();

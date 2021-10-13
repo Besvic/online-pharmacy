@@ -1,6 +1,5 @@
 package com.pharmacy.traning.model.pool;
 
-import com.pharmacy.traning.exception.DatabaseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,18 +12,45 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The type Connection pool.
+ */
 public class ConnectionPool {
 
+    /**
+     * The Logger.
+     */
     private static final Logger logger = LogManager.getLogger();
-
+    /**
+     * The Instance.
+     */
     private static ConnectionPool instance = null;
+    /**
+     * The Free connection.
+     */
     private final BlockingDeque<ProxyConnection> freeConnection;
+    /**
+     * The Busy connection.
+     */
     private final BlockingDeque<ProxyConnection> busyConnection;
+    /**
+     * The Lock.
+     */
     private static final Lock lock = new ReentrantLock(true);
+    /**
+     * The Is create.
+     */
     private static final AtomicBoolean isCreate = new AtomicBoolean(false);
-
+    /**
+     * The Default size connection.
+     */
     private final int DEFAULT_SIZE_CONNECTION = 5;
 
+    /**
+     * Get instance connection pool.
+     *
+     * @return the connection pool
+     */
     public static ConnectionPool getInstance(){
         if (!isCreate.get()){
             lock.lock();
@@ -56,6 +82,11 @@ public class ConnectionPool {
         logger.info("ConnectionPool was create.");
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         ProxyConnection connection = null;
         if (freeConnection.size() > 0){
@@ -71,6 +102,12 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Release connection boolean.
+     *
+     * @param connection the connection
+     * @return the boolean
+     */
     public boolean releaseConnection(Connection connection) {
         if (connection instanceof ProxyConnection && busyConnection.remove(connection)) {
             try {
@@ -83,6 +120,9 @@ public class ConnectionPool {
         return false;
     }
 
+    /**
+     * Destroy pool.
+     */
     public void destroyPool() {
         for (int i = 0; i < freeConnection.size(); i++) {
             try {

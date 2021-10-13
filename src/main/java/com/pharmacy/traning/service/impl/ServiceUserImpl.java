@@ -9,7 +9,6 @@ import com.pharmacy.traning.model.entity.UserStatus;
 import com.pharmacy.traning.model.util.CryptorPassword;
 import com.pharmacy.traning.service.ServiceUser;
 import com.pharmacy.traning.validator.Validator;
-import com.pharmacy.traning.validator.ValidatorUser;
 import com.pharmacy.traning.validator.impl.ValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,14 +18,37 @@ import java.util.Optional;
 
 import static com.pharmacy.traning.controller.comand.SessionAttribute.ADMIN;
 
+/**
+ * The type Service user.
+ */
 public class ServiceUserImpl implements ServiceUser {
 
+    /**
+     * The Logger.
+     */
     private static final Logger logger = LogManager.getLogger();
+    /**
+     * The Instance.
+     */
     private static ServiceUserImpl instance;
+    /**
+     * The User dao.
+     */
     private static final UserDaoImpl userDao = UserDaoImpl.getInstance();
+    /**
+     * The Validator.
+     */
     private static final Validator validator = ValidatorImpl.getInstance();
+    /**
+     * The Crypt.
+     */
     private static final CryptorPassword crypt = CryptorPassword.getInstance();
 
+    /**
+     * Get instance service user.
+     *
+     * @return the service user
+     */
     public static ServiceUserImpl getInstance(){
         if (instance == null)
             instance = new ServiceUserImpl();
@@ -37,21 +59,24 @@ public class ServiceUserImpl implements ServiceUser {
 
     }
 
+    /**
+     * Registration boolean.
+     *
+     * @param user the user
+     * @return the boolean
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
-    public boolean registration(Optional<User> user) throws ServiceException {
-        if (user.isPresent() && validator.isName(user.get().getName()) &&
-                validator.isEmail(user.get().getLogin()) && validator.isPassword(user.get().getPassword())) {
-            try {
-                if (user.get().getPosition().equals(ADMIN) && userDao.checkIsAdmin()){
-                    logger.error("First administrator completed registration!");
-                   throw new ServiceException("First administrator completed registration!");
+    public boolean registration(User user) throws ServiceException, DaoException {
+        if ( validator.isName(user.getName()) &&
+                validator.isEmail(user.getLogin()) && validator.isPassword(user.getPassword())) {
+                if (user.getPosition().getValue().equals(ADMIN) && !userDao.checkIsAdmin()){
+                    user.setPassword(crypt.encryptor(user.getPassword()));
+                    return userDao.createUser(user);
                 }
-                user.get().setPassword(crypt.encryptor(user.get().getPassword()));
-                return userDao.createUser(user.get());
-            } catch (DaoException e) {
-                logger.warn("Not available create person, because this email already saved!", e);
-                throw new ServiceException("Not available create person, because this email already saved!", e);
-            }
+                logger.error("First administrator completed registration!");
+                throw new ServiceException("First administrator completed registration!");
         }
         else {
             logger.error("Not available create person, because this data is null!");
@@ -59,6 +84,14 @@ public class ServiceUserImpl implements ServiceUser {
         }
     }
 
+    /**
+     * Update photo by id boolean.
+     *
+     * @param path the path
+     * @param id   the id
+     * @return the boolean
+     * @throws ServiceException the service exception
+     */
     @Override
     public boolean updatePhotoById(String path, long id) throws ServiceException {
         try {
@@ -69,6 +102,16 @@ public class ServiceUserImpl implements ServiceUser {
         }
     }
 
+    /**
+     * Update user by id boolean.
+     *
+     * @param user the user
+     * @param pass the pass
+     * @param name the name
+     * @return the boolean
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public boolean updateUserById(User user, String pass, String name) throws ServiceException, DaoException {
         if (validator.isName(name)){
@@ -78,6 +121,15 @@ public class ServiceUserImpl implements ServiceUser {
         return userDao.updateUserById(user);
     }
 
+    /**
+     * Change user status by user id boolean.
+     *
+     * @param strId  the str id
+     * @param status the status
+     * @return the boolean
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public boolean changeUserStatusByUserId(String strId, String status) throws ServiceException, DaoException {
         if (validator.isInt(strId) && !status.isEmpty()) {
@@ -89,6 +141,14 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Update page, please!");
     }
 
+    /**
+     * Delete user by user id boolean.
+     *
+     * @param strId the str id
+     * @return the boolean
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public boolean deleteUserByUserId(String strId) throws ServiceException, DaoException {
         if (validator.isInt(strId)) {
@@ -99,16 +159,38 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Update page, please!");
     }
 
+    /**
+     * Find all delete user list.
+     *
+     * @return the list
+     * @throws DaoException     the dao exception
+     * @throws ServiceException the service exception
+     */
     @Override
     public List<User> findAllDeleteUser() throws DaoException, ServiceException {
         return userDao.findAllDeleteUser();
     }
 
+    /**
+     * Find all non delete user list.
+     *
+     * @return the list
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public List<User> findAllNonDeleteUser() throws ServiceException, DaoException {
         return userDao.findAllNonDeleteUser();
     }
 
+    /**
+     * Search delete user by name list.
+     *
+     * @param name the name
+     * @return the list
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public List<User> searchDeleteUserByName(String name) throws ServiceException, DaoException {
         if (validator.isName(name)) {
@@ -118,6 +200,14 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Incorrect input string!");
     }
 
+    /**
+     * Search non delete user by name list.
+     *
+     * @param name the name
+     * @return the list
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public List<User> searchNonDeleteUserByName(String name) throws ServiceException, DaoException {
         if (validator.isName(name)) {
@@ -127,11 +217,20 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Incorrect input string!");
     }
 
+    /**
+     * Find user cash by id double.
+     *
+     * @param userId the user id
+     * @return the double
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public double findUserCashById(long userId) throws ServiceException, DaoException {
         return userDao.findUserCashById(userId);
     }
 
+    // TODO: 13.10.2021 del
     /*@Override
     public List<User> findAllInRegisterUser() throws ServiceException, DaoException {
         List<User> userList = userDao.findAllInRegisterUser();
@@ -142,6 +241,15 @@ public class ServiceUserImpl implements ServiceUser {
         return userList;
     }*/
 
+    /**
+     * Update cash by id boolean.
+     *
+     * @param creditCard the credit card
+     * @param id         the id
+     * @return the boolean
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public boolean updateCashById(CreditCard creditCard, long id) throws ServiceException, DaoException {
         if (validator.isCreditCode(creditCard.getNumber()) &&
@@ -152,6 +260,15 @@ public class ServiceUserImpl implements ServiceUser {
         throw new ServiceException("Check you input data.");
     }
 
+    /**
+     * Sign in optional.
+     *
+     * @param email    the email
+     * @param password the password
+     * @return the optional
+     * @throws ServiceException the service exception
+     * @throws DaoException     the dao exception
+     */
     @Override
     public Optional<User> signIn(String email, String password) throws ServiceException, DaoException {
         if (validator.isEmail(email) && validator.isPassword(password)){

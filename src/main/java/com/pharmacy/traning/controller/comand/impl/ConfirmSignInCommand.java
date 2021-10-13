@@ -18,6 +18,9 @@ import static com.pharmacy.traning.controller.comand.RequestParameter.EMAIL;
 import static com.pharmacy.traning.controller.comand.RequestParameter.PASSWORD;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
+/**
+ * The type Confirm sign in command.
+ */
 public class ConfirmSignInCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();
@@ -38,6 +41,7 @@ public class ConfirmSignInCommand implements Command {
             request.setAttribute(ERROR, e );
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
+        request.setAttribute(ERROR, Message.ERROR_INPUT_LOGIN_PASSWORD);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
 
     }

@@ -22,6 +22,9 @@ import java.util.List;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.*;
 
+/**
+ * The type Go to order list by user command.
+ */
 public class GoToOrderListByUserCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

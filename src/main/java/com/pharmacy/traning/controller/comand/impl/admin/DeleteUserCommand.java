@@ -20,6 +20,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.USER_LIST;
 import static com.pharmacy.traning.controller.comand.RequestParameter.USER_ID;
 
+/**
+ * The type Delete user command.
+ */
 public class DeleteUserCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

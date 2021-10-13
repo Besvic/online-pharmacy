@@ -2,6 +2,9 @@ package com.pharmacy.traning.controller.comand;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * The type Command factory.
+ */
 public class CommandFactory {
 
     private static CommandFactory instance;
@@ -10,12 +13,23 @@ public class CommandFactory {
 
     }
 
+    /**
+     * Get instance command factory.
+     *
+     * @return the command factory
+     */
     public static CommandFactory getInstance(){
         if (instance == null)
             instance = new CommandFactory();
         return instance;
     }
 
+    /**
+     * Create command command.
+     *
+     * @param request the request
+     * @return the command
+     */
     public Command createCommand(HttpServletRequest request){
         String commandName = request.getParameter(RequestParameter.COMMAND);
         Command command;

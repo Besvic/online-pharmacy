@@ -17,6 +17,9 @@ import static com.pharmacy.traning.controller.comand.Message.ERROR_LIST_IS_EMPTY
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.PRODUCT_LIST;
 
+/**
+ * The type Go to product list for purchase command.
+ */
 public class GoToProductListForPurchaseCommand implements Command{
 
     private static final ServiceProductImpl serviceProduct = ServiceProductImpl.getInstance();

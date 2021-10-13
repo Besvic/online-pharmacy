@@ -13,6 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestAttribute.ORDER_LIST_COMPLETED;
 
+/**
+ * The type Go to order list by admin.
+ */
 public class GoToOrderListByAdmin implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();

@@ -6,6 +6,9 @@ import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * The type Go to menu by user command.
+ */
 public class GoToMenuByUserCommand implements Command {
 
     @Override

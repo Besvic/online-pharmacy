@@ -22,6 +22,9 @@ import static com.pharmacy.traning.controller.comand.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.comand.RequestParameter.*;
 import static com.pharmacy.traning.controller.comand.SessionAttribute.USER;
 
+/**
+ * The type Add cash command.
+ */
 public class AddCashCommand implements Command {
 
     private static final ServiceUser serviceUser = ServiceUserImpl.getInstance();

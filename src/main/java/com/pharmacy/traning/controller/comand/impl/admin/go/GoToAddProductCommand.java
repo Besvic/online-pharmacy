@@ -6,6 +6,9 @@ import com.pharmacy.traning.controller.comand.Router;
 import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * The type Go to add product command.
+ */
 public class GoToAddProductCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {

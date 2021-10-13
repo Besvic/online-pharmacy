@@ -7,4 +7,14 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/error/404_exception.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/pages/error/500_exception.jsp</location>
+    </error-page>
 </web-app>

@@ -1,25 +1,36 @@
 package com.pharmacy.traning.controller.comand;
 
+/**
+ * The type Session attribute.
+ */
 public final class SessionAttribute {
-
-    public static final String LOCALE = "locale";
-    public static final String RU_RU = "ru_RU";
-    public static final String EN_EN = "en_EN";
-    public static final String CURRENT_PAGE = "currentPage";
-    public static final String USER = "user";
-    public static final String ADMIN = "admin";
-
-
-
-//    public static final String ERROR = "";
-//    public static final String ERROR = "";
-//    public static final String ERROR = "";
-//    public static final String ERROR = "";
-//    public static final String ERROR = "";
-
-
 
     private SessionAttribute() {
 
     }
+
+    /**
+     * The constant LOCALE.
+     */
+    public static final String LOCALE = "locale";
+    /**
+     * The constant RU_RU.
+     */
+    public static final String RU_RU = "ru_RU";
+    /**
+     * The constant EN_EN.
+     */
+    public static final String EN_EN = "en_EN";
+    /**
+     * The constant CURRENT_PAGE.
+     */
+    public static final String CURRENT_PAGE = "currentPage";
+    /**
+     * The constant USER.
+     */
+    public static final String USER = "user";
+    /**
+     * The constant ADMIN.
+     */
+    public static final String ADMIN = "admin";
 }
