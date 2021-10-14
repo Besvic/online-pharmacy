@@ -5,11 +5,14 @@ import com.pharmacy.traning.model.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidatorImplTest {
 
     private static final Validator valid = ValidatorImpl.getInstance();
+
+    // true test
 
     @Test
     public void isPassword() {
@@ -90,5 +93,86 @@ public class ValidatorImplTest {
         assertTrue(actual);
     }
 
-    // TODO: 07.10.2021  create test for false result
+    //false test
+
+    @Test
+    public void isPasswordFalse() {
+        boolean actual = valid.isPassword("gfdsxa");
+        assertFalse(actual);
+    }
+
+    @Test
+    public void emailIsValidFalse() {
+        boolean actual = valid.isEmail("asdfgmail.ru");
+        assertFalse(actual);
+
+    }
+
+    @Test
+    void isOnlyLetterFalse() {
+        boolean actual = valid.isOnlyLetter("фыв454сыв");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isOnlyNumberFalse() {
+        boolean actual = valid.isOnlyNumber("1234ddf0");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isOnlyUpperCaseLetterFalse() {
+        boolean actual = valid.isOnlyUpperCaseLetter("DFGsdHJKIUYTGVB");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isCvvFalse() {
+        boolean actual = valid.isCvv("2323");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isCreditCodeFalse() {
+        boolean actual = valid.isCreditCode("06789123456");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isDoubleFalse() {
+        boolean actual = valid.isDouble("10d0212");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isIntFalse() {
+        boolean actual = valid.isInt("6d543");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isMoneyFalse() {
+        boolean actual = valid.isMoney("234.3224");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isYearFalse() {
+        boolean actual = valid.isYear("20c1");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isMonthFalse() {
+        boolean actual = valid.isMonth("21");
+        assertFalse(actual);
+    }
+
+    @Test
+    void isNameFalse() {
+        boolean actual = valid.isName("dfv8");
+        assertFalse(actual);
+    }
+
+
 }

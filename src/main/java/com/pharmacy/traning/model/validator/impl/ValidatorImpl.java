@@ -51,7 +51,7 @@ public class ValidatorImpl implements Validator {
     /**
      * The constant REGEX_ONLY_NUMBER.
      */
-    private static final String REGEX_ONLY_NUMBER = "[0-9]{1,8}";
+    private static final String REGEX_ONLY_NUMBER = "[0-9]{1,10}";
     /**
      * The constant REGEX_CORRECT_MONTH.
      */
@@ -80,7 +80,7 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public boolean isPassword(String string) {
-        return string != null && string.length() >= 8 && !string.matches(REGEX_ONLY_LETTER) &&
+        return string != null && string.length() >= 6 && !string.matches(REGEX_ONLY_LETTER) &&
                 !string.matches(REGEX_ONLY_NUMBER);
     }
 
@@ -91,7 +91,6 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public boolean isOnlyLetter(String string) {
-        System.out.println(string);
         return string != null && string.matches(REGEX_ONLY_LETTER);
     }
 

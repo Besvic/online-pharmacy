@@ -23,8 +23,7 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        User user = new User.UserBuilder().setPosition(USER).createUser();
-        System.out.println(user.getPosition().getValue().equals(ADMIN));
+        int l = 1234567890;
 
 
     }
