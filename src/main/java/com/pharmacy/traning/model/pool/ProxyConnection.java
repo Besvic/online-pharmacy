@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
+ * @author Besarab Victor
  * The type Proxy connection.
  */
 public class ProxyConnection implements Connection {

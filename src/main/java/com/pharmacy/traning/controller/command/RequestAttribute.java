@@ -1,6 +1,7 @@
 package com.pharmacy.traning.controller.command;
 
 /**
+ * @author Besarab Victor
  * The type Request attribute.
  */
 public final class RequestAttribute {

@@ -3,6 +3,7 @@ package com.pharmacy.traning.controller.command;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
+ * @author Besarab Victor
  * The type Command factory.
  */
 public class CommandFactory {

@@ -1,6 +1,7 @@
 package com.pharmacy.traning.exception;
 
 /**
+ * @author Besarab Victor
  * The type Service exception.
  */
 public class ServiceException extends Exception{

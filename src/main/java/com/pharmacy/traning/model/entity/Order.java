@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
+ * @author Besarab Victor
  * The type Order.
  */
 public class Order {

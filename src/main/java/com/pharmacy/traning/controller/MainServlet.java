@@ -11,7 +11,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
+
 /**
+ * @author Besarab Victor
  * The type Main servlet.
  */
 @WebServlet(name = "helloServlet", urlPatterns = "/controller")
@@ -35,11 +38,13 @@ public class MainServlet extends UploadServlet {
         try {
             router = command.execute(request);
         } catch (CommandException e) {
-            router = new Router(PathToPage.ERROR_404, Router.RouterType.REDIRECT);
+            request.setAttribute(ERROR, e);
+            router = new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }
         switch (router.getRouterType()) {
             case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
             case REDIRECT -> response.sendRedirect(request.getContextPath() + router.getPagePath());
+            default -> response.sendRedirect(request.getContextPath() + PathToPage.ERROR_404);
         }
     }
 

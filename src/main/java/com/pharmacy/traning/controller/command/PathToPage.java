@@ -1,6 +1,7 @@
 package com.pharmacy.traning.controller.command;
 
 /**
+ * @author Besarab Victor
  * The type Path to page.
  */
 public final class PathToPage {
@@ -16,10 +17,10 @@ public final class PathToPage {
      * The constant SIGN_IN.
      */
     public static final String SIGN_IN = "/pages/enter/sign_in.jsp";
+
     /**
      * The constant MAIN.
      */
-
     public static final String MAIN = "start_page.jsp";
     /**
      * The constant ADMIN_MENU.

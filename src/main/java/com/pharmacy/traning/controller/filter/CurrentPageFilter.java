@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * @author Besarab Victor
  * The type Current page filter.
  */
 @WebFilter(filterName = "CurrentPageFilter", urlPatterns = {"/*"})

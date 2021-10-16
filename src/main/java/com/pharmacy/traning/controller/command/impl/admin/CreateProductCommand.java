@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.service.ServiceProduct;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
 import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
-import static com.pharmacy.traning.controller.command.RequestAttribute.REPORT;
 import static com.pharmacy.traning.controller.command.RequestParameter.*;
 
 /**
@@ -38,12 +36,10 @@ public class CreateProductCommand implements Command {
         String quantity = request.getParameter(QUANTITY);
         try {
             if (serviceProduct.createProduct(product, dosage, price, quantity)) {
-                request.setAttribute(REPORT, Message.REPORT_PRODUCT_ADD);
                 return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
             }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
-            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in CreateProductCommand. " + e);
         }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

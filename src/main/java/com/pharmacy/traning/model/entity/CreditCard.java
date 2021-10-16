@@ -3,6 +3,7 @@ package com.pharmacy.traning.model.entity;
 import java.util.Arrays;
 
 /**
+ * @author Besarab Victor
  * The type Credit card.
  */
 public class CreditCard {

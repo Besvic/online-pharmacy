@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * @author Besarab Victor
  * The type Cryptor password.
  */
 public final class CryptorPassword {

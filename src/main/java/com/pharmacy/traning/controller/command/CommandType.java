@@ -4,18 +4,20 @@ import com.pharmacy.traning.controller.command.impl.*;
 import com.pharmacy.traning.controller.command.impl.admin.*;
 import com.pharmacy.traning.controller.command.impl.admin.go.*;
 import com.pharmacy.traning.controller.command.impl.go.GoMainPageCommand;
+import com.pharmacy.traning.controller.command.impl.go.GoToDefaultCommand;
 import com.pharmacy.traning.controller.command.impl.go.GoToSignInCommand;
 import com.pharmacy.traning.controller.command.impl.user.*;
 import com.pharmacy.traning.controller.command.impl.user.go.*;
 
 /**
+ * @author Besarab Victor
  * The enum Command type.
  */
 public enum CommandType {
     /**
      * The Default.
      */
-    DEFAULT(new DefaultCommand()),
+    DEFAULT(new GoToDefaultCommand()),
     /**
      * The Go sign in.
      */
@@ -205,10 +207,7 @@ public enum CommandType {
     /**
      * The Update data user.
      */
-    UPDATE_DATA_USER(new UpdateDataUserCommand()),
-
-
-    ;
+    UPDATE_DATA_USER(new UpdateDataUserCommand());
 
 
 

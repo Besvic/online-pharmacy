@@ -1,4 +1,4 @@
-package com.pharmacy.traning.controller.command.impl;
+package com.pharmacy.traning.controller.command.impl.go;
 
 import com.pharmacy.traning.controller.command.Command;
 import com.pharmacy.traning.controller.command.PathToPage;
@@ -7,9 +7,9 @@ import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * The type Default command.
+ * The type Go to default command.
  */
-public class DefaultCommand implements Command {
+public class GoToDefaultCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {

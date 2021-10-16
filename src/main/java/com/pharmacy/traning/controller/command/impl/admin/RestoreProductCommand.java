@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.service.ServiceProduct;
@@ -33,12 +32,10 @@ public class RestoreProductCommand implements Command {
                 request.setAttribute(PRODUCT_LIST, products);
                 return new Router(PathToPage.ADMIN_PRODUCT_DELETE_LIST, Router.RouterType.FORWARD);
             }
-            else {
-                request.setAttribute(ERROR, Message.ERROR_RESTORE);
-            }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in RestoreProductCommand. " + e);
         }
+        request.setAttribute(ERROR, Message.ERROR_RESTORE);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }
 }

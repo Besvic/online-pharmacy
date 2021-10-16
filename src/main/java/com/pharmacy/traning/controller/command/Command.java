@@ -1,12 +1,10 @@
 package com.pharmacy.traning.controller.command;
 
 import com.pharmacy.traning.exception.CommandException;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.IOException;
-
 /**
+ * @author Besarab Victor
  * The interface Command.
  */
 public interface Command {
@@ -17,8 +15,6 @@ public interface Command {
      * @param request the request
      * @return the router
      * @throws CommandException the command exception
-     * @throws IOException      the io exception
-     * @throws ServletException the servlet exception
      */
-    Router execute(HttpServletRequest request) throws CommandException, IOException, ServletException;
+    Router execute(HttpServletRequest request) throws CommandException;
 }

@@ -1,6 +1,7 @@
 package com.pharmacy.traning.exception;
 
 /**
+ * @author Besarab Victor
  * The type Dao exception.
  */
 public class DaoException extends Exception{

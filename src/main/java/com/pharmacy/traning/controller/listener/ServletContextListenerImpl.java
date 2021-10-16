@@ -6,6 +6,7 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
 /**
+ * @author Besarab Victor
  * The type Servlet context listener.
  */
 @WebListener

@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 /**
- * The type Go to admin profile.
+ * The type Go to admin profile command.
  */
 public class GoToAdminProfileCommand implements Command {
     @Override

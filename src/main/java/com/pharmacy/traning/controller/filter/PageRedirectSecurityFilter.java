@@ -18,6 +18,7 @@ import static com.pharmacy.traning.controller.command.SessionAttribute.ADMIN;
 import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
 /**
+ * @author Besarab Victor
  * The type Page redirect security filter.
  */
 @WebFilter(urlPatterns = {"/pages/user/*", "/pages/admin/*"},

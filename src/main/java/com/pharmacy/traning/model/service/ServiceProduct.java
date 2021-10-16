@@ -1,6 +1,5 @@
 package com.pharmacy.traning.model.service;
 
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 
@@ -19,9 +18,8 @@ public interface ServiceProduct {
      * @param number  the number
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean createProduct(Product product, String dosage, String price, String number) throws ServiceException, DaoException;
+    boolean createProduct(Product product, String dosage, String price, String number) throws ServiceException;
 
     /**
      * Delete product by id boolean.
@@ -29,9 +27,8 @@ public interface ServiceProduct {
      * @param id the id
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean deleteProductById(long id) throws ServiceException, DaoException;
+    boolean deleteProductById(long id) throws ServiceException;
 
     /**
      * Restore product by id boolean.
@@ -39,9 +36,8 @@ public interface ServiceProduct {
      * @param id the id
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean restoreProductById(long id) throws ServiceException, DaoException;
+    boolean restoreProductById(long id) throws ServiceException;
 
     /**
      * Really delete product by id boolean.
@@ -49,18 +45,16 @@ public interface ServiceProduct {
      * @param id the id
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean reallyDeleteProductById(long id) throws ServiceException, DaoException;
+    boolean reallyDeleteProductById(long id) throws ServiceException;
 
     /**
      * Find all product list.
      *
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Product> findAllProduct() throws ServiceException, DaoException;
+    List<Product> findAllProduct() throws ServiceException;
 
     /**
      * Search product by name list.
@@ -68,18 +62,16 @@ public interface ServiceProduct {
      * @param name the name
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Product> searchProductByName(String name) throws ServiceException, DaoException;
+    List<Product> searchProductByName(String name) throws ServiceException;
 
     /**
      * Find all delete product list.
      *
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Product> findAllDeleteProduct() throws ServiceException, DaoException;
+    List<Product> findAllDeleteProduct() throws ServiceException;
 
     /**
      * Search delete product by name list.
@@ -87,9 +79,8 @@ public interface ServiceProduct {
      * @param name the name
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Product> searchDeleteProductByName(String name) throws ServiceException, DaoException;
+    List<Product> searchDeleteProductByName(String name) throws ServiceException;
 
     /**
      * Add product quantity by product id boolean.
@@ -98,9 +89,8 @@ public interface ServiceProduct {
      * @param id              the id
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean addProductQuantityByProductId(String productQuantity, String id) throws ServiceException, DaoException;
+    boolean addProductQuantityByProductId(String productQuantity, String id) throws ServiceException;
 
     /**
      * Change product boolean.
@@ -111,9 +101,8 @@ public interface ServiceProduct {
      * @param strPrice    the str price
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean changeProduct(Product product, String strDosage, String strQuantity, String strPrice) throws ServiceException, DaoException;
+    boolean changeProduct(Product product, String strDosage, String strQuantity, String strPrice) throws ServiceException;
 
     /**
      * Find product by id product.
@@ -121,9 +110,8 @@ public interface ServiceProduct {
      * @param id the id
      * @return the product
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    Product findProductById(String id) throws ServiceException, DaoException;
+    Product findProductById(String id) throws ServiceException;
 
 
 

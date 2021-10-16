@@ -14,9 +14,9 @@ import java.util.List;
 
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 
-/***
- * class PharmacyDaoImpl
- * @author Victor Besarab
+/**
+ * @author Besarab Victor
+ * The type Pharmacy dao.
  */
 public class PharmacyDaoImpl implements PharmacyDao {
 
@@ -51,9 +51,10 @@ public class PharmacyDaoImpl implements PharmacyDao {
             when 'delete' then 2
             end) asc;""";
 
-    /***
+    /**
+     * Get instance pharmacy dao.
      *
-     * @return pharmacy dao
+     * @return the pharmacy dao
      */
     public static PharmacyDao getInstance(){
         if (instance == null){
@@ -65,12 +66,6 @@ public class PharmacyDaoImpl implements PharmacyDao {
 
     }
 
-    /***
-     *
-     * @param pharmacy
-     * @return
-     * @throws DaoException
-     */
     @Override
     public boolean createPharmacy(Pharmacy pharmacy) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -78,60 +73,37 @@ public class PharmacyDaoImpl implements PharmacyDao {
             statement.setString(1, pharmacy.getCity());
             statement.setString(2, pharmacy.getStreet());
             statement.setInt(3, pharmacy.getNumber());
-            if (statement.executeUpdate() != 0)
-                return true;
+           return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or createPharmacy method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or createPharmacy method is not available. " + throwables);
         }
-        return false;
     }
 
-    /***
-     *
-     * @param pharmacyId
-     * @return
-     * @throws DaoException
-     */
     @Override
     public boolean deletePharmacy(long pharmacyId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_DELETE_PHARMACY_BY_ID)){
             statement.setLong(1, pharmacyId);
-            if (statement.executeUpdate() != 0)
-                return true;
+           return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or deletePharmacy method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or deletePharmacy method is not available. " + throwables);
         }
-        return false;
     }
 
-    /***
-     *
-     * @param pharmacyId
-     * @return
-     * @throws DaoException
-     */
     @Override
     public boolean restorePharmacy(long pharmacyId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_RESTORE_PHARMACY_BY_ID)){
             statement.setLong(1, pharmacyId);
-            if (statement.executeUpdate() != 0)
-                return true;
+            return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or restorePharmacy method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or restorePharmacy method is not available. " + throwables);
         }
-        return false;
     }
 
-    /***
-     *
-     * @return
-     * @throws DaoException
-     */
     @Override
     public List<Pharmacy> findAllActualPharmacy() throws DaoException {
         List<Pharmacy> pharmacyList = new ArrayList<>();
@@ -147,17 +119,12 @@ public class PharmacyDaoImpl implements PharmacyDao {
                         .createPharmacy());
                 }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + throwables);
         }
         return pharmacyList;
     }
 
-    /***
-     *
-     * @return
-     * @throws DaoException
-     */
     @Override
     public List<Pharmacy> findAllPharmacy() throws DaoException {
         List<Pharmacy> pharmacyList = new ArrayList<>();
@@ -174,8 +141,8 @@ public class PharmacyDaoImpl implements PharmacyDao {
                         .createPharmacy());
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findAllPharmacy method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findAllPharmacy method is not available. " + throwables);
         }
         return pharmacyList;
     }

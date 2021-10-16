@@ -5,18 +5,14 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.CreditCard;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.service.ServiceUser;
 import com.pharmacy.traning.model.service.impl.ServiceUserImpl;
 import com.pharmacy.traning.model.validator.impl.ValidatorImpl;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
 
 import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.command.RequestParameter.*;
@@ -31,7 +27,7 @@ public class AddCashCommand implements Command {
     private static final ValidatorImpl validator = ValidatorImpl.getInstance();
 
     @Override
-    public Router execute(HttpServletRequest request) throws CommandException, IOException, ServletException {
+    public Router execute(HttpServletRequest request) throws CommandException {
         String cardMonth = request.getParameter(CARD_MONTH);
         String cardYear = request.getParameter(CARD_YEAR);
         String cardCVV = request.getParameter(CARD_CVV);
@@ -58,13 +54,11 @@ public class AddCashCommand implements Command {
                 user.setCash(currencyCash);
                 session.setAttribute(USER, user);
                 return new Router(PathToPage.USER_MENU, Router.RouterType.REDIRECT);
-            }else{
-                request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
-                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
+            request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in AddCashCommand. " + e);
         }
     }
 }

@@ -15,26 +15,16 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * @author Besarab Victor
  * The type Service product.
  */
 public class ServiceProductImpl implements ServiceProduct {
 
-    /**
-     * The Logger.
-     */
     private static final Logger logger = LogManager.getLogger();
-    /**
-     * The Instance.
-     */
-    private static ServiceProductImpl instance;
-    /**
-     * The Product dao.
-     */
+
     private final ProductDao productDao = ProductDaoImpl.getInstance();
-    /**
-     * The Validator.
-     */
     private final Validator validator = ValidatorImpl.getInstance();
+    private static ServiceProductImpl instance;
 
     /**
      * Get instance service product.
@@ -47,19 +37,8 @@ public class ServiceProductImpl implements ServiceProduct {
         return instance;
     }
 
-    /**
-     * Create product boolean.
-     *
-     * @param product  the product
-     * @param dosage   the dosage
-     * @param price    the price
-     * @param quantity the quantity
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean createProduct(Product product, String dosage, String price, String quantity) throws ServiceException, DaoException {
+    public boolean createProduct(Product product, String dosage, String price, String quantity) throws ServiceException {
         if ( validator.isOnlyLetter(product.getName()) &&
                 validator.isOnlyLetter(product.getManufactureCountry()) &&
                 validator.isOnlyLetter(product.getMeasure()) && validator.isDouble(dosage) && validator.isMoney(price) &&
@@ -67,142 +46,104 @@ public class ServiceProductImpl implements ServiceProduct {
             product.setQuantity(Integer.parseInt(quantity));
             product.setDosage(Double.parseDouble(dosage));
             product.setPrice(Double.parseDouble(price));
-            return productDao.addProduct(product);
+            try {
+                return productDao.addProduct(product);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in createProduct method. " + e);
+            }
         }
         logger.error("Object product is null");
         throw new ServiceException("Object product is null");
     }
 
-    /**
-     * Delete product by id boolean.
-     *
-     * @param id the id
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean deleteProductById(long id) throws ServiceException, DaoException {
-        return productDao.deleteProductById(id);
+    public boolean deleteProductById(long id) throws ServiceException {
+        try {
+            return productDao.deleteProductById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("ServiceException in deleteProductById method. " + e);
+        }
     }
 
-    /**
-     * Restore product by id boolean.
-     *
-     * @param id the id
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean restoreProductById(long id) throws ServiceException, DaoException {
-        return productDao.restoreProductById(id);
+    public boolean restoreProductById(long id) throws ServiceException {
+        try {
+            return productDao.restoreProductById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("ServiceException in restoreProductById method. " + e);
+        }
     }
 
-    /**
-     * Really delete product by id boolean.
-     *
-     * @param id the id
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean reallyDeleteProductById(long id) throws ServiceException, DaoException {
-        return productDao.reallyDeleteProductById(id);
+    public boolean reallyDeleteProductById(long id) throws ServiceException {
+        try {
+            return productDao.reallyDeleteProductById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("ServiceException in reallyDeleteProductById method. " + e);
+        }
     }
 
-    /**
-     * Find all product list.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public List<Product> findAllProduct() throws ServiceException, DaoException {
-        return productDao.findAllProduct();
+    public List<Product> findAllProduct() throws ServiceException {
+        try {
+            return productDao.findAllProduct();
+        } catch (DaoException e) {
+            throw new ServiceException("ServiceException in findAllProduct method. " + e);
+        }
     }
 
-    /**
-     * Search product by name list.
-     *
-     * @param name the name
-     * @return the list
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public List<Product> searchProductByName(String name) throws ServiceException, DaoException {
+    public List<Product> searchProductByName(String name) throws ServiceException {
         if (name != null && !name.isEmpty()){
-            return productDao.searchProductByName(name);
+            try {
+                return productDao.searchProductByName(name);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in method searchProductByName. " + e);
+            }
         }
         logger.error("Product name isn't empty!");
         throw new ServiceException("Product name isn't empty!");
     }
 
-    /**
-     * Find all delete product list.
-     *
-     * @return the list
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public List<Product> findAllDeleteProduct() throws ServiceException, DaoException {
-        return productDao.findAllDeleteProduct();
+    public List<Product> findAllDeleteProduct() throws ServiceException {
+        try {
+            return productDao.findAllDeleteProduct();
+        } catch (DaoException e) {
+            throw new ServiceException("ServiceException in method findAllDeleteProduct. " + e);
+        }
     }
 
-    /**
-     * Search delete product by name list.
-     *
-     * @param name the name
-     * @return the list
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public List<Product> searchDeleteProductByName(String name) throws ServiceException, DaoException {
+    public List<Product> searchDeleteProductByName(String name) throws ServiceException {
         if (name != null && !name.isEmpty()){
-            return productDao.searchDeleteProductByName(name);
+            try {
+                return productDao.searchDeleteProductByName(name);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in method searchDeleteProductByName. " + e);
+            }
         }
         logger.error("Product name isn't empty!");
         throw new ServiceException("Product name isn't empty!");
     }
 
-    /**
-     * Add product quantity by product id boolean.
-     *
-     * @param productQuantity the product quantity
-     * @param productId       the product id
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean addProductQuantityByProductId(String productQuantity, String productId) throws ServiceException, DaoException {
+    public boolean addProductQuantityByProductId(String productQuantity, String productId) throws ServiceException {
         if (validator.isOnlyNumber(productQuantity) && validator.isInt(productId)){
             int quantity = Integer.parseInt(productQuantity);
             long id = Long.parseLong(productId);
-            return productDao.addProductQuantityByProductId(quantity, id);
+            try {
+                return productDao.addProductQuantityByProductId(quantity, id);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in method addProductQuantityByProductId. " + e);
+            }
         }
         logger.error("Product quantity isn't correct!");
         throw new ServiceException("Product quantity isn't correct!");
     }
 
-    /**
-     * Change product boolean.
-     *
-     * @param product     the product
-     * @param strDosage   the str dosage
-     * @param strQuantity the str quantity
-     * @param strPrice    the str price
-     * @return the boolean
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public boolean changeProduct(Product product, String strDosage, String strQuantity, String strPrice) throws ServiceException, DaoException {
+    public boolean changeProduct(Product product, String strDosage, String strQuantity, String strPrice) throws ServiceException {
         if (validator.isOnlyLetter(product.getMeasure()) &&
                 validator.isName(product.getName()) && validator.isOnlyNumber(strQuantity) &&
                 validator.isName(product.getManufactureCountry()) && validator.isDouble(strDosage) &&
@@ -210,32 +151,32 @@ public class ServiceProductImpl implements ServiceProduct {
             product.setDosage(Double.parseDouble(strDosage));
             product.setQuantity(Integer.parseInt(strQuantity));
             product.setPrice(Double.parseDouble(strPrice));
-            return productDao.changeProductByProductId(product);
+            try {
+                return productDao.changeProductByProductId(product);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in method changeProduct. " + e);
+            }
         }
         logger.error("Product data isn't correct!");
         throw new ServiceException("Product data isn't correct!");
     }
 
-    /**
-     * Find product by id product.
-     *
-     * @param strId the str id
-     * @return the product
-     * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
-     */
     @Override
-    public Product findProductById(String strId) throws ServiceException, DaoException {
+    public Product findProductById(String strId) throws ServiceException {
         if (validator.isInt(strId)){
             long id = Long.parseLong(strId);
-            Optional<Product> optional = productDao.findProductById(id);
-            if (optional.isPresent()) {
-                return optional.get();
+            Optional<Product> optional;
+            try {
+                optional = productDao.findProductById(id);
+                if (optional.isPresent()) {
+                    return optional.get();
+                }
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in method changeProduct. " + e);
             }
         }
         logger.error("Update page, please.");
         throw new ServiceException("Update page, please.");
     }
-
 
 }

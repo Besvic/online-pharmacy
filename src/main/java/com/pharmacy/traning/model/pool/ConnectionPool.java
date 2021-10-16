@@ -13,6 +13,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * @author Besarab Victor
  * The type Connection pool.
  */
 public class ConnectionPool {
@@ -21,6 +22,18 @@ public class ConnectionPool {
      * The Logger.
      */
     private static final Logger logger = LogManager.getLogger();
+    /**
+     * The Lock.
+     */
+    private static final Lock lock = new ReentrantLock(true);
+    /**
+     * The Is create.
+     */
+    private static final AtomicBoolean isCreate = new AtomicBoolean(false);
+    /**
+     * The Default size connection.
+     */
+    private static final int DEFAULT_SIZE_CONNECTION = 8;
     /**
      * The Instance.
      */
@@ -33,18 +46,6 @@ public class ConnectionPool {
      * The Busy connection.
      */
     private final BlockingDeque<ProxyConnection> busyConnection;
-    /**
-     * The Lock.
-     */
-    private static final Lock lock = new ReentrantLock(true);
-    /**
-     * The Is create.
-     */
-    private static final AtomicBoolean isCreate = new AtomicBoolean(false);
-    /**
-     * The Default size connection.
-     */
-    private final int DEFAULT_SIZE_CONNECTION = 5;
 
     /**
      * Get instance connection pool.
@@ -77,6 +78,7 @@ public class ConnectionPool {
                 freeConnection.put(proxyConnection);
             } catch (InterruptedException | SQLException e) {
                 logger.fatal("No connection to the database.");
+                throw new RuntimeException("No connection to the database.", e);
             }
         }
         logger.info("ConnectionPool was create.");
@@ -89,16 +91,12 @@ public class ConnectionPool {
      */
     public Connection getConnection() {
         ProxyConnection connection = null;
-        if (freeConnection.size() > 0){
             try {
                 connection = freeConnection.take();
                 busyConnection.put(connection);
             } catch (InterruptedException e) {
                 logger.error("Connection not available.", e);
             }
-        } else {
-            logger.info("No free connections.");
-        }
         return connection;
     }
 

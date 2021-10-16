@@ -2,7 +2,6 @@ package com.pharmacy.traning.controller.command.impl.admin;
 
 import com.pharmacy.traning.controller.command.*;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.util.CryptorPassword;
@@ -44,9 +43,8 @@ public class UpdateDataAdminCommand implements Command {
                         return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
                     }
                 }
-            } catch (ServiceException | DaoException e) {
-                request.setAttribute(ERROR, e.toString());
-                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD) ;
+            } catch (ServiceException e) {
+                throw new CommandException("CommandException in UpdateDataAdminCommand. " + e);
             }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD) ;

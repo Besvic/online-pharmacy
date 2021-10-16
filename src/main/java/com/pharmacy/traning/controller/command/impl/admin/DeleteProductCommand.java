@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.service.ServiceProduct;
@@ -37,9 +36,8 @@ public class DeleteProductCommand implements Command {
                 request.setAttribute(ERROR, Message.ERROR_DELETE);
                 return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
-            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in DeleteProductCommand. " + e);
         }
     }
 }

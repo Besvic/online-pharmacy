@@ -19,28 +19,14 @@ import java.util.Optional;
 import static com.pharmacy.traning.model.dao.ColumnName.*;
 
 /**
- * The type Order dao.
+ *
+ * @author Besarab Victor
+ *  The type Order dao.
  */
 public class OrderDaoImpl implements OrderDao {
 
     private static final Logger logger = LogManager.getLogger();
     private static OrderDao instance;
-
-    /**
-     * Get instance order dao.
-     *
-     * @return the order dao
-     */
-    public static OrderDao getInstance(){
-        if (instance == null){
-            instance = new OrderDaoImpl();
-        }
-        return instance;
-    }
-
-    private OrderDaoImpl(){
-
-    }
 
     private static final String SQL_ADD_ORDER = """
             insert into `order` (order_user_id, order_date, order_product_id, order_quantity)
@@ -112,6 +98,23 @@ public class OrderDaoImpl implements OrderDao {
             delete from `order`
             where order_id = ?;""";
 
+
+    /**
+     * Get instance order dao.
+     *
+     * @return the order dao
+     */
+    public static OrderDao getInstance(){
+        if (instance == null){
+            instance = new OrderDaoImpl();
+        }
+        return instance;
+    }
+
+    private OrderDaoImpl(){
+
+    }
+
     @Override
     public boolean addOrder(Order order) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -121,13 +124,11 @@ public class OrderDaoImpl implements OrderDao {
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, order.getProduct().getId());
             statement.setInt(4, order.getQuantity());
-            if (statement.executeUpdate() != 0)
-                return true;
+            return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or addOrder method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or addOrder method is not available. " + throwables);
         }
-        return false;
     }
 
     @Override
@@ -136,13 +137,11 @@ public class OrderDaoImpl implements OrderDao {
              PreparedStatement statement = connection.prepareStatement(SQL_CHANGE_QUANTITY_PRODUCT_IN_ORDER)){
             statement.setInt(1, quantity);
             statement.setLong(2, orderId);
-            if (statement.executeUpdate() != 0)
-                return true;
+            return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + throwables);
         }
-        return false;
     }
 
     @Override
@@ -150,13 +149,11 @@ public class OrderDaoImpl implements OrderDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER_BY_ID)){
             statement.setLong(1, orderId);
-            if (statement.executeUpdate() != 0)
-                return true;
+           return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or deleteOrderById method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or deleteOrderById method is not available. " + throwables);
         }
-        return false;
     }
 
     @Override
@@ -165,12 +162,11 @@ public class OrderDaoImpl implements OrderDao {
             statement.setLong(1, pharmacyId);
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, orderId);
-            if (statement.executeUpdate() != 0)
-                return true;
+            return statement.executeUpdate() != 0;
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }return false;
+            logger.error("PrepareStatement didn't connection or completedOrder method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or completedOrder method is not available. " + throwables);
+        }
     }
 
 
@@ -191,8 +187,8 @@ public class OrderDaoImpl implements OrderDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or checkIsOrder method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or checkIsOrder method is not available. " + throwables);
         }
         return Optional.empty();
     }
@@ -217,8 +213,8 @@ public class OrderDaoImpl implements OrderDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + throwables);
         }
         return orderList;
     }
@@ -245,8 +241,8 @@ public class OrderDaoImpl implements OrderDao {
 
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + throwables);
         }
         return orderList;
     }
@@ -282,8 +278,8 @@ public class OrderDaoImpl implements OrderDao {
             }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + throwables);
         }
         return orderList;
     }
@@ -311,8 +307,8 @@ public class OrderDaoImpl implements OrderDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or searchOrderByName method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or searchOrderByName method is not available. " + throwables);
         }
         return orderList;
     }
@@ -339,8 +335,8 @@ public class OrderDaoImpl implements OrderDao {
                 }
             }
         } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
+            logger.error("PrepareStatement didn't connection or findOrderById method is not available. " + throwables);
+            throw new DaoException("PrepareStatement didn't connection or findOrderById method is not available. " + throwables);
         }
         return Optional.empty();
     }

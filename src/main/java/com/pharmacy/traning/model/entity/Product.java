@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
+ * @author Besarab Victor
  * The type Product.
  */
 public class Product {

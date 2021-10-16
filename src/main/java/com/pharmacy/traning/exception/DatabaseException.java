@@ -1,6 +1,7 @@
 package com.pharmacy.traning.exception;
 
 /**
+ * @author Besarab Victor
  * The type Database exception.
  */
 public class DatabaseException extends Exception{

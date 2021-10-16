@@ -21,6 +21,7 @@ import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
 /**
+ * @author Besarab Victor
  * The type Upload servlet.
  */
 @WebServlet(name = "UploadServlet", urlPatterns = "/uploadServlet")

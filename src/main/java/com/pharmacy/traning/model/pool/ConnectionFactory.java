@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * @author Besarab Victor
  * The type Connection factory.
  */
 class ConnectionFactory {

@@ -1,6 +1,7 @@
 package com.pharmacy.traning.model.entity;
 
 /**
+ * @author Besarab Victor
  * The type User.
  */
 public class User {

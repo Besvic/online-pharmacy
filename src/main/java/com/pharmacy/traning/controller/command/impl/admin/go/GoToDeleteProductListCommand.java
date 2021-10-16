@@ -4,7 +4,6 @@ import com.pharmacy.traning.controller.command.Command;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.service.ServiceProduct;
@@ -29,9 +28,8 @@ public class GoToDeleteProductListCommand implements Command {
             List<Product> products = serviceProduct.findAllDeleteProduct();
             request.setAttribute(PRODUCT_LIST, products);
             return new Router(PathToPage.ADMIN_PRODUCT_DELETE_LIST, Router.RouterType.FORWARD);
-        } catch (ServiceException | DaoException e) {
-         request.setAttribute(ERROR, e);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in GoToDeleteProductListCommand. " + e);
         }
-        return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }
 }

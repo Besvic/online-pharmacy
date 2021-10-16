@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -34,13 +33,6 @@ class OrderDaoImplTest {
         boolean actual = instance.addOrder(new Order.OrderBuilder().createOrder());
         assertTrue(actual);
     }
-
-    // TODO: 14.10.2021 как быть с исключением???? 
-    /*@Mock(expected = DaoException.class)
-    void addOrderDaoException() throws DaoException {
-        when(instance.addOrder(any(Order.class))).thenThrow(new DaoException());
-        //assertThrows(DaoException.class, instance.addOrder(new Order.OrderBuilder().createOrder()));
-    }*/
 
     @Test
     void addProductQuantityInOrder() throws DaoException {

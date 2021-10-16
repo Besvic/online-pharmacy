@@ -1,10 +1,10 @@
 package com.pharmacy.traning.controller.command.impl.admin;
 
 import com.pharmacy.traning.controller.command.Command;
+import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Pharmacy;
 import com.pharmacy.traning.model.service.ServicePharmacy;
@@ -35,9 +35,10 @@ public class CreatePharmacyCommand implements Command {
             if (servicePharmacy.createPharmacy(pharmacy, number)){
                 return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
             }
-        } catch (DaoException | ServiceException e) {
-           request.setAttribute(ERROR, e);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in CreatePharmacyCommand. " + e);
         }
+        request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
     }
 }

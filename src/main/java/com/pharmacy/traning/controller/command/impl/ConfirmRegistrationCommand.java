@@ -4,7 +4,6 @@ import com.pharmacy.traning.controller.command.Command;
 import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.User;
 import com.pharmacy.traning.model.entity.UserStatus;
@@ -37,13 +36,10 @@ public class ConfirmRegistrationCommand implements Command {
             if (serviceUser.registration(user)) {
                return new Router(PathToPage.SIGN_IN, Router.RouterType.REDIRECT);
             }
-            else {
-                request.setAttribute(ERROR, Message.ERROR_ADMINISTRATOR_REGISTRATION);
-                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
-            }
-        } catch (ServiceException | DaoException e) {
-            request.setAttribute(ERROR, e);
+            request.setAttribute(ERROR, Message.ERROR_ADMINISTRATOR_REGISTRATION);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in ConfirmRegistrationCommand. " + e);
         }
     }
 }

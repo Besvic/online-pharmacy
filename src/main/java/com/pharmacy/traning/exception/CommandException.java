@@ -1,6 +1,7 @@
 package com.pharmacy.traning.exception;
 
 /**
+ * @author Besarab Victor
  * The type Command exception.
  */
 public class CommandException extends Exception{

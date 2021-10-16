@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Product;
 import com.pharmacy.traning.model.service.ServiceProduct;
@@ -42,9 +41,8 @@ public class ChangeDataProductCommand implements Command {
                 request.setAttribute(REPORT, Message.REPORT_DATA_CHANGE);
                 return new Router(PathToPage.ADMIN_MENU, Router.RouterType.REDIRECT);
             }
-        } catch (DaoException | ServiceException e) {
-            request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
-            return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in ChangeDataProductCommand. " + e);
         }
         request.setAttribute(ERROR, Message.ERROR_INPUT_DATA);
         return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

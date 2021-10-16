@@ -8,6 +8,7 @@ import java.util.Calendar;
 import static java.util.Calendar.YEAR;
 
 /**
+ * @author Besarab Victor
  * The type Validator.
  */
 public class ValidatorImpl implements Validator {

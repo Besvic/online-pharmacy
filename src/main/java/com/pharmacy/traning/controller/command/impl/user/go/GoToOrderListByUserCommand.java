@@ -5,7 +5,6 @@ import com.pharmacy.traning.controller.command.Message;
 import com.pharmacy.traning.controller.command.PathToPage;
 import com.pharmacy.traning.controller.command.Router;
 import com.pharmacy.traning.exception.CommandException;
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Order;
 import com.pharmacy.traning.model.entity.Pharmacy;
@@ -41,13 +40,11 @@ public class GoToOrderListByUserCommand implements Command {
                 request.setAttribute(ORDER_LIST_NOT_COMPLETED, orderList);
                 request.setAttribute(PHARMACY_LIST, pharmacyList);
                 return new Router(PathToPage.USER_ORDER_LIST, Router.RouterType.FORWARD);
-            } else {
-                request.setAttribute(ERROR, Message.ERROR_PHARMACY_LIST_IS_EMPTY);
-                return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
             }
-        } catch (DaoException | ServiceException e) {
-            request.setAttribute(ERROR, Message.ERROR_INPUT_DATA + e);
+            request.setAttribute(ERROR, Message.ERROR_PHARMACY_LIST_IS_EMPTY);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
+        } catch (ServiceException e) {
+            throw new CommandException("CommandException in GoToOrderListByUserCommand. " + e);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.pharmacy.traning.model.service;
 
-import com.pharmacy.traning.exception.DaoException;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Order;
 
@@ -19,9 +18,8 @@ public interface ServiceOrder {
      * @param quantity  the quantity
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean addOrder(long productId, long userId, String quantity) throws ServiceException, DaoException;
+    boolean addOrder(long productId, long userId, String quantity) throws ServiceException;
 
     /**
      * Pay order boolean.
@@ -32,9 +30,8 @@ public interface ServiceOrder {
      * @param orderPrice    the order price
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean payOrder(long orderId, long pharmacyId, String orderQuantity, String orderPrice) throws ServiceException, DaoException;
+    boolean payOrder(long orderId, long pharmacyId, String orderQuantity, String orderPrice) throws ServiceException;
 
     /**
      * Delete order by id boolean.
@@ -42,9 +39,8 @@ public interface ServiceOrder {
      * @param orderId the order id
      * @return the boolean
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    boolean deleteOrderById(long orderId) throws ServiceException, DaoException;
+    boolean deleteOrderById(long orderId) throws ServiceException;
 
     /**
      * Find all not completed order by user list.
@@ -52,9 +48,8 @@ public interface ServiceOrder {
      * @param userId the user id
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Order> findAllNotCompletedOrderByUser(long userId) throws ServiceException, DaoException;
+    List<Order> findAllNotCompletedOrderByUser(long userId) throws ServiceException;
 
     /**
      * Find all completed order by user id list.
@@ -63,18 +58,16 @@ public interface ServiceOrder {
      * @param date   the date
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws ServiceException, DaoException;
+    List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws ServiceException;
 
     /**
      * Find all completed order list.
      *
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Order> findAllCompletedOrder() throws ServiceException, DaoException;
+    List<Order> findAllCompletedOrder() throws ServiceException;
 
     /**
      * Search order by name list.
@@ -82,9 +75,8 @@ public interface ServiceOrder {
      * @param name the name
      * @return the list
      * @throws ServiceException the service exception
-     * @throws DaoException     the dao exception
      */
-    List<Order> searchOrderByName(String name) throws ServiceException, DaoException;
+    List<Order> searchOrderByName(String name) throws ServiceException;
 
 
     // TODO: 13.10.2021 del

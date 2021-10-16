@@ -6,6 +6,7 @@ import jakarta.servlet.http.*;
 import static com.pharmacy.traning.controller.command.SessionAttribute.*;
 
 /**
+ * @author Besarab Victor
  * The type Http session listener.
  */
 @WebListener

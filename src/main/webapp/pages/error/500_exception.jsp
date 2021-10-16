@@ -5,7 +5,7 @@
   Time: 13:39
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page pageEncoding="UTF-8" isErrorPage="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="${locale}" scope="session"/>
@@ -17,10 +17,16 @@
 </head>
 <body>
 <div class="container">
+    <table>
+        <c:forEach var="trace" items="${pageContext.exception.stackTrace}">
+            <tr><td>${trace}</td></tr>
+        </c:forEach>
+        Stack trace: <pre>${pageContext.out.flush()}${exception.printStackTrace(pageContext.response.writer)}
+    </table>
+
     <div class="error">
         <h1>500</h1>
         <h2>Ooops error ${error}</h2>
-
 
     </div>
     <div class="stack-container">
@@ -129,6 +135,7 @@
     </div>
 
 </div>
+
 </body>
 <script src="${pageContext.request.contextPath}/js/error/505_error.js"></script>
 </html>

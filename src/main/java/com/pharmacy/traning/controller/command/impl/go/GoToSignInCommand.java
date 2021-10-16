@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 /**
- * The type Go to sign in command page.
+ * The type Go to sign in command.
  */
 public class GoToSignInCommand implements Command {
     @Override
