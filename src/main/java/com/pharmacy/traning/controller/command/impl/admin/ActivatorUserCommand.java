@@ -32,7 +32,6 @@ public class ActivatorUserCommand implements Command {
             List<User> userList = serviceUser.findAllNonDeleteUser();
             request.setAttribute(USER_LIST, userList);
             return new Router(PathToPage.ADMIN_NON_DELETE_USER_LIST, Router.RouterType.FORWARD);
-
         } catch (ServiceException e) {
             throw new CommandException("CommandException in ActivatorUserCommand. " + e);
         }

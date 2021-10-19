@@ -30,7 +30,6 @@ import java.util.Optional;
 public class ServiceOrderImpl implements ServiceOrder {
 
     private static final Logger logger = LogManager.getLogger();
-
     private static final OrderDao orderDao = OrderDaoImpl.getInstance();
     private static final UserDao userDao = UserDaoImpl.getInstance();
     private static final ProductDao productDao = ProductDaoImpl.getInstance();
@@ -118,7 +117,7 @@ public class ServiceOrderImpl implements ServiceOrder {
             try {
                 transaction.includeAutoCommit();
             } catch (DaoException e) {
-                throw new ServiceException("ServiceException in payOrder method. " + e);
+                logger.error("ServiceException in payOrder method. " + e);
             }
         }
     }
@@ -142,12 +141,17 @@ public class ServiceOrderImpl implements ServiceOrder {
     }
 
     @Override
-    public List<Order> findAllCompletedOrderByUserId(long userId, LocalDate date) throws ServiceException {
-        try {
-            return orderDao.findAllCompletedOrderByUserId(userId, date);
-        } catch (DaoException e) {
-            throw new ServiceException("ServiceException in findAllCompletedOrderByUserId method. " + e);
+    public List<Order> findAllCompletedOrderByUserId(long userId, String strDate) throws ServiceException {
+        if (validator.isDate(strDate)){
+            try {
+                LocalDate date = LocalDate.parse(strDate);
+                return orderDao.findAllCompletedOrderByUserId(userId, date);
+            } catch (DaoException e) {
+                throw new ServiceException("ServiceException in findAllCompletedOrderByUserId method. " + e);
+            }
         }
+        logger.error("Incorrect date!");
+        throw new ServiceException("Incorrect date!");
     }
 
     @Override

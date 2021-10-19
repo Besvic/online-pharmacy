@@ -120,14 +120,13 @@ public class OrderDaoImpl implements OrderDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_ADD_ORDER)){
             statement.setLong(1, order.getUser().getId());
-            System.out.println(Date.valueOf(LocalDate.now()));
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, order.getProduct().getId());
             statement.setInt(4, order.getQuantity());
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or addOrder method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or addOrder method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or addOrder method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or addOrder method is not available. " + e);
         }
     }
 
@@ -138,9 +137,9 @@ public class OrderDaoImpl implements OrderDao {
             statement.setInt(1, quantity);
             statement.setLong(2, orderId);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or addProductQuantityInOrder method is not available. " + e);
         }
     }
 
@@ -150,9 +149,9 @@ public class OrderDaoImpl implements OrderDao {
              PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER_BY_ID)){
             statement.setLong(1, orderId);
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or deleteOrderById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or deleteOrderById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or deleteOrderById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or deleteOrderById method is not available. " + e);
         }
     }
 
@@ -163,9 +162,9 @@ public class OrderDaoImpl implements OrderDao {
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, orderId);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or completedOrder method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or completedOrder method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or completedOrder method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or completedOrder method is not available. " + e);
         }
     }
 
@@ -186,9 +185,9 @@ public class OrderDaoImpl implements OrderDao {
                             .createOrder());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or checkIsOrder method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or checkIsOrder method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or checkIsOrder method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or checkIsOrder method is not available. " + e);
         }
         return Optional.empty();
     }
@@ -212,9 +211,9 @@ public class OrderDaoImpl implements OrderDao {
                         .createOrder());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllNotCompletedOrderById method is not available. " + e);
         }
         return orderList;
     }
@@ -240,9 +239,9 @@ public class OrderDaoImpl implements OrderDao {
                             .createOrder());
 
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrder method is not available. " + e);
         }
         return orderList;
     }
@@ -277,9 +276,9 @@ public class OrderDaoImpl implements OrderDao {
                         .createOrder());
             }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllCompletedOrderByUserId method is not available. " + e);
         }
         return orderList;
     }
@@ -306,9 +305,9 @@ public class OrderDaoImpl implements OrderDao {
                             .createOrder());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or searchOrderByName method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or searchOrderByName method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or searchOrderByName method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or searchOrderByName method is not available. " + e);
         }
         return orderList;
     }
@@ -334,9 +333,9 @@ public class OrderDaoImpl implements OrderDao {
                     .createOrder());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findOrderById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findOrderById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findOrderById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findOrderById method is not available. " + e);
         }
         return Optional.empty();
     }

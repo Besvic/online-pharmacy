@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Product dao.
+ * @author Besarab Victor
+ * The interface Product dao find data in database.
  */
 public interface ProductDao {
 

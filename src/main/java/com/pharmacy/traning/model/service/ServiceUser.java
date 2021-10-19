@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface Service user.
+ * @author Besarab Victor
+ * The interface Service user definition all general methods for validate data before using Dao.
  */
 public interface ServiceUser {
 
     /**
-     * Registration boolean.
+     * Registration check input data and send to dao method.
      *
      * @param user the user
      * @return the boolean
@@ -22,7 +23,7 @@ public interface ServiceUser {
     boolean registration(User user) throws ServiceException;
 
     /**
-     * Update photo by id boolean.
+     * Update photo by id check input data and send to dao method.
      *
      * @param path the path
      * @param id   the id
@@ -32,7 +33,7 @@ public interface ServiceUser {
     boolean updatePhotoById(String path, long id) throws ServiceException;
 
     /**
-     * Update user by id boolean.
+     * Update user by id check input data and send to dao method.
      *
      * @param user the user
      * @param pass the pass
@@ -43,7 +44,7 @@ public interface ServiceUser {
     boolean updateUserById(User user, String pass, String name) throws ServiceException;
 
     /**
-     * Change user status by user id boolean.
+     * Change user status by user id check input data and send to dao method.
      *
      * @param userId        the user id
      * @param currentStatus the current status
@@ -53,7 +54,7 @@ public interface ServiceUser {
     boolean changeUserStatusByUserId(String userId, String currentStatus) throws ServiceException;
 
     /**
-     * Delete user by user id boolean.
+     * Delete user by user id check input data and send to dao method.
      *
      * @param strId the str id
      * @return the boolean
@@ -62,7 +63,7 @@ public interface ServiceUser {
     boolean deleteUserByUserId(String strId) throws ServiceException;
 
     /**
-     * Find all delete user list.
+     * Find all delete user check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception
@@ -70,7 +71,7 @@ public interface ServiceUser {
     List<User> findAllDeleteUser() throws ServiceException;
 
     /**
-     * Find all non delete user list.
+     * Find all non delete user check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception
@@ -78,7 +79,7 @@ public interface ServiceUser {
     List<User> findAllNonDeleteUser() throws ServiceException;
 
     /**
-     * Search delete user by name list.
+     * Search delete user by name check input data and send to dao method.
      *
      * @param name the name
      * @return the list
@@ -87,7 +88,7 @@ public interface ServiceUser {
     List<User> searchDeleteUserByName(String name) throws ServiceException;
 
     /**
-     * Search non delete user by name list.
+     * Search non delete user by name check input data and send to dao method.
      *
      * @param name the name
      * @return the list
@@ -96,7 +97,7 @@ public interface ServiceUser {
     List<User> searchNonDeleteUserByName(String name) throws ServiceException;
 
     /**
-     * Find user cash by id double.
+     * Find user cash by id check input data and send to dao method.
      *
      * @param userId the user id
      * @return the double
@@ -107,7 +108,7 @@ public interface ServiceUser {
    /* List<User> findAllInRegisterUser() throws ServiceException;*/
 
     /**
-     * Update cash by id boolean.
+     * Update cash by id check input data and send to dao method.
      *
      * @param creditCard the credit card
      * @param id         the id
@@ -117,7 +118,7 @@ public interface ServiceUser {
     boolean updateCashById(CreditCard creditCard, long id) throws ServiceException;
 
     /**
-     * Sign in optional.
+     * Sign in check input data and send to dao method.
      *
      * @param email    the email
      * @param password the password

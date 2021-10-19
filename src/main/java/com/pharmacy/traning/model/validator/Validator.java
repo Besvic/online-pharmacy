@@ -1,19 +1,10 @@
 package com.pharmacy.traning.model.validator;
 
 /**
- * The interface Validator.
+ * @author Besarab Victor
+ * The interface Validator for search incorrect input data.
  */
 public interface Validator {
-    /**
-     * Is null object boolean.
-     *
-     * @param object the object
-     * @return the boolean
-     */
-    default boolean isNullObject(Object object){
-        return object != null;
-    }
-
     /**
      * Is password boolean.
      *
@@ -117,4 +108,12 @@ public interface Validator {
      * @return the boolean
      */
     boolean isName(String string);
+
+    /**
+     *
+     * @param string
+     * @return
+     */
+    boolean isDate(String string);
+
 }

@@ -26,8 +26,8 @@ public class GoToOrderListByUserIdCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         try {
             long userId = Long.parseLong(request.getParameter(USER_ID));
-            LocalDate date = LocalDate.parse(request.getParameter(DATE));
-            request.setAttribute(ORDER_LIST_COMPLETED, serviceOrder.findAllCompletedOrderByUserId(userId, date));
+            String strDate = request.getParameter(DATE);
+            request.setAttribute(ORDER_LIST_COMPLETED, serviceOrder.findAllCompletedOrderByUserId(userId, strDate));
             return new Router(PathToPage.ADMIN_ORDER_LIST_BY_USER_ID, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
             throw new CommandException("CommandException in GoToOrderListByUserIdCommand. " + e);

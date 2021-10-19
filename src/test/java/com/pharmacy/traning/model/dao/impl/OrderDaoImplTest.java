@@ -23,13 +23,15 @@ class OrderDaoImplTest {
     private OrderDaoImpl instance;
 
     @BeforeEach
-    void setUp() {
+    private void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+    //Correct result
+
     @Test
     void addOrderTrue() throws DaoException {
-        when(instance.addOrder(any(Order.class))).thenReturn(true); // TODO: 14.10.2021 как правильно писать передаваемый параметр ???
+        when(instance.addOrder(any(Order.class))).thenReturn(true);
         boolean actual = instance.addOrder(new Order.OrderBuilder().createOrder());
         assertTrue(actual);
     }
@@ -103,7 +105,8 @@ class OrderDaoImplTest {
         assertEquals(actual, expected);
     }
     
-    // false test
+    // Incorrect result
+
     @Test
     void addOrderFalse() throws DaoException {
         when(instance.addOrder(any(Order.class))).thenReturn(false);
@@ -142,7 +145,7 @@ class OrderDaoImplTest {
 
     @Test
     void findAllNotCompletedOrderByIdFalse() throws DaoException {
-        when(instance.findAllNotCompletedOrderById(anyLong())).thenReturn(List.of()); // TODO: 14.10.2021  надо ли класть null?
+        when(instance.findAllNotCompletedOrderById(anyLong())).thenReturn(List.of());
         List<Order> actual = instance.findAllNotCompletedOrderById(anyLong());
         List<Order> expected = List.of();
         assertEquals(actual, expected);

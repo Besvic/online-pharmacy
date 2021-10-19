@@ -41,7 +41,7 @@ public class DeleteOrderByUserCommand implements Command {
                 if (!pharmacyList.isEmpty()){
                     request.setAttribute(ORDER_LIST_NOT_COMPLETED, orderList);
                     request.setAttribute(PHARMACY_LIST, pharmacyList);
-                    return new Router(PathToPage.USER_ORDER_LIST, Router.RouterType.REDIRECT);
+                    return new Router(PathToPage.USER_ORDER_LIST, Router.RouterType.FORWARD);
                 } else {
                     request.setAttribute(ERROR, Message.ERROR_PHARMACY_LIST_IS_EMPTY);
                     return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);

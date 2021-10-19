@@ -9,13 +9,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * The type Transaction.
+ * @author Besarab Victor
+ * The type Transaction. Used to perform multiple dao methods as a single operation.
  */
 public class Transaction {
 
     private static final Logger logger = LogManager.getLogger();
-    private Connection connection;
     private static Transaction instance;
+    private Connection connection;
 
     private Transaction(){}
 
@@ -43,9 +44,9 @@ public class Transaction {
                 connection = ConnectionPool.getInstance().getConnection();
             }
             connection.setAutoCommit(false);
-        } catch (SQLException throwables) {
-            logger.error("Function setAutoCommit isn't available." + throwables);
-            throw new DaoException("Function setAutoCommit isn't available.", throwables);
+        } catch (SQLException e) {
+            logger.error("Function setAutoCommit isn't available. " + e);
+            throw new DaoException("Function setAutoCommit isn't available. " + e);
         }
         return connection;
     }
@@ -58,9 +59,9 @@ public class Transaction {
     public void includeAutoCommit() throws DaoException {
         try {
             connection.setAutoCommit(true);
-        } catch (SQLException throwables) {
-            logger.error("Function setAutoCommit isn't available." + throwables);
-            throw new DaoException("Function setAutoCommit isn't available.", throwables);
+        } catch (SQLException e) {
+            logger.error("Function setAutoCommit isn't available. " + e);
+            throw new DaoException("Function setAutoCommit isn't available. " + e);
         }
     }
 
@@ -72,9 +73,9 @@ public class Transaction {
     public void commit() throws DaoException {
         try {
             connection.commit();
-        } catch (SQLException throwables) {
-            logger.error("Function commit isn't available." + throwables);
-            throw new DaoException("Function commit isn't available.", throwables);
+        } catch (SQLException e) {
+            logger.error("Function commit isn't available. " + e);
+            throw new DaoException("Function commit isn't available. " + e);
         }
     }
 
@@ -86,9 +87,9 @@ public class Transaction {
     public void rollback() throws DaoException {
         try {
             connection.rollback();
-        } catch (SQLException throwables) {
-            logger.error("Function rollback isn't available." + throwables);
-            throw new DaoException("Function rollback isn't available.", throwables);
+        } catch (SQLException e) {
+            logger.error("Function rollback isn't available." + e);
+            throw new DaoException("Function rollback isn't available." + e);
         }
     }
 

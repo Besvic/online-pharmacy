@@ -119,9 +119,9 @@ public class ProductDaoImpl implements ProductDao {
             statement.setDate(6, Date.valueOf(product.getDateOfDelivery()));
             statement.setString(7, product.getMeasure());
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or addProduct method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or addProduct method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or addProduct method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or addProduct method is not available. " + e);
         }
     }
 
@@ -165,9 +165,9 @@ public class ProductDaoImpl implements ProductDao {
                 }
                 return productList;
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or searchProductByNameAndScript method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or searchProductByNameAndScript method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or searchProductByNameAndScript method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or searchProductByNameAndScript method is not available. " + e);
         }
     }
     private List<Product> findAllProductByScript(String script) throws DaoException {
@@ -188,9 +188,9 @@ public class ProductDaoImpl implements ProductDao {
                         .createProduct());
             }
             return productList;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllProductByScript method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllProductByScript method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllProductByScript method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllProductByScript method is not available. " + e);
         }
     }
 
@@ -214,9 +214,9 @@ public class ProductDaoImpl implements ProductDao {
              PreparedStatement statement = connection.prepareStatement(script)){
             statement.setLong(1, id);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or executeScriptById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or executeScriptById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or executeScriptById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or executeScriptById method is not available. " + e);
         }
     }
 
@@ -233,9 +233,9 @@ public class ProductDaoImpl implements ProductDao {
             statement.setString(6, product.getMeasure());
             statement.setLong(7, product.getId());
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or changeProductByProductId method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or changeProductByProductId method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or changeProductByProductId method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or changeProductByProductId method is not available. " + e);
         }
     }
 
@@ -246,9 +246,9 @@ public class ProductDaoImpl implements ProductDao {
             statement.setInt(1, productQuantity);
             statement.setLong(2, productId);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or addProductQuantityByProductId method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or addProductQuantityByProductId method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or addProductQuantityByProductId method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or addProductQuantityByProductId method is not available. " + e);
         }
     }
 
@@ -258,9 +258,9 @@ public class ProductDaoImpl implements ProductDao {
             statement.setInt(1, productQuantity);
             statement.setLong(2, productId);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or reduceProductQuantityByProductId method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or reduceProductQuantityByProductId method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or reduceProductQuantityByProductId method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or reduceProductQuantityByProductId method is not available. " + e);
         }
     }
 
@@ -283,9 +283,9 @@ public class ProductDaoImpl implements ProductDao {
                             .createProduct());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findProductById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findProductById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findProductById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findProductById method is not available. " + e);
         }
         return Optional.empty();
     }

@@ -45,10 +45,10 @@ public final class CryptorPassword {
             md5 = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             logger.warn("Was catch NoSuchAlgorithmException: ", e);
-            return new String();
+            return "";
         }
         byte[] bytes = md5.digest(password.getBytes());
-      StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         for (var b: bytes) {
             builder.append(b);
         }

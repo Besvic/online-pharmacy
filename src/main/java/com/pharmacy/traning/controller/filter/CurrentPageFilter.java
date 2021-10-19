@@ -12,10 +12,10 @@ import java.io.IOException;
  * @author Besarab Victor
  * The type Current page filter.
  */
-@WebFilter(filterName = "CurrentPageFilter", urlPatterns = {"/*"})
+@WebFilter( dispatcherTypes = {DispatcherType.FORWARD}, filterName = "CurrentPageFilter", urlPatterns = {"/*"})
 public class CurrentPageFilter implements Filter {
 
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) {
     }
 
     public void destroy() {
@@ -26,12 +26,10 @@ public class CurrentPageFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
         String currentPage = httpRequest.getRequestURL().toString();
-
         if (currentPage.contains("pages/")) {
             int index = currentPage.indexOf("pages/");
             currentPage = currentPage.substring(index);
             session.setAttribute(SessionAttribute.CURRENT_PAGE, currentPage);
-
         } else if (currentPage.contains("controller") && !httpRequest.getParameterMap().isEmpty()
                && httpRequest.getQueryString() != null && !httpRequest.getQueryString().contains("command=change_locale")) {
             int index = currentPage.indexOf("controller");

@@ -28,7 +28,6 @@ public class ServiceUserImpl implements ServiceUser {
     private static final Logger logger = LogManager.getLogger();
     private static final UserDao userDao = UserDaoImpl.getInstance();
     private static final Validator validator = ValidatorImpl.getInstance();
-    private static final CryptorPassword crypt = CryptorPassword.getInstance();
     private static ServiceUserImpl instance;
 
     /**
@@ -48,8 +47,9 @@ public class ServiceUserImpl implements ServiceUser {
 
     @Override
     public boolean registration(User user) throws ServiceException {
-        if ( validator.isName(user.getName()) &&
+        if (user != null && validator.isName(user.getName()) &&
                 validator.isEmail(user.getLogin()) && validator.isPassword(user.getPassword())) {
+            CryptorPassword crypt = CryptorPassword.getInstance();
             try {
                 if (user.getPosition().getValue().equals(ADMIN)){
                     if (!userDao.checkIsAdmin()) {
@@ -58,8 +58,7 @@ public class ServiceUserImpl implements ServiceUser {
                     }
                     logger.error("First administrator completed registration! ");
                     throw new ServiceException("First administrator completed registration! ");
-                }
-                else {
+                } else {
                     user.setPassword(crypt.encryptor(user.getPassword()));
                     if (userDao.createUser(user)){
                         return true;
@@ -67,7 +66,6 @@ public class ServiceUserImpl implements ServiceUser {
                     logger.error("This is email used! ");
                     throw new ServiceException("This is email used! ");
                 }
-
             } catch (DaoException e) {
                 throw new ServiceException("ServiceException in method registration. " + e);
             }

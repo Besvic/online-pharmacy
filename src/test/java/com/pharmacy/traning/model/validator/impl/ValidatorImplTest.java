@@ -12,7 +12,7 @@ public class ValidatorImplTest {
 
     private static final Validator valid = ValidatorImpl.getInstance();
 
-    // true test
+    // Correct result
 
     @Test
     public void isPassword() {
@@ -93,7 +93,13 @@ public class ValidatorImplTest {
         assertTrue(actual);
     }
 
-    //false test
+    @Test
+    void isDate() {
+        boolean actual = valid.isDate("2021-10-06");
+        assertTrue(actual);
+    }
+
+    // Incorrect result
 
     @Test
     public void isPasswordFalse() {
@@ -175,4 +181,9 @@ public class ValidatorImplTest {
     }
 
 
+    @Test
+    void isDateFalse() {
+        boolean actual = valid.isDate("2021/10/06");
+        assertFalse(actual);
+    }
 }

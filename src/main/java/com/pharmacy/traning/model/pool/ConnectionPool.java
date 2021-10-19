@@ -18,33 +18,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ConnectionPool {
 
-    /**
-     * The Logger.
-     */
     private static final Logger logger = LogManager.getLogger();
-    /**
-     * The Lock.
-     */
     private static final Lock lock = new ReentrantLock(true);
-    /**
-     * The Is create.
-     */
     private static final AtomicBoolean isCreate = new AtomicBoolean(false);
-    /**
-     * The Default size connection.
-     */
     private static final int DEFAULT_SIZE_CONNECTION = 8;
-    /**
-     * The Instance.
-     */
     private static ConnectionPool instance = null;
-    /**
-     * The Free connection.
-     */
     private final BlockingDeque<ProxyConnection> freeConnection;
-    /**
-     * The Busy connection.
-     */
     private final BlockingDeque<ProxyConnection> busyConnection;
 
     /**
@@ -78,7 +57,7 @@ public class ConnectionPool {
                 freeConnection.put(proxyConnection);
             } catch (InterruptedException | SQLException e) {
                 logger.fatal("No connection to the database.");
-                throw new RuntimeException("No connection to the database.", e);
+                throw new RuntimeException("No connection to the database." + e);
             }
         }
         logger.info("ConnectionPool was create.");
@@ -95,7 +74,7 @@ public class ConnectionPool {
                 connection = freeConnection.take();
                 busyConnection.put(connection);
             } catch (InterruptedException e) {
-                logger.error("Connection not available.", e);
+                logger.error("Connection not available." + e);
             }
         return connection;
     }
@@ -112,7 +91,7 @@ public class ConnectionPool {
                 freeConnection.put((ProxyConnection) connection);
                 return true;
             } catch (InterruptedException e) {
-                logger.error("Connection not available.", e);
+                logger.error("Connection not available." + e);
             }
         }
         return false;
@@ -122,11 +101,11 @@ public class ConnectionPool {
      * Destroy pool.
      */
     public void destroyPool() {
-        for (int i = 0; i < freeConnection.size(); i++) {
+        for (int i = 0; i < DEFAULT_SIZE_CONNECTION; i++) {
             try {
                 freeConnection.take().reallyClose();
-            } catch (SQLException | InterruptedException throwables) {
-                logger.error("Connection not available for destroy." + throwables);
+            } catch (SQLException | InterruptedException e) {
+                logger.error("Connection not available for destroy." + e);
             }
         }
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {

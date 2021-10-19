@@ -6,7 +6,8 @@ import com.pharmacy.traning.model.entity.Product;
 import java.util.List;
 
 /**
- * The interface Service product.
+  * @author Besarab Victor
+  * The interface Service product definition all general methods for validate data before using Dao.
  */
 public interface ServiceProduct {
     /**
@@ -40,7 +41,7 @@ public interface ServiceProduct {
     boolean restoreProductById(long id) throws ServiceException;
 
     /**
-     * Really delete product by id boolean.
+     * Really delete product by id check input data and send to dao method.
      *
      * @param id the id
      * @return the boolean
@@ -49,7 +50,7 @@ public interface ServiceProduct {
     boolean reallyDeleteProductById(long id) throws ServiceException;
 
     /**
-     * Find all product list.
+     * Find all product check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception
@@ -57,7 +58,7 @@ public interface ServiceProduct {
     List<Product> findAllProduct() throws ServiceException;
 
     /**
-     * Search product by name list.
+     * Search product by name check input data and send to dao method.
      *
      * @param name the name
      * @return the list
@@ -66,7 +67,7 @@ public interface ServiceProduct {
     List<Product> searchProductByName(String name) throws ServiceException;
 
     /**
-     * Find all delete product list.
+     * Find all delete product check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception
@@ -74,7 +75,7 @@ public interface ServiceProduct {
     List<Product> findAllDeleteProduct() throws ServiceException;
 
     /**
-     * Search delete product by name list.
+     * Search delete product by name check input data and send to dao method.
      *
      * @param name the name
      * @return the list
@@ -83,7 +84,7 @@ public interface ServiceProduct {
     List<Product> searchDeleteProductByName(String name) throws ServiceException;
 
     /**
-     * Add product quantity by product id boolean.
+     * Add product quantity by product id check input data and send to dao method.
      *
      * @param productQuantity the product quantity
      * @param id              the id
@@ -93,7 +94,7 @@ public interface ServiceProduct {
     boolean addProductQuantityByProductId(String productQuantity, String id) throws ServiceException;
 
     /**
-     * Change product boolean.
+     * Change product check input data and send to dao method.
      *
      * @param product     the product
      * @param strDosage   the str dosage
@@ -105,7 +106,7 @@ public interface ServiceProduct {
     boolean changeProduct(Product product, String strDosage, String strQuantity, String strPrice) throws ServiceException;
 
     /**
-     * Find product by id product.
+     * Find product by id check input data and send to dao method.
      *
      * @param id the id
      * @return the product

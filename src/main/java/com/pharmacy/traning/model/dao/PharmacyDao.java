@@ -6,7 +6,8 @@ import com.pharmacy.traning.model.entity.Pharmacy;
 import java.util.List;
 
 /**
- * The interface Pharmacy dao.
+ * @author Besarab Victor
+ * The interface Pharmacy dao find data in database.
  */
 public interface PharmacyDao {
 

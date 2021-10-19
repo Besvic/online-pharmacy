@@ -6,11 +6,12 @@ import com.pharmacy.traning.model.entity.Pharmacy;
 import java.util.List;
 
 /**
- * The interface Service pharmacy.
+ * @author Besarab Victor
+ * The interface Service pharmacy definition all general methods for validate data before using Dao.
  */
 public interface ServicePharmacy {
     /**
-     * Create pharmacy boolean.
+     * Create pharmacy check input data and send to dao method.
      *
      * @param pharmacy the pharmacy
      * @param number   the number
@@ -20,7 +21,7 @@ public interface ServicePharmacy {
     boolean createPharmacy(Pharmacy pharmacy, String number) throws ServiceException;
 
     /**
-     * Delete pharmacy boolean.
+     * Delete pharmacy check input data and send to dao method.
      *
      * @param id the id
      * @return the boolean
@@ -29,7 +30,7 @@ public interface ServicePharmacy {
     boolean deletePharmacy(long id) throws ServiceException;
 
     /**
-     * Restore pharmacy boolean.
+     * Restore pharmacy check input data and send to dao method.
      *
      * @param id the id
      * @return the boolean
@@ -38,7 +39,7 @@ public interface ServicePharmacy {
     boolean restorePharmacy(long id) throws ServiceException;
 
     /**
-     * Find all actual pharmacy list.
+     * Find all actual pharmacy check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception
@@ -46,7 +47,7 @@ public interface ServicePharmacy {
     List<Pharmacy> findAllActualPharmacy() throws ServiceException;
 
     /**
-     * Find all pharmacy list.
+     * Find all pharmacy check input data and send to dao method.
      *
      * @return the list
      * @throws ServiceException the service exception

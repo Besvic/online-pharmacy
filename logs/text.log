@@ -1,0 +1,29 @@
+23:09:49.767 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:10:55.566 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:18:58.816 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:20:17.492 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:20:56.121 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:23:36.966 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:24:55.171 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:25:32.597 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:26:40.134 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:27:23.904 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:35:45.788 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:36:43.567 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:41:35.341 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:41:35.420 [main] ERROR com.pharmacy.traning.model.service.impl.ServicePharmacyImpl - Incorrect input data!
+23:41:35.451 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+23:41:35.467 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string! 
+23:41:35.467 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Not available create person, because this data incorrect! 
+23:41:35.498 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+23:41:35.498 [main] WARN  com.pharmacy.traning.model.service.impl.ServiceUserImpl - Enter is not successful, email or password entered incorrect.
+23:41:35.498 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string!
+23:41:35.545 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+23:41:35.560 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+23:41:35.560 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect date!
+23:41:35.607 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+23:41:35.607 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+23:41:35.623 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+23:41:35.623 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Update page, please.
+23:41:35.638 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product quantity isn't correct!
+23:41:35.638 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!

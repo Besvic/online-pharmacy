@@ -44,7 +44,7 @@ public class MainServlet extends UploadServlet {
         switch (router.getRouterType()) {
             case FORWARD -> request.getRequestDispatcher(router.getPagePath()).forward(request, response);
             case REDIRECT -> response.sendRedirect(request.getContextPath() + router.getPagePath());
-            default -> response.sendRedirect(request.getContextPath() + PathToPage.ERROR_404);
+            default -> response.sendError(500, "Unknown type");
         }
     }
 

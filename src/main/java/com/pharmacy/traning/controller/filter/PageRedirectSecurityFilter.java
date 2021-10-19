@@ -49,7 +49,6 @@ public class PageRedirectSecurityFilter implements Filter {
             Position userPosition = userOptional.isPresent() ? userOptional.get().getPosition() : null;
             if (userOptional.isPresent() && (userPosition.getValue().equalsIgnoreCase(ADMIN) && currentPage.contains(ADMIN_PATH) ||
                     userOptional.isPresent() && userPosition.getValue().equalsIgnoreCase(USER) && currentPage.contains(USER_PATH))){
-                
             }else{
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + signInPath);
             }

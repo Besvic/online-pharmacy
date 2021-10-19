@@ -33,7 +33,7 @@ public final class ColumnName {
      * The constant ORDER_ID.
      */
 //order
-    public static final String ORDER_ID= "order_id";
+    public static final String ORDER_ID = "order_id";
     /**
      * The constant ORDER_QUANTITY.
      */

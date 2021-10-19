@@ -21,9 +21,8 @@ import java.util.Optional;
 public class ServiceProductImpl implements ServiceProduct {
 
     private static final Logger logger = LogManager.getLogger();
-
-    private final ProductDao productDao = ProductDaoImpl.getInstance();
-    private final Validator validator = ValidatorImpl.getInstance();
+    private static final ProductDao productDao = ProductDaoImpl.getInstance();
+    private static final Validator validator = ValidatorImpl.getInstance();
     private static ServiceProductImpl instance;
 
     /**

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The interface User dao.
+ * @author Besarab Victor
+ * The interface User dao find data in database.
  */
 public interface UserDao {
 

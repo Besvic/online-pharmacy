@@ -74,9 +74,9 @@ public class PharmacyDaoImpl implements PharmacyDao {
             statement.setString(2, pharmacy.getStreet());
             statement.setInt(3, pharmacy.getNumber());
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or createPharmacy method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or createPharmacy method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or createPharmacy method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or createPharmacy method is not available. " + e);
         }
     }
 
@@ -86,9 +86,9 @@ public class PharmacyDaoImpl implements PharmacyDao {
              PreparedStatement statement = connection.prepareStatement(SQL_DELETE_PHARMACY_BY_ID)){
             statement.setLong(1, pharmacyId);
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or deletePharmacy method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or deletePharmacy method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or deletePharmacy method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or deletePharmacy method is not available. " + e);
         }
     }
 
@@ -98,9 +98,9 @@ public class PharmacyDaoImpl implements PharmacyDao {
              PreparedStatement statement = connection.prepareStatement(SQL_RESTORE_PHARMACY_BY_ID)){
             statement.setLong(1, pharmacyId);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or restorePharmacy method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or restorePharmacy method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or restorePharmacy method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or restorePharmacy method is not available. " + e);
         }
     }
 
@@ -118,9 +118,9 @@ public class PharmacyDaoImpl implements PharmacyDao {
                         .setNumber(result.getInt(PHARMACY_NUMBER))
                         .createPharmacy());
                 }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllActualPharmacy method is not available. " + e);
         }
         return pharmacyList;
     }
@@ -140,9 +140,9 @@ public class PharmacyDaoImpl implements PharmacyDao {
                         .setStatus(PharmacyStatus.valueOf(result.getString(PHARMACY_STATUS).toUpperCase()))
                         .createPharmacy());
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllPharmacy method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllPharmacy method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllPharmacy method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllPharmacy method is not available. " + e);
         }
         return pharmacyList;
     }

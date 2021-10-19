@@ -61,6 +61,10 @@ public class ValidatorImpl implements Validator {
      * The constant REGEX_CORRECT_YEAR.
      */
     private static final String REGEX_CORRECT_YEAR = "[0-9]{4}";
+    /**
+     * The constant REGEX_CORRECT_DATE.
+     */
+    private static final String REGEX_CORRECT_DATE = "202[1-9]{1}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}";
 
     private static ValidatorImpl instance;
 
@@ -144,5 +148,10 @@ public class ValidatorImpl implements Validator {
     @Override
     public boolean isName(String string) {
         return string != null && string.matches(REGEX_CORRECT_NAME);
+    }
+
+    @Override
+    public boolean isDate(String string){
+        return string != null && string.matches(REGEX_CORRECT_DATE);
     }
 }

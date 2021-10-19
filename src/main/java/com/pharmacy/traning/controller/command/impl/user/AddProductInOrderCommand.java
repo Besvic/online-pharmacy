@@ -41,7 +41,7 @@ public class AddProductInOrderCommand implements Command {
             if (serviceOrder.addOrder(productId, userId, quantity)){
                 List<Product> productList = serviceProduct.findAllProduct();
                 request.setAttribute(PRODUCT_LIST, productList);
-                return new Router(PathToPage.USER_PRODUCT_LIST, Router.RouterType.REDIRECT);
+                return new Router(PathToPage.USER_PRODUCT_LIST, Router.RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             throw new CommandException("CommandException in AddProductInOrderCommand. " + e);

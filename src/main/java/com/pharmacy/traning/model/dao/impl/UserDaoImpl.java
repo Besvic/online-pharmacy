@@ -149,9 +149,9 @@ public class UserDaoImpl implements UserDao {
             statement.setString(5, user.getPassword());
             statement.setString(6, user.getUserStatus().toString());
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or createUser method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or createUser method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or createUser method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or createUser method is not available. " + e);
         }
     }
 
@@ -161,9 +161,9 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
             statement.setLong(1, id);
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or deleteUserById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or deleteUserById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or deleteUserById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or deleteUserById method is not available. " + e);
         }
     }
 
@@ -175,9 +175,9 @@ public class UserDaoImpl implements UserDao {
             statement.setString(2, user.getName());
             statement.setLong(3, user.getId());
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or updateUserById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or updateUserById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or updateUserById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or updateUserById method is not available. " + e);
         }
     }
 
@@ -186,10 +186,11 @@ public class UserDaoImpl implements UserDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_CASH_BY_ID)) {
             statement.setDouble(1, cash);
+            statement.setLong(2, id);
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or updateCashById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or updateCashById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or updateCashById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or updateCashById method is not available. " + e);
         }
     }
 
@@ -199,9 +200,9 @@ public class UserDaoImpl implements UserDao {
             statement.setDouble(1, cash);
             statement.setLong(2, id);
             return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or reduceCashById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or reduceCashById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or reduceCashById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or reduceCashById method is not available. " + e);
         }
     }
 
@@ -220,9 +221,9 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(scrypt)) {
             statement.setLong(1, userId);
            return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or setUserStatus method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or setUserStatus method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
         }
     }
 
@@ -256,11 +257,10 @@ public class UserDaoImpl implements UserDao {
                             .setUserStatus(result.getString(USER_STATUS))
                             .setPhoto(result.getString(USER_PHOTO))
                             .createUser());
-
                 }
-        }catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findAllUserByScript method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findAllUserByScript method is not available. " + throwables);
+        }catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findAllUserByScript method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findAllUserByScript method is not available. " + e);
         }
         return userList;
     }
@@ -293,9 +293,9 @@ public class UserDaoImpl implements UserDao {
                             .createUser());
                 }
             }
-        }catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or searchUserByScript method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or searchUserByScript method is not available. " + throwables);
+        }catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or searchUserByScript method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or searchUserByScript method is not available. " + e);
         }
         return userList;
     }
@@ -320,9 +320,9 @@ public class UserDaoImpl implements UserDao {
                             .createUser());
                 }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or checkAuthorisation method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or checkAuthorisation method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or checkAuthorisation method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or checkAuthorisation method is not available. " + e);
         }
         return Optional.empty();
     }
@@ -358,9 +358,9 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, path);
             statement.setLong(2, id);
           return statement.executeUpdate() != 0;
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or updatePhotoById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or updatePhotoById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or updatePhotoById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or updatePhotoById method is not available. " + e);
         }
     }
 
@@ -386,9 +386,9 @@ public class UserDaoImpl implements UserDao {
                    return result.getDouble(USER_CASH);
                }
             }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or findUserCashById method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or findUserCashById method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or findUserCashById method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or findUserCashById method is not available. " + e);
         }
         return 0;
     }
