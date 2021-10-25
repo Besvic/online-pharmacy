@@ -179,17 +179,6 @@ public class ServiceUserImpl implements ServiceUser {
         }
     }
 
-    // TODO: 13.10.2021 del
-    /*@Override
-    public List<User> findAllInRegisterUser() throws ServiceException, DaoException {
-        List<User> userList = userDao.findAllInRegisterUser();
-        if (userList.isEmpty()){
-            logger.error("List is empty.");
-            throw new ServiceException("List is empty.");
-        }
-        return userList;
-    }*/
-
     @Override
     public boolean updateCashById(CreditCard creditCard, long id) throws ServiceException {
         try {

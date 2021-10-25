@@ -3,7 +3,6 @@ package com.pharmacy.traning.model.service;
 import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Order;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -78,12 +77,5 @@ public interface ServiceOrder {
      * @throws ServiceException the service exception
      */
     List<Order> searchOrderByName(String name) throws ServiceException;
-
-
-    // TODO: 13.10.2021 del
-    /*boolean addProductInOrder(long productId, long userId, int quantity) throws ServiceException, DaoException;
-    boolean addProductQuantityInOrder(long orderId, int quantity) throws ServiceException, DaoException;*/
-
-
 
 }

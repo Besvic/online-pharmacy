@@ -78,23 +78,10 @@ public class UserDaoImpl implements UserDao {
             where user_status != 'delete' and user_position = 'user' and user_name like ?
             order by user_name;""";
 
-    // TODO: 12.10.2021 del
-   /* private static final String SQL_FIND_ALL_IN_REGISTER_USER = """
-            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
-            from users
-            where user_status != 'delete' and user_position = 'user'
-            order by user_name;""";*/
-
     private static final String SQL_CHECK_AUTHORISATION = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
             where user_login = ? and user_password = ?;""";
-
-    // TODO: 16.10.2021 del
-    private static final String SQL_FIND_USER_BY_ID = """ 
-            select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
-            from users
-            where user_id = ?;""";
 
     private static final String SQL_UPDATE_PHOTO_BY_ID = """
             update users
@@ -227,11 +214,6 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    // TODO: 12.10.2021 del
-    /*@Override
-    public List<User> findAllInRegisterUser() throws DaoException {
-        return findAllUserByScript(SQL_FIND_ALL_IN_REGISTER_USER);    }
-*/
     @Override
     public List<User> findAllDeleteUser() throws DaoException {
         return findAllUserByScript(SQL_FIND_ALL_DELETE_USER);
@@ -326,30 +308,6 @@ public class UserDaoImpl implements UserDao {
         }
         return Optional.empty();
     }
-
-    // TODO: 12.10.2021 del
-   /* @Override
-    public Optional<User> findUserById(long userId, Connection connection) throws DaoException {
-        try(PreparedStatement statement = connection.prepareStatement(SQL_FIND_USER_BY_ID)) {
-            statement.setLong(1, userId);
-            try (ResultSet result = statement.executeQuery()){
-                if (result.next()){
-                    return Optional.ofNullable(new User.UserBuilder()
-                            .setId(result.getInt(USER_ID))
-                            .setName(result.getString(ColumnName.USER_NAME))
-                            .setCash(result.getDouble(ColumnName.USER_CASH))
-                            .setLogin(result.getString(ColumnName.USER_LOGIN))
-                            .setUserStatus(result.getString(USER_STATUS))
-                            .setPhoto(result.getString(USER_PHOTO))
-                            .createUser());
-                }
-            }
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or this function is not available." + throwables);
-            throw new DaoException("PrepareStatement didn't connection or this function is not available.", throwables);
-        }
-        return Optional.empty();
-    }*/
 
     @Override
     public boolean updatePhotoById(String path, long id) throws DaoException {
