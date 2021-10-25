@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link href="../css/test.css" rel="stylesheet" type="text/css"/>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  
+
+</head>
+    <body>
+        <div class="box">
+            <table class="table_data">
+                <form action="controller">
+                <!-- <form action="uploadImage"> -->
+                <tr class="first_row">
+                    <td class="img_column" rowspan="3"> <img class="image" src="/css/image/default_product_image.jpg" alt="image product"></td>
+                    <td><label class="label_text">full name</label></td>
+                    <td><input class="input" type="text" name="product_name" placeholder="full name" required></td>
+                    <td><label class="label_text">manufacture country</label></td>
+                    <td><input class="input" type="text" name="manufacture_country" placeholder="country" required></td>
+                </tr>
+                <!-- </form> -->
+                
+                    <tr class="second_row">
+                    <td><label class="label_text">dosage</label></td>
+                    <td><input class="input" type="number" name="dosage" placeholder="dosage" required></td>
+                    <td><label class="label_text">measure</label></td>
+                    <td><input class="input" type="text" name="measure" placeholder="mg" required></td>
+                
+                    </tr>
+                    <tr class="treeth_row"`>
+                    <td><label class="label_text">quantity</label></td>
+                    <td><input class="input" type="number" name="quantity" placeholder="quantity" required></td>
+                    <td><label class="label_text">price (BYR)</label></td>
+                    <td><input class="input" type="number" name="price" placeholder="price" required></td>
+                    
+                    </tr>
+                    <tr>
+                    <td>
+                        <label class="upload_button">
+                        
+                        <div class="example-1">
+                            <div class="form-group">
+                            <label class="label">
+                                <i class="material-icons">attach_file</i>
+                                <span class="title">Добавить файл</span>
+                                <input class="input_file" type="file" accept=".jpg, .jpeg, .png" name="command" value="upload_image" />
+                            </label>
+                            </div>
+                        </div>
+                        </label> 
+                    </td>
+                    <td>
+                    
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><button class="submit_button" type="submit" name = "command" value="add_product">save product</label> </button></td>
+                    
+                    
+                    </tr>
+                </form>
+            </table>
+        </div>  
+    </body>
+</html>

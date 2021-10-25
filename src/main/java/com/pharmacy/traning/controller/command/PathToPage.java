@@ -101,7 +101,7 @@ public final class PathToPage {
      */
     public static final String PATH_TO_PHOTO_USER = "/css/image/user/";
     /**
-     * The constant ABSOLUTELY_PATH.
+     * The constant SAVE_IMAGE.
      */
-    public static final String ABSOLUTELY_PATH = "D:\\БГУИР\\Личное\\Java\\Epam\\online-pharmacy\\src\\main\\webapp";
+    public static final String SAVE_IMAGE = "D:\\БГУИР\\Личное\\Java\\Epam\\online-pharmacy\\src\\main\\webapp";
 }

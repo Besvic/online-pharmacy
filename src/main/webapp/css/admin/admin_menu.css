@@ -1,0 +1,59 @@
+body,
+h1,
+h2,
+h3 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+a{
+    text-decoration: none;
+
+    
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+}
+
+.logo{
+    background: #e8f800;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 200px;
+    width: 100%;
+   
+    
+}
+
+.graphic_logo{
+    
+    max-height: 100%; 
+    
+}
+  
+  .main-list-item a {
+    color: black;
+  }
+
+  * {box-sizing: border-box;}
+
+
+nav.navbar .dropdown:hover > .dropdown-menu {
+  display: block; 
+  justify-content: space-between;
+
+
+ } 
+
+ .nav-link{
+   font-size: 30px;
+   font-weight: bold;
+   margin-right: 100px;
+     background-color: #e8f800;
+     border: none;
+
+ }

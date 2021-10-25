@@ -164,11 +164,6 @@ public class Order {
         this.quantity = quantity;
     }
 
-    /***
-     * Equals
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -183,20 +178,12 @@ public class Order {
                 date == null ? order.date == null : date.equals(order.date);
     }
 
-    /***
-     * Hash Code
-     * @return
-     */
     @Override
     public int hashCode() {
         return Long.hashCode(id) + product.hashCode() + user.hashCode() + pharmacy.hashCode() +
                 status.hashCode() + date.hashCode() +  Integer.hashCode(quantity);
     }
 
-    /***
-     * To String
-     * @return
-     */
     @Override
     public String toString() {
         return new String(new StringBuilder()

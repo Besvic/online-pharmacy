@@ -187,12 +187,6 @@ public class Product {
         this.measure = measure;
     }
 
-    /***
-     *
-     * Equals
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -208,11 +202,6 @@ public class Product {
                 dateOfDelivery == null ? product.dateOfDelivery == null : dateOfDelivery.equals(product.dateOfDelivery);
     }
 
-    /***
-     *
-     * Hash Code
-     * @return
-     */
     @Override
     public int hashCode() {
         return Integer.hashCode(quantity) + Long.hashCode(id) +
@@ -220,11 +209,6 @@ public class Product {
                 measure.hashCode() + manufactureCountry.hashCode();
     }
 
-    /***
-     *
-     * To String
-     * @return
-     */
     @Override
     public String toString() {
         return new String(new StringBuffer().append("Product{")

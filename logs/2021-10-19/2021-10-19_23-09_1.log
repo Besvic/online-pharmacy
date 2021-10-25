@@ -1,0 +1,90 @@
+16:31:27.842 [main] FATAL Main - exception
+DaoException: null
+	at Main.main(Main.java:12) [classes/:?]
+16:33:08.964 [main] FATAL Main - exception
+DaoException: null
+	at Main.main(Main.java:13) [classes/:?]
+14:56:51.855 [main] INFO  ConnectionPool - ConnectionPool was create.
+17:24:12.730 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+17:24:12.789 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+
+values ('ADMIN', 'Victor2', 12.0, 'victor2', 'victor2', 'IN_REGISTER')' at line 1
+17:27:19.881 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+17:27:19.999 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+
+values ('ADMIN', 'Victor2', 12.0, 'victor2', 'victor2', 'IN_REGISTER')' at line 1
+17:29:20.257 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+17:33:55.415 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+
+values ('ADMIN', 'q', 12.0, 'w', 'w', 'IN_REGISTER')' at line 1
+17:59:52.667 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+18:01:00.022 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+
+values ('ADMIN', 'q', 12.0, 'w', 'w', 'IN_REGISTER')' at line 1
+18:02:04.552 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+18:03:10.332 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+
+values ('ADMIN', 'q', 12.0, 'w', 'w', 'IN_REGISTER')' at line 1
+18:03:23.459 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+18:04:45.977 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:03:10.290 [main] INFO  com.pharmacy.traning.model.util.CryptorPasswordTest - 37-4390-46-125-866410-12100-57109113607-83
+22:45:15.644 [main] INFO  com.pharmacy.traning.model.util.CryptorPasswordTest - 37-4390-46-125-866410-12100-57109113607-83
+23:54:04.199 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+00:09:11.874 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+00:09:41.532 [main] ERROR com.pharmacy.traning.model.dao.impl.UserDaoImpl - PrepareStatement didn't connection or this function is not available.java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'victor2' for key 'users.users_login_uindex'
+00:10:21.153 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+00:03:11.962 [main] INFO  com.pharmacy.traning.model.util.CryptorPasswordTest - 37-4390-46-125-866410-12100-57109113607-83
+00:09:51.733 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+00:29:17.876 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+00:29:41.773 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+00:33:49.864 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+00:42:28.395 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+01:18:02.999 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+01:18:49.261 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+01:18:49.402 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+01:18:49.402 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+01:18:49.402 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect date!
+01:20:20.318 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+01:22:53.567 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+01:27:49.013 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+01:27:49.029 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+01:27:49.035 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect date!
+11:31:19.220 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+11:31:19.252 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+11:31:19.267 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect date!
+12:19:49.158 [main] ERROR com.pharmacy.traning.model.service.impl.ServicePharmacyImpl - Incorrect input data!
+12:30:45.628 [main] ERROR com.pharmacy.traning.model.service.impl.ServicePharmacyImpl - Incorrect input data!
+20:34:02.053 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+20:48:30.597 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+20:48:30.666 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+20:48:30.688 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+20:48:30.706 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Update page, please.
+20:48:30.723 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product quantity isn't correct!
+20:48:30.743 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+21:20:25.755 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Not available create person, because this data incorrect! 
+22:01:44.024 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+22:01:45.368 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string! 
+22:01:49.401 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Not available create person, because this data incorrect! 
+22:01:57.950 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:01:59.920 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+22:02:01.873 [main] WARN  com.pharmacy.traning.model.service.impl.ServiceUserImpl - Enter is not successful, email or password entered incorrect.
+22:02:02.827 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string!
+22:04:05.962 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:24:41.154 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Not available create person, because this data incorrect! 
+22:40:02.622 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:43:58.853 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:44:56.395 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:46:29.189 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:48:19.624 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:49:06.489 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:49:57.009 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:52:45.983 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+22:59:39.276 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:00:44.631 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:01:32.215 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:02:02.689 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:03:23.684 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:03:54.477 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:04:06.451 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:04:43.141 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:05:55.020 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:06:06.817 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:06:55.937 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:07:53.671 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:08:11.602 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+23:08:55.908 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.

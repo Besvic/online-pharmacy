@@ -183,12 +183,6 @@ public class User {
         this.photo = photo;
     }
 
-    /***
-     *
-     * Equals
-     * @param o
-     * @return
-     */
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -203,22 +197,12 @@ public class User {
                 photo == null ? user.photo == null : photo.equals(user.photo);
     }
 
-    /***
-     *
-     * Hash Code
-     * @return
-     */
     @Override
     public int hashCode() {
         return Long.hashCode(id) + Double.hashCode(cash) + position.hashCode() + userStatus.hashCode()
                 + login.hashCode() + password.hashCode() + name.hashCode() + photo.hashCode();
     }
 
-    /***
-     *
-     * To String
-     * @return
-     */
     @Override
     public String toString() {
         return new String(new StringBuffer()

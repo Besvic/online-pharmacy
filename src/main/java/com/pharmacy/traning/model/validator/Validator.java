@@ -111,8 +111,8 @@ public interface Validator {
 
     /**
      *
-     * @param string
-     * @return
+     * @param string the string
+     * @return the boolean
      */
     boolean isDate(String string);
 

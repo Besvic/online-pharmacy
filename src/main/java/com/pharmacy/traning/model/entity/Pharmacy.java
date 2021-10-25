@@ -119,11 +119,6 @@ public class Pharmacy {
         this.status = status;
     }
 
-    /***
-     * Equals
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,20 +133,11 @@ public class Pharmacy {
                 && status == null ? pharmacy.status == null : status.equals(pharmacy.status);
     }
 
-    /***
-     * Hash Code
-     * @return
-     */
     @Override
     public int hashCode() {
         return Long.hashCode(id) +  city.hashCode() + street.hashCode() + Integer.hashCode(number) + status.hashCode();
     }
 
-    /***
-     *
-     * To String
-     * @return
-     */
     @Override
     public String toString() {
         return new String(new StringBuilder()

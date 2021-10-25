@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../css/admin/table.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="table">
+        <table  align="center">
+            <thead  >
+            <tr class="first_row">
+                <th>name </th>
+                <th>dosage <span id="measure_id"> measure </span> </th>
+                <th>quantity </th>
+                <th>price </th>
+                <th>manufacture_country</th>
+                <th>date_of_delivery</th>
+                <th colspan="3">change_function </th>
+                <th></th>
+            </tr>
+            </thead>
+
+
+            <c:forEach var="product_list" items="${product_list}">
+                <tr class="row">
+                    <td>{product_list.name}</td>
+                    <td>12(г)</td>
+                    <td>122</td>
+                    <td>10.2</td>
+                    <td>Country</td>
+                    <td>12-12-1212</td>
+                    <td>
+                        <form action="controller" method="post">
+                            <button type="submit" name="command" value="delete_product">delete</button>
+                            <input type="hidden" name="product_id" value="${product_list.id}">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="controller" method="post">
+                            <button type="submit" name="command" value="go_change_product">change</button>
+                            <input type="hidden" name="product_id" value="${product_list.id}">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="controller" method="post">
+                            <input type="number" name="quantity" placeholder="add quantity" required>
+                            <button type="submit" name="command" value="add_product_quantity">add quantity</button>
+                            <input type="hidden" name="product_id" value="${product_list.id}">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+
+
+
+            <tr class="row">
+                <td>{product_list.name}</td>
+                <td>12(г)</td>
+                <td>122</td>
+                <td>10.2</td>
+                <td>Country</td>
+                <td>12-12-1212</td>
+                <td>
+                    <form action="controller" method="post">
+                        <button class="button delete" type="submit" name="command" value="delete_product">delete</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <button class="button" type="submit" name="command" value="go_change_product">change</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <input class="input" type="number" name="quantity" placeholder="add quantity" required>
+                        <button class="button" type="submit" name="command" value="add_product_quantity">add</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+            </tr>
+            <tr class="row">
+                <td>{product_list.name}</td>
+                <td>12(г)</td>
+                <td>122</td>
+                <td>10.2</td>
+                <td>Country</td>
+                <td>12-12-1212</td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="delete_product">delete</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="go_change_product">change</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <input type="number" name="quantity" placeholder="add quantity" required>
+                        <button type="submit" name="command" value="add_product_quantity">add quantity</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+            </tr>
+            <tr class="info_row row">
+                <td>{product_list.name}</td>
+                <td>12(г)</td>
+                <td>122</td>
+                <td>10.2</td>
+                <td>Country</td>
+                <td>12-12-1212</td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="delete_product">delete</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="go_change_product">change</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <input type="number" name="quantity" placeholder="add quantity" required>
+                        <button type="submit" name="command" value="add_product_quantity">add quantity</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+            </tr>
+            <tr class="info_row row">
+                <td>{product_list.name}</td>
+                <td>12(г)</td>
+                <td>122</td>
+                <td>10.2</td>
+                <td>Country</td>
+                <td>12-12-1212</td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="delete_product">delete</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <button type="submit" name="command" value="go_change_product">change</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="controller" method="post">
+                        <input type="number" name="quantity" placeholder="add quantity" required>
+                        <button type="submit" name="command" value="add_product_quantity">add quantity</button>
+                        <input type="hidden" name="product_id" value="${product_list.id}">
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>

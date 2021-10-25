@@ -142,11 +142,6 @@ public class CreditCard {
         this.cash = cash;
     }
 
-    /***
-     * Equals
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -161,19 +156,11 @@ public class CreditCard {
                 name == null ? that.name == null : name.equals(that.name);
     }
 
-    /***
-     * Hash Code
-     * @return
-     */
     @Override
     public int hashCode() {
         return Arrays.hashCode( new int[] {month, year, cvv}) + Double.hashCode(cash) + number.hashCode() + name.hashCode();
     }
 
-    /***
-     * To String
-     * @return
-     */
     @Override
     public String toString() {
         return new String(new StringBuilder()

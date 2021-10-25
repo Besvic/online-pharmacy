@@ -16,7 +16,7 @@ import java.io.IOException;
 
 import static com.pharmacy.traning.controller.command.PathToPage.PATH_TO_PHOTO_ADMIN;
 import static com.pharmacy.traning.controller.command.PathToPage.PATH_TO_PHOTO_USER;
-import static com.pharmacy.traning.controller.command.PathToPage.ABSOLUTELY_PATH;
+import static com.pharmacy.traning.controller.command.PathToPage.SAVE_IMAGE;
 import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
 import static com.pharmacy.traning.controller.command.SessionAttribute.USER;
 
@@ -39,7 +39,7 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        File uploadDir = new File(ABSOLUTELY_PATH);
+        File uploadDir = new File(SAVE_IMAGE);
         HttpSession session = request.getSession();
         boolean flag = true;
         if (!uploadDir.exists()) {
@@ -53,7 +53,7 @@ public class UploadServlet extends HttpServlet {
 
             if (flag){
                 user.setPhoto(currentPosition.equals(Position.ADMIN) ? PATH_TO_PHOTO_ADMIN + fileName : PATH_TO_PHOTO_USER + fileName);
-                part.write(ABSOLUTELY_PATH + user.getPhoto());
+                part.write(SAVE_IMAGE + user.getPhoto());
                 session.setAttribute(USER, user);
                 try {
                     serviceUser.updatePhotoById(user.getPhoto(), user.getId());
