@@ -10,6 +10,8 @@ import com.pharmacy.traning.exception.CommandException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
 
@@ -19,6 +21,8 @@ import static com.pharmacy.traning.controller.command.RequestAttribute.ERROR;
  */
 @WebServlet(name = "helloServlet", urlPatterns = "/controller")
 public class MainServlet extends UploadServlet {
+
+private static final Logger logger = LogManager.getLogger();
 
     public void init() {
 
@@ -38,6 +42,7 @@ public class MainServlet extends UploadServlet {
         try {
             router = command.execute(request);
         } catch (CommandException e) {
+            logger.error("Command exception in main servlet. " + e);
             request.setAttribute(ERROR, e);
             router = new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         }

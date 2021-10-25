@@ -31,7 +31,7 @@ public class ConfirmRegistrationCommand implements Command {
                 .setPassword(request.getParameter(PASSWORD))
                 .setUserStatus(String.valueOf(UserStatus.ACTIVE))
                 .createUser();
-        user.setPosition(request.getParameter(IS_ADMIN) == null ? USER :ADMIN);
+        user.setPosition(request.getParameter(IS_ADMIN) == null ? USER : ADMIN);
         try {
             if (serviceUser.registration(user)) {
                return new Router(PathToPage.SIGN_IN, Router.RouterType.REDIRECT);
@@ -39,7 +39,7 @@ public class ConfirmRegistrationCommand implements Command {
             request.setAttribute(ERROR, Message.ERROR_ADMINISTRATOR_REGISTRATION);
             return new Router(PathToPage.ERROR_404, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
-            throw new CommandException("CommandException in ConfirmRegistrationCommand. " + e);
+            throw new CommandException("CommandException in ConfirmRegistrationCommand. " +  e);
         }
     }
 }

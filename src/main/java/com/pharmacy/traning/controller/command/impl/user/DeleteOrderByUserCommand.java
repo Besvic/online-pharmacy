@@ -29,6 +29,7 @@ public class DeleteOrderByUserCommand implements Command {
 
     private static final ServiceOrder serviceOrder = ServiceOrderImpl.getInstance();
     private static final ServicePharmacy servicePharmacy = ServicePharmacyImpl.getInstance();
+
     @Override
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();

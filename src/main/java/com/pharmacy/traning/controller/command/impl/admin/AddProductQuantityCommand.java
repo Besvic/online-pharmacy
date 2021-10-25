@@ -34,7 +34,7 @@ public class AddProductQuantityCommand implements Command {
             if (serviceProduct.addProductQuantityByProductId(quantity, id)){
                 List<Product> productList = serviceProduct.findAllProduct();
                 request.setAttribute(PRODUCT_LIST, productList);
-                return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.REDIRECT);
+                return new Router(PathToPage.ADMIN_PRODUCT_LIST, Router.RouterType.FORWARD);
             }
         } catch (ServiceException e) {
             throw new CommandException("CommandException in AddProductQuantityCommand. " + e);

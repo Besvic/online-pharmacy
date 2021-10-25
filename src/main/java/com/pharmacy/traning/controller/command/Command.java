@@ -5,12 +5,11 @@ import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author Besarab Victor
- * The interface Command.
+ * The interface Command execute command for client.
  */
 public interface Command {
-
     /**
-     * Execute router.
+     * Execute router command on server.
      *
      * @param request the request
      * @return the router

@@ -1,6 +1,7 @@
 package com.pharmacy.traning.controller.filter;
 
 import com.pharmacy.traning.controller.command.PathToPage;
+import com.pharmacy.traning.exception.ServiceException;
 import com.pharmacy.traning.model.entity.Position;
 import com.pharmacy.traning.model.entity.User;
 import jakarta.servlet.*;
@@ -9,6 +10,8 @@ import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -44,6 +47,7 @@ public class PageRedirectSecurityFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         HttpSession session = httpServletRequest.getSession();
         String currentPage = httpServletRequest.getRequestURI();
+        System.out.println();
         try {
             Optional<User> userOptional = Optional.ofNullable((User) session.getAttribute(USER));
             Position userPosition = userOptional.isPresent() ? userOptional.get().getPosition() : null;

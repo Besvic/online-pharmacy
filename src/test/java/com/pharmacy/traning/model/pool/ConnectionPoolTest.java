@@ -19,7 +19,7 @@ class ConnectionPoolTest {
             assertTrue(actual);
             instance.releaseConnection(connection);
         } catch (SQLException e) {
-            e.printStackTrace();
+            fail();
         }
     }
 
@@ -29,7 +29,7 @@ class ConnectionPoolTest {
             boolean actual = instance.releaseConnection(connection);
             assertTrue(actual);
         } catch (SQLException e) {
-            e.printStackTrace();
+           fail();
         }
     }
 

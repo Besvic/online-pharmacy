@@ -11,13 +11,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class CryptorPassword {
 
-    /**
-     * The Logger.
-     */
     private static final Logger logger = LogManager.getLogger();
-    /**
-     * The Instance.
-     */
     private static CryptorPassword instance = null;
 
     private CryptorPassword(){};
@@ -34,7 +28,7 @@ public final class CryptorPassword {
     }
 
     /**
-     * Encryptor string.
+     * Encryptor string password by user.
      *
      * @param password the password
      * @return the string

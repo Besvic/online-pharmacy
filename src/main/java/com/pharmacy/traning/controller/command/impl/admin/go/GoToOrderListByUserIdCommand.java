@@ -9,8 +9,6 @@ import com.pharmacy.traning.model.service.ServiceOrder;
 import com.pharmacy.traning.model.service.impl.ServiceOrderImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
-import java.time.LocalDate;
-
 import static com.pharmacy.traning.controller.command.RequestAttribute.ORDER_LIST_COMPLETED;
 import static com.pharmacy.traning.controller.command.RequestParameter.DATE;
 import static com.pharmacy.traning.controller.command.RequestParameter.USER_ID;

@@ -27,3 +27,25 @@
 23:41:35.623 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Update page, please.
 23:41:35.638 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product quantity isn't correct!
 23:41:35.638 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+11:39:30.189 [main] ERROR m - qqqqqqq
+com.pharmacy.traning.exception.ServiceException: sdfvgb
+	at m.main(m.java:10) [classes/:?]
+11:40:12.814 [main] ERROR m - qqqqqqq
+java.lang.NullPointerException: sdfvgb
+	at m.main(m.java:10) [classes/:?]
+11:41:33.484 [main] ERROR m - qqqqqqq
+java.lang.NullPointerException: sdfvgb
+	at m.main(m.java:13) [classes/:?]
+11:41:59.692 [main] ERROR m - qqqqqqq
+java.lang.NullPointerException: sdfvgb
+	at m.main(m.java:13) [classes/:?]
+11:43:00.645 [main] ERROR m - qqqqqqq
+com.pharmacy.traning.exception.DaoException: sdfvgb
+	at m.main(m.java:14) [classes/:?]
+Caused by: java.lang.RuntimeException: 111111vgh
+	at m.main(m.java:12) ~[classes/:?]
+11:47:55.824 [main] ERROR m - qqqqqqq
+com.pharmacy.traning.exception.DaoException: sdfvgb
+	at m.main(m.java:14) [classes/:?]
+Caused by: java.lang.RuntimeException: 111111vgh
+	at m.main(m.java:12) ~[classes/:?]

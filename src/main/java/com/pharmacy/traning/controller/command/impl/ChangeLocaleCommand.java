@@ -17,11 +17,7 @@ public class ChangeLocaleCommand implements Command {
     public Router execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         String currentLocale = String.valueOf(session.getAttribute(LOCALE));
-        if (currentLocale.equals(RU_RU)){
-            session.setAttribute(LOCALE, EN_EN);
-        } else {
-            session.setAttribute(LOCALE, RU_RU);
-        }
+        session.setAttribute(LOCALE, currentLocale.equals(RU_RU) ? EN_EN : RU_RU);
         return new Router((String) session.getAttribute(CURRENT_PAGE), Router.RouterType.FORWARD);
     }
 }
