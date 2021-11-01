@@ -149,9 +149,4 @@ public interface UserDao {
      * @throws DaoException the dao exception
      */
     double findUserCashById(long userId) throws DaoException;
-
-
-
-
-
 }

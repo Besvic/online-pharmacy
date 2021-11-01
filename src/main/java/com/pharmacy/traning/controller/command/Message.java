@@ -37,7 +37,7 @@ public final class Message {
     /**
      * The constant ERROR_LIMITED_ACCESS.
      */
-    public static final String ERROR_LIMITED_ACCESS = "Sorry, on this account  limited access some time.";
+    public static final String ERROR_LIMITED_ACCESS = "Sorry, on this account insufficient funds on the balance sheet or limited access some time.";
 
 
     /**

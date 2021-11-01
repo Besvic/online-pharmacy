@@ -105,14 +105,14 @@ public class ConnectionPool {
             try {
                 freeConnection.take().reallyClose();
             } catch (SQLException | InterruptedException e) {
-                logger.error("Connection not available for destroy." + e);
+                logger.error("Connection not available for destroy. " + e);
             }
         }
         DriverManager.getDrivers().asIterator().forEachRemaining(driver -> {
             try {
                 DriverManager.deregisterDriver(driver);
             } catch (SQLException e) {
-               logger.error("No driver deregister." + e);
+               logger.error("No driver deregister. " + e);
             }
         });
     }

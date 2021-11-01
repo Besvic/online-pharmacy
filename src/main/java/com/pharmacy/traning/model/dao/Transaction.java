@@ -59,6 +59,7 @@ public class Transaction {
     public void includeAutoCommit() throws DaoException {
         try {
             connection.setAutoCommit(true);
+            connection.close();
         } catch (SQLException e) {
             logger.error("Function setAutoCommit isn't available. " + e);
             throw new DaoException("Function setAutoCommit isn't available. " + e);

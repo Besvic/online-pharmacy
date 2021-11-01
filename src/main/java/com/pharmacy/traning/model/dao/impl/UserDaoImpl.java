@@ -81,7 +81,7 @@ public class UserDaoImpl implements UserDao {
     private static final String SQL_CHECK_AUTHORISATION = """
             select user_id, user_position, user_name, user_cash, user_login, user_password, user_status, user_photo
             from users
-            where user_login = ? and user_password = ?;""";
+            where user_login = ? and user_password = ? and user_status != 'delete';""";
 
     private static final String SQL_UPDATE_PHOTO_BY_ID = """
             update users
@@ -208,10 +208,10 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(scrypt)) {
             statement.setLong(1, userId);
            return statement.executeUpdate() != 0;
-        } catch (SQLException e) {
-            logger.error("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
-            throw new DaoException("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
-        }
+       } catch (SQLException e) {
+           logger.error("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
+           throw new DaoException("PrepareStatement didn't connection or setUserStatus method is not available. " + e);
+       }
     }
 
     @Override
@@ -328,9 +328,9 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SQL_CHECK_IS_ADMIN);
              ResultSet result = statement.executeQuery()) {
            return result.next();
-        } catch (SQLException throwables) {
-            logger.error("PrepareStatement didn't connection or checkIsAdmin method is not available. " + throwables);
-            throw new DaoException("PrepareStatement didn't connection or checkIsAdmin method is not available. " + throwables);
+        } catch (SQLException e) {
+            logger.error("PrepareStatement didn't connection or checkIsAdmin method is not available. " + e);
+            throw new DaoException("PrepareStatement didn't connection or checkIsAdmin method is not available. " + e);
         }
     }
 
