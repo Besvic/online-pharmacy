@@ -56,7 +56,7 @@ public class ConnectionPool {
                 ProxyConnection proxyConnection = new ProxyConnection(connection);
                 freeConnection.put(proxyConnection);
             } catch (InterruptedException | SQLException e) {
-                logger.fatal("No connection to the database.");
+                logger.fatal("No connection to the database." + e);
                 throw new RuntimeException("No connection to the database." + e);
             }
         }

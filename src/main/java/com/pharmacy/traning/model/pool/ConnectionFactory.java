@@ -42,11 +42,11 @@ class ConnectionFactory {
             logger.log(Level.FATAL, "File with properties" + DATABASE_PROPERTIES + " not found " + e);
             throw new RuntimeException("File with properties" + DATABASE_PROPERTIES + " not found: " + e);
         } catch (IOException e) {
-            logger.log(Level.FATAL, "Reading error: ", e);
-            throw new RuntimeException("Reading error: ", e);
+            logger.log(Level.FATAL, "Reading error: " + e);
+            throw new RuntimeException("Reading error: " + e);
         } catch (ClassNotFoundException e) {
-            logger.log(Level.FATAL, "Driver " + PROPERTY_DRIVER_CLASS_NAME + "not found ", e);
-            throw new RuntimeException("Driver " + PROPERTY_DRIVER_CLASS_NAME + "not found ", e);
+            logger.log(Level.FATAL, "Driver " + PROPERTY_DRIVER_CLASS_NAME + "not found " + e);
+            throw new RuntimeException("Driver " + PROPERTY_DRIVER_CLASS_NAME + "not found " + e);
         }
     }
 

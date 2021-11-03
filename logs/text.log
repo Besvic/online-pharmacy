@@ -49,3 +49,20 @@ com.pharmacy.traning.exception.DaoException: sdfvgb
 	at m.main(m.java:14) [classes/:?]
 Caused by: java.lang.RuntimeException: 111111vgh
 	at m.main(m.java:12) ~[classes/:?]
+18:12:44.639 [main] INFO  com.pharmacy.traning.model.pool.ConnectionPool - ConnectionPool was create.
+18:12:44.735 [main] ERROR com.pharmacy.traning.model.service.impl.ServicePharmacyImpl - Incorrect input data!
+18:12:44.771 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+18:12:44.775 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string! 
+18:12:44.784 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Not available create person, because this data incorrect! 
+18:12:44.803 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Update page, please!
+18:12:44.807 [main] WARN  com.pharmacy.traning.model.service.impl.ServiceUserImpl - Enter is not successful, email or password entered incorrect.
+18:12:44.809 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceUserImpl - Incorrect input string!
+18:12:44.871 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect quantity.
+18:12:44.875 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Product name isn't empty!
+18:12:44.878 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceOrderImpl - Incorrect date!
+18:12:44.924 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
+18:12:44.931 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+18:12:44.938 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product name isn't empty!
+18:12:44.946 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Update page, please.
+18:12:44.955 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product quantity isn't correct!
+18:12:44.965 [main] ERROR com.pharmacy.traning.model.service.impl.ServiceProductImpl - Product data isn't correct!
